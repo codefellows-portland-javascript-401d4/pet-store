@@ -9,7 +9,6 @@ const module = angular.module('components', []);
 context.keys().forEach(key => {
     
     const name = camelcase(path.basename(key, '.js'));
-    console.log(context(key).default);
     module.component(name, context(key).default);
 
 });

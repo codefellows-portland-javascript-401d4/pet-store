@@ -1,0 +1,6 @@
+<h2>All Stores</h2>
+<ul>
+    <li ng-repeat="store in $ctrl.stores"><a ui-sref="store({id: store._id})">{{store.name}}</a></li>
+</ul>
+
+<a ui-sref="stores.add"></a>
