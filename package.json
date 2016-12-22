@@ -50,5 +50,10 @@
   "bugs": {
     "url": "https://github.com/andybeers/pet-store/issues"
   },
-  "homepage": "https://github.com/andybeers/pet-store#readme"
+  "homepage": "https://github.com/andybeers/pet-store#readme",
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
 }

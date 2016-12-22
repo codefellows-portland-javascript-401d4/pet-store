@@ -2,11 +2,11 @@ routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
-    name: '',
-    url: '',
-    component: ''
+    name: 'app',
+    url: '/',
+    component: 'app'
   });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('app');
 
 }
