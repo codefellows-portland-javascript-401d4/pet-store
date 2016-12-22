@@ -8,6 +8,8 @@ export default {
 controller.$inject = ['storeService', '$state'];
 function controller(stores, $state) {
 
+  this.styles = styles;
+
   stores.get().then(stores => {
     this.stores = stores;
   });

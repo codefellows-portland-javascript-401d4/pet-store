@@ -1,4 +1,4 @@
-<section>
+<section ng-class="$ctrl.styles.stores">
 		<h2>Greg's Secondhand Pet Store Company</h2>
 		<ui-view>
 			<new-store add="$ctrl.add"></new-store>
@@ -8,7 +8,7 @@
 					ui-sref="stores.detail({ 
 							id: store._id
 					})">
-						<h4>{{store.name}}: {{store.address.street}}, {{store.address.city}}, {{store.address.state}}</h4>
+						<h4>{{store.name}}</h4>
 				</li>
     </ul>
 	</ui-view>

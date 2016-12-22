@@ -1,0 +1,12 @@
+<section>
+	<h4>Add new store?</h4>
+	<label>name: </label>
+	<input ng-model="$ctrl.name">
+	<label>street: </label>
+	<input ng-model="$ctrl.address.street">
+	<label>city: </label>
+	<input ng-model="$ctrl.address.city">
+	<label>state(two-letter abbrev): </label>
+	<input ng-model="$ctrl.address.state">
+	<button ng-click="$ctrl.addNew()">Add Store</button>
+</section>

@@ -1,0 +1,9 @@
+<section>
+		<h2>{{$ctrl.store.name}} store:</h2>
+    <ul>
+			<li ng-repeat="pet in $ctrl.store.pets">
+				<p>{{$ctrl.pet.name}} ({{$ctrl.pet.animal}})</p>
+			</li>
+    </ul>
+		<new-pet store-id="$ctrl.store._id" add="$ctrl.add"></new-pet>
+</section>
