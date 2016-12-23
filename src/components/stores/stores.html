@@ -1,0 +1,16 @@
+<button class="viewButton" ng-click="$ctrl.detail()">View Stores</button>
+<button class="viewButton" ng-click="$ctrl.new()">Add a Store</button>
+
+<div class="component detail" ng-show="$ctrl.viewDetail === true">
+  <h2>List of pet stores</h2>
+    <a ng-repeat="store in $ctrl.stores"
+        ui-sref="stores.detail({
+            id: store._id,
+            name: store.name
+        })">{{store.name}}
+    </a>
+  <ui-view>select a pet store to see detail</ui-view>
+</div>
+
+
+<new-store add="$ctrl.add" ng-show="$ctrl.viewNew === true"><new-store>
