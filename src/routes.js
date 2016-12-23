@@ -26,6 +26,28 @@ export default function routes($stateProvider, $urlRouterProvider) {
     component: 'newStore'
   });
 
+  $stateProvider.state({
+    name: 'store',
+    url: '/store/:id',
+    abstract: true,
+    default: '.pets',
+    resolve: {
+    },
+    component: 'store'
+  });
+
+  $stateProvider.state({
+    name: 'store.pets',
+    url: '/pets',
+    component: 'storePets'
+  });
+
+  $stateProvider.state({
+    name: 'store.newPet',
+    url: '/new',
+    component: 'newPet'
+  });
+
   $urlRouterProvider.otherwise('/');
   $urlRouterProvider.when('/stores', '/stores/all');
 
