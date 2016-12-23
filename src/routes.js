@@ -26,6 +26,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
     component: 'newStore'
   });
 
-  $urlRouterProvider.otherwise('/stores');
+  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.when('/stores', '/stores/all');
 
 }
