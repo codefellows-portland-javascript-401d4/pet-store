@@ -25,6 +25,15 @@ export default function routes($stateProvider, $urlRouterProvider) {
         component: 'addStore'
     });
 
+    $stateProvider.state({
+        name: 'store',
+        url: 'store/:id',
+        component: 'store',
+        resolve: {
+            id: ['$transition$', t => t.params().id]
+        }
+    });
+
     
     $urlRouterProvider.otherwise('/');
 }
