@@ -34,7 +34,6 @@ describe('stores component', () => {
     stores.name = name;
     stores.address = address;
     stores.addNew();
-    console.log(newStore);
     assert.deepEqual(newStore, {name, address: {street, city, state}});
   });
 });
