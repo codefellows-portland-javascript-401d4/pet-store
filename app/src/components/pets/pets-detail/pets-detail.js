@@ -4,5 +4,10 @@ export default {
   template,
   bindings: {
     pet: '='
-  }
+  },
+  controller
 };
+
+function controller() {
+  
+}
