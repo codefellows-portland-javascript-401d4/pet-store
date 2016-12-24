@@ -3,7 +3,7 @@ routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 export default function routes($stateProvider, $urlRouterProvider) {
     
   $stateProvider.state({
-    name: 'stores.all',
+    name: 'stores',
     url: '/stores',
     component: 'stores' 
   });
@@ -19,7 +19,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
   });
 
   $stateProvider.state({
-    name: 'store.detail',
+    name: 'stores.detail',
         // the url, plus implied params id and view
     url: '/:id',
     params: {
@@ -35,7 +35,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
             //     return stores.get(t.params().id);
             // }]
     },
-    component: 'storeDetail'
+    component: 'storesDetail'
   });
 
 	 $stateProvider.state({

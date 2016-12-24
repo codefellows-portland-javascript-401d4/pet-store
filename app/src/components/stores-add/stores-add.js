@@ -1,4 +1,4 @@
-import template from './store-add.html';
+import template from './stores-add.html';
 
 export default {
   template,

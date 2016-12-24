@@ -1,8 +1,7 @@
 <section ng-class="$ctrl.styles.stores">
-		<h2>Greg's Secondhand Pet Store Company</h2>
 		<ui-view>
-			<new-store add="$ctrl.add"></new-store>
-				<h4>Select a store to view its pets:</h4>			
+			<a ui-sref="stores.add">Add New Store</a>
+			<h4>Select a store to view its pets:</h4>			
     <ul>
 			<li ng-repeat="store in $ctrl.stores"
 					ui-sref="stores.detail({ 
