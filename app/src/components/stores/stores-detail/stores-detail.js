@@ -3,7 +3,8 @@ import template from './stores-detail.html';
 export default {
   template,
   bindings: { 
-    id: '<'
+    id: '<',
+    stores: '<'
   },
   controller
 };

@@ -1,5 +1,7 @@
 <section>
-		<h2>{{$ctrl.store.name}}:</h2>
+		<h4>{{$ctrl.store.name}} ({{$ctrl.store.address.street}}, {{$ctrl.store.address.city}} {{$ctrl.store.address.state}}):</h4>
+		<a ui-sref="pets.add" add="$ctrl.add">Add New Pet</a>
+		<!--<new-pet store-id="$ctrl.store._id" add="$ctrl.add"></new-pet>-->
     <ul>
 			<li ng-repeat="pet in $ctrl.store.pets">
 				<pets-detail
@@ -7,5 +9,4 @@
 				</pets-detail>
 			</li>
     </ul>
-		<!--<new-pet store-id="$ctrl.store._id" add="$ctrl.add"></new-pet>-->
 </section>

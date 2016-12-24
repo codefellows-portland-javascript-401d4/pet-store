@@ -3,7 +3,8 @@ import template from './stores-add.html';
 export default {
   template,
   bindings: {
-    add: '<'
+    add: '<',
+    stores: '<',
   },
   controller
 };
@@ -14,9 +15,7 @@ function controller() {
 
   this.reset = () => {
     this.name = '';
-    this.address.street = '';
-    this.address.city = '';
-    this.address.state = '';
+    this.address = {};
   };
 
   this.reset();
@@ -33,3 +32,5 @@ function controller() {
     this.reset();
   };
 }
+
+

@@ -11,11 +11,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'stores.add',
     url: '/add',
-    views: {
-      main: {
-        component: 'storesAdd'
-      }
-    }
+    component: 'storesAdd'
   });
 
   $stateProvider.state({
@@ -38,21 +34,17 @@ export default function routes($stateProvider, $urlRouterProvider) {
     component: 'storesDetail'
   });
 
-	 $stateProvider.state({
-   name: 'store.pets',
-   url: '/store',
-   component: 'store' 
- });
+// 	 $stateProvider.state({
+//    name: 'store.pets',
+//    url: '/store',
+//    component: 'store' 
+//  });
 
- 	$stateProvider.state({
-   name: 'store.add',
-   url: '/add',
-   views: {
-     main: {
-       component: 'storeAdd'
-     }
-   }
- });
+  $stateProvider.state({
+    name: 'pets.add',
+    url: '/pets/add',
+    component: 'petsAdd' 
+  });
 
   $urlRouterProvider.otherwise('/stores');
 }

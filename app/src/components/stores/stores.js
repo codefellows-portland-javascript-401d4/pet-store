@@ -3,6 +3,9 @@ import styles from './stores.scss';
 
 export default {
   template,
+  bindings: {
+    stores: '<',
+  },
   controller
 };
 
