@@ -1,0 +1,24 @@
+@mixin main-content() {
+    border-radius: 15px;
+    text-align: center;
+    min-height: 400px;
+    background-color: $content;
+    margin: 2%;
+    padding: 2%;
+}
+
+@mixin add-content() {
+        border-radius: 15px;
+        width: 50%;
+        padding: 2%;
+        margin: 2% auto 0;
+        background-color: $grey;
+}
+
+@mixin table() {
+        background-color: $grey;
+        width: 50%;
+        margin: 2% auto 0;
+        border-collapse: collapse;
+}
+

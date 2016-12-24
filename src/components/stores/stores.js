@@ -6,18 +6,14 @@ export default {
     controller
 };
 
-controller.$inject = ['$state'];
+controller.$inject = ['storeService'];
 
-
-function controller($state) {
+function controller(stores, $state) {
     this.styles = styles;
 
-    this.setDisplay = name => {
-        const parts = $state.current.name.split('.');
-        parts[parts.length-1] = name;
-        const newState  = parts.join('.');
-        $state.go(newState);
-    };
+    stores.get().then(stores => {
+        this.stores = stores;
+    });
 
 }
 

@@ -1,3 +1,24 @@
 <section ng-class="$ctrl.styles.addstores">
-    <div>Some way to add a store.</div>
+    <h2>Use the Form Below to Add a Store</h2>
+    <div class="add-store">
+        <div>
+            <h3>Enter the Store's Information</h3>
+            <label>Name</label>
+            <input ng-model="$ctrl.name">
+        </div>
+        <div>
+            <label>Street</label>
+            <input ng-model="$ctrl.street">
+        </div>
+        <div>
+            <label>City</label>
+            <input ng-model="$ctrl.city">
+        </div>
+        <div>
+            <label>State</label>
+            <input ng-model="$ctrl.state">
+        </div>
+        <button ng-click="$ctrl.addStore()">Add</button>
+        <button ng-click="$ctrl.backToAll()">Cancel</button>       
+    </div>
 </section>

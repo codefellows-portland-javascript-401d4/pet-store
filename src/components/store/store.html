@@ -1,0 +1,12 @@
+<section ng-class="$ctrl.styles.store">
+    <header>
+        <h1>{{$ctrl.store.name}}</h1>
+        <div>
+            <p>{{$ctrl.store.address.street}}<br>
+            {{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</p>
+        </div>
+    </header>
+    <section>
+        <ui-view></ui-view>
+    </section>
+</section>

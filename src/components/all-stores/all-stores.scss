@@ -1,7 +1,34 @@
 @import 'colors';
+@import 'buttons';
+@import 'content';
 
 :local(.allstores) {
-    border: 1px solid black;
-    min-height: 300px;
-    margin: 2%;
+    @include main-content();
+
+    table {
+        @include table();
+    }
+
+    thead {
+        font-weight: bold;
+    }
+    
+    tbody {
+        cursor: pointer;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    button {
+        @include button();
+        margin: 2%;
+        transition: transform .5s;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    } 
+
 }
