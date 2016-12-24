@@ -4,7 +4,11 @@ export default function routes($stateProvider, $urlRouterProvider) {
     $stateProvider.state({
         name: 'welcome',
         url: '/',
-        component: 'welcome'
+        views: {
+            main: {
+                component: 'welcome'
+            }
+        }
     });
 
     $urlRouterProvider.otherwise('/');

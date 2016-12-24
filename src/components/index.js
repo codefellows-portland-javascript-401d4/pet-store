@@ -8,7 +8,7 @@ const context = require.context(
     /^\.\/(?!index).+?\.js$/
 );
 
-const module = angular.components('components', []);
+const module = angular.module('components', []);
 
 context.keys().forEach(key => {
     const name = camelcase(path.basename(key, '.js'));

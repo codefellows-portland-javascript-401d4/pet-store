@@ -6,8 +6,8 @@ const cssExtract = new ExtractTextPlugin('main.css');
 module.exports = {
     entry: './src/main.js',
     output: {
-        path: '../server/public',
-        // path: './build',
+        // path: '../server/public',
+        path: './build',
         filename: 'main.js'
     },
     devtool: 'source-map',
