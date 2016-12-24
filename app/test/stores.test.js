@@ -12,7 +12,7 @@ describe('stores component', () => {
     stores = $componentController(
       'stores',
       {storeService},
-      {stores(s) {newStore = s;}}
+      {addStore(s) {newStore = s;}}
     );
   });
   const storeService = {
@@ -24,14 +24,17 @@ describe('stores component', () => {
 
   it('calls the add function with property data', () => {
     const name = 'store';
-    const address = {
-      street: 'street',
-      city: 'city',
-      state: 'state'
-    };
+    const street = 'street';
+    const city = 'city';
+    const state = 'state';
+    const address = {};
+    stores.street = street;
+    stores.city = city;
+    stores.state = state;
     stores.name = name;
     stores.address = address;
     stores.addNew();
-    assert.deepEqual(newStore, {name, address});
+    console.log(newStore);
+    assert.deepEqual(newStore, {name, address: {street, city, state}});
   });
 });

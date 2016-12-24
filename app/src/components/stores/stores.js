@@ -13,13 +13,16 @@ controller.$inject = ['storeService'];
 function controller(stores) {
 
   this.addNew = () => {
+    const street = this.street;
+    const city = this.city;
+    const state = this.state;
     this.addStore({
       name: this.name,
       address: {
-        street: this.street,
-        city: this.city,
-        state: this.state
-      }
+        street,
+        city,
+        state
+      },
     });
   };
 
