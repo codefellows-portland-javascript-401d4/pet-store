@@ -9,6 +9,8 @@ export default {
     controller
 };
 
+controller.$inject = [];
+
 function controller() {
     this.styles = styles;
 };
