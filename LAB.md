@@ -2,7 +2,7 @@
 ===
 
 * Pairing encouraged (unless you feel _very_ solid in angular routing and components)
-* Data API is (TBD)
+* Data API is `https://pet-store-401.herokuapp.com/api`
 * Specs are provided below!
 * You can use a resource library if you want
 
@@ -15,17 +15,24 @@
     _id: <id>,
     name: <name>,
     address: {
-        street: <street>,
-        city: <city>,
-        state: <state>
+        street: [street],
+        city: [city],
+        state: [state]
     },
+    // array of pets gets added on GET stores/:id
     pets: [
-        { 
-            name: <name>,
-            animal: <cat|lizard|bird|dog|fish>
-        },
         ...
     ]
+```
+
+### Pet
+
+```
+{ 
+    _id: <id>,
+    name: <name>,
+    animal: <cat|lizard|bird|dog|fish>
+}
 ```
 
 ## Views
@@ -57,7 +64,8 @@
             animal type [cat, lizard, bird, dog, fish],
             (+ store id which is implicit!)
         * Either Submit or Cancel goes to `store` for correct store
-        
-  Rubric *20pts*
+  
+  
+  ## Rubric *20pts*
   
   * TBD
