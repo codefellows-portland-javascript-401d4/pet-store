@@ -56,27 +56,27 @@
 	
 	var _components2 = _interopRequireDefault(_components);
 	
-	var _services = __webpack_require__(24);
+	var _services = __webpack_require__(28);
 	
 	var _services2 = _interopRequireDefault(_services);
 	
-	var _angularUiRouter = __webpack_require__(28);
+	var _angularUiRouter = __webpack_require__(32);
 	
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 	
-	var _routes = __webpack_require__(29);
+	var _routes = __webpack_require__(33);
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _angularUiRouterDefault = __webpack_require__(30);
+	var _angularUiRouterDefault = __webpack_require__(34);
 	
 	var _angularUiRouterDefault2 = _interopRequireDefault(_angularUiRouterDefault);
 	
-	var _angularAnimate = __webpack_require__(31);
+	var _angularAnimate = __webpack_require__(35);
 	
 	var _angularAnimate2 = _interopRequireDefault(_angularAnimate);
 	
-	var _angularResource = __webpack_require__(33);
+	var _angularResource = __webpack_require__(37);
 	
 	var _angularResource2 = _interopRequireDefault(_angularResource);
 	
@@ -86,9 +86,9 @@
 	
 	app.config(_routes2.default);
 	
-	var apiUrl = 'https://pet-store-401.herokuapp.com/api';
+	var link = 'https://pet-store-401.herokuapp.com/api';
 	
-	app.value('apiUrl', apiUrl);
+	app.value('apiUrl', link);
 
 /***/ },
 /* 1 */
@@ -33033,7 +33033,7 @@
 	
 	var context = __webpack_require__(11);
 	
-	var _module = _angular2.default.components('components', []);
+	var _module = _angular2.default.module('components', []);
 	
 	context.keys().forEach(function (key) {
 	    var name = (0, _camelcase2.default)(_path2.default.basename(key, '.js'));
@@ -33521,7 +33521,8 @@
 	var map = {
 		"./page-root/page-root-header/page-root-header.js": 12,
 		"./page-root/page-root.js": 16,
-		"./welcome/welcome.js": 20
+		"./stores/stores.js": 20,
+		"./welcome/welcome.js": 24
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -33560,8 +33561,7 @@
 	exports.default = {
 	    template: _pageRootHeader2.default,
 	    transclude: {
-	        links: '?headerLinks',
-	        custom: '?headerCustom'
+	        links: '?headerLinks'
 	    },
 	    controller: controller
 	};
@@ -33575,7 +33575,7 @@
 /* 13 */
 /***/ function(module, exports) {
 
-	module.exports = "<section>\n    <h1>Welcome to PDX Pet Stores!</h1>\n    <nav>\n        <a ui-sref=\"welcome\">Welcome</a>\n        <a ui-sref=\"stores\">Stores</a>\n    </nav>\n    <section ng-transclude></section>\n</section>";
+	module.exports = "<section>\n    <h1>Welcome to PDX Pet Stores!</h1>\n    <nav>\n        <a ui-sref=\"welcome\">Welcome</a>\n        <a ui-sref=\"stores\">Stores</a>\n    </nav>\n    <section ng-transclude=\"links\"></section>\n</section>";
 
 /***/ },
 /* 14 */
@@ -33618,7 +33618,7 @@
 /* 17 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <app-header>\n        <ui-view name=\"header\"></ui-view>\n    </app-header>\n</header>\n<main>\n    <ui-view name=\"main\"></ui-view>\n</main>";
+	module.exports = "<header>\n    <page-root-header>\n        <header-links>\n            <ui-view name=\"header\"></ui-view>\n        </header-links>\n    </page-root-header>\n</header>\n<main>\n    <ui-view name=\"main\"></ui-view>\n</main>";
 
 /***/ },
 /* 18 */
@@ -33637,11 +33637,57 @@
 	    value: true
 	});
 	
-	var _welcome = __webpack_require__(21);
+	var _stores = __webpack_require__(21);
+	
+	var _stores2 = _interopRequireDefault(_stores);
+	
+	var _stores3 = __webpack_require__(22);
+	
+	var _stores4 = _interopRequireDefault(_stores3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _stores2.default,
+	    bindings: {
+	        stores: '<'
+	    },
+	    controller: controller
+	};
+	
+	
+	function controller() {
+	    this.styles = _stores4.default;
+	};
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\n    <select\n        ng-model=\"$ctrl.selected\"\n        ng-options=\"stores._id as stores.name for stores in $ctrl.stores\">\n    </select>\n</section>";
+
+/***/ },
+/* 22 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 23 */,
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _welcome = __webpack_require__(25);
 	
 	var _welcome2 = _interopRequireDefault(_welcome);
 	
-	var _welcome3 = __webpack_require__(22);
+	var _welcome3 = __webpack_require__(26);
 	
 	var _welcome4 = _interopRequireDefault(_welcome3);
 	
@@ -33658,20 +33704,20 @@
 	};
 
 /***/ },
-/* 21 */
+/* 25 */
 /***/ function(module, exports) {
 
 	module.exports = "<h2>Welcome!</h2>\n<p>\n    This is where all the happening Portland pet stores hang out!\n    Check it out and enjoy!\n</p>";
 
 /***/ },
-/* 22 */
+/* 26 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 23 */,
-/* 24 */
+/* 27 */,
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33694,7 +33740,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var context = __webpack_require__(25);
+	var context = __webpack_require__(29);
 	
 	var _module = _angular2.default.module('services', []);
 	
@@ -33706,12 +33752,12 @@
 	exports.default = _module.name;
 
 /***/ },
-/* 25 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./pet-service.js": 26,
-		"./store-service.js": 27
+		"./pet-service.js": 30,
+		"./store-service.js": 31
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -33724,11 +33770,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 25;
+	webpackContext.id = 29;
 
 
 /***/ },
-/* 26 */
+/* 30 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33737,7 +33783,7 @@
 	    value: true
 	});
 	exports.default = petService;
-	petSerice.$inject = ['$http', 'apiUrl'];
+	petService.$inject = ['$http', 'apiUrl'];
 	
 	function petService($http, apiUrl) {
 	    return {
@@ -33755,7 +33801,7 @@
 	};
 
 /***/ },
-/* 27 */
+/* 31 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33771,7 +33817,7 @@
 	};
 
 /***/ },
-/* 28 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -42120,7 +42166,7 @@
 	//# sourceMappingURL=angular-ui-router.js.map
 
 /***/ },
-/* 29 */
+/* 33 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -42142,11 +42188,27 @@
 	        }
 	    });
 	
+	    $stateProvider.state({
+	        name: 'stores',
+	        url: '/stores',
+	        resolve: {
+	            stores: ['storeService', function (Store) {
+	                return Store.query();
+	            }]
+	        },
+	        component: 'stores',
+	        views: {
+	            main: {
+	                component: 'stores'
+	            }
+	        }
+	    });
+	
 	    $urlRouterProvider.otherwise('/');
 	};
 
 /***/ },
-/* 30 */
+/* 34 */
 /***/ function(module, exports) {
 
 	/**
@@ -42247,15 +42309,15 @@
 	})(window.angular);
 
 /***/ },
-/* 31 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(32);
+	__webpack_require__(36);
 	module.exports = 'ngAnimate';
 
 
 /***/ },
-/* 32 */
+/* 36 */
 /***/ function(module, exports) {
 
 	/**
@@ -46415,15 +46477,15 @@
 
 
 /***/ },
-/* 33 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(34);
+	__webpack_require__(38);
 	module.exports = 'ngResource';
 
 
 /***/ },
-/* 34 */
+/* 38 */
 /***/ function(module, exports) {
 
 	/**

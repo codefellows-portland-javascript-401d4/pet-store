@@ -4,8 +4,7 @@ import styles from './page-root-header.scss';
 export default {
     template,
     transclude: {
-        links: '?headerLinks',
-        custom: '?headerCustom' 
+        links: '?headerLinks'
     },
     controller
 };

@@ -19,6 +19,6 @@ const app = angular.module('myApp', [
 
 app.config(routes);
 
-const apiUrl = 'https://pet-store-401.herokuapp.com/api';
+const link = 'https://pet-store-401.herokuapp.com/api';
 
-app.value('apiUrl', apiUrl);
+app.value('apiUrl', link);
