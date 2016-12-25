@@ -3,6 +3,7 @@ import styles from './stores-new.scss';
 
 export default {
     template,
+    transclude: true,
     bindings: {
         stores: '<',
         add: '<'
@@ -13,9 +14,9 @@ export default {
     controller
 };
 
-controller.$inject = ['storeService'];
+controller.$inject = ['storeService', '$state'];
 
-function controller(Store) {
+function controller(Store, $state) {
     this.styles = styles;
 
     this.reset = () => {
@@ -23,6 +24,10 @@ function controller(Store) {
         this.street = '';
         this.city = '';
         this.usState = '';
+    };
+
+    this.toAll = () => {
+        $state.go('stores.all');
     };
 
     this.addNew = () => {
