@@ -9,12 +9,22 @@ export default {
     controller
 };
 
-controller.$inject = ['$state'];
+controller.$inject = ['storeService','$state'];
 
-function controller($state) {
+function controller(Store, $state) {
     this.styles = styles;
 
     this.toNewForm = () => {
         $state.go('stores.add');
+    };
+
+    this.remove = () => {
+        console.log(this.selected);
+        this.selected.$delete()
+            .then(store => {
+                const index = this.stores.indexOf(store);
+                if (index !== -1) this.stores.splice(index, 1);
+                console.log(this.stores);
+            });
     };
 };
