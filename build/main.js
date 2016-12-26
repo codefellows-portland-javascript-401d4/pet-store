@@ -33519,10 +33519,10 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./new-pet/new-pet.js": 12,
-		"./page-root/page-root-header/page-root-header.js": 16,
-		"./page-root/page-root.js": 20,
-		"./store-pets/store-pets.js": 24,
+		"./page-root/page-root-header/page-root-header.js": 12,
+		"./page-root/page-root.js": 16,
+		"./store/new-pet/new-pet.js": 20,
+		"./store/store-pets/store-pets.js": 24,
 		"./store/store.js": 28,
 		"./stores/stores-all/stores-all.js": 32,
 		"./stores/stores-new/stores-new.js": 36,
@@ -33553,11 +33553,100 @@
 	    value: true
 	});
 	
-	var _newPet = __webpack_require__(13);
+	var _pageRootHeader = __webpack_require__(13);
+	
+	var _pageRootHeader2 = _interopRequireDefault(_pageRootHeader);
+	
+	var _pageRootHeader3 = __webpack_require__(14);
+	
+	var _pageRootHeader4 = _interopRequireDefault(_pageRootHeader3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _pageRootHeader2.default,
+	    transclude: {
+	        links: '?headerLinks'
+	    },
+	    controller: controller
+	};
+	
+	
+	function controller() {
+	    this.styles = _pageRootHeader4.default;
+	}
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\n    <h1>Welcome to PDX Pet Stores!</h1>\n    <nav>\n        <a ui-sref=\"welcome\">Welcome</a>\n        <a ui-sref=\"stores\">Stores</a>\n    </nav>\n    <section ng-transclude=\"links\"></section>\n</section>";
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 15 */,
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _pageRoot = __webpack_require__(17);
+	
+	var _pageRoot2 = _interopRequireDefault(_pageRoot);
+	
+	var _pageRoot3 = __webpack_require__(18);
+	
+	var _pageRoot4 = _interopRequireDefault(_pageRoot3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _pageRoot2.default,
+	    controller: controller
+	};
+	
+	
+	function controller() {
+	    this.styles = _pageRoot4.default;
+	};
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	module.exports = "<header>\n    <page-root-header>\n        <header-links>\n            <ui-view name=\"header\"></ui-view>\n        </header-links>\n    </page-root-header>\n</header>\n<main>\n    <ui-view name=\"main\"></ui-view>\n</main>";
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 19 */,
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _newPet = __webpack_require__(21);
 	
 	var _newPet2 = _interopRequireDefault(_newPet);
 	
-	var _newPet3 = __webpack_require__(14);
+	var _newPet3 = __webpack_require__(22);
 	
 	var _newPet4 = _interopRequireDefault(_newPet3);
 	
@@ -33607,99 +33696,10 @@
 	};
 
 /***/ },
-/* 13 */
-/***/ function(module, exports) {
-
-	module.exports = "<section>\n    <h3>Let's add a new pet for {{$ctrl.store.name}}!</h3>\n    <form>\n        Name: <input type=\"text\" ng-model=\"$ctrl.petName\">\n        Kind: <select\n                ng-options=\"category as category for category in $ctrl.category\"\n                ng-model=\"$ctrl.selectedCategory\">{{category}}</select>\n        <button ng-click=\"$ctrl.addNewPet()\">Enter</button>\n    </form>\n    <button ng-click=\"$ctrl.goBack()\">Go Back</button>\n</section>";
-
-/***/ },
-/* 14 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 15 */,
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _pageRootHeader = __webpack_require__(17);
-	
-	var _pageRootHeader2 = _interopRequireDefault(_pageRootHeader);
-	
-	var _pageRootHeader3 = __webpack_require__(18);
-	
-	var _pageRootHeader4 = _interopRequireDefault(_pageRootHeader3);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	    template: _pageRootHeader2.default,
-	    transclude: {
-	        links: '?headerLinks'
-	    },
-	    controller: controller
-	};
-	
-	
-	function controller() {
-	    this.styles = _pageRootHeader4.default;
-	}
-
-/***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-	module.exports = "<section>\n    <h1>Welcome to PDX Pet Stores!</h1>\n    <nav>\n        <a ui-sref=\"welcome\">Welcome</a>\n        <a ui-sref=\"stores\">Stores</a>\n    </nav>\n    <section ng-transclude=\"links\"></section>\n</section>";
-
-/***/ },
-/* 18 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 19 */,
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _pageRoot = __webpack_require__(21);
-	
-	var _pageRoot2 = _interopRequireDefault(_pageRoot);
-	
-	var _pageRoot3 = __webpack_require__(22);
-	
-	var _pageRoot4 = _interopRequireDefault(_pageRoot3);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	    template: _pageRoot2.default,
-	    controller: controller
-	};
-	
-	
-	function controller() {
-	    this.styles = _pageRoot4.default;
-	};
-
-/***/ },
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <page-root-header>\n        <header-links>\n            <ui-view name=\"header\"></ui-view>\n        </header-links>\n    </page-root-header>\n</header>\n<main>\n    <ui-view name=\"main\"></ui-view>\n</main>";
+	module.exports = "<section>\n    <h3>Let's add a new pet for {{$ctrl.store.name}}!</h3>\n    <form>\n        Name: <input type=\"text\" ng-model=\"$ctrl.petName\">\n        Kind: <select\n                ng-options=\"category as category for category in $ctrl.category\"\n                ng-model=\"$ctrl.selectedCategory\">{{category}}</select>\n        <button ng-click=\"$ctrl.addNewPet()\">Enter</button>\n    </form>\n    <button ng-click=\"$ctrl.goBack()\">Go Back</button>\n</section>";
 
 /***/ },
 /* 22 */
@@ -33762,7 +33762,6 @@
 	                    return;
 	                };
 	            });
-	            console.log(index);
 	            if (index !== -1) _this.store.pets.splice(index, 1);
 	        });
 	    };
@@ -33772,7 +33771,7 @@
 /* 25 */
 /***/ function(module, exports) {
 
-	module.exports = "<section>\n    <h3>Hi from \"{{$ctrl.store.name}}\"</h3>\n    <div>\n        <h4>Street: {{$ctrl.store.address.street}}</h4>\n        <h4>City: {{$ctrl.store.address.city}}</h4>\n        <h4>State: {{$ctrl.store.address.state}}</h4>\n    </div>\n    <div ng-repeat=\"pet in $ctrl.store.pets\">\n        {{pet}}\n        <button ng-click=\"$ctrl.remove(pet)\">Delete</button>\n    </div>\n    <!--<p>{{$ctrl.store}}</p>-->\n    <button ng-click=\"$ctrl.goAddPet()\">Add a new pet!</button>\n</section>";
+	module.exports = "<section>\n    <h3>Hi from \"{{$ctrl.store.name}}\"</h3>\n    <div>\n        <h4>Street: {{$ctrl.store.address.street}}</h4>\n        <h4>City: {{$ctrl.store.address.city}}</h4>\n        <h4>State: {{$ctrl.store.address.state}}</h4>\n    </div>\n    <div>\n        <table>\n            <thead>\n                <tr>\n                    <th>Pet Name</th>\n                    <th>Pet Type</th>\n                    <th>Delete</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr ng-repeat=\"pet in $ctrl.store.pets\">\n                    <td>{{pet.name}}</td>\n                    <td>{{pet.animal}}</td>\n                    <td><button ng-click=\"$ctrl.remove(pet)\">Delete</button></td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    <button ng-click=\"$ctrl.goAddPet()\">Add a new pet!</button>\n</section>";
 
 /***/ },
 /* 26 */
@@ -33873,11 +33872,9 @@
 	    };
 	
 	    this.remove = function () {
-	        console.log(_this.selected);
 	        _this.selected.$delete().then(function (store) {
 	            var index = _this.stores.indexOf(store);
 	            if (index !== -1) _this.stores.splice(index, 1);
-	            console.log(_this.stores);
 	        });
 	    };
 	};

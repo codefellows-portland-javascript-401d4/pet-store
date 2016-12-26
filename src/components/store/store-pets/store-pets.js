@@ -34,7 +34,6 @@ function controller(petService, $state) {
                         return;
                     };
                 });
-                console.log(index);
                 if (index !== -1) this.store.pets.splice(index, 1);
             });
     };

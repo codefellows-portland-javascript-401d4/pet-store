@@ -23,12 +23,10 @@ function controller(Store, $state) {
     };
 
     this.remove = () => {
-        console.log(this.selected);
         this.selected.$delete()
             .then(store => {
                 const index = this.stores.indexOf(store);
                 if (index !== -1) this.stores.splice(index, 1);
-                console.log(this.stores);
             });
     };
 };
