@@ -18,6 +18,10 @@ function controller(Store, $state) {
         $state.go('stores.add');
     };
 
+    this.go = () => {
+        $state.go('stores.store', { id: this.selected._id });
+    };
+
     this.remove = () => {
         console.log(this.selected);
         this.selected.$delete()
