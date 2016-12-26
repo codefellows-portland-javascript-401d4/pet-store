@@ -56,27 +56,27 @@
 	
 	var _components2 = _interopRequireDefault(_components);
 	
-	var _services = __webpack_require__(36);
+	var _services = __webpack_require__(48);
 	
 	var _services2 = _interopRequireDefault(_services);
 	
-	var _angularUiRouter = __webpack_require__(40);
+	var _angularUiRouter = __webpack_require__(52);
 	
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 	
-	var _routes = __webpack_require__(41);
+	var _routes = __webpack_require__(53);
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _angularUiRouterDefault = __webpack_require__(42);
+	var _angularUiRouterDefault = __webpack_require__(54);
 	
 	var _angularUiRouterDefault2 = _interopRequireDefault(_angularUiRouterDefault);
 	
-	var _angularAnimate = __webpack_require__(43);
+	var _angularAnimate = __webpack_require__(55);
 	
 	var _angularAnimate2 = _interopRequireDefault(_angularAnimate);
 	
-	var _angularResource = __webpack_require__(45);
+	var _angularResource = __webpack_require__(57);
 	
 	var _angularResource2 = _interopRequireDefault(_angularResource);
 	
@@ -33519,12 +33519,15 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./page-root/page-root-header/page-root-header.js": 12,
-		"./page-root/page-root.js": 16,
-		"./stores/stores-all/stores-all.js": 20,
-		"./stores/stores-new/stores-new.js": 24,
-		"./stores/stores.js": 28,
-		"./welcome/welcome.js": 32
+		"./new-pet/new-pet.js": 12,
+		"./page-root/page-root-header/page-root-header.js": 16,
+		"./page-root/page-root.js": 20,
+		"./store-pets/store-pets.js": 24,
+		"./store/store.js": 28,
+		"./stores/stores-all/stores-all.js": 32,
+		"./stores/stores-new/stores-new.js": 36,
+		"./stores/stores.js": 40,
+		"./welcome/welcome.js": 44
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -33550,11 +33553,87 @@
 	    value: true
 	});
 	
-	var _pageRootHeader = __webpack_require__(13);
+	var _newPet = __webpack_require__(13);
+	
+	var _newPet2 = _interopRequireDefault(_newPet);
+	
+	var _newPet3 = __webpack_require__(14);
+	
+	var _newPet4 = _interopRequireDefault(_newPet3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _newPet2.default,
+	    transclude: true,
+	    require: {
+	        parent: '^store'
+	    },
+	    bindings: {
+	        store: '<',
+	        pets: '<',
+	        category: '<'
+	    },
+	    controller: controller
+	};
+	
+	
+	controller.$inject = ['petService', '$state'];
+	
+	function controller(petService, $state) {
+	    var _this = this;
+	
+	    this.styles = _newPet4.default;
+	
+	    this.reset = function () {
+	        _this.petName = '';
+	        _this.selectedCategory = '';
+	    };
+	
+	    this.addNewPet = function () {
+	        petService.add({
+	            name: _this.petName,
+	            animal: _this.selectedCategory,
+	            store: _this.store._id
+	        }).then(function (pet) {
+	            _this.store.pets.push(pet);
+	            _this.reset();
+	        });
+	    };
+	
+	    this.goBack = function () {
+	        $state.go('stores.store', { id: _this.store._id });
+	    };
+	};
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\n    <h3>Let's add a new pet for {{$ctrl.store.name}}!</h3>\n    <form>\n        Name: <input type=\"text\" ng-model=\"$ctrl.petName\">\n        Kind: <select\n                ng-options=\"category as category for category in $ctrl.category\"\n                ng-model=\"$ctrl.selectedCategory\">{{category}}</select>\n        <button ng-click=\"$ctrl.addNewPet()\">Enter</button>\n    </form>\n    <button ng-click=\"$ctrl.goBack()\">Go Back</button>\n</section>";
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 15 */,
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _pageRootHeader = __webpack_require__(17);
 	
 	var _pageRootHeader2 = _interopRequireDefault(_pageRootHeader);
 	
-	var _pageRootHeader3 = __webpack_require__(14);
+	var _pageRootHeader3 = __webpack_require__(18);
 	
 	var _pageRootHeader4 = _interopRequireDefault(_pageRootHeader3);
 	
@@ -33574,53 +33653,10 @@
 	}
 
 /***/ },
-/* 13 */
-/***/ function(module, exports) {
-
-	module.exports = "<section>\n    <h1>Welcome to PDX Pet Stores!</h1>\n    <nav>\n        <a ui-sref=\"welcome\">Welcome</a>\n        <a ui-sref=\"stores\">Stores</a>\n    </nav>\n    <section ng-transclude=\"links\"></section>\n</section>";
-
-/***/ },
-/* 14 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 15 */,
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _pageRoot = __webpack_require__(17);
-	
-	var _pageRoot2 = _interopRequireDefault(_pageRoot);
-	
-	var _pageRoot3 = __webpack_require__(18);
-	
-	var _pageRoot4 = _interopRequireDefault(_pageRoot3);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	    template: _pageRoot2.default,
-	    controller: controller
-	};
-	
-	
-	function controller() {
-	    this.styles = _pageRoot4.default;
-	};
-
-/***/ },
 /* 17 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <page-root-header>\n        <header-links>\n            <ui-view name=\"header\"></ui-view>\n        </header-links>\n    </page-root-header>\n</header>\n<main>\n    <ui-view name=\"main\"></ui-view>\n</main>";
+	module.exports = "<section>\n    <h1>Welcome to PDX Pet Stores!</h1>\n    <nav>\n        <a ui-sref=\"welcome\">Welcome</a>\n        <a ui-sref=\"stores\">Stores</a>\n    </nav>\n    <section ng-transclude=\"links\"></section>\n</section>";
 
 /***/ },
 /* 18 */
@@ -33639,40 +33675,31 @@
 	    value: true
 	});
 	
-	var _storesAll = __webpack_require__(21);
+	var _pageRoot = __webpack_require__(21);
 	
-	var _storesAll2 = _interopRequireDefault(_storesAll);
+	var _pageRoot2 = _interopRequireDefault(_pageRoot);
 	
-	var _storesAll3 = __webpack_require__(22);
+	var _pageRoot3 = __webpack_require__(22);
 	
-	var _storesAll4 = _interopRequireDefault(_storesAll3);
+	var _pageRoot4 = _interopRequireDefault(_pageRoot3);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	    template: _storesAll2.default,
-	    bindings: {
-	        stores: '<'
-	    },
+	    template: _pageRoot2.default,
 	    controller: controller
 	};
 	
 	
-	controller.$inject = ['$state'];
-	
-	function controller($state) {
-	    this.styles = _storesAll4.default;
-	
-	    this.toNewForm = function () {
-	        $state.go('stores.add');
-	    };
+	function controller() {
+	    this.styles = _pageRoot4.default;
 	};
 
 /***/ },
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "<h3>All stores listed</h3>\n<section>\n    <select\n        ng-model=\"$ctrl.selected\"\n        ng-options=\"stores._id as stores.name for stores in $ctrl.stores\">\n    </select>\n</section>\n<section>\n    <button ng-click=\"$ctrl.toNewForm()\">Add new stores here!</button>\n</section>";
+	module.exports = "<header>\n    <page-root-header>\n        <header-links>\n            <ui-view name=\"header\"></ui-view>\n        </header-links>\n    </page-root-header>\n</header>\n<main>\n    <ui-view name=\"main\"></ui-view>\n</main>";
 
 /***/ },
 /* 22 */
@@ -33691,31 +33718,61 @@
 	    value: true
 	});
 	
-	var _storesNew = __webpack_require__(25);
+	var _storePets = __webpack_require__(25);
 	
-	var _storesNew2 = _interopRequireDefault(_storesNew);
+	var _storePets2 = _interopRequireDefault(_storePets);
 	
-	var _storesNew3 = __webpack_require__(26);
+	var _storePets3 = __webpack_require__(26);
 	
-	var _storesNew4 = _interopRequireDefault(_storesNew3);
+	var _storePets4 = _interopRequireDefault(_storePets3);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	    template: _storesNew2.default,
+	    template: _storePets2.default,
+	    transclude: true,
+	    require: {
+	        parent: '^store'
+	    },
+	    bindings: {
+	        store: '<',
+	        pets: '<'
+	    },
 	    controller: controller
 	};
 	
 	
-	function controller() {
-	    this.styles = _storesNew4.default;
-	}
+	controller.$inject = ['petService', '$state'];
+	
+	function controller(petService, $state) {
+	    var _this = this;
+	
+	    this.styles = _storePets4.default;
+	
+	    this.goAddPet = function () {
+	        $state.go('stores.store.addPet');
+	    };
+	
+	    this.remove = function (pet) {
+	        petService.remove(pet._id).then(function (removedPet) {
+	            var index = -1;
+	            _this.store.pets.some(function (pet, petIndex) {
+	                if (removedPet._id === pet._id) {
+	                    index = petIndex;
+	                    return;
+	                };
+	            });
+	            console.log(index);
+	            if (index !== -1) _this.store.pets.splice(index, 1);
+	        });
+	    };
+	};
 
 /***/ },
 /* 25 */
 /***/ function(module, exports) {
 
-	module.exports = "<section>\n    <h3>Hi</h3>\n</section>";
+	module.exports = "<section>\n    <h3>Hi from \"{{$ctrl.store.name}}\"</h3>\n    <div>\n        <h4>Street: {{$ctrl.store.address.street}}</h4>\n        <h4>City: {{$ctrl.store.address.city}}</h4>\n        <h4>State: {{$ctrl.store.address.state}}</h4>\n    </div>\n    <div ng-repeat=\"pet in $ctrl.store.pets\">\n        {{pet}}\n        <button ng-click=\"$ctrl.remove(pet)\">Delete</button>\n    </div>\n    <!--<p>{{$ctrl.store}}</p>-->\n    <button ng-click=\"$ctrl.goAddPet()\">Add a new pet!</button>\n</section>";
 
 /***/ },
 /* 26 */
@@ -33734,11 +33791,210 @@
 	    value: true
 	});
 	
-	var _stores = __webpack_require__(29);
+	var _store = __webpack_require__(29);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _store3 = __webpack_require__(30);
+	
+	var _store4 = _interopRequireDefault(_store3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _store2.default,
+	    bindings: {
+	        store: '<',
+	        pets: '<'
+	    },
+	    controller: controller
+	};
+	
+	
+	function controller() {
+	    this.styles = _store4.default;
+	};
+
+/***/ },
+/* 29 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\n    <h2>Welcome to the {{$ctrl.store.name}}</h2>\n    <ui-view></ui-view>\n</section>";
+
+/***/ },
+/* 30 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 31 */,
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _storesAll = __webpack_require__(33);
+	
+	var _storesAll2 = _interopRequireDefault(_storesAll);
+	
+	var _storesAll3 = __webpack_require__(34);
+	
+	var _storesAll4 = _interopRequireDefault(_storesAll3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _storesAll2.default,
+	    bindings: {
+	        stores: '<'
+	    },
+	    controller: controller
+	};
+	
+	
+	controller.$inject = ['storeService', '$state'];
+	
+	function controller(Store, $state) {
+	    var _this = this;
+	
+	    this.styles = _storesAll4.default;
+	
+	    this.toNewForm = function () {
+	        $state.go('stores.add');
+	    };
+	
+	    this.go = function () {
+	        $state.go('stores.store', { id: _this.selected._id });
+	    };
+	
+	    this.remove = function () {
+	        console.log(_this.selected);
+	        _this.selected.$delete().then(function (store) {
+	            var index = _this.stores.indexOf(store);
+	            if (index !== -1) _this.stores.splice(index, 1);
+	            console.log(_this.stores);
+	        });
+	    };
+	};
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
+	module.exports = "<h3>All stores listed</h3>\n<section>\n    <select\n        ng-model=\"$ctrl.selected\"\n        x-note=\"you can alias what is actually stored in ng-options for ease os use in your ng-model later\"\n        ng-options=\"stores as stores.name for stores in $ctrl.stores\">\n    </select>\n    <button ng-click=\"$ctrl.go()\">Go to Pet Store</button>\n    <button ng-click=\"$ctrl.remove()\">Remove</button>\n</section>\n<section>\n    <button ng-click=\"$ctrl.toNewForm()\">Add new stores here!</button>\n</section>";
+
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 35 */,
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _storesNew = __webpack_require__(37);
+	
+	var _storesNew2 = _interopRequireDefault(_storesNew);
+	
+	var _storesNew3 = __webpack_require__(38);
+	
+	var _storesNew4 = _interopRequireDefault(_storesNew3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _storesNew2.default,
+	    transclude: true,
+	    bindings: {
+	        stores: '<',
+	        add: '<'
+	    },
+	    require: {
+	        parent: '^stores'
+	    },
+	    controller: controller
+	};
+	
+	
+	controller.$inject = ['storeService', '$state'];
+	
+	function controller(Store, $state) {
+	    var _this = this;
+	
+	    this.styles = _storesNew4.default;
+	
+	    this.reset = function () {
+	        _this.storeName = '';
+	        _this.street = '';
+	        _this.city = '';
+	        _this.usState = '';
+	    };
+	
+	    this.toAll = function () {
+	        $state.go('stores.all');
+	    };
+	
+	    this.toStore = function (store) {
+	        $state.go('stores.store', { id: store._id });
+	    };
+	
+	    this.addNew = function () {
+	        new Store({
+	            name: _this.storeName,
+	            address: {
+	                street: _this.street,
+	                city: _this.city,
+	                state: _this.usState
+	            }
+	        }).$save().then(function (store) {
+	            _this.stores.push(store);
+	            _this.reset();
+	            _this.toStore(store);
+	        });
+	    };
+	}
+
+/***/ },
+/* 37 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\n    <h3>Hi</h3>\n    <form>\n        Name: <input type=\"text\" ng-model=\"$ctrl.storeName\" required>\n        Address: <input type=\"text\" ng-model=\"$ctrl.street\" required>\n        City: <input type=\"text\" ng-model=\"$ctrl.city\" required>\n        State: <input type=\"text\" ng-model=\"$ctrl.usState\" required>\n        <button ng-click=\"$ctrl.addNew()\" ng-transclude>Send</button>\n        <button ng-click=\"$ctrl.toAll()\">Cancel</button>\n    </form>\n</section>";
+
+/***/ },
+/* 38 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 39 */,
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _stores = __webpack_require__(41);
 	
 	var _stores2 = _interopRequireDefault(_stores);
 	
-	var _stores3 = __webpack_require__(30);
+	var _stores3 = __webpack_require__(42);
 	
 	var _stores4 = _interopRequireDefault(_stores3);
 	
@@ -33758,20 +34014,20 @@
 	};
 
 /***/ },
-/* 29 */
+/* 41 */
 /***/ function(module, exports) {
 
 	module.exports = "<section>\n    <h2>All stores dealt with here</h2>\n    <ui-view></ui-view>\n</section>";
 
 /***/ },
-/* 30 */
+/* 42 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 31 */,
-/* 32 */
+/* 43 */,
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33780,11 +34036,11 @@
 	    value: true
 	});
 	
-	var _welcome = __webpack_require__(33);
+	var _welcome = __webpack_require__(45);
 	
 	var _welcome2 = _interopRequireDefault(_welcome);
 	
-	var _welcome3 = __webpack_require__(34);
+	var _welcome3 = __webpack_require__(46);
 	
 	var _welcome4 = _interopRequireDefault(_welcome3);
 	
@@ -33801,20 +34057,20 @@
 	};
 
 /***/ },
-/* 33 */
+/* 45 */
 /***/ function(module, exports) {
 
 	module.exports = "<h2>Welcome!</h2>\n<p>\n    This is where all the happening Portland pet stores hang out!\n    Check it out and enjoy!\n</p>";
 
 /***/ },
-/* 34 */
+/* 46 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 35 */,
-/* 36 */
+/* 47 */,
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33837,7 +34093,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var context = __webpack_require__(37);
+	var context = __webpack_require__(49);
 	
 	var _module = _angular2.default.module('services', []);
 	
@@ -33849,12 +34105,12 @@
 	exports.default = _module.name;
 
 /***/ },
-/* 37 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./pet-service.js": 38,
-		"./store-service.js": 39
+		"./pet-service.js": 50,
+		"./store-service.js": 51
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -33867,11 +34123,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 37;
+	webpackContext.id = 49;
 
 
 /***/ },
-/* 38 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33885,12 +34141,12 @@
 	function petService($http, apiUrl) {
 	    return {
 	        add: function add(image) {
-	            return $http.post(apiUrl + '/images', image).then(function (res) {
+	            return $http.post(apiUrl + '/pets', image).then(function (res) {
 	                return res.data;
 	            });
 	        },
 	        remove: function remove(id) {
-	            return $http.delete(apiUrl + '/images/' + id).then(function (res) {
+	            return $http.delete(apiUrl + '/pets/' + id).then(function (res) {
 	                return res.data;
 	            });
 	        }
@@ -33898,7 +34154,7 @@
 	};
 
 /***/ },
-/* 39 */
+/* 51 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33914,7 +34170,7 @@
 	};
 
 /***/ },
-/* 40 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -42263,7 +42519,7 @@
 	//# sourceMappingURL=angular-ui-router.js.map
 
 /***/ },
-/* 41 */
+/* 53 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -42314,11 +42570,47 @@
 	        component: 'storesNew'
 	    });
 	
+	    $stateProvider.state({
+	        name: 'stores.store',
+	        url: '/store/{id}',
+	        abstract: true,
+	        default: '.pets',
+	        resolve: {
+	            store: ['storeService', '$transition$', function (Store, t) {
+	                return Store.get({ id: t.params().id });
+	            }],
+	            pets: ['store', function (store) {
+	                return store.pets;
+	            }],
+	            //I couldn't let this array sit in store component
+	            //but I could let it live in addPet component
+	            //in the controller
+	            //I guess the argument to be made here is which components
+	            //Actually need to know about this array
+	            category: [function () {
+	                return ['cat', 'lizard', 'bird', 'dog', 'fish'];
+	            }]
+	        },
+	        component: 'store'
+	    });
+	
+	    $stateProvider.state({
+	        name: 'stores.store.pets',
+	        url: '/pets',
+	        component: 'storePets'
+	    });
+	
+	    $stateProvider.state({
+	        name: 'stores.store.addPet',
+	        url: '/addpet',
+	        component: 'newPet'
+	    });
+	
 	    $urlRouterProvider.otherwise('/');
 	};
 
 /***/ },
-/* 42 */
+/* 54 */
 /***/ function(module, exports) {
 
 	/**
@@ -42419,15 +42711,15 @@
 	})(window.angular);
 
 /***/ },
-/* 43 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(44);
+	__webpack_require__(56);
 	module.exports = 'ngAnimate';
 
 
 /***/ },
-/* 44 */
+/* 56 */
 /***/ function(module, exports) {
 
 	/**
@@ -46587,15 +46879,15 @@
 
 
 /***/ },
-/* 45 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(46);
+	__webpack_require__(58);
 	module.exports = 'ngResource';
 
 
 /***/ },
-/* 46 */
+/* 58 */
 /***/ function(module, exports) {
 
 	/**

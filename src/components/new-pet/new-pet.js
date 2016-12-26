@@ -15,9 +15,9 @@ export default {
     controller
 };
 
-controller.$inject = ['petService'];
+controller.$inject = ['petService', '$state'];
 
-function controller(petService) {
+function controller(petService, $state) {
     this.styles = styles;
 
     this.reset = () => {
@@ -36,5 +36,9 @@ function controller(petService) {
                 this.store.pets.push(pet);
                 this.reset();
             });
+    };
+
+    this.goBack = () => {
+        $state.go('stores.store', {id: this.store._id});
     };
 };

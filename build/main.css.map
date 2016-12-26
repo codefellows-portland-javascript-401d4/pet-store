@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"main.css","sourceRoot":""}
+{"version":3,"sources":["webpack:///webpack:///src/scss/src/scss/main.scss"],"names":[],"mappings":"AAAA;EACI,wBAAuB,EAC1B","file":"main.css","sourcesContent":["* {\n    outline: 1px red dashed;\n}\n\n\n// WEBPACK FOOTER //\n// webpack:///src/scss/src/scss/main.scss"],"sourceRoot":""}
