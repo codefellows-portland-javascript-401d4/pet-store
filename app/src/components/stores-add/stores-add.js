@@ -9,9 +9,13 @@ export default {
   controller
 };
 
-controller.$inject = ['storeService'];
+controller.$inject = ['storeService', '$state'];
 
-function controller() {
+function controller(stores, $state) {
+
+  this.backToAll = () => {
+    $state.go('stores.all');
+  };
 
   this.reset = () => {
     this.name = '';
@@ -21,7 +25,7 @@ function controller() {
   this.reset();
 
   this.addNew = () => {
-    this.add({
+    stores.add({
       name: this.name,
       address: {
         street: this.address.street,
