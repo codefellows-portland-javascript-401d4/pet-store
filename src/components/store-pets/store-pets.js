@@ -1,15 +1,17 @@
-import template from './store.html';
+import template from './store-pets.html';
 
 export default {
   template,
   bindings: {
-    id: '<',
     store: '<'
   },
   controller,
-  controllerAs: '$store'
+  controllerAs:'$storePets'
 };
 
+controller.$inject = ['$state'];
+
 function controller() {
+
 
 }

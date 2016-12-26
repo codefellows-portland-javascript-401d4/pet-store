@@ -1,3 +1,10 @@
 <section>
-  in the store component
+  <h1>{{$store.store.name}}</h1>
+
+  <div>
+    {{$store.store.address.street}}<br>
+    {{$store.store.address.city}}, {{$store.store.address.state}}
+  </div>
+
+  <ui-view></ui-view>
 </section>
