@@ -1,7 +1,7 @@
 {
-  "name": "angular-image-gallery",
+  "name": "pet-store",
   "version": "1.0.0",
-  "description": "An Angular-fueled image gallery lab assignment for cf401.",
+  "description": "An Angular-fueled pet store lab assignment for cf401.",
   "main": "app.js",
   "scripts": {
     "pre": "eslint",
@@ -50,6 +50,7 @@
     "protractor": "^4.0.13",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
+    "webdriver": "0.0.1",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"
   },
