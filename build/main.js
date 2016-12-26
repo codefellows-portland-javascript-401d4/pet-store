@@ -33699,7 +33699,7 @@
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "<section>\n    <h3>Let's add a new pet for {{$ctrl.store.name}}!</h3>\n    <form>\n        Name: <input type=\"text\" ng-model=\"$ctrl.petName\">\n        Kind: <select\n                ng-options=\"category as category for category in $ctrl.category\"\n                ng-model=\"$ctrl.selectedCategory\">{{category}}</select>\n        <button ng-click=\"$ctrl.addNewPet()\">Enter</button>\n    </form>\n    <button ng-click=\"$ctrl.goBack()\">Go Back</button>\n</section>";
+	module.exports = "<section>\n    <h3>Let's add a new pet for {{$ctrl.store.name}}!</h3>\n    <form>\n        Name: <input type=\"text\" ng-model=\"$ctrl.petName\">\n        Kind: <select\n                ng-options=\"category as category for category in $ctrl.category\"\n                ng-model=\"$ctrl.selectedCategory\">{{category}}</select>\n        <button ng-click=\"$ctrl.addNewPet()\">Enter</button>\n    </form>\n    <button ng-click=\"$ctrl.goBack()\">Cancel</button>\n</section>";
 
 /***/ },
 /* 22 */
