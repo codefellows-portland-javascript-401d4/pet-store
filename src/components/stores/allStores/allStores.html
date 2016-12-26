@@ -1,5 +1,7 @@
 <h2>This is a list of all stores!</h2>
 <button ui-sref="stores.new">Add a store.</button>
 <ul>
-  <li ng-repeat="store in $ctrl.stores">{{store}}</li>
+  <li ng-repeat="store in $ctrl.stores">
+    <a ui-sref="store({id: store._id})"><h3>{{store.name}}</h3></a>
+  </li>
 </ul>
