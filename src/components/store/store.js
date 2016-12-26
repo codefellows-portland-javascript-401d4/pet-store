@@ -12,4 +12,4 @@ export default {
 
 function controller() {
     this.styles = styles;
-}
+};

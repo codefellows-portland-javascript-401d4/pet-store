@@ -47,7 +47,15 @@ export default function routes($stateProvider, $urlRouterProvider) {
             store: ['storeService', '$transition$', (Store, t) => {
                 return Store.get({ id: t.params().id });
             }],
-            pets: ['store', store => store.pets]
+            pets: ['store', store => store.pets],
+            //I couldn't let this array sit in store component
+            //but I could let it live in addPet component
+            //in the controller
+            //I guess the argument to be made here is which components
+            //Actually need to know about this array
+            category: [() => {
+                return ['cat', 'lizard', 'bird', 'dog', 'fish'];
+            }]
         },
         component: 'store'
     });
@@ -63,7 +71,6 @@ export default function routes($stateProvider, $urlRouterProvider) {
         url: '/addpet',
         component: 'newPet'
     });
-
 
     $urlRouterProvider.otherwise('/');
 };

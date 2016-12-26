@@ -14,6 +14,12 @@ export default {
     controller
 };
 
-function controller() {
+controller.$inject = ['$state'];
+
+function controller($state) {
     this.styles = styles;
+
+    this.goAddPet = () => {
+        $state.go('stores.store.addPet');
+    };
 };
