@@ -63,9 +63,9 @@
   "author": "Tim Combs <tim00combs@gmail.com>",
   "license": "CC-BY-NC-4.0",
   "bugs": {
-    "url": "https://github.com/timcombs/image-gallery"
+    "url": "https://github.com/timcombs/pet-store"
   },
-  "homepage": "https://github.com/timcombs/image-gallery#readme",
+  "homepage": "https://github.com/timcombs/pet-store#readme",
   "babel": {
     "presets": [
       "es2015"

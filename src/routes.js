@@ -4,17 +4,19 @@ export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'stores',
     url: '/stores',
+    abstract: true,
+    default: '.all',
     resolve: {
       stores: ['storeService', storeService => storeService.getAll()]
     },
-    component: 'store'
+    component: 'stores'
   });
 
-  // $stateProvider.state({
-  //   name: 'stores.all',
-  //   url: '/',
-  //   component: 'store'
-  // });
+  $stateProvider.state({
+    name: 'stores.all',
+    url: '/all',
+    component: 'storesAll'
+  });
 
   // $stateProvider.state({
   //   name: 'stores.add',

@@ -1,4 +1,4 @@
-storeService.$inject = ['$http', 'apiUri'];
+storeService.$inject = ['$http', 'apiUrl'];
 
 export default function storeService($http, apiUrl) {
   return {
