@@ -27,13 +27,29 @@ export default function routes($stateProvider, $urlRouterProvider) {
 
     $stateProvider.state({
         name: 'store',
-        url: 'store/:id',
+        url: '/store/:id',
         component: 'store',
+        abstract: true,
+        default: 'store.pets',
         resolve: {
-            id: ['$transition$', t => t.params().id]
+            id: ['$transition$', t => t.params().id],
+            store: ['storeService', 'id', (Store, id) => {
+                return Store.get({id: id});
+            }]        
         }
     });
 
+    $stateProvider.state({
+        name: 'store.pets',
+        url: '/pets',
+        component: 'pets',
+    });
+
+    $stateProvider.state({
+        name: 'store.addPet',
+        url: '/add',
+        component: 'addPet'
+    });
     
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/stores/all');
 }

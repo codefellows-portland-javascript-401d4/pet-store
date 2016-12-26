@@ -28,4 +28,9 @@ function controller(Store, $state) {
         $state.go('stores.all');
 
     };
+
+    this.cancel = function() {
+        this.newStore = '';
+        $state.go('stores.all');
+    };
 }

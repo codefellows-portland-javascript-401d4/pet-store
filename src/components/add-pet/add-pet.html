@@ -1,0 +1,14 @@
+<div>
+    <h3>Add Pet:</h3>
+    <label>Name:</label>
+    <input type="text" ng-model="$ctrl.newPet.name">
+    <label>Animal:</label>
+    <select ng-model="$ctrl.newPet.animal">
+        <option value="">--Select Animal--</option>
+        <option ng-repeat="animal in ['cat', 'lizard', 'bird', 'dog', 'fish']" value="{{animal}}">{{animal}}</option>
+    </select>
+    <button ng-click="$ctrl.addPet()">Sumbit</button>
+    <button ng-click="$ctrl.cancel()">Cancel</button>
+    <br /> 
+    {{$ctrl.newPet}}
+</div>
