@@ -3,13 +3,11 @@ import template from './stores-all.html';
 export default {
   template,
   bindings: {
-    stores:'<'
+    stores: '<'
   },
   controller,
   controllerAs: '$storesAll'
 };
-
-controller.$inject = ['storeService'];
 
 function controller() {
 

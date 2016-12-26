@@ -11,7 +11,5 @@ export default {
 
 function controller() {
 
-  
-
 
 }

@@ -18,11 +18,11 @@ export default function routes($stateProvider, $urlRouterProvider) {
     component: 'storesAll'
   });
 
-  // $stateProvider.state({
-  //   name: 'stores.add',
-  //   url: '/',
-  //   component: 'store'
-  // });
+  $stateProvider.state({
+    name: 'stores.add',
+    url: '/add',
+    component: 'storesAdd'
+  });
 
   // $stateProvider.state({
   //   name: 'store',
