@@ -28,8 +28,8 @@ function controller(stores, $state) {
 
   this.new = () => {
     $state.go('stores.add');
-    // this.viewNew = true;
-    // this.viewDetail = false;
+    this.viewNew = true;
+    this.viewDetail = false;
   };
 
   this.detail = () => {

@@ -16,7 +16,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state({
     name: 'stores.all',
-    url: '/stores',
+    url: '/all',
     views: {
       stores: {
         component: 'stores'
@@ -26,12 +26,8 @@ export default function routes($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state({
     name: 'stores.add',
-    url: '/stores',
-    views: {
-      new: {
-        component: 'new-store'
-      }
-    }
+    url: '/add',
+    component: 'newStore'      
   });
 
 
