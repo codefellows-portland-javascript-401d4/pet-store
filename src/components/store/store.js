@@ -1,4 +1,4 @@
-import template from './stores.html';
+import template from './store.html';
 
 export default {
   template,
@@ -9,8 +9,5 @@ export default {
 };
 
 function controller() {
-  this.name = this.store.name;
-  this.stree = this.store.street;
-  this.city = this.store.city;
-  this.state = this.store.state;
+
 }

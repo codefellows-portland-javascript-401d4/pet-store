@@ -32,6 +32,10 @@ export default function routes($stateProvider, $urlRouterProvider) {
     abstract: true,
     default: '.pets',
     resolve: {
+      store: ['petService', '$transition$', (petService, t) => {
+        return petService.get(t.params().id);
+      }],
+      pets: ['store', store => store.pets]
     },
     component: 'store'
   });
