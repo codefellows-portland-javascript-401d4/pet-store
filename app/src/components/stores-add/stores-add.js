@@ -13,7 +13,7 @@ controller.$inject = ['storeService', '$state'];
 
 function controller(stores, $state) {
 
-  this.backToAll = () => {
+  this.backToStores = () => {
     $state.go('stores.all');
   };
 
@@ -24,7 +24,7 @@ function controller(stores, $state) {
 
   this.reset();
 
-  this.addNew = () => {
+  this.addStore = () => {
     stores.add({
       name: this.name,
       address: {
