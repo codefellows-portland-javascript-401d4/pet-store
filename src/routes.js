@@ -58,6 +58,12 @@ export default function routes($stateProvider, $urlRouterProvider) {
         component: 'storePets'
     });
 
+    $stateProvider.state({
+        name: 'stores.store.addPet',
+        url: '/addpet',
+        component: 'newPet'
+    });
+
 
     $urlRouterProvider.otherwise('/');
 };
