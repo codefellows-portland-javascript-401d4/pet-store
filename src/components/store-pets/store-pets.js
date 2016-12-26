@@ -14,6 +14,28 @@ export default {
     controller
 };
 
-function controller() {
+controller.$inject = ['petService','$state'];
+
+function controller(petService, $state) {
     this.styles = styles;
+
+    this.goAddPet = () => {
+        $state.go('stores.store.addPet');
+    };
+
+    this.remove = pet => {
+        petService
+            .remove(pet._id)
+            .then(removedPet => {
+                let index = -1;
+                this.store.pets.some((pet, petIndex) => {
+                    if (removedPet._id === pet._id) {
+                        index = petIndex;
+                        return;
+                    };
+                });
+                console.log(index);
+                if (index !== -1) this.store.pets.splice(index, 1);
+            });
+    };
 };

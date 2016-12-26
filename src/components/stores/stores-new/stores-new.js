@@ -30,6 +30,10 @@ function controller(Store, $state) {
         $state.go('stores.all');
     };
 
+    this.toStore = store => {
+        $state.go('stores.store', { id: store._id });
+    };
+
     this.addNew = () => {
         new Store({
             name: this.storeName,
@@ -43,6 +47,7 @@ function controller(Store, $state) {
         .then(store => {
             this.stores.push(store);
             this.reset();
+            this.toStore(store);
         });
     };
 }

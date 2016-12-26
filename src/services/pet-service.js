@@ -4,12 +4,12 @@ export default function petService($http, apiUrl) {
     return {
         add(image) {
             return $http
-                .post(`${apiUrl}/images`, image)
+                .post(`${apiUrl}/pets`, image)
                 .then(res => res.data);
         },
         remove(id) {
             return $http
-                .delete(`${apiUrl}/images/${id}`)
+                .delete(`${apiUrl}/pets/${id}`)
                 .then(res => res.data);
         }
     };
