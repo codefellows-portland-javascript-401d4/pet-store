@@ -4,6 +4,9 @@ import styles from './store-pets.scss';
 export default {
     template,
     transclude: true,
+    require: {
+        parent: '^store'
+    },
     bindings: {
         store: '<',
         pets: '<'
