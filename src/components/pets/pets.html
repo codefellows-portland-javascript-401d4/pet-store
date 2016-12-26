@@ -1,7 +1,7 @@
 <section>
     <ul>
-        <li ng-repeat="pet in $ctrl.store.pets">
-        {{pet}}
+        <li ng-repeat="pet in $ctrl.store.pets | orderBy:'animal'" >
+            {{pet.name}}, {{pet.animal}}
         </li>
     </ul>
 
