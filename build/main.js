@@ -56,27 +56,27 @@
 	
 	var _components2 = _interopRequireDefault(_components);
 	
-	var _services = __webpack_require__(28);
+	var _services = __webpack_require__(36);
 	
 	var _services2 = _interopRequireDefault(_services);
 	
-	var _angularUiRouter = __webpack_require__(32);
+	var _angularUiRouter = __webpack_require__(40);
 	
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 	
-	var _routes = __webpack_require__(33);
+	var _routes = __webpack_require__(41);
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _angularUiRouterDefault = __webpack_require__(34);
+	var _angularUiRouterDefault = __webpack_require__(42);
 	
 	var _angularUiRouterDefault2 = _interopRequireDefault(_angularUiRouterDefault);
 	
-	var _angularAnimate = __webpack_require__(35);
+	var _angularAnimate = __webpack_require__(43);
 	
 	var _angularAnimate2 = _interopRequireDefault(_angularAnimate);
 	
-	var _angularResource = __webpack_require__(37);
+	var _angularResource = __webpack_require__(45);
 	
 	var _angularResource2 = _interopRequireDefault(_angularResource);
 	
@@ -33521,8 +33521,10 @@
 	var map = {
 		"./page-root/page-root-header/page-root-header.js": 12,
 		"./page-root/page-root.js": 16,
-		"./stores/stores.js": 20,
-		"./welcome/welcome.js": 24
+		"./stores/stores-all/stores-all.js": 20,
+		"./stores/stores-new/stores-new.js": 24,
+		"./stores/stores.js": 28,
+		"./welcome/welcome.js": 32
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -33637,11 +33639,106 @@
 	    value: true
 	});
 	
-	var _stores = __webpack_require__(21);
+	var _storesAll = __webpack_require__(21);
+	
+	var _storesAll2 = _interopRequireDefault(_storesAll);
+	
+	var _storesAll3 = __webpack_require__(22);
+	
+	var _storesAll4 = _interopRequireDefault(_storesAll3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _storesAll2.default,
+	    bindings: {
+	        stores: '<'
+	    },
+	    controller: controller
+	};
+	
+	
+	controller.$inject = ['$state'];
+	
+	function controller($state) {
+	    this.styles = _storesAll4.default;
+	
+	    this.toNewForm = function () {
+	        $state.go('stores.add');
+	    };
+	};
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = "<h3>All stores listed</h3>\n<section>\n    <select\n        ng-model=\"$ctrl.selected\"\n        ng-options=\"stores._id as stores.name for stores in $ctrl.stores\">\n    </select>\n</section>\n<section>\n    <button ng-click=\"$ctrl.toNewForm()\">Add new stores here!</button>\n</section>";
+
+/***/ },
+/* 22 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 23 */,
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _storesNew = __webpack_require__(25);
+	
+	var _storesNew2 = _interopRequireDefault(_storesNew);
+	
+	var _storesNew3 = __webpack_require__(26);
+	
+	var _storesNew4 = _interopRequireDefault(_storesNew3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _storesNew2.default,
+	    controller: controller
+	};
+	
+	
+	function controller() {
+	    this.styles = _storesNew4.default;
+	}
+
+/***/ },
+/* 25 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\n    <h3>Hi</h3>\n</section>";
+
+/***/ },
+/* 26 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 27 */,
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _stores = __webpack_require__(29);
 	
 	var _stores2 = _interopRequireDefault(_stores);
 	
-	var _stores3 = __webpack_require__(22);
+	var _stores3 = __webpack_require__(30);
 	
 	var _stores4 = _interopRequireDefault(_stores3);
 	
@@ -33661,20 +33758,20 @@
 	};
 
 /***/ },
-/* 21 */
+/* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "<section>\n    <select\n        ng-model=\"$ctrl.selected\"\n        ng-options=\"stores._id as stores.name for stores in $ctrl.stores\">\n    </select>\n</section>";
+	module.exports = "<section>\n    <h2>All stores dealt with here</h2>\n    <ui-view></ui-view>\n</section>";
 
 /***/ },
-/* 22 */
+/* 30 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 23 */,
-/* 24 */
+/* 31 */,
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33683,11 +33780,11 @@
 	    value: true
 	});
 	
-	var _welcome = __webpack_require__(25);
+	var _welcome = __webpack_require__(33);
 	
 	var _welcome2 = _interopRequireDefault(_welcome);
 	
-	var _welcome3 = __webpack_require__(26);
+	var _welcome3 = __webpack_require__(34);
 	
 	var _welcome4 = _interopRequireDefault(_welcome3);
 	
@@ -33704,20 +33801,20 @@
 	};
 
 /***/ },
-/* 25 */
+/* 33 */
 /***/ function(module, exports) {
 
 	module.exports = "<h2>Welcome!</h2>\n<p>\n    This is where all the happening Portland pet stores hang out!\n    Check it out and enjoy!\n</p>";
 
 /***/ },
-/* 26 */
+/* 34 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 27 */,
-/* 28 */
+/* 35 */,
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33740,7 +33837,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var context = __webpack_require__(29);
+	var context = __webpack_require__(37);
 	
 	var _module = _angular2.default.module('services', []);
 	
@@ -33752,12 +33849,12 @@
 	exports.default = _module.name;
 
 /***/ },
-/* 29 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./pet-service.js": 30,
-		"./store-service.js": 31
+		"./pet-service.js": 38,
+		"./store-service.js": 39
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -33770,11 +33867,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 29;
+	webpackContext.id = 37;
 
 
 /***/ },
-/* 30 */
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33801,7 +33898,7 @@
 	};
 
 /***/ },
-/* 31 */
+/* 39 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33817,7 +33914,7 @@
 	};
 
 /***/ },
-/* 32 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -42166,7 +42263,7 @@
 	//# sourceMappingURL=angular-ui-router.js.map
 
 /***/ },
-/* 33 */
+/* 41 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -42190,13 +42287,14 @@
 	
 	    $stateProvider.state({
 	        name: 'stores',
+	        abstract: true,
+	        default: '.all',
 	        url: '/stores',
 	        resolve: {
 	            stores: ['storeService', function (Store) {
 	                return Store.query();
 	            }]
 	        },
-	        component: 'stores',
 	        views: {
 	            main: {
 	                component: 'stores'
@@ -42204,11 +42302,23 @@
 	        }
 	    });
 	
+	    $stateProvider.state({
+	        name: 'stores.all',
+	        url: '/all',
+	        component: 'storesAll'
+	    });
+	
+	    $stateProvider.state({
+	        name: 'stores.add',
+	        url: '/add',
+	        component: 'storesNew'
+	    });
+	
 	    $urlRouterProvider.otherwise('/');
 	};
 
 /***/ },
-/* 34 */
+/* 42 */
 /***/ function(module, exports) {
 
 	/**
@@ -42309,15 +42419,15 @@
 	})(window.angular);
 
 /***/ },
-/* 35 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(36);
+	__webpack_require__(44);
 	module.exports = 'ngAnimate';
 
 
 /***/ },
-/* 36 */
+/* 44 */
 /***/ function(module, exports) {
 
 	/**
@@ -46477,15 +46587,15 @@
 
 
 /***/ },
-/* 37 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(38);
+	__webpack_require__(46);
 	module.exports = 'ngResource';
 
 
 /***/ },
-/* 38 */
+/* 46 */
 /***/ function(module, exports) {
 
 	/**
