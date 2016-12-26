@@ -14,6 +14,27 @@ export default function routes($stateProvider, $urlRouterProvider) {
     component: 'stores'
   });
 
+  $stateProvider.state({
+    name: 'stores.all',
+    url: '/stores',
+    views: {
+      stores: {
+        component: 'stores'
+      }
+    }
+  });
+
+  $stateProvider.state({
+    name: 'stores.add',
+    url: '/stores',
+    views: {
+      new: {
+        component: 'new-store'
+      }
+    }
+  });
+
+
   // $stateProvider.state({
   //   name: 'about',
   //   url: '/about',

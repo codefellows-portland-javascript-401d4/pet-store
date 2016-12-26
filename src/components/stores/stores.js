@@ -6,9 +6,9 @@ export default {
   controller
 };
 
-controller.$inject = ['storeService'];
+controller.$inject = ['storeService', '$state'];
 
-function controller(stores) {
+function controller(stores, $state) {
 
   this.styles = styles;
 
@@ -27,8 +27,9 @@ function controller(stores) {
   };
 
   this.new = () => {
-    this.viewNew = true;
-    this.viewDetail = false;
+    $state.go('stores.add');
+    // this.viewNew = true;
+    // this.viewDetail = false;
   };
 
   this.detail = () => {
