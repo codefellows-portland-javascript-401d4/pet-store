@@ -1,9 +1,10 @@
-import template from './pets-detail.html';
+import template from './store.html';
 
 export default {
   template,
-  bindings: {
-    pet: '='
+  bindings: { 
+    id: '<',
+    store: '<'
   },
   controller
 };

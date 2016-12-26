@@ -32,8 +32,12 @@ function controller(stores, $state) {
         city: this.address.city,
         state: this.address.state
       }
-    });
-    this.reset();
+    })
+        .then(saved => {
+          const newStoreId = saved._id;               
+          this.stores.push(saved);
+          $state.go('store', {id: newStoreId});
+        });
   };
 }
 
