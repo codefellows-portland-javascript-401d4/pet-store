@@ -52,7 +52,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
     component: 'newPet'
   });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/stores/all');
   $urlRouterProvider.when('/stores', '/stores/all');
 
 }
