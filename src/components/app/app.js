@@ -1,12 +1,12 @@
-<header>
-    <app-header>
-        <ui-view name="header"></ui-view>
-    </app-header>
-</header>
+import template from './app.html';
 
-<main>
-<h1>in app.js</h1>
-    <ui-view name="main"></ui-view>
-</main>
+export default {
+	template,
+	controller
+};
 
-<footer>&copy; 2016 cuteness forever</footer>
+controller.$inject = ['$state'];
+
+function controller($state) {
+	this.gotoStores = () => $state.go('stores');
+}

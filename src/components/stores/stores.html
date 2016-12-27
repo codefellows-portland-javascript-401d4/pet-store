@@ -1,0 +1,17 @@
+<section >
+    <h2>In stores.html</h2>
+    <select 
+        ng-model="$ctrl.selected"
+        ng-change="$ctrl.setStore(event)"
+        ng-options="store._id as store.name for store in $ctrl.stores">
+    </select>  
+    <section class="add-store">
+        <add-new inline="true" add="$ctrl.add">
+            <input ng-model="$ctrl.newStore.name">
+        </add-new>
+    </section>
+    <hr>
+    <section>
+        <ui-view></ui-view>
+    </section>
+</section>
