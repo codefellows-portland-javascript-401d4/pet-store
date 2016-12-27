@@ -1,5 +1,5 @@
-import template from './header.html';
-import styles from './header.scss';
+import template from './stores.html';
+import styles from './stores.scss';
 
 export default {
   template,

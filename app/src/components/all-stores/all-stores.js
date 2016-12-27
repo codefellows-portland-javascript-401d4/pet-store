@@ -1,5 +1,5 @@
-import template from './stores.html';
-import styles from './stores.scss';
+import template from './all-stores.html';
+import styles from './all-stores.scss';
 
 export default {
   template,
@@ -10,6 +10,5 @@ export default {
 };
 
 function controller() {
-  console.log('In stores.js');
   this.styles = styles;
 }
