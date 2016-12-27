@@ -1,0 +1,13 @@
+<h2>This is a new store!</h2>
+<form>
+  <fieldset>
+    <legend>New Store</legend>
+    Name: <input ng-model="$ctrl.name"><br>
+    Address: <br>
+    Street: <input ng-model="$ctrl.street">
+    City: <input ng-model="$ctrl.city">
+    State: <input ng-model="$ctrl.state"><br>
+    <button ng-click="$ctrl.addNew()">Add</button>
+    <button ui-sref="stores.all">Cancel</button>
+  </fieldset>
+</form>
