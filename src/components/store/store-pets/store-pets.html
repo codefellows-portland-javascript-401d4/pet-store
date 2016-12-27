@@ -1,11 +1,11 @@
 <section>
     <h3>Hi from "{{$ctrl.store.name}}"</h3>
     <div>
-        <h4>Street: {{$ctrl.store.address.street}}</h4>
-        <h4>City: {{$ctrl.store.address.city}}</h4>
-        <h4>State: {{$ctrl.store.address.state}}</h4>
+        <p>Street: {{$ctrl.store.address.street}}</p>
+        <p>City: {{$ctrl.store.address.city}}</p>
+        <p>State: {{$ctrl.store.address.state}}</p>
     </div>
-    <div>
+    <div ng-class="$ctrl.styles.pettable">
         <table>
             <thead>
                 <tr>

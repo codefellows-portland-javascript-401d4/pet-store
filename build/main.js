@@ -33580,7 +33580,7 @@
 /* 13 */
 /***/ function(module, exports) {
 
-	module.exports = "<section>\n    <h1>Welcome to PDX Pet Stores!</h1>\n    <nav>\n        <a ui-sref=\"welcome\">Welcome</a>\n        <a ui-sref=\"stores\">Stores</a>\n    </nav>\n    <section ng-transclude=\"links\"></section>\n</section>";
+	module.exports = "<section>\n    <h1>Pet Store-pedia!</h1>\n    <hr>\n    <nav>\n        <a ui-sref=\"welcome\">Welcome</a>\n        <a ui-sref=\"stores\">Stores</a>\n    </nav>\n    <section ng-transclude=\"links\"></section>\n</section>";
 
 /***/ },
 /* 14 */
@@ -33699,7 +33699,7 @@
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "<section>\n    <h3>Let's add a new pet for {{$ctrl.store.name}}!</h3>\n    <form>\n        Name: <input type=\"text\" ng-model=\"$ctrl.petName\">\n        Kind: <select\n                ng-options=\"category as category for category in $ctrl.category\"\n                ng-model=\"$ctrl.selectedCategory\">{{category}}</select>\n        <button ng-click=\"$ctrl.addNewPet()\">Enter</button>\n    </form>\n    <button ng-click=\"$ctrl.goBack()\">Cancel</button>\n</section>";
+	module.exports = "<section>\n    <h3>Let's add a new pet for {{$ctrl.store.name}}!</h3>\n    <form>\n        Name: <input type=\"text\" ng-model=\"$ctrl.petName\">\n        Kind: <select\n                ng-options=\"category as category for category in $ctrl.category\"\n                ng-model=\"$ctrl.selectedCategory\">{{category}}</select>\n        <button ng-click=\"$ctrl.addNewPet()\">Enter</button>\n    </form>\n    <button ng-click=\"$ctrl.goBack()\">Go Back/Cancel</button>\n</section>";
 
 /***/ },
 /* 22 */
@@ -33771,13 +33771,14 @@
 /* 25 */
 /***/ function(module, exports) {
 
-	module.exports = "<section>\n    <h3>Hi from \"{{$ctrl.store.name}}\"</h3>\n    <div>\n        <h4>Street: {{$ctrl.store.address.street}}</h4>\n        <h4>City: {{$ctrl.store.address.city}}</h4>\n        <h4>State: {{$ctrl.store.address.state}}</h4>\n    </div>\n    <div>\n        <table>\n            <thead>\n                <tr>\n                    <th>Pet Name</th>\n                    <th>Pet Type</th>\n                    <th>Delete</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr ng-repeat=\"pet in $ctrl.store.pets\">\n                    <td>{{pet.name}}</td>\n                    <td>{{pet.animal}}</td>\n                    <td><button ng-click=\"$ctrl.remove(pet)\">Delete</button></td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    <button ng-click=\"$ctrl.goAddPet()\">Add a new pet!</button>\n</section>";
+	module.exports = "<section>\n    <h3>Hi from \"{{$ctrl.store.name}}\"</h3>\n    <div>\n        <p>Street: {{$ctrl.store.address.street}}</p>\n        <p>City: {{$ctrl.store.address.city}}</p>\n        <p>State: {{$ctrl.store.address.state}}</p>\n    </div>\n    <div ng-class=\"$ctrl.styles.pettable\">\n        <table>\n            <thead>\n                <tr>\n                    <th>Pet Name</th>\n                    <th>Pet Type</th>\n                    <th>Delete</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr ng-repeat=\"pet in $ctrl.store.pets\">\n                    <td>{{pet.name}}</td>\n                    <td>{{pet.animal}}</td>\n                    <td><button ng-click=\"$ctrl.remove(pet)\">Delete</button></td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    <button ng-click=\"$ctrl.goAddPet()\">Add a new pet!</button>\n</section>";
 
 /***/ },
 /* 26 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+	module.exports = {"pettable":"_1AzJAT7k4rgfKsm33oGzGr"};
 
 /***/ },
 /* 27 */,
@@ -33818,7 +33819,7 @@
 /* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "<section>\n    <h2>Welcome to the {{$ctrl.store.name}}</h2>\n    <ui-view></ui-view>\n</section>";
+	module.exports = "<section>\n    <ui-view></ui-view>\n</section>";
 
 /***/ },
 /* 30 */
@@ -33883,7 +33884,7 @@
 /* 33 */
 /***/ function(module, exports) {
 
-	module.exports = "<h3>All stores listed</h3>\n<section>\n    <select\n        ng-model=\"$ctrl.selected\"\n        x-note=\"you can alias what is actually stored in ng-options for ease os use in your ng-model later\"\n        ng-options=\"stores as stores.name for stores in $ctrl.stores\">\n    </select>\n    <button ng-click=\"$ctrl.go()\">Go to Pet Store</button>\n    <button ng-click=\"$ctrl.remove()\">Remove</button>\n</section>\n<section>\n    <button ng-click=\"$ctrl.toNewForm()\">Add new stores here!</button>\n</section>";
+	module.exports = "<h3>Check out our associated pet stores!</h3>\n<section>\n    <select\n        ng-model=\"$ctrl.selected\"\n        x-note=\"you can alias what is actually stored in ng-options for ease os use in your ng-model later\"\n        ng-options=\"stores as stores.name for stores in $ctrl.stores\">\n    </select>\n    <button ng-click=\"$ctrl.go()\">Go to Pet Store</button>\n    <button ng-click=\"$ctrl.remove()\">Remove</button>\n</section>\n<section>\n    <button ng-click=\"$ctrl.toNewForm()\">Add new stores here!</button>\n</section>";
 
 /***/ },
 /* 34 */
@@ -33968,7 +33969,7 @@
 /* 37 */
 /***/ function(module, exports) {
 
-	module.exports = "<section>\n    <h3>Hi</h3>\n    <form>\n        Name: <input type=\"text\" ng-model=\"$ctrl.storeName\" required>\n        Address: <input type=\"text\" ng-model=\"$ctrl.street\" required>\n        City: <input type=\"text\" ng-model=\"$ctrl.city\" required>\n        State: <input type=\"text\" ng-model=\"$ctrl.usState\" required>\n        <button ng-click=\"$ctrl.addNew()\" ng-transclude>Send</button>\n        <button ng-click=\"$ctrl.toAll()\">Cancel</button>\n    </form>\n</section>";
+	module.exports = "<section>\n    <h3>You can add new stores here!</h3>\n    <form>\n        Name: <input type=\"text\" ng-model=\"$ctrl.storeName\" required>\n        Address: <input type=\"text\" ng-model=\"$ctrl.street\" required>\n        City: <input type=\"text\" ng-model=\"$ctrl.city\" required>\n        State: <input type=\"text\" ng-model=\"$ctrl.usState\" required>\n        <button ng-click=\"$ctrl.addNew()\" ng-transclude>Send</button>\n        <button ng-click=\"$ctrl.toAll()\">Cancel</button>\n    </form>\n</section>";
 
 /***/ },
 /* 38 */
@@ -34014,7 +34015,7 @@
 /* 41 */
 /***/ function(module, exports) {
 
-	module.exports = "<section>\n    <h2>All stores dealt with here</h2>\n    <ui-view></ui-view>\n</section>";
+	module.exports = "<section>\n    <ui-view></ui-view>\n</section>";
 
 /***/ },
 /* 42 */
@@ -34057,7 +34058,7 @@
 /* 45 */
 /***/ function(module, exports) {
 
-	module.exports = "<h2>Welcome!</h2>\n<p>\n    This is where all the happening Portland pet stores hang out!\n    Check it out and enjoy!\n</p>";
+	module.exports = "<h2>Welcome to Pet Store-pedia!</h2>\n<hr>\n<p>\n    This is where all the happening pet stores hang out!\n    Check it out and enjoy!\n</p>";
 
 /***/ },
 /* 46 */
