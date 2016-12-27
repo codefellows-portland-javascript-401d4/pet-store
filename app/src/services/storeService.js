@@ -3,7 +3,7 @@ storeService.$inject = ['$http', 'apiUrl'];
 export default function storeService($http, apiUrl) {
   return {
     getStores() {
-      return $http.get(`${apiUrl}/stores`)
+      return $http.get(`${apiUrl}/unauth/stores`)
         .then(res => res.data);
     },
     addStore(store) {
@@ -15,7 +15,7 @@ export default function storeService($http, apiUrl) {
         .then(res => res.data);
     },
     getPets() {
-      return $http.get(`${apiUrl}/pets`)
+      return $http.get(`${apiUrl}/unauth/pets`)
         .then(res => res.data);
     },
     getPet(id) {

@@ -1,15 +1,11 @@
-import template from './stores.html';
-import styles from './stores.scss';
+import template from './header.html';
+import styles from './header.scss';
 
 export default {
   template,
-  controller,
-  bindings: {
-    storeList: '<'
-  }
+  controller
 };
 
 function controller() {
-  console.log('In stores.js');
   this.styles = styles;
 }

@@ -1,9 +1,3 @@
-<p>Stores display</p>
-<section>
-  <div ng-repeat="store in $ctrl.storeList"
-  ui-sref="store({ id: store._id })">
-    <h2><a href="#">{{ store.name }}</a></h2>
-      <p>{{ store.city }}, {{ store.state }}</p>
-  </div>
+<section ng-class="$ctrl.styles.stores">
+  <h3>Here's a list of Portland pet stores</h3>
 </section>
-

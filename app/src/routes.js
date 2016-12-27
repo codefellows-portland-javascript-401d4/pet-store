@@ -5,8 +5,9 @@ export default function routes($stateProvider, $urlRouterProvider) {
     .state({
       name: 'stores',
       url: '/stores',
-      component: 'header',
+      component: 'stores',
       abstract: true,
+      default: '.all',
       resolve: {
         storeList: ['storeService', s => {
           return s.getStores();
@@ -16,7 +17,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
     .state({
       name: 'stores.all',
       url: '/all',
-      component: 'stores'
+      component: 'allStores'
     });
   //   .state({
   //     name: 'stores.addStore',
