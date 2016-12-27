@@ -1,0 +1,11 @@
+<section>
+  Add a new store
+  name: <input ng-model="$storesAdd.name" type="text">
+  address: 
+    street: <input ng-model="$storesAdd.street" type="text">
+    city: <input ng-model="$storesAdd.city" type="text">
+    state: <input ng-model="$storesAdd.state" type="text">
+
+  <button ui-sref="stores.all">cancel</button>
+  <button ng-click="$storesAdd.addStore()">add store</button>
+</section>
