@@ -8,9 +8,21 @@ export default {
   }
 };
 
-controller.$inject = ['storeService'];
+controller.$inject = ['storeService', '$state'];
 
-function controller(stores) {
+function controller(stores, $state) {
+
+  this.$onInit = () => {
+    const stores = this.stores;
+    if(stores.length) {
+      this.selected = stores[0]._id;
+    }
+  };
+
+  this.setStore = () => {
+    if(!this.selected) return;
+    $state.go('store', { id: this.selected });
+  };
 
   this.addNew = () => {
     const street = this.street;

@@ -1,6 +1,6 @@
 routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-export default function routes($stateProvider, $urlRouterProvider) {
+export default function routes($stateProvider /*$urlRouterProvider*/) {
 
   $stateProvider.state({
     name: 'stores',
@@ -12,14 +12,22 @@ export default function routes($stateProvider, $urlRouterProvider) {
   });
 
   $stateProvider.state({
-    name: 'stores.store',
-    url: '/:id',
+    name: 'store',
+    url: 'store/:id',
     resolve: {
-      id: ['$transition$', t => t.params().id]
+      store: ['storeService', '$transition$', (store, t) => {
+        return store.getId(t.params().id);
+      }]
     },
-    component: 'stores'
+    component: 'store'
   });
 
-  $urlRouterProvider.otherwise('/store');
+  $stateProvider.state({
+    name: 'welcome',
+    url: '/welcome',
+    component: 'welcome'
+  });
+
+  // $urlRouterProvider.otherwise('/store');
 }
 

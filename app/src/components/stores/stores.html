@@ -5,14 +5,14 @@
   <table>
     <tr 
       ng-repeat="store in $ctrl.stores"
-      ui-sref="stores.store({id:store._id})"
-    >
-      <td>{{store.name}}</td>
+      ui-sref="store({id:store._id})">
+      <td>{{store.name}}</td> 
       <td>{{store.address.street}} {{store.address.city}}, {{store.address.state}}</td>
+      <p>{{$ctrl.selected}}</p>
     </tr>
   </table>
 </section>
 
 <main>
-    <ui-view></ui-view>
+  <ui-view></ui-view>
 </main>
