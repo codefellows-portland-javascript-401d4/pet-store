@@ -1,29 +1,35 @@
 @import 'colors';
+@import 'content';
+@import 'buttons';
 
 :local(.store) {
     margin: 10% 2% 2%;
 
     header {
-        background-color: $header;
-        margin: 0;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-        z-index: 1000;
+        @include header();
 
         div {
             float: right;
-            margin: 0 2% 0 0;
+            margin: 1.25% 1% 1%;
         }
 
         h1 {
-            font-size: 2.5em;
-            text-align: left;
-            width: 50%;
-            margin: 1% 0 1% 5%;
-            display: inline-block;
+            @include headerH1();
         }
+
+        button {
+            @include button();
+            float: right;
+            background-color: $content;
+            margin: 1% 2%;
+            transition: transform .5s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        button:focus {outline:0;}
 
     }
 

@@ -6,8 +6,12 @@ export default {
     controller
 };
 
-function controller() {
+controller.$inject = ['userService'];
+
+function controller(userService) {
     this.styles = styles;
+    this.logout = () => userService.logout();
+    this.isAuthenticated = () => userService.isAuthenticated();
 }
 
 

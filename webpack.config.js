@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const cssExtract = new ExtractTextPlugin('main.css');
+
 module.exports = {
     entry: './src/app.js',
     output: {
@@ -28,6 +30,12 @@ module.exports = {
                 cacheDirectory: true,
                 // plugins: ['transform-runtime']    
             } 
+        }, {
+            test: /\.css$/,
+            loader: cssExtract.extract(
+                'style-loader',
+                'css-loader'
+            )	
         }, {
             test: /\.scss$/,
             // loader: 'style-loader!css-loader?sourceMap!sass-loader?sourceMap'

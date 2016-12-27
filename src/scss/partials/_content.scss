@@ -22,3 +22,26 @@
         border-collapse: collapse;
 }
 
+@mixin paragraph() {
+    font-size: 1.5em;
+    line-height: 2;
+    text-align: left;
+}
+
+@mixin header() {
+        background-color: $header;
+        margin: 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+}
+
+@mixin headerH1() {
+        font-size: 2.5em;
+        text-align: left;
+        width: 50%;
+        margin: 1% 0 1% 5%;
+        display: inline-block;
+}

@@ -1,6 +1,7 @@
 <section ng-class="$ctrl.styles.stores">
     <header>
         <h1>Pet Stores</h1>
+        <button ng-if="$ctrl.isAuthenticated()" ui-sref="welcome" ng-click="$ctrl.logout()">logout</button>
     </header>
     <section>
         <ui-view></ui-view>
