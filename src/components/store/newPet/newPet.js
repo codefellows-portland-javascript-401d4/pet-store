@@ -14,6 +14,11 @@ function controller(petService) {
 
   this.types = ['cat', 'lizard', 'bird', 'dog', 'fish'];
 
+  this.reset = () => {
+    this.name = '';
+    this.selectedType = '';
+  };
+
   this.add = () => {
     petService.add({
       name: this.name,
@@ -26,6 +31,7 @@ function controller(petService) {
       .catch(err => {
         console.log('add pet catch', err);
       });
+    this.reset();
   };
 
 }
