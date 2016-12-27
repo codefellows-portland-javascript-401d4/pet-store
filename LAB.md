@@ -68,4 +68,7 @@
   
   ## Rubric *20pts*
   
-  * TBD
+  * Routes, Resolves, States *8pts*
+  * Components *6pts*
+  * Tests *4pts*
+  * Code Quality *2pts*

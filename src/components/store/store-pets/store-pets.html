@@ -18,7 +18,7 @@
                 <tr ng-repeat="pet in $ctrl.store.pets">
                     <td>{{pet.name}}</td>
                     <td>{{pet.animal}}</td>
-                    <td><button ng-click="$ctrl.remove(pet)">Delete</button></td>
+                    <td><button ng-click="$ctrl.parent.del(pet)">Delete</button></td>
                 </tr>
             </tbody>
         </table>

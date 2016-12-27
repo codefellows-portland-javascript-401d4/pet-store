@@ -4,12 +4,12 @@ import styles from './stores-new.scss';
 export default {
     template,
     transclude: true,
+    require: {
+        parent: '^stores'
+    },
     bindings: {
         stores: '<',
         add: '<'
-    },
-    require: {
-        parent: '^stores'
     },
     controller
 };
@@ -50,4 +50,4 @@ function controller(Store, $state) {
             this.toStore(store);
         });
     };
-}
+};
