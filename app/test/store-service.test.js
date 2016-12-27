@@ -60,24 +60,4 @@ describe( 'store service', () => {
     $httpBackend.flush();
   });
 
-  it('removes store', done => {
-
-    const store = {
-      id: '123'
-    };
-        
-    $httpBackend
-            .expectDELETE('/api/stores/123')
-            .respond(store);
-
-    storeService.remove(store.id)
-            .then(removedStore => {
-              assert.deepEqual(removedStore, store);
-              done();
-            })
-            .catch(done);
-
-    $httpBackend.flush();
-  });
-
 });
