@@ -1,0 +1,18 @@
+<header>
+  <h1>Pet Store</h1>
+</header>
+<section>
+  <table>
+    <tr 
+      ng-repeat="store in $ctrl.stores"
+      ui-sref="store({id:store._id})">
+      <td>{{store.name}}</td> 
+      <td>{{store.address.street}} {{store.address.city}}, {{store.address.state}}</td>
+      <p>{{$ctrl.selected}}</p>
+    </tr>
+  </table>
+</section>
+
+<main>
+  <ui-view></ui-view>
+</main>
