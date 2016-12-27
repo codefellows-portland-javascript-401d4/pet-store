@@ -3,12 +3,23 @@ import template from './newStore.html';
 export default {
   template,
   bindings: {
+    stores: '<',
     add: '<'
   },
   controller
 };
 
-function controller() {
+controller.$inject = ['$state'];
+
+function controller($state) {
+
+  this.reset = () => {
+    this.name = '';
+    this.street = '';
+    this.city = '';
+    this.state = '';
+  };
+
   this.addNew = () => {
     this.add({
       name: this.name,
@@ -16,7 +27,16 @@ function controller() {
         street: this.street,
         city: this.city,
         state: this.state
-      },
+      }
+    })
+    .then(saved => {
+      this.stores.push(saved);
+      console.log('Store added: ', saved);
+    })
+    .catch(err => {
+      console.log('add store catch', err);
     });
+    $state.go('stores');
+    this.reset();
   };
 }
