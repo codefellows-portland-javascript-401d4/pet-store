@@ -33912,17 +33912,14 @@
 	    controller: controller
 	};
 	
+	// controller.$inject = ['storeService'];
 	
-	controller.$inject = ['storeService'];
-	
-	function controller(stores, $state) {
-	    var _this = this;
-	
+	function controller() {
 	    this.styles = _stores4.default;
 	
-	    stores.get().then(function (stores) {
-	        _this.stores = stores;
-	    });
+	    // stores.get().then(stores => {
+	    //     this.stores = stores;
+	    // });
 	}
 
 /***/ },
