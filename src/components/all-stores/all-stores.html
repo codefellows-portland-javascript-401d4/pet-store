@@ -1,0 +1,41 @@
+<section>
+
+    <h2>All Pet Stores</h2>
+    <section class="choose-store">
+    <form>
+       <h3>Choose a Store</h3><br>
+      <select 
+        ng-model="$ctrl.selected"
+        ng-options="store._id as store.name for store in $ctrl.stores"
+        ng-change="$ctrl.setStore(e)">
+    </select> 
+    </form>
+    </section><br>
+
+    <section class="store-info" ng-if="$ctrl.selected">
+        <h2>Store Name   {{$ctrl.selected.name}}</h2>
+        <p>{{ctrl.stores}}</p>
+    </section>
+
+    <section class="add-store">
+        <form>
+            <!--STRETCH: Make this form only show up when toggled-->
+        <h3>Add a Store</h3>
+            <add-new inline="true" add="$ctrl.add">
+                Store Name
+                <input ng-model="$ctrl.newStore.name"><br>
+                Street
+                <input ng-model="$ctrl.newStore.street"><br>
+                City
+                <input ng-model="$ctrl.newStore.city"><br>
+                State
+                <input ng-model="$ctrl.newStore.state"><br>
+            </add-new>
+            <button >Add Store</button>
+        </form>
+    </section>
+
+
+</section>
+
+ 

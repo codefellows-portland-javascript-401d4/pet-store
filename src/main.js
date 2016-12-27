@@ -6,10 +6,14 @@ import uiRouter from 'angular-ui-router';
 // import defaultRoute from 'angular-ui-router-default';
 import routes from './routes'; 
 import defaultRoute from 'angular-ui-router-default';
-import resource from 'angular-resource';
 
-const app = angular.module('myApp', [components, services, uiRouter, defaultRoute, resource]);
+const app = angular.module('myApp', [components, services, uiRouter, defaultRoute]);
 
 app.config(routes);
 
-app.value('apiUrl', 'http://localhost:3500/api');
+//route debugger
+app.run(function($rootScope) {
+	$rootScope.$on('$stateChangeError', console.log.bind(console));
+});
+
+app.value('apiUrl', 'https://pet-store-401.herokuapp.com/api/unauth');
