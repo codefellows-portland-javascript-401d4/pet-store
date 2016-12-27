@@ -1,7 +1,7 @@
 import angular from 'angular';
 import components from './components';
 import services from './services';
-import './scss/main.scss';
+// import './scss/main.scss';
 import uiRouter from 'angular-ui-router';
 import routes from './routes';
 
