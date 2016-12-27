@@ -33665,7 +33665,6 @@
 	                state: _this.state
 	            }
 	        }).then(function (saved) {
-	            var newStoreId = saved._id;
 	            _this.stores.push(saved);
 	            $state.go('store', { id: saved._id });
 	        });
@@ -33912,14 +33911,9 @@
 	    controller: controller
 	};
 	
-	// controller.$inject = ['storeService'];
 	
 	function controller() {
 	    this.styles = _stores4.default;
-	
-	    // stores.get().then(stores => {
-	    //     this.stores = stores;
-	    // });
 	}
 
 /***/ },
