@@ -7,7 +7,7 @@ describe('Stores Page', () => {
     
   describe('navigation', () => {
 
-    it('defaults to /stores/all', () => {
+    it('stores/all functions', () => {
             
       const uiView = element(by.css('main ui-view'));
 
@@ -23,6 +23,20 @@ describe('Stores Page', () => {
             
       const nav = element.all(by.css('a'));
       const addNewStore = nav.get(0);
+      const list = element.all(by.css('li'));
+      //first store in list
+      const notAsAwesome = list.get(0);
+
+      notAsAwesome.click();
+
+      testState('/stores/585c664abe50100011c6c991/pets', 'store');
+
+      const nav2 = element.all(by.css('button'));
+      const backToStores = nav2.get(1);
+
+      backToStores.click();
+
+      testState('/stores/all', 'stores');
             
       addNewStore.click();
 
