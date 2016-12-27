@@ -2,9 +2,9 @@ petService.$inject = ['$http', 'apiUrl'];
 
 export default function petService($http, apiUrl) {
     return {
-        add(image) {
+        add(pet) {
             return $http
-                .post(`${apiUrl}/pets`, image)
+                .post(`${apiUrl}/pets`, pet)
                 .then(res => res.data);
         },
         remove(id) {
