@@ -31,12 +31,12 @@ function controller($state) {
     })
     .then(saved => {
       this.stores.push(saved);
+      this.reset();
+      $state.go('store', {id: saved._id});
       console.log('Store added: ', saved);
     })
     .catch(err => {
       console.log('add store catch', err);
     });
-    this.reset();
-    $state.go('stores');
   };
 }
