@@ -4,7 +4,10 @@ import styles from './storesMain.scss';
 
 export default {
     template,
-    controller
+    controller, 
+    bindings: {
+        stores: '<'
+    }
 };
 
 controller.$inject = ['storeService'];
@@ -13,5 +16,5 @@ function controller(storeService) {
     this.styles = styles;
     this.stores = [];
 
-    this.newStore = storeService.add();
+    // this.newStore = storeService.add();
 };

@@ -7,7 +7,7 @@ export default function storeService($http, apiUrl) {
             return $http.get(`${apiUrl}/stores`)
                 .then(res => res.data);
         },
-        get(storeId) {
+        getId(storeId) {
             return $http.get(`${apiUrl}/stores/${storeId}`)
                 .then(res => res.data);
         },
