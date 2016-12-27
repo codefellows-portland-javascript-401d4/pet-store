@@ -8,9 +8,9 @@ export default {
   controller
 };
 
-controller.$inject = ['petService'];
+controller.$inject = ['petService', '$state'];
 
-function controller(petService) {
+function controller(petService, $state) {
 
   this.types = ['cat', 'lizard', 'bird', 'dog', 'fish'];
 
@@ -32,6 +32,8 @@ function controller(petService) {
         console.log('add pet catch', err);
       });
     this.reset();
+    console.log('store id', this.store._id);
+    $state.go('store.pets', {id: this.store._id});
   };
 
 }
