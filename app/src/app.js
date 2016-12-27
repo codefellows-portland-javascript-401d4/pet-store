@@ -12,7 +12,7 @@ const app = angular.module('myApp', [
     uiRouter
 ]);
 
-const dev = 'http://localhost:3000/api'; // the development URL, production is '/api/'
+const dev = 'https://pet-store-401.herokuapp.com/api/unauth';
 
 app.config(routes);
 

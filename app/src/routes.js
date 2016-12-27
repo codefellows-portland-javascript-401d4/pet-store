@@ -16,26 +16,39 @@ export default function routes($stateProvider, $urlRouterProvider) {
     });
 
     $stateProvider.state({
-        name: 'albums',
-        url: '/albums',
-        component: 'albumsMain'
+        name: 'stores',
+        url: '/stores',
+        component: 'storesMain'
     });
 
     $stateProvider.state({
-        name: 'albums.images',
-        url: '/:id/images',
-        resolve: {
-            albumId: ['$transition$', t => t.params().id]
-        },
-        views: {
-            myimages: 'imageChoice'
-        }
+        name: 'stores.all',
+        url: '/stores',
+        component: 'storesMain'
     });
 
     $stateProvider.state({
-        name: 'images',
-        url: '/images',
-        component: 'imageChoice'
+        name: 'stores.add',
+        url: '/stores',
+        component: 'storeAdd'
+    });
+
+    $stateProvider.state({
+        name: 'store',
+        url: '/:id',
+        component: 'store'
+    });
+
+    $stateProvider.state({
+        name: 'store.pets',
+        url: '/:id',
+        component: 'store'
+    });
+
+    $stateProvider.state({
+        name: 'store.addPet',
+        url: '/:id',
+        component: 'addPet'
     });
 
     $urlRouterProvider.otherwise('/');
