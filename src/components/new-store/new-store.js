@@ -12,7 +12,6 @@ function controller() {
 
   this.reset = () => {
     this.name = '';
-    // this.address.street = '';
   };
 
   this.reset();

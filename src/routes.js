@@ -15,47 +15,25 @@ export default function routes($stateProvider, $urlRouterProvider) {
   });
 
   $stateProvider.state({
-    name: 'stores.all',
+    name:'stores.all',
     url: '/all',
     views: {
-      stores: {
-        component: 'stores'
+      all: {
+        component: 'storesAll'
       }
     }
   });
 
+
   $stateProvider.state({
     name: 'stores.add',
     url: '/add',
-    component: 'newStore'      
+    views: {
+      all: {
+        component: 'newStore'
+      }
+    }
   });
-
-
-  // $stateProvider.state({
-  //   name: 'about',
-  //   url: '/about',
-  //   component: 'about'
-  // });
-  //
-  // $stateProvider.state({
-  //   name: 'about.bio',
-  //   url: '/bio',
-  //   views: {
-  //     bio: {
-  //       component: 'bio'
-  //     }
-  //   }
-  // });
-  //
-  // $stateProvider.state({
-  //   name: 'about.lab',
-  //   url: '/app',
-  //   views: {
-  //     lab: {
-  //       component: 'lab'
-  //     }
-  //   }
-  // });
 
   $stateProvider.state({
     name: 'stores.detail',

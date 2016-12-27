@@ -3,12 +3,15 @@ import styles from './stores.scss';
 
 export default {
   template,
-  controller
+  controller,
+  bindings: {
+    stores: '<'
+  }
 };
 
-controller.$inject = ['storeService', '$state'];
+controller.$inject = ['storeService'];
 
-function controller(stores, $state) {
+function controller(stores) {
 
   this.styles = styles;
 
@@ -19,6 +22,8 @@ function controller(stores, $state) {
     this.stores = stores;
   });
 
+  // this.stores = stores;
+
   this.add = store => {
     stores.add(store)
     .then(saved => {
@@ -27,7 +32,7 @@ function controller(stores, $state) {
   };
 
   this.new = () => {
-    $state.go('stores.add');
+    // $state.go('stores.add');
     this.viewNew = true;
     this.viewDetail = false;
   };
