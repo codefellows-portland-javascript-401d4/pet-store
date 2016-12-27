@@ -75,6 +75,10 @@
 	
 	app.config(_routes2.default);
 	app.value('apiUrl', dev);
+	
+	// app.factory('apiUrl', function() {
+	//   return dev;
+	// });
 
 /***/ },
 /* 1 */
@@ -42038,7 +42042,23 @@
 /* 14 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = routes;
+	routes.$inject = ['$stateProvider', '$urlRouteProvider'];
+	
+	function routes($stateProvider, $urlRouteProvider) {
+	  $stateProvider.state({
+	    name: 'welcome',
+	    url: '/',
+	    component: 'app'
+	  });
+	
+	  $urlRouteProvider.otherwise('/');
+	}
 
 /***/ }
 /******/ ]);
