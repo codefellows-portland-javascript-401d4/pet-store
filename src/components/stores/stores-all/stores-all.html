@@ -1,0 +1,13 @@
+<h3>Check out our associated pet stores!</h3>
+<section>
+    <select
+        ng-model="$ctrl.selected"
+        x-note="you can alias what is actually stored in ng-options for ease os use in your ng-model later"
+        ng-options="stores as stores.name for stores in $ctrl.stores">
+    </select>
+    <button ng-click="$ctrl.go()">Go to Pet Store</button>
+    <button ng-click="$ctrl.remove()">Remove</button>
+</section>
+<section>
+    <button ng-click="$ctrl.toNewForm()">Add new stores here!</button>
+</section>

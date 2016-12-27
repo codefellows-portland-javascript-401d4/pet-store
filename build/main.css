@@ -1,0 +1,35 @@
+body {
+  background-color: steelblue; }
+
+h1, h2, h3 {
+  text-align: center; }
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; }
+
+nav a {
+  padding: 0.1em;
+  margin: 0.1em; }
+
+section {
+  width: auto;
+  text-align: center;
+  background-color: white;
+  border-radius: 4px; }
+
+p {
+  margin: 0.1em;
+  text-align: center; }
+
+button {
+  margin: 1px auto; }
+._1AzJAT7k4rgfKsm33oGzGr table {
+  margin: 1px auto;
+  outline: 1px black solid; }
+
+._1AzJAT7k4rgfKsm33oGzGr th, ._1AzJAT7k4rgfKsm33oGzGr tr, ._1AzJAT7k4rgfKsm33oGzGr td {
+  outline: 1px black solid; }
+
+/*# sourceMappingURL=main.css.map*/

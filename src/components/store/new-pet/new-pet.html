@@ -1,0 +1,11 @@
+<section>
+    <h3>Let's add a new pet for {{$ctrl.store.name}}!</h3>
+    <form>
+        Name: <input type="text" ng-model="$ctrl.petName">
+        Kind: <select
+                ng-options="category as category for category in $ctrl.category"
+                ng-model="$ctrl.selectedCategory">{{category}}</select>
+        <button ng-click="$ctrl.addNewPet()">Enter</button>
+    </form>
+    <button ng-click="$ctrl.goBack()">Go Back/Cancel</button>
+</section>
