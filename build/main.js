@@ -33667,7 +33667,7 @@
 	        }).then(function (saved) {
 	            var newStoreId = saved._id;
 	            _this.stores.push(saved);
-	            $state.go('store', { id: newStoreId });
+	            $state.go('store', { id: saved._id });
 	        });
 	    };
 	}

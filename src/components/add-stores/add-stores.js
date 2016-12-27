@@ -27,10 +27,9 @@ function controller(stores, $state) {
                 state: this.state
             }
         })
-        .then(saved => {
-            const newStoreId = saved._id;               
+        .then(saved => {              
             this.stores.push(saved);
-            $state.go('store', {id: newStoreId});
+            $state.go('store', {id: saved._id});
         });
     };
     

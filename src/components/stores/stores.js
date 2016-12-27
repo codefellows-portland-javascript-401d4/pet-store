@@ -6,8 +6,15 @@ export default {
     controller
 };
 
+// controller.$inject = ['storeService'];
+
 function controller() {
     this.styles = styles;
+
+    // stores.get().then(stores => {
+    //     this.stores = stores;
+    // });
+
 }
 
 
