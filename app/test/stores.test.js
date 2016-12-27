@@ -10,7 +10,7 @@ describe('stores component', () => {
 
   const inject = angular.mock.inject(function($componentController){
     stores = $componentController(
-      'stores',
+      'addStore',
       {storeService},
       {addStore(s) {newStore = s;}}
     );
@@ -34,6 +34,7 @@ describe('stores component', () => {
     stores.name = name;
     stores.address = address;
     stores.addNew();
+    console.log(newStore);
     assert.deepEqual(newStore, {name, address: {street, city, state}});
   });
 });

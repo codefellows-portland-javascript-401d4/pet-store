@@ -1,0 +1,16 @@
+<h1>You're adding a store</h1>
+
+<main>
+  <form>
+    Name:<br>
+    <input ng-model="$ctrl.name" type="text" name="name"><br>
+    Street address:<br>
+    <input ng-model="$ctrl.street" type="text" name="street"><br>
+    City:<br>
+    <input ng-model="$ctrl.city" type="text" name="city"><br>
+    State:<br>
+    <input ng-model="$ctrl.state" type="text" name="state"><br>
+    <input ng-click="$ctrl.addNew()" type="submit">
+    <button ui-sref="stores">cancel</button>
+  </form>
+</main>
