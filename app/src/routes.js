@@ -12,6 +12,12 @@ export default function routes($stateProvider /*$urlRouterProvider*/) {
   });
 
   $stateProvider.state({
+    name:'stores.add',
+    url: '/add',
+    component: 'addStore'
+  });
+
+  $stateProvider.state({
     name: 'store',
     url: 'store/:id',
     resolve: {
