@@ -10,14 +10,12 @@ export default function routes($stateProvider, $urlRouterProvider) {
     });
 
     $stateProvider.state({
-        name: 'about',
-        url: '/about',
-        component: 'about'
-    });
-
-    $stateProvider.state({
         name: 'stores',
         url: '/stores',
+        abstract: true,
+        resolve: {
+            stores: ['storeService', Store => Store.get()]
+        },
         component: 'storesMain'
     });
 

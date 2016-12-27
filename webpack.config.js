@@ -4,15 +4,15 @@ var ExtractTextPlugIn = require('extract-text-webpack-plugin');
 var cssExtract = new ExtractTextPlugIn('styles.css');
 
 module.exports = {
-    entry: './src/app.js',
+    entry: './app/src/app.js',
     output: {
-        path: '../server/public',
+        path: '../public',
         filename: 'app.bundle.js'
     },
     devtool: 'source-map',
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './app/src/index.html'
         }),
         cssExtract
     ],
@@ -42,7 +42,7 @@ module.exports = {
         ]
     },
     sassLoader: {
-        includePaths: ['./src/scss/partials']
+        includePaths: ['./app/src/scss/partials']
     }
 
 };
