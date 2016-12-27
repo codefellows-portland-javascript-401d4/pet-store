@@ -6,7 +6,7 @@
         ng-options="stores as stores.name for stores in $ctrl.stores">
     </select>
     <button ng-click="$ctrl.go()">Go to Pet Store</button>
-    <button ng-click="$ctrl.remove()">Remove</button>
+    <button ng-click="$ctrl.parent.del($ctrl.selected)">Remove</button>
 </section>
 <section>
     <button ng-click="$ctrl.toNewForm()">Add new stores here!</button>

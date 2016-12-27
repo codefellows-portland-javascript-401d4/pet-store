@@ -19,6 +19,6 @@ const app = angular.module('myApp', [
 
 app.config(routes);
 
-const link = 'https://pet-store-401.herokuapp.com/api';
+const link = 'https://pet-store-401.herokuapp.com/api/unauth';
 
 app.value('apiUrl', link);

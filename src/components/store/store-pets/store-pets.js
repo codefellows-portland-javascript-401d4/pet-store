@@ -9,7 +9,8 @@ export default {
     },
     bindings: {
         store: '<',
-        pets: '<'
+        pets: '<',
+        del: '<'
     },
     controller
 };
@@ -21,20 +22,5 @@ function controller(petService, $state) {
 
     this.goAddPet = () => {
         $state.go('stores.store.addPet');
-    };
-
-    this.remove = pet => {
-        petService
-            .remove(pet._id)
-            .then(removedPet => {
-                let index = -1;
-                this.store.pets.some((pet, petIndex) => {
-                    if (removedPet._id === pet._id) {
-                        index = petIndex;
-                        return;
-                    };
-                });
-                if (index !== -1) this.store.pets.splice(index, 1);
-            });
     };
 };
