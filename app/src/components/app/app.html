@@ -1,3 +1,9 @@
 <main>
+		<nav>
+        <a ng-if="$ctrl.isAuthenticated()" ui-sref="stores" ng-click="$ctrl.logout()">logout</a>
+    </nav>
 	<ui-view></ui-view> 
 </main>
+
+
+
