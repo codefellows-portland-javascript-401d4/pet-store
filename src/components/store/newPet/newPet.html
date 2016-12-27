@@ -1,0 +1,7 @@
+<h2>Add a pet:</h2>
+<label>Name</label><br>
+<input ng-model="$ctrl.name"><br>
+<label>Type:</label>
+<select ng-model="$ctrl.selectedType" ng-options="type for type in $ctrl.types"></select><br>
+<button ng-click="$ctrl.add()">Add</button>
+<button ui-sref="store.pets({id: $ctrl.store._id})">Cancel</button>
