@@ -8,9 +8,9 @@ export default {
   }
 };
 
-controller.$inject = ['storeService'];
+controller.$inject = ['storeService', '$state'];
 
-function controller (stores) {
+function controller (stores, $state) {
 
   this.reset = () => {
     this.street = '';
@@ -39,6 +39,8 @@ function controller (stores) {
     stores.add(store)
       .then(saved => {
         this.stores.push(saved);
+        $state.go('store', {id: saved._id});
+
       })
       .catch(err => console.log(err));
   };
