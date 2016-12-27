@@ -13,8 +13,10 @@ controller.$inject = ['petService', '$state'];
 
 function controller(Pet, $state) {
     this.addPet = function() {
-        console.log(this.newPet);
-        if (!this.newPet) return;
+
+        if (!this.newPet.name || !this.newPet.animal) {
+            return;
+        }
 
         this.newPet.store = this.id;
         new Pet (this.newPet).$save()
