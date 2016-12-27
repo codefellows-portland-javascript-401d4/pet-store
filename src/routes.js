@@ -32,6 +32,10 @@ export default function routes($stateProvider, $urlRouterProvider) {
     abstract: true,
     default: '.pets',
     resolve: {
+      store: ['storesService', '$transition$', (stores, t) => {
+        return stores.get(t.params().id);
+      }],
+      pets: ['store', store => store.pets]
     },
     component: 'store'
   });
@@ -48,7 +52,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
     component: 'newPet'
   });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/stores/all');
   $urlRouterProvider.when('/stores', '/stores/all');
 
 }
