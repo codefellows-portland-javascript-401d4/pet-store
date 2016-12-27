@@ -10,7 +10,7 @@ export default function petService($http, apiUrl) {
       return $http.get(`${apiUrl}/pets/${id}`)
         .then(res => res.data);
     },
-    addStore(pet) {
+    addPet(pet) {
       return $http.post(`${apiUrl}/pets`, pet)
         .then(res => res.data);
     }
