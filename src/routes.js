@@ -47,11 +47,11 @@ export default function routes($stateProvider, $urlRouterProvider) {
     component: 'storePets'
   });
 
-  // $stateProvider.state({
-  //   name: 'store.addPet',
-  //   url: '/stores/:id',
-  //   component: 'store'
-  // });
+  $stateProvider.state({
+    name: 'store.addPet',
+    url: '/stores/:id',
+    component: 'store'
+  });
 
 
   $urlRouterProvider.otherwise('/stores/all');

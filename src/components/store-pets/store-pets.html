@@ -1,7 +1,10 @@
 <section>
   <h2>{{$storePets.store.name}} has the following pets for sale:</h2>
   <div ng-repeat="pet in $storePets.pets.name">
-    {{pet.name}}, who is a awesome {{pet.animal}}!!
+    {{pet.name}}, who is an awesome {{pet.animal}}!!
   </div>
+
+  <br><br>
+  OR: <button ui-sref="pets.add">add a new pet</button>
 
 </section>
