@@ -14,32 +14,6 @@ export default function routes($stateProvider, $urlRouterProvider) {
     component: 'stores'
   });
 
-  // $stateProvider.state({
-  //   name: 'about',
-  //   url: '/about',
-  //   component: 'about'
-  // });
-  //
-  // $stateProvider.state({
-  //   name: 'about.bio',
-  //   url: '/bio',
-  //   views: {
-  //     bio: {
-  //       component: 'bio'
-  //     }
-  //   }
-  // });
-  //
-  // $stateProvider.state({
-  //   name: 'about.lab',
-  //   url: '/app',
-  //   views: {
-  //     lab: {
-  //       component: 'lab'
-  //     }
-  //   }
-  // });
-
   $stateProvider.state({
     name: 'stores.detail',
     // the url, plus implied params id and view

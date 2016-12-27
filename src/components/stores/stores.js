@@ -15,7 +15,6 @@ function controller(stores) {
   this.loading = true;
 
   stores.getAll().then(stores => {
-    // this.loading = false;
     this.stores = stores;
   });
 
