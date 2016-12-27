@@ -36,7 +36,7 @@ function controller($state) {
     .catch(err => {
       console.log('add store catch', err);
     });
-    $state.go('stores');
     this.reset();
+    $state.go('stores');
   };
 }
