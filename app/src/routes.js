@@ -29,6 +29,12 @@ export default function routes($stateProvider /*$urlRouterProvider*/) {
   });
 
   $stateProvider.state({
+    name:'store.addPet',
+    url: '/add-pet',
+    component: 'addPet'
+  });
+
+  $stateProvider.state({
     name: 'welcome',
     url: '/welcome',
     component: 'welcome'

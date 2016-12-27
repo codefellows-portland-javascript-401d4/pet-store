@@ -1,0 +1,9 @@
+<h1>Adding a pet</h1>
+<form>
+  Name:<br>
+  <input ng-model="$ctrl.name" type="text" name="name"><br>
+  Type:<br>
+  <input ng-model="$ctrl.animal" type="text" name="animal"><br>
+  <input ng-click="$ctrl.addNew()" type="submit">
+  <button ui-sref="store">Cancel</button>
+</form>

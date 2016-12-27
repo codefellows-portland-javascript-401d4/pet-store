@@ -30,7 +30,7 @@ function controller (stores, $state) {
         street,
         city,
         state
-      },
+      }
     });
     this.reset();
   };
