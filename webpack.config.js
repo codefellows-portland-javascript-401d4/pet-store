@@ -3,6 +3,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 
+  target: 'web',
   entry: './src/app.js',
   output: {
     path: './build/',
@@ -29,8 +30,8 @@ module.exports = {
       exclude:/node_modules/,
       loader: 'babel-loader',
       query: {
-        presets: ['es2015'] //,
-        // cacheDirectory: true,
+        // presets: ['es2015'] //,
+        cacheDirectory: true,
         // plugins: ['transform-runtime']
       } 
 

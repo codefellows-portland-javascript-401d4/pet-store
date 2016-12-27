@@ -10,7 +10,10 @@
   },
     "env": {
         "node": true,
-        "mocha": true
+        "mocha": true,
+        "es6": true,
+        "protractor": true,
+        "jasmine": true
     },
     "extends": "eslint:recommended",
     "rules": {
@@ -31,5 +34,9 @@
             "error",
             "always"
         ]
+    }, 
+    "globals": {
+        "angular": false,
+        "chai": false
     }
 }
