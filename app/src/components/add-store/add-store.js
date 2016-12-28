@@ -12,9 +12,9 @@ export default {
   }
 };
 
-controller.$inject = ['$state'];
+controller.$inject = ['$state', 'storeService'];
 
-function controller($state) {
+function controller($state, storeService) {
   this.styles = styles;
 
   this.reset = function() {
@@ -25,16 +25,20 @@ function controller($state) {
   };
 
   this.addStore = function() {
-    this.parent.add({
+    storeService.addStore({
       name: this.name,
       address: {
         street: this.address.street,
         city: this.address.city,
         state: this.address.state
       }
-    });
+    })
+      .then(newStore => {
+        this.storeId = newStore._id;
+      });
+
     this.reset();
 
-    //$state.go('store', { id: this.parent.storeId });
+    $state.go('store', { id: this.storeId });
   };
 }
