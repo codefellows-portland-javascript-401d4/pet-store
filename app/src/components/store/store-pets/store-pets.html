@@ -1,0 +1,11 @@
+<div class="left">
+    <ul>
+        <h3>Pets</h3>
+        <li ng-repeat="pet in $ctrl.store.pets">
+            <span>{{pet.name}}:</span> {{pet.animal}}
+    </ul>
+</div>
+
+<div class="right">
+    <a ui-sref="store.addPet">Add a pet</a> 
+</div>
