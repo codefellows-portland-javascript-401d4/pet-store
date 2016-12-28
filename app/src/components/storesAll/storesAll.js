@@ -1,6 +1,5 @@
-
-import template from './storesMain.html';
-import styles from './storesMain.scss';
+import template from './storesAll.html';
+import styles from './storesAll.scss';
 
 export default {
     template,
@@ -12,6 +11,4 @@ export default {
 
 function controller() {
     this.styles = styles;
-    this.stores = [];
-
-};
+}

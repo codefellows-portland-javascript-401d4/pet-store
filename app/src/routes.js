@@ -13,6 +13,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
         name: 'stores',
         url: '/stores',
         abstract: true,
+        default: '.all',
         resolve: {
             stores: ['storeService', Store => Store.get()]
         },
@@ -21,13 +22,13 @@ export default function routes($stateProvider, $urlRouterProvider) {
 
     $stateProvider.state({
         name: 'stores.all',
-        url: '/stores',
-        component: 'storesMain'
+        url: '/all',
+        component: 'storesAll'
     });
 
     $stateProvider.state({
         name: 'stores.add',
-        url: '/stores',
+        url: '/add',
         component: 'storeAdd'
     });
 
