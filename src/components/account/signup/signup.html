@@ -1,0 +1,27 @@
+<section>
+  <h2>Sign Up for Petriffic!</h2>
+
+  <form name="auth" ng-submit="$signup.authenticate()">
+    <div>
+      <label>
+        email: <input required ng-model="$signup.credentials.email">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        username: <input required ng-model="$sigup.credentials.username">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        password: <input required ng-model="$sigup.credentials.password">
+      </label>
+    </div>
+
+    <button type="submit">Sign Up</button>
+  </form>
+  
+  <div class="error" ng-if="$signup.error">{{$signup.error.reason}}</div>
+</section>
