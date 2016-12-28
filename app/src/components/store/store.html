@@ -3,8 +3,6 @@
     <p>{{$ctrl.store.address.street}}, {{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</p>
 
     <p>Available pets include:</p>
-    <ul>
-        <li ng-repeat="pet in $ctrl.pets">{{pet.name}} the {{pet.animal}}</li>
-    </ul>
+    <ui-view>Loading Pets...</ui-view>
 
 </section>

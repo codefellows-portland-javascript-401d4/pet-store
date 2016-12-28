@@ -1,0 +1,10 @@
+<table ng-class="$ctrl.styles.pets">
+    <tr>
+        <th>Pet Name</th>
+        <th>Type</th>
+    </tr>
+    <tr ng-repeat="pet in $ctrl.store.pets">
+        <td>{{pet.name}}</td>
+        <td>{{pet.animal}}</td>
+    </tr>
+</table>
