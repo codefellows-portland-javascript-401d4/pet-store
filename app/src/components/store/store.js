@@ -10,8 +10,4 @@ export default {
 };
 
 
-function controller() {
-
-
-
-}
+function controller() {}
