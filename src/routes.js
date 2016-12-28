@@ -26,7 +26,15 @@ export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'stores.all',
     url: '/all',
-    component: 'storesAll'
+    component: 'storesAll',
+    views: {
+      header: {
+        component: 'allHeader'
+      },
+      main: {
+        component: 'storesHeader'
+      }
+    }
   });
 
   $stateProvider.state({
