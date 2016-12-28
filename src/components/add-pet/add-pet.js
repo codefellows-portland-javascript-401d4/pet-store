@@ -12,6 +12,11 @@ export default {
 controller.$inject = ['petService', '$state'];
 
 function controller(Pet, $state) {
+    this.reset = function() {
+        for(var key in this.newPet) {
+            this.newPet[key] = '';
+        }
+    };
     this.addPet = function() {
 
         if (!this.newPet.name || !this.newPet.animal) {
@@ -20,10 +25,15 @@ function controller(Pet, $state) {
 
         this.newPet.store = this.id;
         new Pet (this.newPet).$save()
-            .then(pet => this.store.pets.push(pet))
+            .then(pet => {
+                console.log(pet);
+                this.store.pets.push(pet);
+            }
+            )
             .catch(console.error);
 
-        this.newPet = '';
+        this.reset();
+
         $state.go('store', {id: this.id});
     };
 
