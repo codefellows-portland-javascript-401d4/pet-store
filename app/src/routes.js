@@ -46,8 +46,8 @@ export default function routes($stateProvider, $urlRouterProvider) {
 
     $stateProvider.state({
         name: 'store.pets',
-        url: '/:id',
-        component: 'store'
+        url: '/:id' /*,
+        component: 'storePet' */
     });
 
     $stateProvider.state({

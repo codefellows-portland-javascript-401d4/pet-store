@@ -32,6 +32,7 @@
     _id: <id>,
     name: <name>,
     animal: <cat|lizard|bird|dog|fish>
+    store: _id of Store.
 }
 ```
 
