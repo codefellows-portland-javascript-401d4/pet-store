@@ -13,15 +13,6 @@ export default function routes($stateProvider, $urlRouterProvider) {
 		url: '/stores',
 		abstract: true,
 		default: '.all',
-		// resolve: {
-		// 	_id: ['storeService', '$transition$', (Store, t) => {
-		// 		return Store.get({ id: t.params().id });
-		// 	}],
-        //     // make pets available to viewer components
-		// 	pets: ['store', a => {
-		// 		return a.$promise.then(a => a.pets);
-		// 	}]
-		// },
 		component: 'stores',
 		resolve: {
 			    stores: ['storeService', stores => {
@@ -43,22 +34,21 @@ export default function routes($stateProvider, $urlRouterProvider) {
 	});
 
 	$stateProvider.state({
-		name: 'stores.id',
-		url: '/:id',
+		name: 'store',
+		url: '/store/{id}',
 		abstract: true,
-		default: 'pets',
+		default: '.pets',
 		resolve: {
-			stores: ['storeService', '$transition$', (Store, t) => {
+			store: ['storeService', '$transition$', (Store, t) => {
 				return Store.get(t.params().id);
 			}],
-            // make images available to viewer components
 			pets: ['store', a => a.pets]
 		},
-		component: 'stores' 
+		component: 'store' 
 	});
  
 	$stateProvider.state({
-		name: 'stores.pets',
+		name: 'store.pets',
 		url: '/pets',
 		component: 'viewPets'
 	});
@@ -66,7 +56,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
 	$stateProvider.state({
 		name: 'store.addPet',
 		url: '/add',
-		component: 'addPets'
+		component: 'addPet'
 	});
 
 	$urlRouterProvider.otherwise('/');

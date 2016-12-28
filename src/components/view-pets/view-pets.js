@@ -11,14 +11,17 @@ export default {
 controller.$inject = ['$state'];
  
 function controller($state) {
- 
-	this.goToAddPets = () => {
-		$state.go('store.addPet');
-	};
- 
+     
 	this.backToStores = () => {
 		$state.go('stores');
+	}; 
+
+	this.addPet = () => {
+		console.log(this.store._id);
+		// console.log('addpet clicked.  store id is ', store._id);
+		$state.go('store.addPet', {id: this.store._id});
 	};
- 
+
+
 }
  

@@ -1,3 +1,9 @@
 <section>
-    <h3> {{store.name}} Store Pets</h2>
+<h2>Pets</h2>
+<ul>
+    <li ng-repeat="pet in $ctrl.store.pets">Name: {{pet.name}}, Type: {{pet.animal}}</li>
+</ul>
+<br>
+<button ng-click="$ctrl.addPet()">Add a Pet to This Store</button>
+<button ng-click="$ctrl.backToStores()">Return to All Stores</button>
 </section>

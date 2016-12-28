@@ -11,13 +11,12 @@ export default {
 controller.$inject = ['$state'];
  
 function controller($state) {
- 
 	this.setStore = () => {
-		$state.go('stores/'+'{id: '+this.selected+'}');
-		console.log('route to ', this.selected);
+		$state.go('store', {id: this.selected});
+		
 	};
 
-	this.goToAdd = () => {
+	this.goToAddStore = () => {
 		$state.go('stores.add');
 	};
      

@@ -13,7 +13,9 @@ controller.$inject = ['petService', '$state'];
  
 function controller(pets, $state) {
  
-	this.addPet = () => {
+	this.species = ['cat', 'lizard', 'bird', 'dog', 'fish'];
+
+	this.addThisPet = () => {
 		pets.add({
 			name: this.name,
 			animal: this.animal,
@@ -25,9 +27,13 @@ function controller(pets, $state) {
 	$state.go('store', {id: storeId});
 });
 	};
- 
-	this.backToStore = () => {
-		$state.go('store', {id: this.store._id});
-	};
+
+	this.backToViewPets = () => {
+		$state.go('store.pets');
+	}; 
+    
+	this.backToStores = () => {
+		$state.go('stores');
+	}; 
      
 }
