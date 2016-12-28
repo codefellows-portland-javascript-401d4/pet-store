@@ -5,12 +5,14 @@ export default function routes($stateProvider, $urlRouterProvider) {
 	$stateProvider.state({
 		name: 'home',
 		url: '/',
+		data: { public: true },
 	    component: 'home' 
 	});
 
 	$stateProvider.state({
 		name: 'stores',
 		url: '/stores',
+		data: { public: true },
 		abstract: true,
 		default: '.all',
 		component: 'stores',
@@ -24,18 +26,21 @@ export default function routes($stateProvider, $urlRouterProvider) {
 	$stateProvider.state({
 		name: 'stores.all',
 		url: '/all',
+		data: { public: true },
 		component: 'allStores'
 	});
 
 	$stateProvider.state({
 		name: 'stores.add',
 		url: '/add',
+		data: { public: false },
 		component: 'addNewStore'
 	});
 
 	$stateProvider.state({
 		name: 'store',
 		url: '/store/{id}',
+		data: { public: true },
 		abstract: true,
 		default: '.pets',
 		resolve: {
@@ -50,12 +55,14 @@ export default function routes($stateProvider, $urlRouterProvider) {
 	$stateProvider.state({
 		name: 'store.pets',
 		url: '/pets',
+		data: { public: true },
 		component: 'viewPets'
 	});
  
 	$stateProvider.state({
 		name: 'store.addPet',
 		url: '/add',
+		data: { public: false },
 		component: 'addPet'
 	});
 
