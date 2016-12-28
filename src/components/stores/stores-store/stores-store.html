@@ -1,0 +1,21 @@
+<section ng-class="$ctrl.styles.storesstore">
+    <br />
+    <h1>{{$ctrl.store.name}}</h1>
+    <br />
+
+  <div>
+    <div>
+      <p>{{$ctrl.store.address.street}}</p>
+      <p><span>{{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</span></p>
+      <br />
+      <h5>PETS AVAILABLE:</h5>
+      <ul ng-repeat="pet in $ctrl.store.pets">
+        <li>
+          <p>NAME: {{pet.name}}</p>
+          <p>TYPE: {{pet.animal}}</p>
+
+        </li>
+      </ul>
+    </div>    
+  </div>
+</section>
