@@ -1,0 +1,10 @@
+<h2>{{$ctrl.store.name}}</h2>
+
+<section>
+    <h3>Address:</h3>
+    <p>{{$ctrl.store.address.street}}, {{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</p>
+</section>
+
+<section>
+    <ui-view name="main"></ui-view>
+</section>
