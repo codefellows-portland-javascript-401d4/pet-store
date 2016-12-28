@@ -13,5 +13,5 @@ export default function tokenService($window) {
         set(token) {
             $window.localStorage.setItem(TOKEN_NAME, token);
         }
-    }
+    };
 };

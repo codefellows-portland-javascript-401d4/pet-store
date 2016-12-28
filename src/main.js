@@ -33,13 +33,12 @@ app.filter('titleCase', () => {
     return function titleCaseFilter(input) {
         if (!input) return '';
         return input[0].toUpperCase() + input.slice(1);
-    }
+    };
 });
 
-app.config(routes);
-
 //TODO: will need to change to authorized routing at some point
-const link = 'https://pet-store-401.herokuapp.com/api/unauth';
+// const link = 'https://pet-store-401.herokuapp.com/api/unauth';
+const link = 'https://pet-store-401.herokuapp.com/api';
 
 app.value('apiUrl', link);
 

@@ -3,9 +3,13 @@ import styles from './user-auth.scss';
 
 export default {
     template,
+    bindings: {
+        success: '<'
+    },
     controller
 };
 
 function controller() {
     this.styles = styles;
+    this.action = "signin";
 };

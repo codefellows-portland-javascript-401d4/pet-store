@@ -3,9 +3,30 @@ import styles from './signup.scss';
 
 export default {
     template,
+    bindings: {
+        success: '<'
+    },
     controller
 };
 
-function controller() {
+controller.$inject = ['userService'];
+
+function controller(userService) {
     this.styles = styles;
+
+    this.credentials = {
+        email: '',
+        username: '',
+        password: ''
+    };
+
+    this.authenticate = () => {
+        return userService.signup(this.credentials)
+            .then(() => {
+                this.succes();
+            })
+            .catch(error => {
+                this.error = error;
+            });
+    };
 };

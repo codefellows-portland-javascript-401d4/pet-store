@@ -13,7 +13,7 @@ export default function userService(token, $http, apiUrl) {
         return (credentials) => {
             return $http.post(`${apiUrl}/auth/${endpoint}`, credentials)
                 .then(result => {
-                    token.set(result.data.token)
+                    token.set(result.data.token);
                 })
                 .catch(err => {
                     throw err.data;
