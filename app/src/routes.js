@@ -30,17 +30,18 @@ export default function routes($stateProvider, $urlRouterProvider) {
       name: 'store',
       url: '/store/:id',
       component: 'store',
+      default: '.pets',
       resolve: {
         id: ['$transition$', t => t.params().id],
         store: ['storeService', '$transition$', (s, $t) =>
           s.getStore({id : $t.params().id}) ]
       }
+    })
+    .state({
+      name: 'store.pets',
+      url: '/pets',
+      component: 'pets'
     });
-  //   .state({
-  //     name: 'store.pets',
-  //     url: '/pets',
-  //     component: 'pets'
-  //   })
   //   .state({
   //     name: 'store.addPet',
   //     url: '/add',
