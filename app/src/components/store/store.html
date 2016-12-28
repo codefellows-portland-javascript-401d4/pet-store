@@ -1,6 +1,7 @@
 <section>
   <header>
     <h2>{{$ctrl.store.name}}</h2>
+    <h3>{{$ctrl.store.address.street}}, {{$ctrl.store.address.city}} {{$ctrl.store.address.state}}</h3>
   </header>
   <ul>
     <li ng-repeat="pet in $ctrl.store.pets">{{pet.name}} - {{pet.animal}}</li>
