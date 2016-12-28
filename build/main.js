@@ -56,37 +56,37 @@
 	
 	var _components2 = _interopRequireDefault(_components);
 	
-	var _services = __webpack_require__(53);
+	var _services = __webpack_require__(57);
 	
 	var _services2 = _interopRequireDefault(_services);
 	
-	var _angularUiRouter = __webpack_require__(59);
+	var _angularUiRouter = __webpack_require__(63);
 	
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 	
-	var _angularUiRouterDefault = __webpack_require__(60);
+	var _angularUiRouterDefault = __webpack_require__(64);
 	
 	var _angularUiRouterDefault2 = _interopRequireDefault(_angularUiRouterDefault);
 	
-	__webpack_require__(61);
+	__webpack_require__(65);
 	
-	var _routes = __webpack_require__(62);
+	var _routes = __webpack_require__(66);
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _ngDialog = __webpack_require__(63);
+	var _ngDialog = __webpack_require__(67);
 	
 	var _ngDialog2 = _interopRequireDefault(_ngDialog);
 	
-	__webpack_require__(64);
+	__webpack_require__(68);
 	
-	__webpack_require__(66);
+	__webpack_require__(70);
 	
-	var _http = __webpack_require__(68);
+	var _http = __webpack_require__(72);
 	
 	var _http2 = _interopRequireDefault(_http);
 	
-	var _auth = __webpack_require__(69);
+	var _auth = __webpack_require__(73);
 	
 	var _auth2 = _interopRequireDefault(_auth);
 	
@@ -33863,7 +33863,8 @@
 		"./app/app.js": 37,
 		"./store-pets/store-pets.js": 41,
 		"./store/store.js": 45,
-		"./stores/stores.js": 49
+		"./stores/stores.js": 49,
+		"./welcome/welcome.js": 53
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -34377,15 +34378,23 @@
 	};
 	
 	
-	function controller() {
+	controller.$inject = ['userService'];
+	
+	function controller(userService) {
 	    this.styles = _store4.default;
+	    this.logout = function () {
+	        return userService.logout();
+	    };
+	    this.isAuthenticated = function () {
+	        return userService.isAuthenticated();
+	    };
 	}
 
 /***/ },
 /* 46 */
 /***/ function(module, exports) {
 
-	module.exports = "<section ng-class=\"$ctrl.styles.store\">\n    <header>\n        <h1>{{$ctrl.store.name}}</h1>\n        <div>\n            <p>{{$ctrl.store.address.street}}<br>\n            {{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</p>\n        </div>\n    </header>\n    <section>\n        <ui-view></ui-view>\n    </section>\n</section>\n";
+	module.exports = "<section ng-class=\"$ctrl.styles.store\">\n    <header>\n        <h1>{{$ctrl.store.name}}</h1>\n            <button ng-if=\"$ctrl.isAuthenticated()\" ui-sref=\"welcome\" ng-click=\"$ctrl.logout()\">logout</button>\n        <div>\n            <span>{{$ctrl.store.address.street}}<br>\n            {{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</span>\n        </div>\n    </header>\n    <section>\n        <ui-view></ui-view>\n    </section>\n</section>\n";
 
 /***/ },
 /* 47 */
@@ -34421,15 +34430,23 @@
 	};
 	
 	
-	function controller() {
+	controller.$inject = ['userService'];
+	
+	function controller(userService) {
 	    this.styles = _stores4.default;
+	    this.logout = function () {
+	        return userService.logout();
+	    };
+	    this.isAuthenticated = function () {
+	        return userService.isAuthenticated();
+	    };
 	}
 
 /***/ },
 /* 50 */
 /***/ function(module, exports) {
 
-	module.exports = "<section ng-class=\"$ctrl.styles.stores\">\n    <header>\n        <h1>Pet Stores</h1>\n    </header>\n    <section>\n        <ui-view></ui-view>\n    </section>\n</section>\n";
+	module.exports = "<section ng-class=\"$ctrl.styles.stores\">\n    <header>\n        <h1>Pet Stores</h1>\n        <button ng-if=\"$ctrl.isAuthenticated()\" ui-sref=\"welcome\" ng-click=\"$ctrl.logout()\">logout</button>\n    </header>\n    <section>\n        <ui-view></ui-view>\n    </section>\n</section>\n";
 
 /***/ },
 /* 51 */
@@ -34441,6 +34458,50 @@
 /***/ },
 /* 52 */,
 /* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _welcome = __webpack_require__(54);
+	
+	var _welcome2 = _interopRequireDefault(_welcome);
+	
+	var _welcome3 = __webpack_require__(55);
+	
+	var _welcome4 = _interopRequireDefault(_welcome3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _welcome2.default,
+	    controller: controller
+	};
+	
+	
+	function controller() {
+	    this.styles = _welcome4.default;
+	}
+
+/***/ },
+/* 54 */
+/***/ function(module, exports) {
+
+	module.exports = "<section ng-class=\"$ctrl.styles.welcome\">\n    <header>\n        <h1>Welcome to the Pet Store Directory!</h1>\n    </header> \n    <div>\n        <p>Click on the view stores button below to see the list of stores.\n            If you are not currently signed in, you will be prompted to sign in,\n            or sign up for an account with us. Registration is free, and gives you\n            access to an exhaustive list of stores in our area including their current\n            inventories. As a member, you will be able to add stores to the list, as well as add pets to the inventory of the stores.</p>   \n        <button ui-sref=\"stores\">View Stores</button>\n    </div>\n</section>\n";
+
+/***/ },
+/* 55 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"welcome":"_23XnJNGIuxwbbctNa1oBpu"};
+
+/***/ },
+/* 56 */,
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34464,7 +34525,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// .context is a method webpack adds to require 
-	var context = __webpack_require__(54);
+	var context = __webpack_require__(58);
 	
 	// create the module to put the resources in,
 	// in this case services
@@ -34483,14 +34544,14 @@
 	exports.default = _module.name;
 
 /***/ },
-/* 54 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./pet-service.js": 55,
-		"./store-service.js": 56,
-		"./token-service.js": 57,
-		"./user-service.js": 58
+		"./pet-service.js": 59,
+		"./store-service.js": 60,
+		"./token-service.js": 61,
+		"./user-service.js": 62
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -34503,11 +34564,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 54;
+	webpackContext.id = 58;
 
 
 /***/ },
-/* 55 */
+/* 59 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34541,7 +34602,7 @@
 	}
 
 /***/ },
-/* 56 */
+/* 60 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34581,7 +34642,7 @@
 	}
 
 /***/ },
-/* 57 */
+/* 61 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34609,7 +34670,7 @@
 	}
 
 /***/ },
-/* 58 */
+/* 62 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34662,7 +34723,7 @@
 	}
 
 /***/ },
-/* 59 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -43011,7 +43072,7 @@
 	//# sourceMappingURL=angular-ui-router.js.map
 
 /***/ },
-/* 60 */
+/* 64 */
 /***/ function(module, exports) {
 
 	/**
@@ -43112,7 +43173,7 @@
 	})(window.angular);
 
 /***/ },
-/* 61 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -43321,7 +43382,7 @@
 	//# sourceMappingURL=stateEvents.js.map
 
 /***/ },
-/* 62 */
+/* 66 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -43333,6 +43394,15 @@
 	routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 	
 	function routes($stateProvider, $urlRouterProvider) {
+	
+	    $stateProvider.state({
+	        name: 'welcome',
+	        url: '/welcome',
+	        data: {
+	            public: true
+	        },
+	        component: 'welcome'
+	    });
 	
 	    $stateProvider.state({
 	        name: 'stores',
@@ -43350,9 +43420,6 @@
 	    $stateProvider.state({
 	        name: 'stores.all',
 	        url: '/all',
-	        data: {
-	            public: true
-	        },
 	        component: 'allStores'
 	    });
 	
@@ -43387,11 +43454,11 @@
 	        component: 'addPets'
 	    });
 	
-	    $urlRouterProvider.otherwise('/stores/all');
+	    $urlRouterProvider.otherwise('/welcome');
 	}
 
 /***/ },
-/* 63 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -44286,13 +44353,13 @@
 
 
 /***/ },
-/* 64 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(65);
+	var content = __webpack_require__(69);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -44312,7 +44379,7 @@
 	}
 
 /***/ },
-/* 65 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -44326,13 +44393,13 @@
 
 
 /***/ },
-/* 66 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(67);
+	var content = __webpack_require__(71);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -44352,7 +44419,7 @@
 	}
 
 /***/ },
-/* 67 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -44366,7 +44433,7 @@
 
 
 /***/ },
-/* 68 */
+/* 72 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -44401,7 +44468,7 @@
 	            // does error status indicate token not valid?
 	            if (response.status == 403) {
 	                tokenService.remove();
-	                $state.go('stores.all');
+	                $state.go('welcome');
 	            }
 	            return Promise.reject(response);
 	        }
@@ -44409,7 +44476,7 @@
 	}
 
 /***/ },
-/* 69 */
+/* 73 */
 /***/ function(module, exports) {
 
 	'use strict';

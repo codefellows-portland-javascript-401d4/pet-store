@@ -1,7 +1,5 @@
 export default class StoresPage {
     constructor() {
-        const nav = element.all(by.css('button'));
-        this.aAddStore = nav.get(0);
         this.uiView = element(by.css('main ui-view'));
     }
 
@@ -20,10 +18,6 @@ export default class StoresPage {
     get stateComponent() {
         return this.uiView.all(by.css('*')).first().getTagName();
 
-    }
-
-    goToAddStore() {
-        this.aAddStore.click();
     }
 
 }

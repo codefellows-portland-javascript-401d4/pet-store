@@ -12,8 +12,8 @@ var StoresPage = function () {
     function StoresPage() {
         _classCallCheck(this, StoresPage);
 
-        var nav = element.all(by.css('button'));
-        this.aAddStore = nav.get(0);
+        // const nav = element.all(by.css('button'));
+        // this.aViewStores = nav.get(0);
         this.uiView = element(by.css('main ui-view'));
     }
 
@@ -21,11 +21,6 @@ var StoresPage = function () {
         key: 'get',
         value: function get() {
             return browser.get('/');
-        }
-    }, {
-        key: 'goToAddStore',
-        value: function goToAddStore() {
-            this.aAddStore.click();
         }
     }, {
         key: 'title',
@@ -42,6 +37,11 @@ var StoresPage = function () {
         get: function get() {
             return this.uiView.all(by.css('*')).first().getTagName();
         }
+
+        // goToAddStore() {
+        //     this.aAddStore.click();
+        // }
+
     }]);
 
     return StoresPage;

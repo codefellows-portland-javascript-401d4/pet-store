@@ -21,18 +21,10 @@ describe('My Pet Store App', function () {
             stores.get();
         });
 
-        it('defaults to stores/all page', function () {
+        it('defaults to welcome page', function () {
 
-            expect(stores.url).toBe('/stores/all');
-            expect(stores.stateComponent).toEqual('stores');
-        });
-
-        it('navigates to the add store page', function () {
-
-            stores.goToAddStore();
-
-            expect(stores.url).toBe('/stores/add');
-            expect(stores.stateComponent).toEqual('stores');
+            expect(stores.url).toBe('/welcome');
+            expect(stores.stateComponent).toEqual('welcome');
         });
     });
 });
