@@ -6,29 +6,17 @@ export default {
     template,
     controller,
     bindings: {
-        storeId: '<'
+        storeId: '<',
+        store: '<'
     }
 };
 
-controller.$inject = ['storeService'];
-
-function controller(storeService) {
+function controller() {
     this.styles = styles;
 
-    this.store = {};
-
     this.$onInit = () => {
-        if (this.storeId) {
-            this.getId(this.storeId);
-        }
-    };
-
-    this.getId = storeId => {
-        // this.store._id = this.storeId;
-        storeService.getId(this.storeId)
-            .then(store => {
-                this.store = store;
-            });
+        // console.log('the store Id:', this.storeId);
+        // console.log('we gots us a store:', this.store);
     };
 
 };

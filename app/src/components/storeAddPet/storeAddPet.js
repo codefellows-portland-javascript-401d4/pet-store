@@ -4,7 +4,8 @@ import styles from './storeAddPet.scss';
 export default {
     template,
     bindings: {
-        storeId: '<'
+        storeId: '<',
+        store: '<'
     },
     controller
 };
@@ -24,12 +25,14 @@ function controller(petService, $state) {
 
     this.myChoice = this.choices[0];
 
-    console.log('the storeId:', this.storeId);
-
     this.addPet = () => {
         petService.add({name: this.name,
             animal: this.animalType = this.myChoice.value,
-            store: this.storeId});
+            store: this.storeId})
+        .then( newPet => {
+            this.store.pets.push(newPet);
+            $state.go('store.pets');
+        });
     };
 
     this.cancel = () => {

@@ -27,8 +27,7 @@ function controller(storeService, $state) {
         storeService.add(this.newStore)
             .then(addedStore => { 
                 this.stores.push(addedStore);
-                console.log('Added Store:', addedStore);
-                $state.go('store', {id: addedStore._id});
+                $state.go('store.pets', {id: addedStore._id});
             });
     };
 
