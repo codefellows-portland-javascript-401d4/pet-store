@@ -18,21 +18,22 @@ export default function routes($stateProvider, $urlRouterProvider) {
       name: 'stores.all',
       url: '/all',
       component: 'allStores'
+    })
+    .state({
+      name: 'stores.addStore',
+      url: '/add',
+      component: 'addStore'
     });
-  //   .state({
-  //     name: 'stores.addStore',
-  //     url: '/add',
-  //     component: 'addStore'
-  //   });
-  // $stateProvider
-  //   .state({
-  //     name: 'store',
-  //     url: '/store',
-  //     component: '',
-  //     resolve: {
-  //       id: ['$transitions$', t => t.params().id]
-  //     }
-  //   })
+
+  $stateProvider
+    .state({
+      name: 'store',
+      url: '/store',
+      component: '',
+      resolve: {
+        id: ['$transitions$', t => t.params().id]
+      }
+    });
   //   .state({
   //     name: 'store.pets',
   //     url: '/pets',
