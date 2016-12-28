@@ -56,15 +56,15 @@
 	
 	var _components2 = _interopRequireDefault(_components);
 	
-	var _services = __webpack_require__(21);
+	var _services = __webpack_require__(27);
 	
 	var _services2 = _interopRequireDefault(_services);
 	
-	var _angularUiRouter = __webpack_require__(24);
+	var _angularUiRouter = __webpack_require__(30);
 	
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 	
-	var _routes = __webpack_require__(25);
+	var _routes = __webpack_require__(31);
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
@@ -74,7 +74,7 @@
 	
 	app.config(_routes2.default);
 	
-	var dev = 'https://pet-store-401.herokuapp.com/api';
+	var dev = 'https://pet-store-401.herokuapp.com/api/unauth';
 	
 	app.value('apiUrl', dev);
 
@@ -91,7 +91,7 @@
 /***/ function(module, exports) {
 
 	/**
-	 * @license AngularJS v1.6.0
+	 * @license AngularJS v1.6.1
 	 * (c) 2010-2016 Google, Inc. http://angularjs.org
 	 * License: MIT
 	 */
@@ -149,7 +149,7 @@
 	      return match;
 	    });
 	
-	    message += '\nhttp://errors.angularjs.org/1.6.0/' +
+	    message += '\nhttp://errors.angularjs.org/1.6.1/' +
 	      (module ? module + '/' : '') + code;
 	
 	    for (i = SKIP_INDEXES, paramPrefix = '?'; i < templateArgs.length; i++, paramPrefix = '&') {
@@ -2715,11 +2715,11 @@
 	var version = {
 	  // These placeholder strings will be replaced by grunt's `build` task.
 	  // They need to be double- or single-quoted.
-	  full: '1.6.0',
+	  full: '1.6.1',
 	  major: 1,
 	  minor: 6,
-	  dot: 0,
-	  codeName: 'rainbow-tsunami'
+	  dot: 1,
+	  codeName: 'promise-rectification'
 	};
 	
 	
@@ -3845,12 +3845,15 @@
 	
 	  after: function(element, newElement) {
 	    var index = element, parent = element.parentNode;
-	    newElement = new JQLite(newElement);
 	
-	    for (var i = 0, ii = newElement.length; i < ii; i++) {
-	      var node = newElement[i];
-	      parent.insertBefore(node, index.nextSibling);
-	      index = node;
+	    if (parent) {
+	      newElement = new JQLite(newElement);
+	
+	      for (var i = 0, ii = newElement.length; i < ii; i++) {
+	        var node = newElement[i];
+	        parent.insertBefore(node, index.nextSibling);
+	        index = node;
+	      }
 	    }
 	  },
 	
@@ -12985,7 +12988,8 @@
 	      * appropriate moment.  See the example below for more details on how and when to do this.
 	      * </div>
 	      *
-	      * @param {function()} fn A function that should be called repeatedly.
+	      * @param {function()} fn A function that should be called repeatedly. If no additional arguments
+	      *   are passed (see below), the function is called with the current iteration count.
 	      * @param {number} delay Number of milliseconds between each function call.
 	      * @param {number=} [count=0] Number of times to repeat. If not set, or 0, will repeat
 	      *   indefinitely.
@@ -16616,6 +16620,7 @@
 	   *
 	   * @description
 	   * Retrieves or overrides whether to generate an error when a rejected promise is not handled.
+	   * This feature is enabled by default.
 	   *
 	   * @param {boolean=} value Whether to generate an error when a rejected promise is not handled.
 	   * @returns {boolean|ng.$qProvider} Current value when called without a new value or self for
@@ -16757,7 +16762,11 @@
 	      if (!toCheck.pur) {
 	        toCheck.pur = true;
 	        var errorMessage = 'Possibly unhandled rejection: ' + toDebugString(toCheck.value);
-	        exceptionHandler(errorMessage);
+	        if (toCheck.value instanceof Error) {
+	          exceptionHandler(toCheck.value, errorMessage);
+	        } else {
+	          exceptionHandler(errorMessage);
+	        }
 	      }
 	    }
 	  }
@@ -17491,15 +17500,21 @@
 	
 	        if (!array) {
 	          array = scope.$$watchers = [];
+	          array.$$digestWatchIndex = -1;
 	        }
 	        // we use unshift since we use a while loop in $digest for speed.
 	        // the while loop reads in reverse order.
 	        array.unshift(watcher);
+	        array.$$digestWatchIndex++;
 	        incrementWatchersCount(this, 1);
 	
 	        return function deregisterWatch() {
-	          if (arrayRemove(array, watcher) >= 0) {
+	          var index = arrayRemove(array, watcher);
+	          if (index >= 0) {
 	            incrementWatchersCount(scope, -1);
+	            if (index < array.$$digestWatchIndex) {
+	              array.$$digestWatchIndex--;
+	            }
 	          }
 	          lastDirtyWatch = null;
 	        };
@@ -17832,7 +17847,6 @@
 	      $digest: function() {
 	        var watch, value, last, fn, get,
 	            watchers,
-	            length,
 	            dirty, ttl = TTL,
 	            next, current, target = this,
 	            watchLog = [],
@@ -17873,10 +17887,10 @@
 	          do { // "traverse the scopes" loop
 	            if ((watchers = current.$$watchers)) {
 	              // process our watches
-	              length = watchers.length;
-	              while (length--) {
+	              watchers.$$digestWatchIndex = watchers.length;
+	              while (watchers.$$digestWatchIndex--) {
 	                try {
-	                  watch = watchers[length];
+	                  watch = watchers[watchers.$$digestWatchIndex];
 	                  // Most common watches are on primitives, in which case we can short
 	                  // circuit it with === operator, only when === fails do we use .equals
 	                  if (watch) {
@@ -20193,6 +20207,14 @@
 	  var lastCookies = {};
 	  var lastCookieString = '';
 	
+	  function safeGetCookie(rawDocument) {
+	    try {
+	      return rawDocument.cookie || '';
+	    } catch (e) {
+	      return '';
+	    }
+	  }
+	
 	  function safeDecodeURIComponent(str) {
 	    try {
 	      return decodeURIComponent(str);
@@ -20203,7 +20225,7 @@
 	
 	  return function() {
 	    var cookieArray, cookie, i, index, name;
-	    var currentCookieString = rawDocument.cookie || '';
+	    var currentCookieString = safeGetCookie(rawDocument);
 	
 	    if (currentCookieString !== lastCookieString) {
 	      lastCookieString = currentCookieString;
@@ -25791,51 +25813,71 @@
 	
 	function classDirective(name, selector) {
 	  name = 'ngClass' + name;
-	  return ['$animate', function($animate) {
+	  var indexWatchExpression;
+	
+	  return ['$parse', function($parse) {
 	    return {
 	      restrict: 'AC',
 	      link: function(scope, element, attr) {
-	        var oldVal;
+	        var expression = attr[name].trim();
+	        var isOneTime = (expression.charAt(0) === ':') && (expression.charAt(1) === ':');
 	
-	        scope.$watch(attr[name], ngClassWatchAction, true);
+	        var watchInterceptor = isOneTime ? toFlatValue : toClassString;
+	        var watchExpression = $parse(expression, watchInterceptor);
+	        var watchAction = isOneTime ? ngClassOneTimeWatchAction : ngClassWatchAction;
 	
-	        attr.$observe('class', function(value) {
-	          ngClassWatchAction(scope.$eval(attr[name]));
-	        });
+	        var classCounts = element.data('$classCounts');
+	        var oldModulo = true;
+	        var oldClassString;
 	
-	
-	        if (name !== 'ngClass') {
-	          scope.$watch('$index', function($index, old$index) {
-	            /* eslint-disable no-bitwise */
-	            var mod = $index & 1;
-	            if (mod !== (old$index & 1)) {
-	              var classes = arrayClasses(scope.$eval(attr[name]));
-	              if (mod === selector) {
-	                addClasses(classes);
-	              } else {
-	                removeClasses(classes);
-	              }
-	            }
-	            /* eslint-enable */
-	          });
-	        }
-	
-	        function addClasses(classes) {
-	          var newClasses = digestClassCounts(classes, 1);
-	          attr.$addClass(newClasses);
-	        }
-	
-	        function removeClasses(classes) {
-	          var newClasses = digestClassCounts(classes, -1);
-	          attr.$removeClass(newClasses);
-	        }
-	
-	        function digestClassCounts(classes, count) {
+	        if (!classCounts) {
 	          // Use createMap() to prevent class assumptions involving property
 	          // names in Object.prototype
-	          var classCounts = element.data('$classCounts') || createMap();
+	          classCounts = createMap();
+	          element.data('$classCounts', classCounts);
+	        }
+	
+	        if (name !== 'ngClass') {
+	          if (!indexWatchExpression) {
+	            indexWatchExpression = $parse('$index', function moduloTwo($index) {
+	              // eslint-disable-next-line no-bitwise
+	              return $index & 1;
+	            });
+	          }
+	
+	          scope.$watch(indexWatchExpression, ngClassIndexWatchAction);
+	        }
+	
+	        scope.$watch(watchExpression, watchAction, isOneTime);
+	
+	        function addClasses(classString) {
+	          classString = digestClassCounts(split(classString), 1);
+	          attr.$addClass(classString);
+	        }
+	
+	        function removeClasses(classString) {
+	          classString = digestClassCounts(split(classString), -1);
+	          attr.$removeClass(classString);
+	        }
+	
+	        function updateClasses(oldClassString, newClassString) {
+	          var oldClassArray = split(oldClassString);
+	          var newClassArray = split(newClassString);
+	
+	          var toRemoveArray = arrayDifference(oldClassArray, newClassArray);
+	          var toAddArray = arrayDifference(newClassArray, oldClassArray);
+	
+	          var toRemoveString = digestClassCounts(toRemoveArray, -1);
+	          var toAddString = digestClassCounts(toAddArray, 1);
+	
+	          attr.$addClass(toAddString);
+	          attr.$removeClass(toRemoveString);
+	        }
+	
+	        function digestClassCounts(classArray, count) {
 	          var classesToUpdate = [];
-	          forEach(classes, function(className) {
+	
+	          forEach(classArray, function(className) {
 	            if (count > 0 || classCounts[className]) {
 	              classCounts[className] = (classCounts[className] || 0) + count;
 	              if (classCounts[className] === +(count > 0)) {
@@ -25843,77 +25885,106 @@
 	              }
 	            }
 	          });
-	          element.data('$classCounts', classCounts);
+	
 	          return classesToUpdate.join(' ');
 	        }
 	
-	        function updateClasses(oldClasses, newClasses) {
-	          var toAdd = arrayDifference(newClasses, oldClasses);
-	          var toRemove = arrayDifference(oldClasses, newClasses);
-	          toAdd = digestClassCounts(toAdd, 1);
-	          toRemove = digestClassCounts(toRemove, -1);
-	          if (toAdd && toAdd.length) {
-	            $animate.addClass(element, toAdd);
+	        function ngClassIndexWatchAction(newModulo) {
+	          // This watch-action should run before the `ngClass[OneTime]WatchAction()`, thus it
+	          // adds/removes `oldClassString`. If the `ngClass` expression has changed as well, the
+	          // `ngClass[OneTime]WatchAction()` will update the classes.
+	          if (newModulo === selector) {
+	            addClasses(oldClassString);
+	          } else {
+	            removeClasses(oldClassString);
 	          }
-	          if (toRemove && toRemove.length) {
-	            $animate.removeClass(element, toRemove);
+	
+	          oldModulo = newModulo;
+	        }
+	
+	        function ngClassOneTimeWatchAction(newClassValue) {
+	          var newClassString = toClassString(newClassValue);
+	
+	          if (newClassString !== oldClassString) {
+	            ngClassWatchAction(newClassString);
 	          }
 	        }
 	
-	        function ngClassWatchAction(newVal) {
-	          // eslint-disable-next-line no-bitwise
-	          if (selector === true || (scope.$index & 1) === selector) {
-	            var newClasses = arrayClasses(newVal || []);
-	            if (!oldVal) {
-	              addClasses(newClasses);
-	            } else if (!equals(newVal,oldVal)) {
-	              var oldClasses = arrayClasses(oldVal);
-	              updateClasses(oldClasses, newClasses);
-	            }
+	        function ngClassWatchAction(newClassString) {
+	          if (oldModulo === selector) {
+	            updateClasses(oldClassString, newClassString);
 	          }
-	          if (isArray(newVal)) {
-	            oldVal = newVal.map(function(v) { return shallowCopy(v); });
-	          } else {
-	            oldVal = shallowCopy(newVal);
-	          }
+	
+	          oldClassString = newClassString;
 	        }
 	      }
 	    };
-	
-	    function arrayDifference(tokens1, tokens2) {
-	      var values = [];
-	
-	      outer:
-	      for (var i = 0; i < tokens1.length; i++) {
-	        var token = tokens1[i];
-	        for (var j = 0; j < tokens2.length; j++) {
-	          if (token === tokens2[j]) continue outer;
-	        }
-	        values.push(token);
-	      }
-	      return values;
-	    }
-	
-	    function arrayClasses(classVal) {
-	      var classes = [];
-	      if (isArray(classVal)) {
-	        forEach(classVal, function(v) {
-	          classes = classes.concat(arrayClasses(v));
-	        });
-	        return classes;
-	      } else if (isString(classVal)) {
-	        return classVal.split(' ');
-	      } else if (isObject(classVal)) {
-	        forEach(classVal, function(v, k) {
-	          if (v) {
-	            classes = classes.concat(k.split(' '));
-	          }
-	        });
-	        return classes;
-	      }
-	      return classVal;
-	    }
 	  }];
+	
+	  // Helpers
+	  function arrayDifference(tokens1, tokens2) {
+	    if (!tokens1 || !tokens1.length) return [];
+	    if (!tokens2 || !tokens2.length) return tokens1;
+	
+	    var values = [];
+	
+	    outer:
+	    for (var i = 0; i < tokens1.length; i++) {
+	      var token = tokens1[i];
+	      for (var j = 0; j < tokens2.length; j++) {
+	        if (token === tokens2[j]) continue outer;
+	      }
+	      values.push(token);
+	    }
+	
+	    return values;
+	  }
+	
+	  function split(classString) {
+	    return classString && classString.split(' ');
+	  }
+	
+	  function toClassString(classValue) {
+	    var classString = classValue;
+	
+	    if (isArray(classValue)) {
+	      classString = classValue.map(toClassString).join(' ');
+	    } else if (isObject(classValue)) {
+	      classString = Object.keys(classValue).
+	        filter(function(key) { return classValue[key]; }).
+	        join(' ');
+	    }
+	
+	    return classString;
+	  }
+	
+	  function toFlatValue(classValue) {
+	    var flatValue = classValue;
+	
+	    if (isArray(classValue)) {
+	      flatValue = classValue.map(toFlatValue);
+	    } else if (isObject(classValue)) {
+	      var hasUndefined = false;
+	
+	      flatValue = Object.keys(classValue).filter(function(key) {
+	        var value = classValue[key];
+	
+	        if (!hasUndefined && isUndefined(value)) {
+	          hasUndefined = true;
+	        }
+	
+	        return value;
+	      });
+	
+	      if (hasUndefined) {
+	        // Prevent the `oneTimeLiteralWatchInterceptor` from unregistering
+	        // the watcher, by including at least one `undefined` value.
+	        flatValue.push(undefined);
+	      }
+	    }
+	
+	    return flatValue;
+	  }
 	}
 	
 	/**
@@ -29303,19 +29374,27 @@
 	 *
 	 */
 	var ngModelOptionsDirective = function() {
+	  NgModelOptionsController.$inject = ['$attrs', '$scope'];
+	  function NgModelOptionsController($attrs, $scope) {
+	    this.$$attrs = $attrs;
+	    this.$$scope = $scope;
+	  }
+	  NgModelOptionsController.prototype = {
+	    $onInit: function() {
+	      var parentOptions = this.parentCtrl ? this.parentCtrl.$options : defaultModelOptions;
+	      var modelOptionsDefinition = this.$$scope.$eval(this.$$attrs.ngModelOptions);
+	
+	      this.$options = parentOptions.createChild(modelOptionsDefinition);
+	    }
+	  };
+	
 	  return {
 	    restrict: 'A',
 	    // ngModelOptions needs to run before ngModel and input directives
 	    priority: 10,
-	    require: ['ngModelOptions', '?^^ngModelOptions'],
-	    controller: function NgModelOptionsController() {},
-	    link: {
-	      pre: function ngModelOptionsPreLinkFn(scope, element, attrs, ctrls) {
-	        var optionsCtrl = ctrls[0];
-	        var parentOptions = ctrls[1] ? ctrls[1].$options : defaultModelOptions;
-	        optionsCtrl.$options = parentOptions.createChild(scope.$eval(attrs.ngModelOptions));
-	      }
-	    }
+	    require: {parentCtrl: '?^^ngModelOptions'},
+	    bindToController: true,
+	    controller: NgModelOptionsController
 	  };
 	};
 	
@@ -29868,17 +29947,17 @@
 	
 	      } else {
 	
-	        selectCtrl.writeValue = function writeNgOptionsMultiple(value) {
-	          options.items.forEach(function(option) {
-	            option.element.selected = false;
-	          });
+	        selectCtrl.writeValue = function writeNgOptionsMultiple(values) {
+	          // Only set `<option>.selected` if necessary, in order to prevent some browsers from
+	          // scrolling to `<option>` elements that are outside the `<select>` element's viewport.
 	
-	          if (value) {
-	            value.forEach(function(item) {
-	              var option = options.getOptionFromViewValue(item);
-	              if (option) option.element.selected = true;
-	            });
-	          }
+	          var selectedOptions = values && values.map(getAndUpdateSelectedOption) || [];
+	
+	          options.items.forEach(function(option) {
+	            if (option.element.selected && !includes(selectedOptions, option)) {
+	              option.element.selected = false;
+	            }
+	          });
 	        };
 	
 	
@@ -29968,6 +30047,14 @@
 	        updateOptionElement(option, optionElement);
 	      }
 	
+	      function getAndUpdateSelectedOption(viewValue) {
+	        var option = options.getOptionFromViewValue(viewValue);
+	        var element = option && option.element;
+	
+	        if (element && !element.selected) element.selected = true;
+	
+	        return option;
+	      }
 	
 	      function updateOptionElement(option, element) {
 	        option.element = element;
@@ -33507,9 +33594,12 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./store-app/store-app.js": 12,
-		"./stores/stores.js": 16,
-		"./welcome/welcome.js": 20
+		"./new-store/new-store.js": 12,
+		"./store-app/store-app.js": 14,
+		"./store-detail/store-detail.js": 18,
+		"./stores-all/stores-all.js": 20,
+		"./stores/stores.js": 22,
+		"./welcome/welcome.js": 26
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -33535,11 +33625,78 @@
 	  value: true
 	});
 	
-	var _storeApp = __webpack_require__(13);
+	var _newStore = __webpack_require__(13);
+	
+	var _newStore2 = _interopRequireDefault(_newStore);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _newStore2.default,
+	  bindings: {
+	    stores: '<',
+	    add: '<'
+	  },
+	  controller: controller
+	};
+	
+	
+	controller.$inject = ['storeService', '$state'];
+	
+	function controller(storeService, $state) {
+	  var _this = this;
+	
+	  this.reset = function () {
+	    _this.name = '';
+	    _this.address.street = '';
+	    _this.address.city = '';
+	    _this.address.state = '';
+	  };
+	
+	  this.addNew = function () {
+	    storeService.add({
+	      name: _this.name,
+	      address: {
+	        street: _this.address.street,
+	        city: _this.address.city,
+	        state: _this.address.state
+	      }
+	    }).then(function (store) {
+	      _this.stores.push(store);
+	      _this.reset();
+	      $state.go('stores.detail', {
+	        id: store._id,
+	        name: store.name
+	      });
+	    });
+	  };
+	
+	  this.cancel = function () {
+	    $state.go('stores.all');
+	  };
+	}
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"component\">\n\n  <h3>Add a New Store</h3>\n  <form>\n    <label>store name: </label>\n    <input ng-model=\"$ctrl.name\">\n    <label>street: </label>\n    <input ng-model=\"$ctrl.address.street\">\n    <label>city: </label>\n    <input ng-model=\"$ctrl.address.city\">\n    <label>state: </label>\n    <input ng-model=\"$ctrl.address.state\">\n  </form>\n  \n  <button class=\"viewButton\" ng-click=$ctrl.addNew()>Add Store</button>\n\n  <button class=\"viewButton\" ng-click=$ctrl.cancel()>Cancel</button>\n\n</div>\n";
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _storeApp = __webpack_require__(15);
 	
 	var _storeApp2 = _interopRequireDefault(_storeApp);
 	
-	var _storeApp3 = __webpack_require__(14);
+	var _storeApp3 = __webpack_require__(16);
 	
 	var _storeApp4 = _interopRequireDefault(_storeApp3);
 	
@@ -33551,20 +33708,20 @@
 	};
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\n  <h1>Pet stores</h1>\n\n  <header class=\"main-nav\">\n    <nav>\n      <a ui-sref=\"welcome\">Home</a>\n      <a ui-sref=\"albums\">Stores</a>\n  </nav>\n  </header>\n\n  <main>\n    <ui-view></ui-view>\n  </main>\n\n</div>\n";
+	module.exports = "<div class=\"container\">\n  <h1>Pet stores</h1>\n\n  <header class=\"main-nav\">\n    <nav>\n      <a ui-sref=\"welcome\">Home</a>\n      <a ui-sref=\"stores.all\">Stores</a>\n  </nav>\n  </header>\n\n  <main>\n    <ui-view></ui-view>\n  </main>\n\n</div>\n";
 
 /***/ },
-/* 14 */
+/* 16 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 15 */,
-/* 16 */
+/* 17 */,
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33573,18 +33730,19 @@
 	  value: true
 	});
 	
-	var _stores = __webpack_require__(17);
+	var _storeDetail = __webpack_require__(19);
 	
-	var _stores2 = _interopRequireDefault(_stores);
-	
-	var _stores3 = __webpack_require__(18);
-	
-	var _stores4 = _interopRequireDefault(_stores3);
+	var _storeDetail2 = _interopRequireDefault(_storeDetail);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	  template: _stores2.default,
+	  template: _storeDetail2.default,
+	  bindings: {
+	    store: '<',
+	    id: '<',
+	    name: '<'
+	  },
 	  controller: controller
 	};
 	
@@ -33594,48 +33752,99 @@
 	function controller(stores) {
 	  var _this = this;
 	
-	  this.styles = _stores4.default;
-	
-	  this.loading = true;
-	
-	  stores.getAll().then(function (stores) {
-	    // this.loading = false;
-	    _this.stores = stores;
-	  });
-	
-	  // this.add = album => {
-	  //   albums.add(album)
-	  //   .then(saved => {
-	  //     this.albums.push(saved);
-	  //   });
-	  // };
-	
-	  this.new = function () {
-	    _this.viewNew = true;
-	    _this.viewDetail = false;
-	  };
-	
-	  this.detail = function () {
-	    _this.viewDetail = true;
-	    _this.viewNew = false;
+	  this.$onInit = function () {
+	    stores.get(_this.id).then(function (store) {
+	      _this.store = store;
+	    });
 	  };
 	}
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports) {
 
-	module.exports = "<button class=\"viewButton\" ng-click=\"$ctrl.detail()\">View Albums</button>\n<button class=\"viewButton\" ng-click=\"$ctrl.new()\">Add an Album</button>\n\n<div class=\"component detail\" ng-show=\"$ctrl.viewDetail === true\">\n  <h2>List of pet stores</h2>\n    <a ng-repeat=\"album in $ctrl.stores\"\n        ui-sref=\"stores.detail({\n            id: store._id,\n            name: store.name\n        })\">{{store.name}}\n    </a>\n  <ui-view>select a pet store to see detail</ui-view>\n</div>\n\n\n<!-- <new-album add=\"$ctrl.add\" ng-show=\"$ctrl.viewNew === true\"><new-album> -->\n";
+	module.exports = "<section class=\"detail\">\n  <ul>{{$ctrl.store.name}}\n    <li>{{$ctrl.store.address.street}}</li>\n    <li>{{$ctrl.store.address.city}}</li>\n    <li>{{$ctrl.store.address.state}}</li>\n    <li ng-repeat=\"pet in $ctrl.store.pets\">Name: {{pet.name}} Animal: {{pet.animal}}</li>\n  </ul>\n</section>\n";
 
 /***/ },
-/* 18 */
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _storesAll = __webpack_require__(21);
+	
+	var _storesAll2 = _interopRequireDefault(_storesAll);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _storesAll2.default,
+	  bindings: {
+	    stores: '<'
+	  }
+	};
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"component detail\">\n  <h2>List of pet stores</h2>\n    <a ng-repeat=\"store in $ctrl.stores\"\n        ui-sref=\"stores.detail({\n            id: store._id,\n            name: store.name\n        })\">{{store.name}}\n    </a>\n  <ui-view>select a pet store to see detail</ui-view>\n</div>\n";
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _stores = __webpack_require__(23);
+	
+	var _stores2 = _interopRequireDefault(_stores);
+	
+	var _stores3 = __webpack_require__(24);
+	
+	var _stores4 = _interopRequireDefault(_stores3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _stores2.default,
+	  controller: controller,
+	  bindings: {
+	    stores: '<'
+	  }
+	};
+	
+	
+	controller.$inject = [];
+	
+	function controller() {
+	
+	  this.styles = _stores4.default;
+	}
+
+/***/ },
+/* 23 */
+/***/ function(module, exports) {
+
+	module.exports = "<a ui-sref=\"stores.add\">Add a Store</a>\n\n\n<div>\n  <ui-view name=\"stores.add\"></ui-view>\n</div>\n\n<div class=\"component detail\">\n  <ui-view name=\"stores.all\"></ui-view>\n</div>\n";
+
+/***/ },
+/* 24 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 19 */,
-/* 20 */
+/* 25 */,
+/* 26 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -33648,7 +33857,7 @@
 	};
 
 /***/ },
-/* 21 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33671,7 +33880,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var context = __webpack_require__(22);
+	var context = __webpack_require__(28);
 	
 	var _module = _angular2.default.module('services', []);
 	
@@ -33683,11 +33892,11 @@
 	exports.default = _module.name;
 
 /***/ },
-/* 22 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./store-service.js": 23
+		"./store-service.js": 29
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -33700,11 +33909,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 22;
+	webpackContext.id = 28;
 
 
 /***/ },
-/* 23 */
+/* 29 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33727,17 +33936,17 @@
 	      return $http.get(apiUrl + '/stores/' + id).then(function (res) {
 	        return res.data;
 	      });
+	    },
+	    add: function add(store) {
+	      return $http.post(apiUrl + '/stores', store).then(function (res) {
+	        return res.data;
+	      });
 	    }
-	    // add(album) {
-	    //   return $http.post(`${apiUrl}/albums`, album)
-	    //   .then(res => res.data);
-	    // }
-	
 	  };
 	}
 
 /***/ },
-/* 24 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -42086,7 +42295,7 @@
 	//# sourceMappingURL=angular-ui-router.js.map
 
 /***/ },
-/* 25 */
+/* 31 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -42108,54 +42317,61 @@
 	  $stateProvider.state({
 	    name: 'stores',
 	    url: '/stores',
-	    component: 'stores'
+	    component: 'stores',
+	    resolve: {
+	      stores: ['storeService', function (stores) {
+	        return stores.getAll();
+	      }]
+	    }
 	  });
 	
-	  // $stateProvider.state({
-	  //   name: 'about',
-	  //   url: '/about',
-	  //   component: 'about'
-	  // });
-	  //
-	  // $stateProvider.state({
-	  //   name: 'about.bio',
-	  //   url: '/bio',
-	  //   views: {
-	  //     bio: {
-	  //       component: 'bio'
-	  //     }
-	  //   }
-	  // });
-	  //
-	  // $stateProvider.state({
-	  //   name: 'about.lab',
-	  //   url: '/app',
-	  //   views: {
-	  //     lab: {
-	  //       component: 'lab'
-	  //     }
-	  //   }
-	  // });
+	  $stateProvider.state({
+	    name: 'stores.all',
+	    url: '/all',
+	    views: {
+	      all: {
+	        component: 'storesAll'
+	      }
+	    }
+	  });
 	
-	  // $stateProvider.state({
-	  //   name: 'albums.detail',
-	  //   // the url, plus implied params id and view
-	  //   url: '/:id?name',
-	  //   params: {
-	  //     // "view" same key as above
-	  //     view: { dynamic: true }
-	  //   },
-	  //   resolve: {
-	  //     id: ['$transition$', t => t.params().id],
-	  //     // "view" is name of component binding,
-	  //     // t.params().view is dependent on key above
-	  //     view: ['$transition$', t => t.params().view || 'detail']
-	  //     // crew: ['$transition$', 'crewService', (t, crews) => {
-	  //     //     return crews.get(t.params().id);
-	  //     // }]
-	  //   },
-	  //   component: 'albumDetail'
-	  // });
+	  $stateProvider.state({
+	    name: 'stores.add',
+	    url: '/add',
+	    views: {
+	      all: {
+	        component: 'newStore'
+	      }
+	    }
+	  });
+	
+	  $stateProvider.state({
+	    name: 'stores.detail',
+	    // the url, plus implied params id and view
+	    url: '/:id',
+	    params: {
+	      // "view" same key as above
+	      view: { dynamic: true }
+	    },
+	    resolve: {
+	      id: ['$transition$', function (t) {
+	        return t.params().id;
+	      }],
+	      // "view" is name of component binding,
+	      // t.params().view is dependent on key above
+	      view: ['$transition$', function (t) {
+	        return t.params().view || 'detail';
+	      }]
+	      // crew: ['$transition$', 'crewService', (t, crews) => {
+	      //     return crews.get(t.params().id);
+	      // }]
+	    },
+	    views: {
+	      all: {
+	        component: 'storeDetail'
+	      }
+	    }
+	  });
 	
 	  $urlRouterProvider.otherwise('/');
 	}

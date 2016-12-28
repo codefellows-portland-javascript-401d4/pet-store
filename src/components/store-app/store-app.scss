@@ -22,7 +22,7 @@ header {
 }
 
 .container a {
-  display: block;
+  display: inline-table;
   padding: 5px;
   margin: $defaultMargin;
   border-radius: $defaultBorderRadius;

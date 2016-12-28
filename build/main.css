@@ -18,7 +18,7 @@ header {
   font-size: 1.25rem; }
 
 .container a {
-  display: block;
+  display: inline-table;
   padding: 5px;
   margin: 20px;
   border-radius: 10px;
@@ -80,6 +80,7 @@ img {
   font-weight: bolder; }
 
 .detail li {
+  font-size: 1.25rem;
   list-style-type: none;
   padding-top: 10px; }
 .viewButton {
@@ -106,7 +107,7 @@ img {
 
 .component ul {
   list-style-type: none;
-  padding: 0; }
+  padding: 10px; }
 
 label {
   display: block; }

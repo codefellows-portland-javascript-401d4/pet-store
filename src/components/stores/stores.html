@@ -1,7 +1,3 @@
-<!-- <button class="viewButton" ng-click="$ctrl.detail()">View Stores</button> -->
-<!-- <button class="viewButton" ng-click="$ctrl.new()">Add a Store</button> -->
-
-<!-- <a ui-sref="stores.all">View all stores</a> -->
 <a ui-sref="stores.add">Add a Store</a>
 
 
@@ -11,12 +7,4 @@
 
 <div class="component detail">
   <ui-view name="stores.all"></ui-view>
-  <!-- <h2>List of pet stores</h2>
-    <a ng-repeat="store in $ctrl.stores"
-        ui-sref="stores.detail({
-            id: store._id,
-            name: store.name
-        })">{{store.name}}
-    </a>
-  <ui-view>select a pet store to see detail</ui-view> -->
 </div>
