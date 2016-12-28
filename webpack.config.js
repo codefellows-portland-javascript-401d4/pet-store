@@ -31,12 +31,6 @@ module.exports = {
                 presets: ['es2015']
             }
         }, {
-            test:/\.css$/,
-            loader: cssExtract.extract(
-                'style-loader',
-                'css-loader'
-            )
-        }, {
             test: /\.scss$/,
             loader: cssExtract.extract(
                 'style-loader', 
