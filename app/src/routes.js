@@ -12,6 +12,12 @@ export default function routes($stateProvider /*$urlRouterProvider*/) {
   });
 
   $stateProvider.state({
+    name:'stores.add',
+    url: '/add',
+    component: 'addStore'
+  });
+
+  $stateProvider.state({
     name: 'store',
     url: 'store/:id',
     resolve: {
@@ -20,6 +26,12 @@ export default function routes($stateProvider /*$urlRouterProvider*/) {
       }]
     },
     component: 'store'
+  });
+
+  $stateProvider.state({
+    name:'store.addPet',
+    url: '/add-pet',
+    component: 'addPet'
   });
 
   $stateProvider.state({
