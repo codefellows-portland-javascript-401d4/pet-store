@@ -1,0 +1,10 @@
+<section ng-class="$appHeader.styles.header">
+  <h1>So many pet stores, so little time</h1>
+  <nav>
+    <button ui-sref="welcome">welcome</button>
+    <button ui-sref="stores-all">stores</button>
+    <button ng-if="$appHeader.isAuthenticated()" ui-sref="welcome" ng-click="$appHeader.logout()">logout</button>
+  </nav>
+
+  <section class="custom-headers" ng-transclude></section>
+</section>

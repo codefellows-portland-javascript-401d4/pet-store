@@ -21,7 +21,7 @@ export default function userService(token, $http, apiUrl) {
   }
 
   return {
-    isAuthenicated() {
+    isAuthenticated() {
       return !!token.get();
     },
     logout() {

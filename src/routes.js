@@ -2,6 +2,17 @@ routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
+    name: 'welcome',
+    url: '/welcome',
+    data: {public: true},
+    views: {
+      main: {
+        component: 'welcome'
+      }
+    }
+  });
+  
+  $stateProvider.state({
     name: 'stores',
     url: '/stores',
     abstract: true,
@@ -15,7 +26,15 @@ export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'stores.all',
     url: '/all',
-    component: 'storesAll'
+    component: 'storesAll',
+    views: {
+      header: {
+        component: 'allHeader'
+      },
+      main: {
+        component: 'storesHeader'
+      }
+    }
   });
 
   $stateProvider.state({
@@ -54,6 +73,6 @@ export default function routes($stateProvider, $urlRouterProvider) {
   });
 
 
-  $urlRouterProvider.otherwise('/stores/all');
+  $urlRouterProvider.otherwise('/welcome');
 
 }
