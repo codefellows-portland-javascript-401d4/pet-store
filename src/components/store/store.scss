@@ -1,0 +1,36 @@
+@import 'colors';
+@import 'content';
+@import 'buttons';
+
+:local(.store) {
+    margin: 10% 2% 2%;
+
+    header {
+        @include header();
+
+        div {
+            float: right;
+            margin: 1.25% 1% 1%;
+        }
+
+        h1 {
+            @include headerH1();
+        }
+
+        button {
+            @include button();
+            float: right;
+            background-color: $content;
+            margin: 1% 2%;
+            transition: transform .5s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        button:focus {outline:0;}
+
+    }
+
+}

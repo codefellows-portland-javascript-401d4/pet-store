@@ -1,0 +1,13 @@
+<section ng-class="$ctrl.styles.store">
+    <header>
+        <h1>{{$ctrl.store.name}}</h1>
+            <button ng-if="$ctrl.isAuthenticated()" ui-sref="welcome" ng-click="$ctrl.logout()">logout</button>
+        <div>
+            <span>{{$ctrl.store.address.street}}<br>
+            {{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</span>
+        </div>
+    </header>
+    <section>
+        <ui-view></ui-view>
+    </section>
+</section>

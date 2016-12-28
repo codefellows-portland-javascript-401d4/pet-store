@@ -1,0 +1,28 @@
+@import 'colors';
+@import 'buttons';
+@import 'content';
+
+:local(.addstores) {
+    @include main-content();
+
+    .add-store {
+    @include add-content();
+
+        label {
+            display: block;
+        }
+
+    }
+
+    button {
+        @include button();
+        margin:  4% 2% 2%;
+        transition: transform .5s;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    }
+
+    button:focus {outline:0;}
+}
