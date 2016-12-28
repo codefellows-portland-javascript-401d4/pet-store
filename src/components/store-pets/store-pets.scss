@@ -1,0 +1,31 @@
+@import 'colors';
+@import 'fonts';
+@import 'mixins';
+@import 'buttons';
+
+:local(.section) {
+  background-color: $ltgreen;
+  background: url('http://www.yuenmi.com/hkblog/wp-content/uploads/2012/03/DSC001421.jpg') no-repeat;
+  @include resp-bkg-img(809, 607);
+  @include rounded-corners(1rem);
+  box-shadow: .2rem .25rem .25rem $mdkblue;
+
+  @include clearfix;
+
+  h2 {
+    font-style: italic;
+    font-size: 2rem;
+  }
+
+}
+
+:local(.petlist) {
+  background-color: $ltblue;
+  margin-left: 1%;
+  border: none;
+  @include rounded-corners(1rem);
+  width: 50%;
+  padding: 2%;
+  margin-bottom: 0;
+  box-shadow: .25rem .25rem .25rem $blue;
+}

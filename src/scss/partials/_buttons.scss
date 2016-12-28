@@ -1,0 +1,17 @@
+@import 'colors';
+@import 'mixins';
+
+button {
+  border: none;
+  background: $mdkblue;
+  color: $pink;
+  font-size: 1rem;
+  @include rounded-corners(3rem);
+  padding: 2%;
+  box-shadow: .25rem .25rem .25rem $dkblue;
+}
+
+button:hover {
+  background: $mdkgreen;
+  color: $dkpink;
+}
