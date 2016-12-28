@@ -81,7 +81,7 @@
 	
 	app.config(_routes2.default);
 	
-	var dev = 'https://pet-store-401.herokuapp.com/api';
+	var dev = 'https://pet-store-401.herokuapp.com/api/unauth';
 	
 	// gives the service "object" directly
 	//same as:

@@ -18,7 +18,7 @@ const app = angular.module('myApp', [
 
 app.config(routes);
 
-const dev = 'https://pet-store-401.herokuapp.com/api';
+const dev = 'https://pet-store-401.herokuapp.com/api/unauth';
 
 // gives the service "object" directly
 //same as:
