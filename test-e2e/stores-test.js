@@ -1,9 +1,17 @@
-// import StoresPage from './stores-page';
+'use strict';
 
-// const stores = new StoresPage;
+var _storesPage = require('./stores-page');
 
-describe('stores page', () => {
-    it('makes a failing test', () => {
-        expect(0).toEqual(1);
+var _storesPage2 = _interopRequireDefault(_storesPage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var stores = new _storesPage2.default();
+
+describe('stores page', function () {
+
+    it('should have a title', function () {
+        stores.get();
+        expect(stores.title).toBeOk;
     });
 });
