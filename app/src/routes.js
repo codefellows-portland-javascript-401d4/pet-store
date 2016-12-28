@@ -53,7 +53,10 @@ export default function routes($stateProvider, $urlRouterProvider) {
     $stateProvider.state({
         name: 'store.addPet',
         url: '/:id',
-        component: 'addPet'
+        resolve: {
+            storeId: ['$transition$', t => t.params().id]
+        },
+        component: 'storeAddPet'
     });
 
     $urlRouterProvider.otherwise('/');
