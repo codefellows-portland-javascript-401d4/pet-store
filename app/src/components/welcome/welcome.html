@@ -1,5 +1,7 @@
 <section> 
-  <h2>Welcome!!</h2>
-  <p>Welcome to a view of our stores. Use this site to view our animal stores, select a store to see details and the pets that are in that store.</p>
-  <p>Thanks for visiting!!</p>
+    <h2>Welcome!!</h2>
+    <p>Welcome to a view of our stores. Use this site to view our animal stores, select a store to see details and the pets that are in that store.</p>
+    <p>You will need to Sign In or Sign Up to access the Stores.</p>
+    <p>Thanks for visiting!!</p>
+    <a ng-if="$ctrl.isAuthenticated()" ui-sref="welcome" ng-click="$ctrl.logout()">Log Out</a>
 </section>

@@ -36,6 +36,6 @@ function controller(petService, $state) {
     };
 
     this.cancel = () => {
-        $state.go('store');
+        $state.go('store.pets');
     };
 }
