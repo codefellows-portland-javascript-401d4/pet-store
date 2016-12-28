@@ -33734,7 +33734,7 @@
 	
 	function controller() {
 	    this.styles = _userAuth4.default;
-	    this.action = "signin";
+	    this.action = 'signin';
 	};
 
 /***/ },
@@ -33832,7 +33832,7 @@
 	    this.isAuthenticated = function () {
 	        return userService.isAuthenticated();
 	    };
-	}
+	};
 
 /***/ },
 /* 29 */
@@ -49253,7 +49253,7 @@
 	auth.$inject = ['$rootScope', 'userService', 'ngDialog', '$state'];
 	
 	function auth($rootScope, userService, ngDialog, $state) {
-	    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+	    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
 	
 	        // console.log('$scs', toState, toParams, fromState, fromParams);
 	
