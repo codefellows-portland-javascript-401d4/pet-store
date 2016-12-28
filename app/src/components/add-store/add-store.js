@@ -35,10 +35,9 @@ function controller($state, storeService) {
     })
       .then(newStore => {
         this.storeId = newStore._id;
+        this.reset();
+        $state.go('store', { id: this.storeId });
       });
 
-    this.reset();
-
-    $state.go('store', { id: this.storeId });
   };
 }
