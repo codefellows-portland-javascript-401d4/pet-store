@@ -6,10 +6,15 @@ export default {
   controller,
   require: {
     parent: '^stores'
+  },
+  binding: {
+    storeId: '<'
   }
 };
 
-function controller() {
+controller.$inject = ['$state'];
+
+function controller($state) {
   this.styles = styles;
 
   this.reset = function() {
@@ -29,5 +34,7 @@ function controller() {
       }
     });
     this.reset();
+
+    //$state.go('store', { id: this.parent.storeId });
   };
 }

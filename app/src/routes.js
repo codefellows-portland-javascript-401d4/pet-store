@@ -20,7 +20,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
       component: 'allStores'
     })
     .state({
-      name: 'stores.addStore',
+      name: 'stores.add',
       url: '/add',
       component: 'addStore'
     });
@@ -28,10 +28,12 @@ export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state({
       name: 'store',
-      url: '/store',
-      component: '',
+      url: '/store/:id',
+      component: 'store',
       resolve: {
-        id: ['$transitions$', t => t.params().id]
+        id: ['$transition$', t => t.params().id],
+        store: ['storeService', '$transition$', (s, $t) =>
+          s.getStore({id : $t.params().id}) ]
       }
     });
   //   .state({
