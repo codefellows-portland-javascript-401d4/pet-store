@@ -29,12 +29,18 @@ export default function routes($stateProvider, $urlRouterProvider) {
     $stateProvider.state({
         name: 'stores.add',
         url: '/add',
+        resolve: {
+            stores: ['storeService', Store => Store.get()]
+        },
         component: 'storeAdd'
     });
 
     $stateProvider.state({
         name: 'store',
         url: '/:id',
+        resolve: {
+            storeId: ['$transition$', t => t.params().id]
+        },
         component: 'store'
     });
 
