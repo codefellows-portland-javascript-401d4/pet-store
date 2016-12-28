@@ -22,7 +22,7 @@ function interceptor($window, tokenService, $state) {
     },
     responseError(response) {
             // does error status indicate token not valid?
-      if (response.status == 403) {
+      if (response.status === 403) {
         tokenService.remove();
         $state.go('welcome');
       }
