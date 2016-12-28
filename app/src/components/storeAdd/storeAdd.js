@@ -24,10 +24,11 @@ function controller(storeService, $state) {
     };
 
     this.addStore = () => {
-        storeService.add(this.newStore);
-        this.stores.push(this.newStore);
-        console.log('Added Store:', this.newStore);
-        $state.go('store', {id: this.newStore._id});
+        storeService.add(this.newStore)
+            .then(addedStore => { 
+                this.stores.push(addedStore);
+                $state.go('store.pets', {id: addedStore._id});
+            });
     };
 
     this.cancel = () => {
