@@ -1,0 +1,21 @@
+<section ng-class="$ctrl.styles.pets">
+    <div>
+        <h2>This store has the following pets.</h2>
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Animal Type</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="pet in $ctrl.store.pets">
+                    <td>{{pet.name}}</td>
+                    <td>{{pet.animal}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button ng-click="$ctrl.goToAddPets()">Add a Pet</button>
+    <button ng-click="$ctrl.backToStores()">Back to Stores</button>
+</section>

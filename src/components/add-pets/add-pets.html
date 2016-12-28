@@ -1,0 +1,17 @@
+<section ng-class="$ctrl.styles.addpets">
+    <h2>Use the Form Below to Add a Pet</h2>
+    <div class="add-pet">
+        <div>
+            <h3>Add a Pet</h3>
+            <label>Name:</label>
+            <input ng-model="$ctrl.name">
+        </div>
+        <div>
+            <label>Animal Type</label>
+            <input ng-model="$ctrl.animal">
+        </div>
+        <button ng-click="$ctrl.addPet()">Add</button>
+        <button ng-click="$ctrl.backToStore()">Cancel</button>        
+    </div>
+
+</section>

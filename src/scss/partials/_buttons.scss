@@ -1,0 +1,9 @@
+@mixin button() {
+    border: 1px solid $text;
+    cursor: pointer;
+    padding: 1%;
+    text-align: center;
+    background-color: $button;
+    width: 110px;
+    border-radius: 15px;
+}
