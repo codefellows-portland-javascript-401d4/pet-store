@@ -4,7 +4,7 @@ import styles from './storeAdd.scss';
 export default {
     template,
     bindings: {
-        stores: '='
+        stores: '<'
     },
     controller
 };
@@ -27,7 +27,7 @@ function controller(storeService, $state) {
         storeService.add(this.newStore);
         this.stores.push(this.newStore);
         console.log('Added Store:', this.newStore);
-        $state.go(`stores/${this.newStore._id}`);
+        $state.go('store', {id: this.newStore._id});
     };
 
     this.cancel = () => {

@@ -1,9 +1,15 @@
 <section>
-  <h3>New Pet Info</h3>
-  <label>Name:</label>
-  <input type="text" ng-model="$ctrl.name">
-  <label>Animal Type:</label>
-  <input type="text" ng-model="$ctrl.animalType">
-  <button ng-click="$ctrl.addPet()">Add Pet</button>
-  <button ng-click="$ctrl.cancel()">Cancel</button>
+    <h3>New Pet Info</h3>
+    <label>Name:</label>
+    <input type="text" ng-model="$ctrl.name">
+    <label>Animal Type:</label>
+    <input type="text" ng-model="$ctrl.animalType">
+
+    <!--<span ng-repeat="animal in ['cat', 'lizard', 'bird', 'dog', 'fish']">{{animal}}
+    <input type="radio" ng-model="$ctrl.animalType" 
+            name="animal" ng-value="" checked="" >
+    </span>-->
+
+    <button ng-click="$ctrl.addPet()">Add Pet</button>
+    <button ng-click="$ctrl.cancel()">Cancel</button>
 </section>

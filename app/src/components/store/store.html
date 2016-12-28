@@ -3,15 +3,15 @@
     <h4>{{$ctrl.store.name}}</h4>
     <h5>{{$ctrl.store.address.street}}, {{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</h5>
     <hr>
-    <span>Pets at this store: ({{$ctrl.store.pets.length}})</span>
+    <span>Total Pets at this store: ({{$ctrl.store.pets.length}})</span>
     <ul>
         <li ng-repeat="pet in $ctrl.store.pets">
-            {{pet.name}} a {{pet.animal}}
+            {{pet.name}} the {{pet.animal}}
         </li>
     </ul>
     <p></p>
 
-    <a ui-sref="store.addPet">Add a Pet</a>
+    <a ui-sref="store.addPet({id: $ctrl.store._id})">Add a Pet</a>
     <ui-view></ui-view>
 
 </section>
