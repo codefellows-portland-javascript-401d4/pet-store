@@ -6,7 +6,7 @@ import services from './services';
 
 import animate from 'angular-animate';
 import uiRouter from 'angular-ui-router';
-import defaultRoute from 'angular-ui-router-default';
+// import defaultRoute from 'angular-ui-router-default';
 
 // need this for old $stateChanged events,
 // however, we need to manually grab the module
@@ -27,7 +27,7 @@ const app = angular.module('myApp', [
   services,
   animate,
   uiRouter,
-  defaultRoute,
+  // defaultRoute,
   angular.module('ui.router.state.events').name,
   dialog
 ]);
