@@ -1,13 +1,19 @@
-<a ui-sref="stores.add">Add a new store</a>
 
-<h3>All Stores</h3>
-<ul>
-    <li ng-repeat="store in $ctrl.stores">
-        <div>
-            <h4 ui-sref="store({
-                id: store._id})">
-            {{store.name}}:</h4>
-            {{store.address.city}}, {{store.address.state}}
-        </div>
-    </li>
-</ul>
+<div class="left">
+    <ul>
+        <h3>All Stores:</h3>
+        <li ng-repeat="store in $ctrl.stores">
+            <div>
+                <h4 ui-sref="store({
+                    id: store._id})">
+                {{store.name}}:</h4>
+                {{store.address.city}}, {{store.address.state}}
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+<div class="right">
+    <a ui-sref="stores.add">Add a new store</a>
+</div>

@@ -54,43 +54,43 @@
 	
 	var _components2 = _interopRequireDefault(_components);
 	
-	var _services = __webpack_require__(28);
+	var _services = __webpack_require__(36);
 	
 	var _services2 = _interopRequireDefault(_services);
 	
-	__webpack_require__(33);
+	__webpack_require__(41);
 	
-	var _angularUiRouter = __webpack_require__(35);
+	var _angularUiRouter = __webpack_require__(43);
 	
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 	
-	var _angularUiRouterDefault = __webpack_require__(36);
+	var _angularUiRouterDefault = __webpack_require__(44);
 	
 	var _angularUiRouterDefault2 = _interopRequireDefault(_angularUiRouterDefault);
 	
-	var _angularResource = __webpack_require__(37);
+	var _angularResource = __webpack_require__(45);
 	
 	var _angularResource2 = _interopRequireDefault(_angularResource);
 	
-	__webpack_require__(39);
+	__webpack_require__(47);
 	
-	var _ngDialog = __webpack_require__(40);
+	var _ngDialog = __webpack_require__(48);
 	
 	var _ngDialog2 = _interopRequireDefault(_ngDialog);
 	
-	__webpack_require__(41);
+	__webpack_require__(49);
 	
-	__webpack_require__(43);
+	__webpack_require__(51);
 	
-	var _routes = __webpack_require__(45);
+	var _routes = __webpack_require__(53);
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _http = __webpack_require__(46);
+	var _http = __webpack_require__(54);
 	
 	var _http2 = _interopRequireDefault(_http);
 	
-	var _auth = __webpack_require__(47);
+	var _auth = __webpack_require__(55);
 	
 	var _auth2 = _interopRequireDefault(_auth);
 	
@@ -33619,12 +33619,16 @@
 	var map = {
 		"./add-new/add-new.js": 8,
 		"./app/app.js": 10,
-		"./stores/add-store/add-store.js": 12,
-		"./stores/stores.js": 14,
-		"./user-auth/signin/signin.js": 20,
-		"./user-auth/signup/signup.js": 22,
-		"./user-auth/user-auth.js": 24,
-		"./welcome/welcome.js": 26
+		"./store/add-pets/add-pets.js": 12,
+		"./store/store-pets/store-pets.js": 14,
+		"./store/store.js": 16,
+		"./stores/add-store/add-store.js": 18,
+		"./stores/all-stores/all-stores.js": 20,
+		"./stores/stores.js": 26,
+		"./user-auth/signin/signin.js": 28,
+		"./user-auth/signup/signup.js": 30,
+		"./user-auth/user-auth.js": 32,
+		"./welcome/welcome.js": 34
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -33710,14 +33714,21 @@
 	
 	exports.default = {
 	    template: _app2.default,
-	    controller: function controller() {}
+	    controller: controller
 	};
+	
+	
+	function controller(userService) {
+	    this.logOut = function () {
+	        userService.logout();
+	    };
+	}
 
 /***/ },
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"app\">\n    <nav>\n        <ul>\n            <li ui-sref=\"stores\">stores</li>\n        </ul>\n    </nav>\n    <ui-view></ui-view>\n</div>";
+	module.exports = "<div class=\"app\">\n    <nav>\n        <ul>\n            <li ui-sref=\"welcome\">Home</li>\n            <li ui-sref=\"stores\">Stores</li>\n            <li ng-click=\"$ctrl.logOut()\" ui-sref=\"welcome\">Log out</li>\n        </ul>\n    </nav>\n    <ui-view></ui-view>\n</div>";
 
 /***/ },
 /* 12 */
@@ -33729,28 +33740,31 @@
 	    value: true
 	});
 	
-	var _addStore = __webpack_require__(13);
+	var _addPets = __webpack_require__(13);
 	
-	var _addStore2 = _interopRequireDefault(_addStore);
+	var _addPets2 = _interopRequireDefault(_addPets);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	    template: _addStore2.default,
-	    // bindings: {
-	    //     add: '<'
-	    // },
+	    template: _addPets2.default,
+	    bindings: {
+	        store: '<'
+	    },
 	    controller: controller
 	};
 	
-	controller.$inject = ['storeService'];
 	
 	function controller() {
 	    var _this = this;
 	
-	    this.add = function (album) {
-	        album = _this.album;
-	        console.log(album);
+	    this.add = function () {
+	        console.log(_this.pet);
+	        _this.reset();
+	    };
+	
+	    this.reset = function () {
+	        _this.pet = {};
 	    };
 	}
 
@@ -33758,7 +33772,7 @@
 /* 13 */
 /***/ function(module, exports) {
 
-	module.exports = "<h3>Add a New Store!</h3>\n\n<form ng-submit=\"$ctrl.add()\">\n    <div>\n        <label>Name</label>\n        <input type=\"text\" ng-model=\"$ctrl.store.name\">\n    </div>\n    <div>\n        <label>Address</label>\n        <input type=\"text\" value=\"street\" ng-model=\"$ctrl.store.address.street\">\n        <input type=\"text\" value=\"city\" ng-model=\"$ctrl.store.address.city\">\n        <input type=\"text\" value=\"state\" ng-model=\"$ctrl.store.address.state\">\n    </div>\n    <button>Add</button>\n</form>";
+	module.exports = "<form ng-submit=\"$ctrl.add()\">\n    <label>Name:</label>\n    <input type=\"text\" ng-model=\"$ctrl.pet.name\">\n\n    <label>Type:</label>\n    <select ng-model=\"$ctrl.pet.animal\">\n        <option value=\"cat\">cat</option>\n        <option value=\"lizard\">lizard</option>\n        <option value=\"bird\">bird</option>\n        <option value=\"dog\">dog</option>\n        <option value=\"fish\">fish</option>\n    </select>\n\n    <button>Add!</button>\n\n</form>\n<a ui-sref=\"store({id: $ctrl.store._id})\">cancel</a>\n";
 
 /***/ },
 /* 14 */
@@ -33770,55 +33784,161 @@
 	    value: true
 	});
 	
-	var _stores = __webpack_require__(15);
+	var _storePets = __webpack_require__(15);
 	
-	var _stores2 = _interopRequireDefault(_stores);
-	
-	var _stores3 = __webpack_require__(16);
-	
-	var _stores4 = _interopRequireDefault(_stores3);
+	var _storePets2 = _interopRequireDefault(_storePets);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	    template: _stores2.default,
+	    template: _storePets2.default,
 	    bindings: {
-	        stores: '<'
-	    },
-	    controller: function controller() {}
+	        store: '<'
+	    }
 	};
-	
-	
-	controller.$inject = ['storeService', '$state'];
-	
-	function controller() {
-	    this.styles = _stores4.default;
-	}
 
 /***/ },
 /* 15 */
 /***/ function(module, exports) {
 
-	module.exports = "<p>Here are the stores</p>\n\n<ul>\n    <h3>Stores</h3>\n    <li ng-repeat=\"store in $ctrl.stores\">\n        <div>\n            <h4>{{store.name}}:</h4>\n            {{store.address.city}}, {{store.address.state}}\n        </div>\n    </li>\n</ul>\n\n<a ui-sref=\"stores.add\">Add a new store</a>";
+	module.exports = "<h4>Pets</h4>\n<a ui-sref=\"store.addPet\">Add a pet</a> \n<ul>\n    <li ng-repeat=\"pet in $ctrl.store.pets\">\n        <span>{{pet.name}}:</span> {{pet.animal}}\n</ul>";
 
 /***/ },
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _store = __webpack_require__(17);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _store2.default,
+	    bindings: {
+	        store: '<'
+	    }
+	};
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	module.exports = "<h2>{{$ctrl.store.name}}:</h2>\n\n<section>\n    <h3>Address</h3>\n    <p>{{$ctrl.store.address.street}}, {{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</p>\n</section>\n\n<section>\n    <ui-view name=\"main\"></ui-view>\n</section>\n";
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _addStore = __webpack_require__(19);
+	
+	var _addStore2 = _interopRequireDefault(_addStore);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _addStore2.default,
+	    bindings: {
+	        stores: '='
+	    },
+	    controller: controller
+	};
+	
+	controller.$inject = ['storeService'];
+	
+	function controller(storeService) {
+	    var _this = this;
+	
+	    this.reset = function () {
+	        _this.store = {};
+	    };
+	
+	    this.reset();
+	
+	    this.add = function () {
+	        console.log(_this.store);
+	        storeService.add(_this.store).then(function (store) {
+	            _this.stores.push(store);
+	            _this.reset();
+	        });
+	    };
+	}
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	module.exports = "<h3>Add a New Store!</h3>\n\n<form ng-submit=\"$ctrl.add()\">\n    <div>\n        <label>Name</label>\n        <input type=\"text\" ng-model=\"$ctrl.store.name\">\n    </div>\n    <div>\n        <label>Address</label>\n        <input type=\"text\" value=\"street\" ng-model=\"$ctrl.store.address.street\">\n        <input type=\"text\" value=\"city\" ng-model=\"$ctrl.store.address.city\">\n        <input type=\"text\" value=\"state\" ng-model=\"$ctrl.store.address.state\">\n    </div>\n    <button>Add</button>\n</form>";
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _allStores = __webpack_require__(21);
+	
+	var _allStores2 = _interopRequireDefault(_allStores);
+	
+	var _allStores3 = __webpack_require__(22);
+	
+	var _allStores4 = _interopRequireDefault(_allStores3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _allStores2.default,
+	    bindings: {
+	        stores: '='
+	    },
+	    controller: controller
+	};
+	
+	
+	function controller() {
+	    this.styles = _allStores4.default;
+	}
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = "<a ui-sref=\"stores.add\">Add a new store</a>\n\n<h3>All Stores</h3>\n<ul>\n    <li ng-repeat=\"store in $ctrl.stores\">\n        <div>\n            <h4 ui-sref=\"store({\n                id: store._id})\">\n            {{store.name}}:</h4>\n            {{store.address.city}}, {{store.address.state}}\n        </div>\n    </li>\n</ul>\n";
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(17);
+	var content = __webpack_require__(23);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(19)(content, {});
+	var update = __webpack_require__(25)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/sass-loader/index.js?sourceMap!./stores.scss", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/sass-loader/index.js?sourceMap!./stores.scss");
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/sass-loader/index.js?sourceMap!./all-stores.scss", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/sass-loader/index.js?sourceMap!./all-stores.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -33828,21 +33948,21 @@
 	}
 
 /***/ },
-/* 17 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(18)();
+	exports = module.exports = __webpack_require__(24)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, "ul {\n  list-style-type: none; }\n", "", {"version":3,"sources":["/./src/components/stores/src/components/stores/stores.scss"],"names":[],"mappings":"AAAA;EACI,sBAAqB,EACxB","file":"stores.scss","sourcesContent":["ul {\n    list-style-type: none;\n}"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "ul {\n  list-style-type: none; }\n", "", {"version":3,"sources":["/./src/components/stores/all-stores/src/components/stores/all-stores/all-stores.scss"],"names":[],"mappings":"AAAA;EACI,sBAAqB,EACxB","file":"all-stores.scss","sourcesContent":["ul {\n    list-style-type: none;\n}"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
 
 /***/ },
-/* 18 */
+/* 24 */
 /***/ function(module, exports) {
 
 	/*
@@ -33898,7 +34018,7 @@
 
 
 /***/ },
-/* 19 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -34150,7 +34270,7 @@
 
 
 /***/ },
-/* 20 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34159,7 +34279,41 @@
 	    value: true
 	});
 	
-	var _signin = __webpack_require__(21);
+	var _stores = __webpack_require__(27);
+	
+	var _stores2 = _interopRequireDefault(_stores);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _stores2.default,
+	    bindings: {
+	        stores: '='
+	    }
+	    // controller
+	};
+	
+	// function controller() {
+	//     console.log(this.stores);
+	// }
+
+/***/ },
+/* 27 */
+/***/ function(module, exports) {
+
+	module.exports = "<h2>Stores</h2>\n\n<section>\n    <ui-view name=\"main\"></ui-view>\n</section>";
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _signin = __webpack_require__(29);
 	
 	var _signin2 = _interopRequireDefault(_signin);
 	
@@ -34194,13 +34348,13 @@
 	}
 
 /***/ },
-/* 21 */
+/* 29 */
 /***/ function(module, exports) {
 
 	module.exports = "<section>\n    <h2>Sign in to existing account</h2>\n    <form ng-submit=\"$ctrl.authenticate()\">\n        <div>\n            <label>\n                username: <input required type=\"text\" ng-model=\"$ctrl.credentials.username\">\n            </label>\n        </div>\n\n                <div>\n            <label>\n                password: <input required type=\"text\" ng-model=\"$ctrl.credentials.password\">\n            </label>\n        </div>\n\n        <button type=\"submit\">Sign In</button>\n    </form>\n    <div ng-if=\"$ctrl.error\">{{$ctrl.error.reason}}</div>\n</section>";
 
 /***/ },
-/* 22 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34209,7 +34363,7 @@
 	    value: true
 	});
 	
-	var _signup = __webpack_require__(23);
+	var _signup = __webpack_require__(31);
 	
 	var _signup2 = _interopRequireDefault(_signup);
 	
@@ -34245,13 +34399,13 @@
 	}
 
 /***/ },
-/* 23 */
+/* 31 */
 /***/ function(module, exports) {
 
 	module.exports = "<section>\n    <h2>Sign Up as a new user!</h2>\n    <form ng-submit=\"$ctrl.authenticate()\">\n        <div>\n            <label>\n                email: <input required type=\"text\" ng-model=\"$ctrl.credentials.email\">\n            </label>\n        </div>\n        <div>\n            <label>\n                username: <input required type=\"text\" ng-model=\"$ctrl.credentials.username\">\n            </label>\n        </div>\n\n                <div>\n            <label>\n                password: <input required type=\"text\" ng-model=\"$ctrl.credentials.password\">\n            </label>\n        </div>\n\n        <button type=\"submit\">Sign Up</button>\n    </form>\n    <div ng-if=\"$ctrl.error\">{{$ctrl.error.reason}}</div>\n</section>";
 
 /***/ },
-/* 24 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34260,7 +34414,7 @@
 	    value: true
 	});
 	
-	var _userAuth = __webpack_require__(25);
+	var _userAuth = __webpack_require__(33);
 	
 	var _userAuth2 = _interopRequireDefault(_userAuth);
 	
@@ -34276,17 +34430,17 @@
 	
 	
 	function controller() {
-	    this.action = 'signup';
+	    this.action = 'signin';
 	}
 
 /***/ },
-/* 25 */
+/* 33 */
 /***/ function(module, exports) {
 
 	module.exports = "<div>\n    <input type=\"radio\" ng-model=\"$ctrl.action\" value=\"signin\">\n    <label>Sign In</label>\n\n    <input type=\"radio\" ng-model=\"$ctrl.action\" value=\"signup\">\n    <label>Sign Up</label>\n</div>\n\n<signin ng-if=\"$ctrl.action === 'signin'\" success=\"$ctrl.success\"></signin>\n<signup ng-if=\"$ctrl.action === 'signup'\" success=\"$ctrl.success\"></signup>";
 
 /***/ },
-/* 26 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34295,7 +34449,7 @@
 	    value: true
 	});
 	
-	var _welcome = __webpack_require__(27);
+	var _welcome = __webpack_require__(35);
 	
 	var _welcome2 = _interopRequireDefault(_welcome);
 	
@@ -34306,13 +34460,13 @@
 	};
 
 /***/ },
-/* 27 */
+/* 35 */
 /***/ function(module, exports) {
 
-	module.exports = "<h2>Welcome to the Pet Store</h2>\n\n<p>Login or sign-up to continue<p>";
+	module.exports = "<h2>Welcome to the Pet Store</h2>\n\n<p>Click on stores to access the database<p>";
 
 /***/ },
-/* 28 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34335,7 +34489,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var context = __webpack_require__(29);
+	var context = __webpack_require__(37);
 	
 	var _module = _angular2.default.module('services', []);
 	
@@ -34347,13 +34501,13 @@
 	exports.default = _module.name;
 
 /***/ },
-/* 29 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./storeService.js": 30,
-		"./token-service.js": 31,
-		"./user-service.js": 32
+		"./storeService.js": 38,
+		"./token-service.js": 39,
+		"./user-service.js": 40
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -34366,11 +34520,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 29;
+	webpackContext.id = 37;
 
 
 /***/ },
-/* 30 */
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34387,6 +34541,11 @@
 	                return res.data;
 	            });
 	        },
+	        get: function get(id) {
+	            return $http.get(apiUrl + '/stores/' + id).then(function (res) {
+	                return res.data;
+	            });
+	        },
 	        add: function add(store) {
 	            console.log('add route hit');
 	            return $http.post(apiUrl + '/stores', store).then(function (res) {
@@ -34398,7 +34557,7 @@
 	}
 
 /***/ },
-/* 31 */
+/* 39 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34426,7 +34585,7 @@
 	}
 
 /***/ },
-/* 32 */
+/* 40 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34469,16 +34628,16 @@
 	}
 
 /***/ },
-/* 33 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(34);
+	var content = __webpack_require__(42);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(19)(content, {});
+	var update = __webpack_require__(25)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -34495,10 +34654,10 @@
 	}
 
 /***/ },
-/* 34 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(18)();
+	exports = module.exports = __webpack_require__(24)();
 	// imports
 	
 	
@@ -34509,7 +34668,7 @@
 
 
 /***/ },
-/* 35 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -42858,7 +43017,7 @@
 	//# sourceMappingURL=angular-ui-router.js.map
 
 /***/ },
-/* 36 */
+/* 44 */
 /***/ function(module, exports) {
 
 	/**
@@ -42959,15 +43118,15 @@
 	})(window.angular);
 
 /***/ },
-/* 37 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(38);
+	__webpack_require__(46);
 	module.exports = 'ngResource';
 
 
 /***/ },
-/* 38 */
+/* 46 */
 /***/ function(module, exports) {
 
 	/**
@@ -43820,7 +43979,7 @@
 
 
 /***/ },
-/* 39 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -44029,7 +44188,7 @@
 	//# sourceMappingURL=stateEvents.js.map
 
 /***/ },
-/* 40 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -44924,16 +45083,16 @@
 
 
 /***/ },
-/* 41 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(42);
+	var content = __webpack_require__(50);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(19)(content, {});
+	var update = __webpack_require__(25)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -44950,10 +45109,10 @@
 	}
 
 /***/ },
-/* 42 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(18)();
+	exports = module.exports = __webpack_require__(24)();
 	// imports
 	
 	
@@ -44964,16 +45123,16 @@
 
 
 /***/ },
-/* 43 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(44);
+	var content = __webpack_require__(52);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(19)(content, {});
+	var update = __webpack_require__(25)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -44990,10 +45149,10 @@
 	}
 
 /***/ },
-/* 44 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(18)();
+	exports = module.exports = __webpack_require__(24)();
 	// imports
 	
 	
@@ -45004,7 +45163,7 @@
 
 
 /***/ },
-/* 45 */
+/* 53 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -45041,25 +45200,64 @@
 	    $stateProvider.state({
 	        name: 'stores.all',
 	        url: '/all',
-	        resolve: {
-	            stores: ['storeService', function (storeService) {
-	                return storeService.getAll();
-	            }]
-	        },
-	        component: 'stores'
+	        views: {
+	            main: {
+	                component: 'allStores'
+	            }
+	        }
 	    });
 	
 	    $stateProvider.state({
 	        name: 'stores.add',
 	        url: '/add',
-	        component: 'add-store'
+	        views: {
+	            main: {
+	                component: 'addStore'
+	            }
+	        }
+	    });
+	
+	    $stateProvider.state({
+	        name: 'store',
+	        url: '/stores/:id',
+	        abstract: true,
+	        default: '.pets',
+	        resolve: {
+	            store: ['storeService', '$transition$', function (storeService, t) {
+	                return storeService.get(t.params().id);
+	            }],
+	            pets: ['store', function (store) {
+	                return store.pets;
+	            }]
+	        },
+	        component: 'store'
+	    });
+	
+	    $stateProvider.state({
+	        name: 'store.pets',
+	        url: '/pets',
+	        views: {
+	            main: {
+	                component: 'storePets'
+	            }
+	        }
+	    });
+	
+	    $stateProvider.state({
+	        name: 'store.addPet',
+	        url: '/add-pet',
+	        views: {
+	            main: {
+	                component: 'addPets'
+	            }
+	        }
 	    });
 	
 	    $urlRouterProvider.otherwise('/');
 	}
 
 /***/ },
-/* 46 */
+/* 54 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -45099,7 +45297,7 @@
 	}
 
 /***/ },
-/* 47 */
+/* 55 */
 /***/ function(module, exports) {
 
 	'use strict';

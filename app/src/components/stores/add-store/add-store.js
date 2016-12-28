@@ -3,25 +3,30 @@ import template from './add-store.html';
 export default {
     template,
     bindings: {
-        stores: '='
+        stores: '<'
     },
     controller
 };
-controller.$inject = ['storeService'];
+controller.$inject = ['storeService', '$state'];
 
-function controller(storeService) {
+function controller(storeService, $state) {
     this.reset = () => {
         this.store = {};
     };
 
+    this.newStores = [];
+
     this.reset();
 
     this.add = () => {
-        console.log(this.store);
         storeService.add(this.store)
             .then(store => {
                 this.stores.push(store);
                 this.reset();
+                return store;
+            })
+            .then(store => {
+                $state.go('store', {id: store._id});
             });
     };
 }

@@ -4,11 +4,7 @@
 
     <label>Type:</label>
     <select ng-model="$ctrl.pet.animal">
-        <option value="cat">cat</option>
-        <option value="lizard">lizard</option>
-        <option value="bird">bird</option>
-        <option value="dog">dog</option>
-        <option value="fish">fish</option>
+        <option ng-repeat="type in $ctrl.animalTypes" value="{{type}}">{{type}}</option>
     </select>
 
     <button>Add!</button>
