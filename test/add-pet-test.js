@@ -55,6 +55,7 @@ describe('add-pet-component', () => {
                 assert.equal(actual.animal, animal);
                 assert.equal(actual.store, '123');
                 assert.equal(actual._id, 'ABC');
+                
                 done();
             })
             .catch(done);
