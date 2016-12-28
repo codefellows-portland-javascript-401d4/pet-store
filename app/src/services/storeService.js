@@ -10,8 +10,8 @@ export default function storeService($http, apiUrl) {
       return $http.post(`${apiUrl}/unauth/stores`, store)
         .then(res => res.data);
     },
-    getStore(id) {
-      return $http.get(`${apiUrl}/unauth/stores/` + id)
+    getStore(store) {
+      return $http.get(`${apiUrl}/unauth/stores/` + store.id)
         .then(res => res.data);
     },
     getPets() {
