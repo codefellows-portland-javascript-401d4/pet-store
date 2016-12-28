@@ -58,7 +58,7 @@
                 * pets have { _id, name, animal }
     * `store.pets` (default for `store`)
         * name, animal [cat, lizard, bird, dog, fish]
-        * Link to change to Add New Pet
+        * Link to Add New Pet
     * `store.addPet`
         * Create new from: name
             animal type [cat, lizard, bird, dog, fish],

@@ -3,6 +3,9 @@ import styles from './storeAdd.scss';
 
 export default {
     template,
+    bindings: {
+        stores: '='
+    },
     controller
 };
 
@@ -10,17 +13,21 @@ controller.$inject = ['storeService', '$state'];
 
 function controller(storeService, $state) {
     this.styles = styles;
+    this.stores = [];
 
     this.newStore = {
         name: '',
-        address: '',
-        city: '',
-        state: ''
+        address: {
+            street: '',
+            city: '',
+            state: ''}
     };
 
     this.addStore = () => {
-        console.log(this.newStore);
         storeService.add(this.newStore);
+        this.stores.push(this.newStore);
+        console.log('Added Store:', this.newStore);
+        $state.go(`stores/${this.newStore._id}`);
     };
 
     this.cancel = () => {
