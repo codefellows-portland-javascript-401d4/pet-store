@@ -1,16 +1,7 @@
 const {assert} = chai;
 
 describe('add-pet-component', () => {
-
-    //add mock data store 
-    //TODO: Do I really need this?
-
-    const petStore = [
-        {name: 'Maybe', animal: 'dog', _id: 'DEF'}, {name: 'Jessie', animal: 'dog', _id: 'GHI'}
-    ];
-
-    //add mock service
-
+    //mock services
     const petService = function (obj) {
         this.name = obj.name;
         this.animal = obj.animal;
@@ -44,7 +35,6 @@ describe('add-pet-component', () => {
     before(injectComponent);
 
     function testEmpty() {
-        // console.log(newPet);
         addPet.newPet = {};
         assert.isNotOk(addPet.newPet.name);
         assert.isNotOk(addPet.newPet.animal);
@@ -73,5 +63,4 @@ describe('add-pet-component', () => {
     });
 
     it('resets', testEmpty);
-
 });
