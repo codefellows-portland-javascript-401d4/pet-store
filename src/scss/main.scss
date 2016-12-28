@@ -1,7 +1,17 @@
+@import 'colors';
+@import 'mixins';
+
+
 body {
-  background-color: lightgrey;
+  background-color: $ltpink;
 }
 
 header {
+  border: none;
+  @include rounded-corners(1rem);
   font-size: 2rem;
+  background-color: $blue;
+  width: 80%;
+  padding: 1%;
+  box-shadow: .25rem .25rem .25rem $dkblue;
 }

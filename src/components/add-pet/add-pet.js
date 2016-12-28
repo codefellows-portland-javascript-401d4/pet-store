@@ -1,4 +1,5 @@
 import template from './add-pet.html';
+import styles from './add-pet.scss';
 
 export default {
   template,
@@ -13,6 +14,7 @@ export default {
 controller.$inject = ['petService', '$state'];
 
 function controller(pets, $state) {
+  this.styles = styles;
 
   this.addPet = () => {
     pets.addPet({
