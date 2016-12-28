@@ -1,0 +1,17 @@
+<nav>   
+    <a ui-sref="welcome" ui-sref-active="link">Welcome</a>
+    <a ng-if="$ctrl.isAuthenticated()" ui-sref="welcome" ng-click="$ctrl.logout()">logout</a>
+</nav>
+
+
+<h1>Store List</h1>
+
+<ul>    
+    <li ng-repeat="store in $ctrl.stores">
+        <p>Store Name: {{store.name}}</p>
+        <p>{{store.street}}</p>
+        <p>{{store.city}}</p>
+        <p>{{store.state}}</p>
+        <p>{{store.pets}}</p>
+    </li>
+</ul>
