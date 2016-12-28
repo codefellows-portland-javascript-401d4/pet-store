@@ -39,14 +39,14 @@
 
 * `stores`
     * Header with name of company
-    * `stores.all` (default for `stores`)
-        * Show list of current stores
+    * `stores.all` (default for `stores`) X
+        * Show list of current stores X
             * data is array with:
                 * { _id, name, city, state }
-            * click to go to `store` with id
-        * Link to go to `stores.add`
-    * `stores.add`
-        * Create new from: name, address, city, state
+            * click to go to `store` with id 
+        * Link to go to `stores.add` X
+    * `stores.add` X
+        * Create new from: name, address, city, state 
         * Cancel Button, goes back to `stores`, 
         * Submit goes to `store` with new id
 * `store` (param `id`)

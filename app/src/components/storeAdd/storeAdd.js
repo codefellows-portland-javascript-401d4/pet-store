@@ -6,17 +6,10 @@ export default {
     controller
 };
 
-controller.$inject = ['storeService'];
+controller.$inject = ['storeService', '$state'];
 
-function controller(storeService) {
+function controller(storeService, $state) {
     this.styles = styles;
-
-    this.reset = () => {
-        this.newStore.name = '';
-        this.newStore.address = '';
-        this.newStore.city = '';
-        this.newStore.state = '';
-    };
 
     this.newStore = {
         name: '',
@@ -26,7 +19,11 @@ function controller(storeService) {
     };
 
     this.addStore = () => {
+        console.log(this.newStore);
         storeService.add(this.newStore);
-        this.reset();
+    };
+
+    this.cancel = () => {
+        $state.go('stores.all');
     };
 }
