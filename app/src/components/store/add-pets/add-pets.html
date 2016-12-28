@@ -1,0 +1,17 @@
+<form ng-submit="$ctrl.add()">
+    <label>Name:</label>
+    <input type="text" ng-model="$ctrl.pet.name">
+
+    <label>Type:</label>
+    <select ng-model="$ctrl.pet.animal">
+        <option value="cat">cat</option>
+        <option value="lizard">lizard</option>
+        <option value="bird">bird</option>
+        <option value="dog">dog</option>
+        <option value="fish">fish</option>
+    </select>
+
+    <button>Add!</button>
+
+</form>
+<a ui-sref="store({id: $ctrl.store._id})">cancel</a>

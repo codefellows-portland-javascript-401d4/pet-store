@@ -1,0 +1,10 @@
+<div class="app">
+    <nav>
+        <ul>
+            <li ui-sref="welcome">Home</li>
+            <li ui-sref="stores">Stores</li>
+            <li ng-click="$ctrl.logOut()" ui-sref="welcome">Log out</li>
+        </ul>
+    </nav>
+    <ui-view></ui-view>
+</div>

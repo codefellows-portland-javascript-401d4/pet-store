@@ -1,0 +1,6 @@
+<h4>Pets</h4>
+<a ui-sref="store.addPet">Add a pet</a> 
+<ul>
+    <li ng-repeat="pet in $ctrl.store.pets">
+        <span>{{pet.name}}:</span> {{pet.animal}}
+</ul>
