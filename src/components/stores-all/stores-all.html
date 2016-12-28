@@ -1,6 +1,6 @@
 <div class="component detail">
   <h2>List of pet stores</h2>
-    <a ng-repeat="store in stores"
+    <a ng-repeat="store in $ctrl.stores"
         ui-sref="stores.detail({
             id: store._id,
             name: store.name

@@ -3,5 +3,6 @@
     <li>{{$ctrl.store.address.street}}</li>
     <li>{{$ctrl.store.address.city}}</li>
     <li>{{$ctrl.store.address.state}}</li>
+    <li ng-repeat="pet in $ctrl.store.pets">Animal: {{pet.animal}} Name:{{pet.name}}</li>
   </ul>
 </section>

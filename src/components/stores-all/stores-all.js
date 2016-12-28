@@ -1,5 +1,8 @@
 import template from './stores-all.html';
 
 export default {
-  template
+  template,
+  bindings: {
+    stores: '<'
+  }
 };

@@ -11,7 +11,13 @@ export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name:'stores',
     url: '/stores',
-    component: 'stores'
+    component: 'stores',
+    resolve: {
+      stores: ['storeService', (stores) => {
+        return stores.getAll();
+      }
+      ]
+    }
   });
 
   $stateProvider.state({
@@ -38,7 +44,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'stores.detail',
     // the url, plus implied params id and view
-    url: '/:id?name',
+    url: '/:id',
     params: {
       // "view" same key as above
       view: { dynamic: true }
@@ -52,7 +58,11 @@ export default function routes($stateProvider, $urlRouterProvider) {
       //     return crews.get(t.params().id);
       // }]
     },
-    component: 'storeDetail'
+    views: {
+      all: {
+        component: 'storeDetail'
+      }
+    }
   });
 
   $urlRouterProvider.otherwise('/');
