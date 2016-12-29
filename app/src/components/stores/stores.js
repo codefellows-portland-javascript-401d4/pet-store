@@ -8,11 +8,16 @@ export default {
   controller
 };
 
-controller.$inject = ['$state'];
+controller.$inject = ['storeService', '$state'];
 
-function controller($state) {
+function controller(storeService, $state) {
 
-  this.goToStore = storeId => {
-    $state.go('store', { id: storeId });
+  this.add = store => {
+    storeService.add(store)
+    .then(saved => {
+      this.stores.push(saved);
+      $state.go('store', { id: saved._id });
+    })
+    .catch();
   };
 };

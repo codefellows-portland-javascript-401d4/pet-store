@@ -1,6 +1,6 @@
 storeService.$inject = ['$http', 'apiUrl'];
 
-export default function storeService($http, apiUrl) {
+export default function storeService($http/*, apiUrl*/) {
   return {
     getAll() {
       return $http.get('https://pet-store-401.herokuapp.com/api/unauth/stores')
@@ -9,6 +9,11 @@ export default function storeService($http, apiUrl) {
 
     get(id) {
       return $http.get(`https://pet-store-401.herokuapp.com/api/unauth/stores/${id}`)
+      .then(res => res.data);
+    },
+
+    add(store) {
+      return $http.post('https://pet-store-401.herokuapp.com/api/unauth/stores', store)
       .then(res => res.data);
     }
   };

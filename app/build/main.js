@@ -58,27 +58,23 @@
 	
 	var _components2 = _interopRequireDefault(_components);
 	
-	var _services = __webpack_require__(11);
+	var _services = __webpack_require__(18);
 	
 	var _services2 = _interopRequireDefault(_services);
 	
-	var _routes = __webpack_require__(14);
+	var _routes = __webpack_require__(22);
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var dev = 'https://pet-store-401.herokuapp.com/api';
+	var dev = 'https://pet-store-401.herokuapp.com';
 	// import './scss/main.scss';
 	
 	var app = _angular2.default.module('petStore', [_components2.default, _services2.default, _angularUiRouter2.default]);
 	
 	app.config(_routes2.default);
 	app.value('apiUrl', dev);
-	
-	// app.factory('apiUrl', function() {
-	//   return dev;
-	// });
 
 /***/ },
 /* 1 */
@@ -41914,7 +41910,11 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./app/app.js": 9
+		"./app/app.js": 9,
+		"./new-store/new-store.js": 11,
+		"./store/store.js": 13,
+		"./stores/stores.js": 15,
+		"./welcome/welcome.js": 17
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -41958,10 +41958,163 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "top level test";
+	module.exports = "";
 
 /***/ },
 /* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _newStore = __webpack_require__(12);
+	
+	var _newStore2 = _interopRequireDefault(_newStore);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _newStore2.default,
+	  bindings: {
+	    add: '<'
+	  },
+	  require: {
+	    parent: '^stores'
+	  },
+	  controller: controller
+	};
+	
+	
+	controller.$inject = ['$state'];
+	
+	function controller() {
+	  var _this = this;
+	
+	  this.clearFields = function () {
+	    _this.name = '';
+	    _this.address.street = '';
+	    _this.address.city = '';
+	    _this.address.state = '';
+	  };
+	
+	  this.addStore = function () {
+	    _this.parent.add({
+	      name: _this.name,
+	      address: {
+	        street: _this.address.street,
+	        city: _this.address.city,
+	        state: _this.address.state
+	      }
+	    });
+	    _this.clearFields();
+	  };
+	}
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\n  <form>\n    <label>Name</label>\n    <input ng-model=\"$ctrl.name\">\n    <label>Street</label>\n    <input ng-model=\"$ctrl.address.street\">\n    <label>City</label>\n    <input ng-model=\"$ctrl.address.city\">\n    <label>State</label>\n    <input ng-model=\"$ctrl.address.state\">\n    <button ng-click=\"$ctrl.addStore()\">Add Store</button>\n    <button ui-sref=\"stores\">Cancel</button>\n  </form>\n</section>";
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _store = __webpack_require__(14);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _store2.default,
+	  bindings: {
+	    store: '<'
+	  },
+	  controller: controller
+	};
+	
+	
+	function controller() {}
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\n  <header>\n    <h2>{{$ctrl.store.name}}</h2>\n    <h3>{{$ctrl.store.address.street}}, {{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</h3>\n  </header>\n  <ul>\n    <li ng-repeat=\"pet in $ctrl.store.pets\">{{pet.name}} - {{pet.animal}}</li>\n  </ul>\n</section>";
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _stores = __webpack_require__(16);
+	
+	var _stores2 = _interopRequireDefault(_stores);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _stores2.default,
+	  bindings: {
+	    stores: '<'
+	  },
+	  controller: controller
+	};
+	
+	
+	controller.$inject = ['storeService', '$state'];
+	
+	function controller(storeService, $state) {
+	  var _this = this;
+	
+	  this.add = function (store) {
+	    storeService.add(store).then(function (saved) {
+	      _this.stores.push(saved);
+	      $state.go('store', { id: saved._id });
+	    }).catch();
+	  };
+	
+	  this.goToStore = function (storeId) {
+	    $state.go('store', { id: storeId });
+	  };
+	};
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\n  <h2>Stores</h2>\n  <ul>\n    <li ng-repeat=\"store in $ctrl.stores\" ng-click=\"$ctrl.goToStore(store._id)\">\n      <div store=\"store\">\n        <h2>{{store.name}}</h2>\n      </div>\n    </li>\n  </ul>\n</section>";
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	  template: '<h1>Welcome!</h1>'
+	};
+
+/***/ },
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41984,7 +42137,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var context = __webpack_require__(12);
+	var context = __webpack_require__(19);
 	
 	var _module = _angular2.default.module('services', []);
 	
@@ -41996,11 +42149,12 @@
 	exports.default = _module.name;
 
 /***/ },
-/* 12 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./store-service.js": 13
+		"./pet-service.js": 20,
+		"./store-service.js": 21
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -42013,11 +42167,33 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 12;
+	webpackContext.id = 19;
 
 
 /***/ },
-/* 13 */
+/* 20 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = petService;
+	petService.$inject = ['$http', 'apiUrl'];
+	
+	function petService($http, apiUrl) {
+	  return {
+	    get: function get(id) {
+	      return $http.get('https://pet-store-401.herokuapp.com/api/unauth/stores/' + id).then(function (res) {
+	        return res.data;
+	      });
+	    }
+	  };
+	}
+
+/***/ },
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -42026,12 +42202,17 @@
 	  value: true
 	});
 	exports.default = storeService;
-	storeService.$inject[('$http', 'apiUrl')];
+	storeService.$inject = ['$http', 'apiUrl'];
 	
 	function storeService($http, apiUrl) {
 	  return {
 	    getAll: function getAll() {
-	      return $http.get(apiUrl + '/stores').then(function (res) {
+	      return $http.get('https://pet-store-401.herokuapp.com/api/unauth/stores').then(function (res) {
+	        return res.data;
+	      });
+	    },
+	    get: function get(id) {
+	      return $http.get('https://pet-store-401.herokuapp.com/api/unauth/stores/' + id).then(function (res) {
 	        return res.data;
 	      });
 	    }
@@ -42039,7 +42220,7 @@
 	}
 
 /***/ },
-/* 14 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -42048,16 +42229,45 @@
 	  value: true
 	});
 	exports.default = routes;
-	routes.$inject = ['$stateProvider', '$urlRouteProvider'];
+	routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 	
-	function routes($stateProvider, $urlRouteProvider) {
+	function routes($stateProvider, $urlRouterProvider) {
+	
 	  $stateProvider.state({
 	    name: 'welcome',
 	    url: '/',
-	    component: 'app'
+	    component: 'welcome'
 	  });
 	
-	  $urlRouteProvider.otherwise('/');
+	  $stateProvider.state({
+	    name: 'stores',
+	    url: '/stores',
+	    resolve: {
+	      stores: ['storeService', function (stores) {
+	        return stores.getAll();
+	      }]
+	    },
+	    component: 'stores'
+	  });
+	
+	  $stateProvider.state({
+	    name: 'stores.newStore',
+	    url: '/add-store',
+	    component: 'newStore'
+	  });
+	
+	  $stateProvider.state({
+	    name: 'store',
+	    url: '/stores/:id',
+	    resolve: {
+	      store: ['storeService', '$transition$', function (stores, t) {
+	        return stores.get(t.params().id);
+	      }]
+	    },
+	    component: 'store'
+	  });
+	
+	  $urlRouterProvider.otherwise('/');
 	}
 
 /***/ }
