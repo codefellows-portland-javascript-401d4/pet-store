@@ -23,8 +23,8 @@
   background-color: $ltblue;
   margin-left: 1%;
   border: none;
-  @include rounded-corners(1rem);
   width: 50%;
+  @include rounded-corners(1rem);
   padding: 2%;
   margin-bottom: 0;
   box-shadow: .25rem .25rem .25rem $blue;

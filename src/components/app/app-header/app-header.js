@@ -3,7 +3,6 @@ import styles from './app-header.scss';
 
 export default {
   template,
-  transclude: true,
   controller,
   controllerAs: '$appHeader'
 };

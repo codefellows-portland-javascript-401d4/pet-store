@@ -1,5 +1,6 @@
 <section>
   <h2>Pick Your Favorite Store</h2>
+  <ui-view></ui-view>
   <div ng-repeat="store in $storesAll.stores">
     <a ui-sref="store({id: store._id})">
       {{store.name}}
@@ -8,4 +9,5 @@
 
   <br><br>
   OR: <button ui-sref="stores.add">add a new store</button>
+
 </section>
