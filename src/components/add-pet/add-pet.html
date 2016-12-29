@@ -1,0 +1,15 @@
+<section>
+    <h2>Add a Pet to {{$ctrl.store.name}}</h2>
+    <form>
+                Pet Name
+                <input ng-model="$ctrl.name"><br>
+                Pet Species
+                <select ng-options="x for x in $ctrl.species" ng-model="$ctrl.animal"><br>
+                </select>
+        <input type="submit" ng-click="$ctrl.addThisPet()" value="Add Pet">
+    </form>
+    <br>
+    
+    <button ng-click="$ctrl.backToStores()">Return to All Stores</button>
+    <button ng-click="$ctrl.backToViewPets()">View Pets</button>
+</section>

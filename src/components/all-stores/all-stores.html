@@ -1,0 +1,23 @@
+<section>
+
+    <h2>All Pet Stores</h2>
+    <section class="choose-store">
+    <form>
+       <h3>Choose a Store</h3><br>
+      <select 
+        ng-model="$ctrl.selected"
+        ng-options="store._id as store.name for store in $ctrl.stores"
+        ng-change="$ctrl.setStore(e)">
+        </select>
+    </form>
+    </section><br>
+
+    <button ng-click="$ctrl.goToAddStore()">Add a Store</button>
+
+    <ui-view></ui-view>
+ 
+
+
+</section>
+
+ 

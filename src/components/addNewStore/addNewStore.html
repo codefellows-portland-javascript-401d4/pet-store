@@ -1,0 +1,17 @@
+   <section class="add-store">
+        <form>
+        <h3>Add a Store</h3>
+            <add-new inline="true" add="$ctrl.add">
+                Store Name
+                <input type="text" ng-model="$ctrl.name"><br>
+                Street
+                <input type="text" ng-model="$ctrl.street"><br>
+                City
+                <input type="text" ng-model="$ctrl.city"><br>
+                State
+                <input type="text" ng-model="$ctrl.state"><br>
+            </add-new>
+            <button ng-click="$ctrl.newStore()">Add Store</button>
+        </form><br>
+         <button ng-click="$ctrl.backToStores()">Return to Stores</button>
+    </section>

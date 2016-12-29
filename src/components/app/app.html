@@ -1,0 +1,19 @@
+<header>
+    <app-header>
+        <a ui-sref="stores" ng-if="$ctrl.isAuthenticated()" >View Stores</a>
+        <a ui-sref="sign-in" ng-hide="$ctrl.isAuthenticated()"success="$ctrl.success">Sign In</a>
+        <a ui-sref="sign-up" ng-hide="$ctrl.isAuthenticated()"success="$ctrl.success">Sign Up</a>
+        <button ng-show="$ctrl.isAuthenticated()"ng-click="$ctrl.logout()">logout</button>
+        <p class="out" ng-hide="$ctrl.isAuthenticated()">Not Logged In</p>
+        <p class="in" ng-if="$ctrl.isAuthenticated()">Logged in</p>
+        <ui-view name="header"><h1>Pet Store Browser</h1></ui-view>
+    </app-header>
+</header>
+
+<main>
+
+    <ui-view name="main"></ui-view>
+      <ui-view></ui-view>
+</main>
+
+<footer>&copy; 2016 Mugsy's Pet Store</footer>
