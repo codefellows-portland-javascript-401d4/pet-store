@@ -5,7 +5,7 @@ export default {
   template,
   controller,
   bindings: {
-    storeList: '<'
+    storeList: '<',
   }
 };
 

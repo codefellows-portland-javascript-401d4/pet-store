@@ -1,8 +1,8 @@
 <p>Stores display</p>
 <section>
-  <span ng-repeat="store in $ctrl.storeList" ui-sref="store({ id: store._id })">
-    <h2><a href="#">{{ store.name }}</a></h2>
-      <p>{{ store.city }}, {{ store.state }}</p>
+  <span ng-repeat="store in $ctrl.storeList">
+    <h2><a ui-sref="store({id: store._id})">{{ store.name }}</a></h2>
+      <p>{{ store.address.city }}, {{ store.address.state }}</p>
   </span>
   <a ui-sref="stores.add">Add New Store</a>
 </section>

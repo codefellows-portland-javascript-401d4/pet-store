@@ -28,23 +28,30 @@ export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state({
       name: 'store',
+      default: '.pets',
+      abstract: true,
       url: '/store/:id',
-      component: 'store',
       resolve: {
-        id: ['$transition$', t => t.params().id],
-        store: ['storeService', '$transition$', (s, $t) =>
-          s.getStore({id : $t.params().id}) ]
-      }
+        store: ['storeService', '$transition$', (s, $t) => {
+          return s.getStore($t.params().id); 
+        }]
+      },
+      component: 'store'
+    })
+    .state({
+      name: 'store.pets',
+      url: '/pets',
+      resolve: {
+        pets: ['storeService', s => {
+          return s.getPets(); 
+        }]
+      },
+      component: 'pets'
+    })
+    .state({
+      name: 'store.addPet',
+      url: '/add',
+      component: 'addPet'
     });
-  //   .state({
-  //     name: 'store.pets',
-  //     url: '/pets',
-  //     component: 'pets'
-  //   })
-  //   .state({
-  //     name: 'store.addPet',
-  //     url: '/add',
-  //     component: 'addPet'
-  //   });
   $urlRouterProvider.otherwise('/');
 }

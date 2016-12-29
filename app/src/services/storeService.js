@@ -12,7 +12,7 @@ export default function storeService($http, apiUrl) {
     },
     getStore(id) {
       return $http.get(`${apiUrl}/unauth/stores/` + id)
-        .then(res => res.data);
+       .then(res => res.data);
     },
     getPets() {
       return $http.get(`${apiUrl}/unauth/pets`)

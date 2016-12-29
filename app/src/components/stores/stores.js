@@ -5,7 +5,8 @@ export default {
   template,
   controller,
   bindings: {
-    storeId: '='
+    storeId: '=',
+    store: '<'
   }
 };
 
@@ -14,10 +15,10 @@ controller.$inject = [ 'storeService' ];
 function controller(storeService) {
   this.styles = styles;
 
-  this.add = function(store) {
-    storeService.addStore(store)
-      .then(newStore => {
-        this.storeId = newStore._id;
-      });
-  };
+  // this.add = function(store) {
+  //   storeService.addStore(store)
+  //     .then(newStore => {
+  //       this.storeId = newStore._id;
+  //     });
+  // };
 }

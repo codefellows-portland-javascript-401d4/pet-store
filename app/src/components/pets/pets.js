@@ -1,14 +1,13 @@
-import template from './store.html';
+import template from './pets.html';
 
 export default {
   template,
   controller,
   bindings: {
-    store: '<',
     pets: '<'
   }
 };
 
 function controller() {
-  
+
 }
