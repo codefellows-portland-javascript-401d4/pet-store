@@ -47,10 +47,6 @@ export default function routes($stateProvider, $urlRouterProvider) {
     url: '/store/:id',
     abstract: true,
     default: '.pets',
-    // resolve: {
-    //   paramId: ['$transition$', t => t.params().id],
-    //   store: ['stores', 'paramId', (stores, id) => stores.find(store => store._id === id)]
-    // },
     resolve: {
       store: ['$transition$', 'storeService', (t, stores) => {
         return stores.getOne(t.params().id);

@@ -7,10 +7,6 @@ export default {
   controllerAs: '$app'
 };
 
-controller.$inject = ['$state'];
-
-function controller($state) {
+function controller() {
   this.styles = styles;
-  
-  console.log($state);
 }
