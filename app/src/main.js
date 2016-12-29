@@ -12,7 +12,7 @@ import routes from './routes';
 import http from './http';
 import auth from './auth';
 
-const dev = 'https://pet-store-401.herokuapp.com';
+const dev = 'https://pet-store-401.herokuapp.com/api';
 const app = angular.module('petStore', [
   components,
   services,

@@ -3,7 +3,7 @@ storeService.$inject = ['$http', 'apiUrl'];
 export default function storeService($http, apiUrl) {
   return {
     getAll() {
-      return $http.get(`${apiUrl}/stores`)
+      return $http.get('https://pet-store-401.herokuapp.com/api/stores')
         .then(res => res.data);
     },
 
