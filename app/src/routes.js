@@ -41,11 +41,11 @@ export default function routes($stateProvider, $urlRouterProvider) {
       name: 'store.pets',
       url: '/pets',
       component: 'pets'
+    })
+    .state({
+      name: 'store.addPet',
+      url: '/add',
+      component: 'addPet'
     });
-  //   .state({
-  //     name: 'store.addPet',
-  //     url: '/add',
-  //     component: 'addPet'
-  //   });
   $urlRouterProvider.otherwise('/');
 }
