@@ -2,7 +2,11 @@ routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 export default function routes($stateProvider, $urlRouterProvider) {
 
-
+    $stateProvider.state({
+        name: 'welcome',
+        url: '/',
+        component: 'welcome'
+    });
 
     $stateProvider.state({
         name: 'stores',
@@ -51,5 +55,5 @@ export default function routes($stateProvider, $urlRouterProvider) {
         component: 'addPet'
     });
     
-    $urlRouterProvider.otherwise('/stores/all');
+    $urlRouterProvider.otherwise('/');
 }

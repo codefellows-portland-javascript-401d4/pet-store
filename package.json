@@ -13,7 +13,8 @@
     "test:watch": "karma start",
     "start": "webpack-dev-server --inline",
     "build": "webpack",
-    "update-webdriver": "webdriver-manager update",    "pree2e": "babel test-e2e-src --out-dir test-e2e",
+    "update-webdriver": "webdriver-manager update",
+    "pree2e": "babel test-e2e-src --out-dir test-e2e",
     "e2e": "protractor",
     "e2e-explore": "protractor --elementExplorer"
   },
@@ -65,7 +66,7 @@
     "angular-ui-router-default": "0.0.6",
     "camelcase": "^4.0.0",
     "ng-dialog": "^0.6.4"
-  }, 
+  },
   "babel": {
     "presets": [
       "es2015"

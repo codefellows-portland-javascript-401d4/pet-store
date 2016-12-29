@@ -26,7 +26,6 @@ function controller(Pet, $state) {
         this.newPet.store = this.id;
         new Pet (this.newPet).$save()
             .then(pet => {
-                console.log(pet);
                 this.store.pets.push(pet);
             }
             )
