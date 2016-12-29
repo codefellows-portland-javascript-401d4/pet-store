@@ -11,7 +11,7 @@ export default function storeService($http, apiUrl) {
         .then(res => res.data);
     },
     getStore(id) {
-      return $http.get(`${apiUrl}/unauth/stores/` + id)
+      return $http.get(`${apiUrl}/unauth/stores/${id}`)
        .then(res => res.data);
     },
     getPets() {

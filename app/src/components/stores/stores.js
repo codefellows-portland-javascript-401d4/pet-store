@@ -12,7 +12,7 @@ export default {
 
 controller.$inject = [ 'storeService' ];
 
-function controller(storeService) {
+function controller() {
   this.styles = styles;
 
   // this.add = function(store) {

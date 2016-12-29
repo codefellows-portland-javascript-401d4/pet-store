@@ -12,9 +12,9 @@ export default {
   }
 };
 
-controller.$inject = ['$state'];
+// controller.$inject = ['$state'];
 
-function controller($state) {
+function controller() {
   this.styles = styles;
 
   this.reset = function() {
@@ -35,6 +35,6 @@ function controller($state) {
     });
     this.reset();
 
-    //$state.go('store', { id: this.parent.storeId });
+    // $state.go('store', { id: this.parent.storeId });
   };
 }

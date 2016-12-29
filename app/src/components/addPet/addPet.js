@@ -5,6 +5,8 @@ export default {
   controller
 };
 
+// controller.$inject['$state'];
+
 function controller() {
   this.options = ['Cat', 'Lizard', 'Birb', 'Dog', 'Fish'];
 
@@ -20,4 +22,5 @@ function controller() {
     });
     this.reset();
   };
+  // $state.go('store', { id: this.parent.storeId });
 }
