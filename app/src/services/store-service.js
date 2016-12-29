@@ -9,6 +9,11 @@ export default function storeService($http, apiUrl) {
     add(store) {
       return $http.post(`${apiUrl}/stores`, store)
                 .then(res => res.data);
+    },
+
+    getId(storeId){
+      return $http.get(`${apiUrl}/stores/${storeId}`)
+        .then(res => res.data);
     }
   };
 }

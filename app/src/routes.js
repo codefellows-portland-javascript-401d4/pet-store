@@ -17,7 +17,9 @@ export default function routes($stateProvider, $urlRouterProvider) {
     url: '/home',
     resolve: {
       stores: ['storeService', stores => stores.get()],
-      add: ['storeService', storeService => storeService.add]
+      add: ['storeService', (stores) => {
+        return stores.add;
+      }]
     },
     views: {
       stores: {
@@ -27,6 +29,40 @@ export default function routes($stateProvider, $urlRouterProvider) {
         component: 'newStore'
       }
     }
+  });
+
+  $stateProvider.state({
+    name: 'store',
+    url: '/store/:id',
+    abstract: true,
+    default: '.pet',
+    resolve: {
+      store: ['storeService', '$transition$', (stores, t) => {
+        return stores.getId(t.params().id);
+      }],
+      pets: ['store', store => store.pets]
+    },
+    views: {
+      store: {
+        component: 'pet'
+      }
+    }
+  });
+
+  $stateProvider.state({
+    name: 'store.pet',
+    url: '/pet',
+  });
+
+  $stateProvider.state({
+    name: 'store.newPet',
+    url: '/new',
+    resolve: {
+      add: ['petService', (pet) => {
+        return pet.add;
+      }]
+    },
+    component: 'newPet'
   });
 
   $urlRouterProvider.otherwise('/');

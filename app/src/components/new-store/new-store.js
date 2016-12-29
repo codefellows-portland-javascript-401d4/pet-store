@@ -4,12 +4,16 @@ import styles from './new-store.scss';
 export default {
   template,
   bindings:{
-    add: '<'
+    add: '=',
+    stores: '<'
   },
   controller
 };
 
-function controller () {
+controller.$inject = ['$state'];
+
+
+function controller ($state) {
   this.styles = styles;
 
   this.reset = () => {
@@ -22,6 +26,7 @@ function controller () {
   this.reset();
 
   this.addNew = () => {
+    console.log('name', this.name);
     this.add({
       name: this.name,
       address: {
@@ -33,6 +38,10 @@ function controller () {
     .then(saved => {
       this.stores.push(saved);
       this.reset();
+      $state.go('store', {id: saved._id});
+    })
+    .catch(err => {
+      console.log('error in newstore', err);
     });
   };
 }
