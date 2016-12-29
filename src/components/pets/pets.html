@@ -1,0 +1,9 @@
+<section>
+    <ul>
+        <li ng-repeat="pet in $ctrl.store.pets | orderBy:'animal'" >
+            {{pet.name}}, {{pet.animal}}
+        </li>
+    </ul>
+
+    <a ui-sref="store.addPet">Add Pet</a>
+</section>
