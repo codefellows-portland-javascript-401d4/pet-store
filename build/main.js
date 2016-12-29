@@ -33686,7 +33686,7 @@
 	
 	    this.authenticate = function () {
 	        return userService.signup(_this.credentials).then(function () {
-	            _this.succes();
+	            _this.success();
 	        }).catch(function (error) {
 	            _this.error = error;
 	        });
