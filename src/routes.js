@@ -66,6 +66,21 @@ export default function routes($stateProvider, $urlRouterProvider) {
 		component: 'addPet'
 	});
 
+	$stateProvider.state({
+		name: 'sign-up',
+		url: '/sign-up',
+		data: { public: true },
+		component: 'signUp'
+	});
+
+	$stateProvider.state({
+		name: 'sign-in',
+		url: '/sign-in',
+		data: { public: true },
+		component: 'signIn'
+	});
+
+
 	$urlRouterProvider.otherwise('/');
 }
 

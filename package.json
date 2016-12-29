@@ -1,7 +1,6 @@
 {
   "name": "pet-store",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "karma start",
@@ -42,7 +41,9 @@
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.8.0",
     "mocha": "^3.2.0",
+    "ng-dialog": "^0.6.4",
     "node-sass": "^4.0.0",
+    "protractor": "^4.0.14",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
@@ -57,5 +58,9 @@
     "presets": [
       "es2015"
     ]
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "description": ""
 }
