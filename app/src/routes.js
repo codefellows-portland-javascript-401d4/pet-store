@@ -36,10 +36,13 @@ export default function routes($stateProvider /*$urlRouterProvider*/) {
 
   $stateProvider.state({
     name: 'welcome',
-    url: '/welcome',
+    url: '/',
+    data: {
+      public: true
+    },
     component: 'welcome'
   });
 
-  // $urlRouterProvider.otherwise('/store');
+  // $urlRouterProvider.otherwise('/');
 }
 
