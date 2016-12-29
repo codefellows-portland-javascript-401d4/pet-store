@@ -3,7 +3,7 @@ routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'welcome',
-    url: '/welcome',
+    url: '/',
     data: {public: true},
     views: {
       main: {
@@ -20,21 +20,20 @@ export default function routes($stateProvider, $urlRouterProvider) {
     resolve: {
       stores: ['storeService', stores => stores.getAll()]
     },
-    component: 'stores'
+    views: {
+      header: {
+        component: 'appHeader'
+      },
+      main: {
+        component: 'stores'
+      }
+    }
   });
 
   $stateProvider.state({
     name: 'stores.all',
     url: '/all',
-    component: 'storesAll',
-    views: {
-      header: {
-        component: 'allHeader'
-      },
-      main: {
-        component: 'storesHeader'
-      }
-    }
+    component: 'storesAll'
   });
 
   $stateProvider.state({
@@ -73,6 +72,6 @@ export default function routes($stateProvider, $urlRouterProvider) {
   });
 
 
-  $urlRouterProvider.otherwise('/welcome');
+  $urlRouterProvider.otherwise('/');
 
 }

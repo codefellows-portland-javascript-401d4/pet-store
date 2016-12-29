@@ -10,6 +10,7 @@ export default function userService(token, $http, apiUrl) {
 
   function credential(endpoint) {
     return (credentials) => {
+      console.log('credent', credentials);
       return $http.post(`${apiUrl}/auth/${endpoint}`, credentials)
       .then(result => {
         token.set(result.data.token);
