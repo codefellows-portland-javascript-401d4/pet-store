@@ -1,13 +1,17 @@
 @import 'colors';
+@import 'fonts';
 @import 'mixins';
 
 button {
   border: none;
   background: $mdkblue;
   color: $pink;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
+  font-family: $secondary-font;
   @include rounded-corners(3rem);
-  padding: 2%;
+  padding: 1.6%;
+  margin: .375%;
+  margin-bottom: 1.5%;
   box-shadow: .25rem .25rem .25rem $dkblue;
 }
 
