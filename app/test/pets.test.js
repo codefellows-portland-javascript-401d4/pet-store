@@ -21,11 +21,13 @@ describe('pet component', () => {
   before(inject);
 
   it('call the add function with property data', () => {
-    const name = 'pet name';
-    const type = 'lizard';
+    const name = 'name';
+    const animal = 'animal';
+    const store = {_id: '123id'};
     addPet.name = name;
-    addPet.type = type;
+    addPet.animal = animal;
+    addPet.store = store;
     addPet.addNew();
-    assert.deepEqual(newPet, {name, type});
+    assert.deepEqual(newPet, {name, animal, store:store._id});
   });
 });
