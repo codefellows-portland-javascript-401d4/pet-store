@@ -19,7 +19,7 @@
     - stores tokens in localStorage
 
 
-### Technologies used for front end side
+### Main Technologies used for front end
   - For app
     - Javascript
     - Angular
