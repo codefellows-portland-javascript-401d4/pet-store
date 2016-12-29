@@ -1,21 +1,22 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const cssExtract = new ExtractTextPlugin('main.css');
 
 module.exports = {
+  target: 'web',
   entry: './src/main.js',
   output: {
     path: './build',
     filename: 'main.js'
   },
-  devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
     cssExtract
   ],
+  devtool: 'source-map',
   module: {
     preLoaders: [{
       test: /\.js$/,
@@ -30,14 +31,23 @@ module.exports = {
         presets: ['es2015']
       }
     }, {
-      test:/\.scss/,
-      loader: cssExtract.extract( 
+      test: /\.css/,
+      loader: cssExtract.extract(
         'style-loader',
-        'style-loader!css-loader?sourceMap!sass-loader?sourceMap'
-       )
+        'css-loader?sourceMap!sass-loader?sourceMap'
+      )
+    },  {
+      test: /\.scss/,
+      loader: cssExtract.extract(
+        'style-loader',
+        'css-loader'
+      )
     }, {
       test: /\.html$/,
       loader: 'html-loader'
+    }, {
+      test: /\.jpeg/,
+      loader: 'file-loader'
     }]
   },
   sassLoader: {
