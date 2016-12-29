@@ -1,0 +1,26 @@
+@import 'mixins';
+@import 'fonts';
+@import 'colors';
+
+:local(.section) {
+  background: url('http://www.city-data.com/forum/attachments/pets/98722d1343011037-how-many-animals-too-many-t1um6nxjtqxxxxxxxx_-72359069-0-pix.jpg') no-repeat;
+  box-shadow: .25rem .25rem .25rem $blue;
+  @include resp-bkg-img(1000, 483);
+  @include rounded-corners(1rem);
+  @include clearfix;
+
+}
+
+:local(.header) {
+  margin: 1.5%;
+  margin-bottom: 1rem;
+}
+
+:local(.small) {
+  font-size: 1.1rem;
+}
+
+:local(.btn) {
+  background: $mdkblue;
+  margin-left: 1.5%;
+}
