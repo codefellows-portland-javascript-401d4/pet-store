@@ -13,6 +13,10 @@
   - Specific Store - displays all the pets
     - displays the full address of store
     - page has link to page that allows you to add a new pet
+  
+  - Now has signin/signup authentication
+    - uses tokens for authentication
+    - stores tokens in localStorage
 
 
 ### Technologies used for front end side
