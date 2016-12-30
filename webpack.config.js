@@ -5,7 +5,7 @@ module.exports = {
   target: 'web',
   entry: './src/main.js',
   output: {
-    path: '../server/public',
+    path: './build',
     filename: 'bundle.js'
   },
   devtool: 'source-map',
