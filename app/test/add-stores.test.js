@@ -27,15 +27,16 @@ describe('add-stores component', () => {
       city: 'Portland',
       state: 'Oregon'
     },
-    pets: [ {name: 'Felix', animal: 'cat' } ],
+    _id: 987654321
   };
 
   const _id = 987654321;
 
   // mock the service to use in tests
   const storeService = {
-    add(store) {
+    addStore(store) {
       store._id = _id;
+      storeList.push(store);
       return Promise.resolve(store);
     }
   };
@@ -57,5 +58,20 @@ describe('add-stores component', () => {
     });
   });
 
+  it('adds a new store to the storeList', done => {
+
+    addStore.name = 'Store Two';
+    addStore.address = {};
+    addStore.address.street = '1236 Main St';
+    addStore.address.city = 'Portland';
+    addStore.address.state = 'Oregon';
+    addStore.addStore();
+
+    setTimeout(() => {
+      assert.equal(addStore.storeList.length, 2);
+      assert.deepEqual(addStore.storeList[1], newStore);
+      done();
+    });
+  });
 
 });
