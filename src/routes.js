@@ -18,7 +18,6 @@ export default function routes($stateProvider, $urlRouterProvider) {
     default: '.all',
     resolve: {
       stores: ['storesService', storesService => storesService.getAll()],
-      add: ['storesService', storesService => storesService.add]
     },
     component: 'stores'
   });
