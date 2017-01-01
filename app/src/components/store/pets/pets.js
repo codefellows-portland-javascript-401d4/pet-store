@@ -4,7 +4,9 @@ export default {
   template,
   controller,
   bindings: {
-    pets: '<'
+    pets: '<',
+    addPet: '<',
+    store: '<'
   }
 };
 

@@ -22,35 +22,26 @@ export default function routes($stateProvider, $urlRouterProvider) {
     .state({
       name: 'stores.add',
       url: '/add',
-      component: 'addStore',
-      resolve: {
-        add: ['storeService', s => {
-          return s.addStore();
-        }]
-      }
+      component: 'addStore'
     });
 
   $stateProvider
     .state({
       name: 'store',
-      default: '.pets',
-      abstract: true,
       url: '/store/:id',
       resolve: {
         store: ['storeService', '$transition$', (s, $t) => {
-          return s.getStore($t.params().id); 
-        }]
+          return s.getStore($t.params().id);
+        }],
+        pets: ['store', s => s.pets]
       },
-      component: 'store'
+      component: 'store',
+      abstract: true,
+      default: '.pets'
     })
     .state({
       name: 'store.pets',
       url: '/pets',
-      resolve: {
-        pets: ['storeService', s => {
-          return s.getPets(); 
-        }]
-      },
       component: 'pets'
     })
     .state({
