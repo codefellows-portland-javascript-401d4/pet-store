@@ -11,7 +11,7 @@
 ### Store
 
 ```
-{ 
+{
     _id: <id>,
     name: <name>,
     address: {
@@ -28,7 +28,7 @@
 ### Pet
 
 ```
-{ 
+{
     _id: <id>,
     name: <name>,
     animal: <cat|lizard|bird|dog|fish>
@@ -47,12 +47,12 @@
         * Link to go to `stores.add`
     * `stores.add`
         * Create new from: name, address, city, state
-        * Cancel Button, goes back to `stores`, 
+        * Cancel Button, goes back to `stores`,
         * Submit goes to `store` with new id
 * `store` (param `id`)
     * Header with name, address, city, state
     * Data is:
-        * Store object 
+        * Store object
             * with { _id, name, address, city, state, pets }
             * where pets is array of pets
                 * pets have { _id, name, animal }
@@ -64,8 +64,8 @@
             animal type [cat, lizard, bird, dog, fish],
             (+ store id which is implicit!)
         * Either Submit or Cancel goes to `store` for correct store
-  
-  
+
+
   ## Rubric *20pts*
-  
+
   * TBD
