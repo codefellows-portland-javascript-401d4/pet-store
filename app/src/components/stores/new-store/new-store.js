@@ -1,0 +1,42 @@
+import template from './new-store.html';
+import styles from './new-store.scss';
+
+export default {
+  template,
+  controller,
+  require: {
+    parent: '^stores'
+  },
+  binding: {
+    storeId: '<'
+  }
+};
+
+controller.$inject = ['$state', 'storeService'];
+
+function controller($state, storeService) {
+  this.styles = styles;
+
+  this.reset = function() {
+    this.name = '';
+    this.address.street = '';
+    this.address.city = '';
+    this.address.state = '';
+  };
+
+  this.addStore = function() {
+    storeService.addStore({
+      name: this.name,
+      address: {
+        street: this.address.street,
+        city: this.address.city,
+        state: this.address.state
+      }
+    })
+      .then(newStore => {
+        this.storeId = newStore._id;
+        this.reset();
+        $state.go('store', {id: this.storeId});
+      });
+  };
+}
