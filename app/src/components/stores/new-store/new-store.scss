@@ -1,0 +1,20 @@
+:local(.new-store) {
+
+  th {
+    font-weight: bold;
+    color: darkblue;
+    border: 2px solid gray;
+    padding: 10px 10px;
+  }
+
+  td {
+    color: darkred;
+    border: 1px solid gray;
+    padding: 8px 8px;
+  }
+
+  tr:hover {
+    color: blue;
+    background: yellow;
+  }
+}
