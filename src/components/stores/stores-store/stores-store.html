@@ -1,0 +1,21 @@
+<section ng-class="$ctrl.styles.storesStore">
+  <aside class="store-contact">
+    <div>
+      <h1>{{$ctrl.store.name}}</h1>
+
+      <p>{{$ctrl.store.address.street}}</p>
+      <p><span>{{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</span></p>
+
+    </div>    
+  </aside>
+
+  <div class="pet-details">
+    <h3>PETS IN STORE</h3>     
+
+    <button ui-sref="stores.store.pets">SEE PETS</button>
+    <button ui-sref="stores.store.addpet">ADD PET</button>
+
+    <ui-view></ui-view>
+
+  </div> 
+</section>

@@ -1,0 +1,32 @@
+:local(.storesstoreaddpet) {
+  position: absolute;
+  margin: 3rem auto auto 0;
+  padding: 0.5rem;
+  border: 1px solid lightgray;
+
+  div {
+    position: relative;
+    height: content-max;
+  }
+
+  div > h4 {
+    margin: .25rem auto;
+    float: right;
+    
+  }
+
+  div > div > label {
+    float: right;
+    
+  }
+
+  div > div > label > input {
+    margin: 0.5rem;
+    
+  }
+
+  div > button {
+    float: right;
+    
+  }
+}
