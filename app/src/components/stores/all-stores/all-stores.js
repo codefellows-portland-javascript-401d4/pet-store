@@ -14,7 +14,7 @@ controller.$inject = ['$state'];
 function controller($state) {
   this.styles = styles;
 
-  this.selectStore = (id) => {
-    $state.select('store.pets', {id});
+  this.gotoStore = (id) => {
+    $state.go('store.pets', {id});
   };
 }

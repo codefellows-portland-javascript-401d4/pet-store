@@ -38,13 +38,13 @@ export default function routes($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state({
     name: 'store.pets',
-    url: './pets',
-    component: 'storesPets'
+    url: '/pets',
+    component: 'storePets'
   });
 
   $stateProvider.state({
     name: 'store.addPet',
-    url: './add-pet',
+    url: '/add-pet',
     component: 'addPet'
   });
 
