@@ -1,21 +1,21 @@
-<h2>Directory of BoZen Pet Emporium Stores</h2>
 
 <table>
 
   <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>City</th>
-    <th>State</th>
+    <th> ID </th>
+    <th> Name </th>
+    <th> City </th>
+    <th> State </th>
   </tr>
 
-  <tr ng-click="$ctrl.selectStore(store._id)" ng-repeat="store in $ctrl.storesDirectory" ng-class="$ctrl.styles.all-stores">
-    <td>{{store._id}}</td>
-    <td>{{store.name}}</td>
-    <td>{{store.address.city}}</td>
-    <td>{{store.address.state}}<td>
+  <tr ng-click="$ctrl.selectStore(store._id)" ng-repeat="store in $ctrl.storesDirectory" ng-class="$ctrl.styles.allStores">
+    <td> {{store._id}} </td>
+    <td> {{store.name}} </td>
+    <td> {{store.address.city}} </td>
+    <td> {{store.address.state}} <td>
   </tr>
 
 </table>
-
-<a ui-sref="stores.add">Add New Store</a>
+<br/>
+<br/>
+<a ui-sref="stores.addStore"> Add New Store </a>

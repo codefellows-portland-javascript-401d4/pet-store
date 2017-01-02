@@ -10,5 +10,4 @@ controller.$inject = ['$state'];
 
 function controller($state) { // eslint-disable-line
   this.styles = styles;
-  // this.gotoSpiders = () => $state.go('spiders');
 }

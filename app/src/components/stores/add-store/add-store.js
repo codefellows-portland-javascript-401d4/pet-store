@@ -1,5 +1,5 @@
-import template from './new-store.html';
-import styles from './new-store.scss';
+import template from './add-store.html';
+import styles from './add-store.scss';
 
 export default {
   template,
@@ -33,8 +33,8 @@ function controller($state, storeService) {
         state: this.address.state
       }
     })
-      .then(newStore => {
-        this.storeId = newStore._id;
+      .then(addStore => {
+        this.storeId = addStore._id;
         this.reset();
         $state.go('store', {id: this.storeId});
       });

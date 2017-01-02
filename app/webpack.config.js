@@ -9,15 +9,15 @@ module.exports = {
   target: 'web',
   entry: './src/app.js',
   output: {
-    path: '../server/build',
-    filename: 'build.js'
+    path: '../server/public',
+    filename: 'main.js'
   },
   devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
-    cssExtract
+    new ExtractTextPlugin('main.css')
   ],
   module: {
     preLoaders: [{

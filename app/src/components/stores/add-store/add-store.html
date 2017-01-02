@@ -1,0 +1,28 @@
+
+<form ng-submit="$ctrl.addStore()" ng-class="$ctrl.styles.addStore">
+
+  <table>
+    <tr>
+      <td> Name: </td>
+      <td> <input required type="text" ng-model="$ctrl.name"> </td>
+    </tr>
+    <tr>
+      <td> Street Address: </td>
+      <td> <input required type="text" ng-model="$ctrl.address.street"> </td>
+    </tr>
+    <tr>
+      <td> City: </td>
+      <td> <input required type="text" ng-model="$ctrl.address.city"> </td>
+    </tr>
+    <tr>
+      <td> State: </td>
+      <td> <input required type="text" ng-model="$ctrl.address.state"> </td>
+    </tr>
+  </table>
+
+  <div>
+    <button type="submit"> Add New Store </button>
+    <button id="cancel-add-store" ui-sref="stores.all"> Cancel </button>
+  </div>
+
+</form>
