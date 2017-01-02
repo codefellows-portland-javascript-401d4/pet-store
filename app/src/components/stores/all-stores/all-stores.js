@@ -5,10 +5,16 @@ export default {
   template,
   controller,
   bindings: {
-    storeDirectory: '<'
+    storesList: '<'
   }
 };
 
-function controller() {
+controller.$inject = ['$state'];
+
+function controller($state) {
   this.styles = styles;
+
+  this.selectStore = (id) => {
+    $state.select('store.pets', {id});
+  };
 }

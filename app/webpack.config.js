@@ -17,7 +17,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
-    new ExtractTextPlugin('main.css')
+    // new ExtractTextPlugin('main.css')
+    cssExtract
   ],
   module: {
     preLoaders: [{

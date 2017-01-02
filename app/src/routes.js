@@ -8,7 +8,7 @@ export default function routes($stateProvider, $urlRouterProvider) {
     abstract: true,
     default: '.all',
     resolve: {
-      storesDirectory: ['storeService', stores => stores.getAllStores()]
+      storesList: ['storeService', stores => stores.getAll()]
     },
     component: 'stores'
   });
@@ -27,12 +27,11 @@ export default function routes($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state({
     name: 'store',
-    url: '/store/:id',
+    url: '/{id}',
     abstract: true,
     default: '.pets',
     resolve: {
-      id: ['$transition$', t => t.params().id],
-      store: ['storeService', '$transition$', (s, t) => s.getStore({id: t.params().id})]
+      store: ['storeService', '$transition$', (stores, t) => stores.get(t.params().id)]
     },
     component: 'store'
   });
@@ -44,9 +43,9 @@ export default function routes($stateProvider, $urlRouterProvider) {
   });
 
   $stateProvider.state({
-    name: 'store.newPet',
-    url: './new-pet',
-    component: 'newPet'
+    name: 'store.addPet',
+    url: './add-pet',
+    component: 'addPet'
   });
 
   $urlRouterProvider.otherwise('/stores');

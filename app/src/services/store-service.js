@@ -5,19 +5,19 @@ storeService.$inject = ['$http', 'apiUrl'];
 export default function storeService($http, apiUrl) {
   return {
 
-    getAllStores() {
+    getAll() {
       return $http.get(`${apiUrl}/unauth/stores`)
         .then(res => res.data);
     },
-    getStore(store) {
+    get(store) {
       return $http.get(`${apiUrl}/unauth/stores/` + store.id)
         .then(res => res.data);
     },
-    removeStore(id) {
+    remove(id) {
       return $http.delete(`${apiUrl}/unauth/stores/${id}`)
         .then(res => res.data);
     },
-    addStore(store) {
+    add(store) {
       return $http.post(`${apiUrl}/unauth/stores`, store)
         .then(res => res.data);
     }
