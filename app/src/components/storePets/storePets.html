@@ -1,0 +1,14 @@
+<section class="{{$ctrl.styles.pets}}">
+
+    <span>The Pets at this store:</span>
+    <ul>
+        <li ng-repeat="pet in $ctrl.store.pets">
+            {{pet.name}} the {{pet.animal}}
+        </li>
+    </ul>
+    <p></p>
+    
+    <a ui-sref="store.pets.addPet({id: $ctrl.store._id})">Add a Pet</a>
+    <ui-view></ui-view>
+
+</section>
