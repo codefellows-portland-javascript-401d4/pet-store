@@ -33,6 +33,12 @@ module.exports = {
                 // plugins: ['transform-runtime']
             }
         }, {
+            test: /\.css$/,
+            loader: cssExtract.extract(
+                'style-loader',
+                'css-loader'
+            )
+        }, {
             // test: /\.css$/,
             // loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
             test: /\.scss$/,
