@@ -6,6 +6,7 @@ const context = require.context(
   './',
   true,
   /^\.\/(?!index).+?\.js$/
+  
 );
 
 const module = angular.module( 'components', [] );

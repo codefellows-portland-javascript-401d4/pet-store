@@ -10,14 +10,16 @@
       <article>
         <select required ng-model="$ctrl.animal" name="animal">
           <option value="">ANIMAL</option>
+
           <option ng-repeat="pet in $ctrl.pets" value={{pet}}>
             {{pet}}
+
           </option>
-        </select>
-      
+        </select>      
       </article>
 
       <button ng-click="$ctrl.addpet()">ADD</button>
+
       <button ng-click="$ctrl.scratch()">CANCEL</button>
     
     </div>

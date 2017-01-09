@@ -16,6 +16,7 @@ module.exports = function(config) {
       './src/main.js',
       './node_modules/angular-mocks/angular-mocks.js',
       './test/**/*.js'
+      
     ],
     
     // //files to exclude
@@ -28,6 +29,7 @@ module.exports = function(config) {
     preprocessors: {
       './src/main.js': [ 'webpack' ],
       './test/**/*.js/': [ 'babel' ]
+      
     },
 
     // browsers to start
@@ -38,6 +40,7 @@ module.exports = function(config) {
     // possible reporters: 'dots', 'progress'
     // see https://npmjs.org/browse/keyword/karma-reporter for available reporters
     reporters: [ 'spec' ],
+    
 
     // server port
     port: 9876,
@@ -67,10 +70,12 @@ module.exports = function(config) {
       Chrome_travis_ci: {
         base: 'Chrome', 
         flags: [ '--no-sandbox' ]
+        
       }
     };
 
     options.browsers = [ 'Chrome_travis_ci' ];
+    
     options.singleRun = true;
 
   }

@@ -5,11 +5,13 @@ describe('test UI stores.store.addpet component', () => {
 
   beforeEach(
     angular.mock.module('components')
+
   );
 
   let $component = null;
   beforeEach(angular.mock.inject($componentController => {
     $component = $componentController;
+
   }));
 
   const pet = { 
@@ -22,13 +24,16 @@ describe('test UI stores.store.addpet component', () => {
   function isReset(component) {
     assert.equal( component.name, '' );
     assert.equal( component.animal, '' );
+
   }
 
   describe('calls stores.store\'s addPet() fn', () => {
 
     it('starts with pet keys unassigned', () => {
       const component = $component( 'storesStoreAddpet', {} );
+      
       isReset( component );
+
     });
 
     it('executes stores.store.addpet( pet )', () => {
@@ -43,6 +48,7 @@ describe('test UI stores.store.addpet component', () => {
         addPet: obj => result = obj,
         store: {
           _id: 5
+
         }
       };
 

@@ -54,7 +54,6 @@ describe('test UI add stores component', () => {
       
       let result = null;
       component.parent = {add: (obj) => { 
-        console.log('component.add for: ', obj);
         return result = obj;} 
         
       };

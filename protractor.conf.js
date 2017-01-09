@@ -5,6 +5,7 @@ exports.config = {
   // list all file globs...
   specs: [
     'test-e2e/**/*.js'
+    
   ],
 
   // // ...or define test suites:
@@ -15,6 +16,7 @@ exports.config = {
   
   capabilities: {
     browserName: 'chrome'
+    
   },
 
   // // Optional

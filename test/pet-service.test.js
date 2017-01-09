@@ -55,6 +55,7 @@ describe('handles REST calls for pet instances from stores.store controller', ()
     const pet = { 
       name: 'Miffy', 
       animal: 'lizard' 
+
     };
 
     $httpBackend
@@ -65,6 +66,7 @@ describe('handles REST calls for pet instances from stores.store controller', ()
       .then(savedPet => {
         assert.deepEqual( savedPet, pet );
         done();
+        
       })
       .catch(done);
 

@@ -6,28 +6,27 @@ export default {
   bindings: {
     stores: '<',
     add: '<'
+
   },
   require: {
     parent: '^stores'
+
   },
   controller
 
 };
 
-// controller.$inject = [ 'storesService' ];
-
 function controller() {
   this.styles = styles;
 
-  console.log('IN ADD STORES');
   this.reset = () => {
     this.name = '';
     this.address = {
       street: '',
       city: '',
       state: ''
-    };
 
+    };
   };
 
   this.reset();

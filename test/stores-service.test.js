@@ -73,6 +73,7 @@ describe('handles REST calls from main stores controller', () => {
       .then(savedStore => {
         assert.deepEqual( savedStore, store );
         done();
+        
       })
       .catch(done);
 

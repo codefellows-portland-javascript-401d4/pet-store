@@ -5,6 +5,7 @@ export default {
   template,
   require: {
     parent: '^storesStore'
+    
   },
   controller
 
@@ -13,7 +14,6 @@ export default {
 function controller() {
   this.styles = styles;
 
-  console.log('IN ADD PETS');
   this.pets = ['cat', 'lizard', 'bird', 'dog', 'fish'];
   this.reset = () => {
     this.name = '';
