@@ -1,0 +1,11 @@
+<section ng-class="$ctrl.styles.addPet">
+    <form ng-submit="$ctrl.addPet()">
+        <label>Name:</label>
+        <input type="text" ng-model="$ctrl.name" required>
+        <select ng-options="pet for pet in $ctrl.types" ng-model="$ctrl.type">
+        </select>
+        <br />
+        <button>Submit</button>
+        <button ui-sref="store({id: $ctrl.id})">Cancel</button>
+    </form>
+</section>
