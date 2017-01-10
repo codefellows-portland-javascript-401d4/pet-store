@@ -1,0 +1,24 @@
+<section ng-class="$storesAdd.styles.section">
+
+  <h2 ng-class"$storesAdd.styles.h2">Add a new store<h2>
+  <div>
+    <label>name</label>
+    <input ng-class="$storesAdd.styles.width" ng-model="$storesAdd.name" type="text">
+  </div>
+  <div>
+    <label>street</label>
+    <input ng-class="$storesAdd.styles.width" ng-model="$storesAdd.street" type="text">
+  </div>
+  <div>
+    <label>city</label>
+    <input ng-class="$storesAdd.styles.width" ng-model="$storesAdd.city" type="text">
+  </div>
+  <div>
+    <label>state</label>
+    <input ng-class="$storesAdd.styles.width" ng-model="$storesAdd.state" type="text">
+  </div>
+
+  <button ui-sref="stores.all">cancel</button>
+  <button ng-click="$storesAdd.addStore()">add store</button>
+
+</section>

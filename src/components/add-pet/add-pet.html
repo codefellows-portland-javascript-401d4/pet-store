@@ -1,0 +1,8 @@
+<section>
+  Add a new pet<br>
+  name: <input ng-model="$addPet.name" type="text">
+  animal: <input ng-model="$addPet.animal" type="text">
+  <button ng-click="$addPet.addPet()">add pet</button>
+  <br>
+  <button ui-sref="store({id: $addPet.store._id})">cancel</button>
+</section>
