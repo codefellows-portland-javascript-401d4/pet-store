@@ -1,8 +1,14 @@
-<section>
-  Add a new pet<br>
-  name: <input ng-model="$addPet.name" type="text">
-  animal: <input ng-model="$addPet.animal" type="text">
-  <button ng-click="$addPet.addPet()">add pet</button>
-  <br>
+<section ng-class="$addPet.styles.section">
+  <h2 ng-class="$addPet.styles.h2">Add a new pet<h2>
+  <div>
+    <label>name</label>
+    <input required ng-class="$storesAdd.styles.width" ng-model="$addPet.name" type="text" placeholder="pet name">
+  </div>
+  <div>
+    <label>animal</label>
+    <input required ng-class="$storesAdd.styles.width" ng-model="$addPet.animal" type="text" placeholder="enter type">
+  </div>
+
   <button ui-sref="store({id: $addPet.store._id})">cancel</button>
+  <button ng-click="$addPet.addPet()">add pet</button>
 </section>

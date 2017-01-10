@@ -1,19 +1,15 @@
-@import 'colors';
-@import 'fonts';
 @import 'mixins';
-@import 'buttons';
+@import 'fonts';
+@import 'colors';
 
 :local(.section) {
-  background-color: $ltgreen;
-  background: url('http://www.yuenmi.com/hkblog/wp-content/uploads/2012/03/DSC001421.jpg') no-repeat;
-  box-shadow: .2rem .25rem .25rem $mdkblue;
-  margin-top: 2%;
-
-  @include resp-bkg-img(809, 607);
+  background: url('http://www.whatsopennow.eu/site/wp-content/uploads/2015/02/WhatsOpenNow-branded-map-icons.jpg') no-repeat;
+  box-shadow: .25rem .25rem .25rem $blue;
+  @include resp-bkg-img(1000, 483);
   @include rounded-corners(1rem);
   @include clearfix;
 
-  main {
+  div {
     font-family: $text-font;
     padding: .5% 1%;
     margin: 1.5%;
@@ -22,32 +18,23 @@
     @include rounded-corners(1rem); 
   }
 
-  main div {
-    margin: 2% 1%;
-  }
-
   h2 {
     background-color: $ltblue;
     font-family: $secondary-font;
-    padding: 1.5%;
+    padding: 1%;
     margin: 1.5%;
     margin-bottom: 0;
     width: 50%;
     @include rounded-corners(1rem); 
   }
 
+  a {
+    font-size: 1rem;
+  }
+
   button {
     margin-left: 2%;
   }
-}
-
-:local(.petlist) {
-  background-color: $ltblue;
-  margin-left: 1%;
-  border: none;
-  width: 50%;
-  @include rounded-corners(1rem);
-  padding: 2%;
 }
 
 :local(.scroll) {

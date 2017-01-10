@@ -1,4 +1,5 @@
 import template from './store.html';
+import styles from './store.scss';
 
 export default {
   template,
@@ -11,5 +12,6 @@ export default {
 };
 
 function controller() {
+  this.styles = styles;
 
 }

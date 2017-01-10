@@ -1,11 +1,16 @@
-<section>
+<section ng-class="$storesAll.styles.section">
   <h2>Pick Your Favorite Store</h2>
-  <div ng-repeat="store in $storesAll.stores">
-    <a ui-sref="store({id: store._id})">
-      {{store.name}}
-    </a>
+  <ui-view></ui-view>
+  <div ng-class="$storesAll.styles.scroll">
+    <div ng-repeat="store in $storesAll.stores">
+      <a ui-sref="store({id: store._id})">
+        {{store.name}}
+      </a>
+    </div>
   </div>
 
+
   <br><br>
-  OR: <button ui-sref="stores.add">add a new store</button>
+<button ui-sref="stores.add">add a new store</button>
+
 </section>

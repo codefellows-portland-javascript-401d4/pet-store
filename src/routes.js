@@ -2,6 +2,17 @@ routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
+    name: 'welcome',
+    url: '/',
+    data: {public: true},
+    views: {
+      main: {
+        component: 'welcome'
+      }
+    }
+  });
+  
+  $stateProvider.state({
     name: 'stores',
     url: '/stores',
     abstract: true,
@@ -9,7 +20,14 @@ export default function routes($stateProvider, $urlRouterProvider) {
     resolve: {
       stores: ['storeService', stores => stores.getAll()]
     },
-    component: 'stores'
+    views: {
+      header: {
+        component: 'appHeader'
+      },
+      main: {
+        component: 'stores'
+      }
+    }
   });
 
   $stateProvider.state({
@@ -29,10 +47,6 @@ export default function routes($stateProvider, $urlRouterProvider) {
     url: '/store/:id',
     abstract: true,
     default: '.pets',
-    // resolve: {
-    //   paramId: ['$transition$', t => t.params().id],
-    //   store: ['stores', 'paramId', (stores, id) => stores.find(store => store._id === id)]
-    // },
     resolve: {
       store: ['$transition$', 'storeService', (t, stores) => {
         return stores.getOne(t.params().id);
@@ -54,6 +68,6 @@ export default function routes($stateProvider, $urlRouterProvider) {
   });
 
 
-  $urlRouterProvider.otherwise('/stores/all');
+  $urlRouterProvider.otherwise('/');
 
 }

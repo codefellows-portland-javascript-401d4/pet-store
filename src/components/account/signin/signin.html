@@ -1,0 +1,19 @@
+<section>
+  <h2>Sign in to access the Petriffic!</h2>
+
+  <form name="auth" ng-submit="$signin.authenticate()">
+    <div>
+      <label>
+        username: <input required ng-model="$signin.credentials.username">
+      </label>
+
+      <label>
+        password: <input required ng-model="$signin.credentials.password">
+      </label>
+    </div>
+
+    <button type="submit">Sign In</button>
+  </form>
+
+  <div class="error" ng-if="$signin.error">{{$signin.error.reason}}</div>
+</section>
