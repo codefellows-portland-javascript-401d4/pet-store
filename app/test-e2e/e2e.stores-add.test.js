@@ -1,3 +1,4 @@
+//stopped working when Auth was added
 describe('by model', () => {
   it('verify text input model', () => {
     browser.get('#!/stores/add');

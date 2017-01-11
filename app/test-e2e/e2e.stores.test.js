@@ -1,3 +1,4 @@
+//stopped working when Auth was added
 describe('Stores Page', () => {
 
   it('should have the correct title', () => {

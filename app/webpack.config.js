@@ -1,12 +1,14 @@
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+// create an output file to extract to via:
 const cssExtract = new ExtractTextPlugin('main.css');
 
 module.exports = {
+  target: 'web', 
   entry: './src/main.js',
   output: {
-    path: './build',
+    path: '../server/public',
     filename: 'main.js'
   },
   devtool: 'source-map',
@@ -31,11 +33,17 @@ module.exports = {
                 // plugins: ['transform-runtime']
       }
     }, {
+      test: /\.css$/,
+      loader: cssExtract.extract(
+                'style-loader',
+                'css-loader'
+            )	
+    }, {
       test: /\.scss$/,
-      loader: ExtractTextPlugin.extract(
+      loader: cssExtract.extract(
                 'style-loader',
                 'css-loader?sourceMap!sass-loader?sourceMap'
-            ) 
+            )	
     }, {
       test: /\.html$/,
       loader: 'html-loader'	
