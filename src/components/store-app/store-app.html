@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Pet stores</h1>
+
+  <header class="main-nav">
+    <nav>
+      <a ui-sref="welcome">Home</a>
+      <a ui-sref="stores.all">Stores</a>
+      <a ng-if="$ctrl.isAuthenticated()" ui-sref="welcome" ng-click="$ctrl.logout()">logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <ui-view></ui-view>
+  </main>
+
+</div>
