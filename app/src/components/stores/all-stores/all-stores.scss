@@ -18,3 +18,20 @@
     background: yellow;
   }
 }
+
+  a {
+    font-size: 24px;
+    font-weight: bold;
+    color: blue;
+  }
+
+  a:hover {
+    font-size: 24px;
+    font-weight: bold;
+    color: green;
+  }
+
+  tr:hover {
+    color: blue;
+    background: yellow;
+  }
