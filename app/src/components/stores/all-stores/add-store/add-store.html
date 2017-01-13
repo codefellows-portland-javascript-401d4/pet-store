@@ -1,5 +1,5 @@
 <section>
-  <form ng-submit="$ctrl.addStore()">
+  <form ng-submit="$ctrl.add()">
     <label>Name:</label>
     <input type="text" ng-model="$ctrl.name" required>
     <label>Street:</label>
@@ -9,6 +9,7 @@
     <label>State:</label>
     <input type="text" ng-model="$ctrl.address.state" required>
     
-    <button>Submit</button>
+    <button ui-sref="store">Submit</button>
+    <button ui-sref="stores.all">Cancel</button>
   </form>
 </section>

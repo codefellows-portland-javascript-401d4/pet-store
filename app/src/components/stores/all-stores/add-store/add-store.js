@@ -6,10 +6,15 @@ export default {
   controller,
   require: {
     parent: '^stores'
+  },
+  binding: {
+    store: '<'
   }
 };
 
-function controller() {
+controller.$inject = ['storeService', '$state'];
+
+function controller(storeService, $state) {
   this.styles = styles;
 
   this.reset = function() {
@@ -19,15 +24,19 @@ function controller() {
     this.address.state = '';
   };
 
-  this.addStore = function() {
-    this.parent.add({
+  this.add = function() {
+    storeService.addStore({
       name: this.name,
       address: {
         street: this.address.street,
         city: this.address.city,
         state: this.address.state
       }
+    })
+    .then(newStore => {
+      this.storeId = newStore._id;
+      this.reset();
+      $state.go('store', {id: this.storeId});
     });
-    this.reset();
   };
 }

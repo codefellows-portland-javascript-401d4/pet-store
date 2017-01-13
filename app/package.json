@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "karma start",
+    "test": "",
     "start": "webpack-dev-server --inline",
     "build": "webpack"
   },
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/risafletcher/pet-store#readme",
   "devDependencies": {
     "angular-mocks": "^1.5.9",
+    "angular-ui-router-default": "0.0.6",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.8",
     "babel-preset-es2015": "^6.18.0",

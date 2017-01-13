@@ -3,15 +3,14 @@ import styles from './stores.scss';
 
 export default {
   template,
-  controller
+  controller,
+  bindings: {
+    store: '<'
+  }
 };
 
 controller.$inject = [ 'storeService' ];
 
-function controller(storeService) {
+function controller() {
   this.styles = styles;
-
-  this.add = function(store) {
-    storeService.addStore(store);
-  };
 }
