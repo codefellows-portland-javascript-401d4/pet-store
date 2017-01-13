@@ -1,0 +1,8 @@
+<section class="detail">
+  <ul>{{$ctrl.store.name}}
+    <li>{{$ctrl.store.address.street}}</li>
+    <li>{{$ctrl.store.address.city}}</li>
+    <li>{{$ctrl.store.address.state}}</li>
+    <li ng-repeat="pet in $ctrl.store.pets">Name: {{pet.name}} Animal: {{pet.animal}}</li>
+  </ul>
+</section>
