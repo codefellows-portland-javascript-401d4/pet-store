@@ -1,4 +1,4 @@
-import template from './pet-new.html';
+import template from './new-pet.html';
 
 export default {
   template,

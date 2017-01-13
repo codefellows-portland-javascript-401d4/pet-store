@@ -1,17 +1,23 @@
 import template from './stores.html';
-// import styles from './stores.scss';
 
 export default {
   template,
-  controller,
   bindings: {
     stores: '<'
-  }
+  },
+  controller
 };
 
-controller.$inject = [];
+controller.$inject = ['storeService', '$state'];
 
-function controller() {
+function controller(storeService, $state) {
 
-  // this.styles = styles;
-}
+  this.add = store => {
+    storeService.add(store)
+    .then(saved => {
+      this.stores.push(saved);
+      $state.go('store', { id: saved._id });
+    })
+    .catch();
+  };
+};

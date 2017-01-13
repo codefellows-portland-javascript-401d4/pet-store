@@ -1,9 +1,5 @@
-<a ui-sref="pets.add">Add a Pet</a>
-
-<div>
-  <ui-view name="pets.add"></ui-view>
-</div>
-
-<div class="component detail">
-  <ui-view name="pets.all"></ui-view>
-</div>
+<section>
+  <ul>
+    <li ng-repeat="pet in $ctrl.store.pets">{{pet.name}} - {{pet.animal}}</li>
+  </ul>
+</section>

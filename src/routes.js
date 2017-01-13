@@ -1,4 +1,4 @@
-routes.inject = ['$stateProvider', '$urlRouterProvider'];
+routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 export default function routes($stateProvider, $urlRouterProvider) {
 
@@ -9,53 +9,37 @@ export default function routes($stateProvider, $urlRouterProvider) {
   });
 
   $stateProvider.state({
-    name:'stores',
+    name: 'stores',
     url: '/stores',
-    component: 'stores',
+    abstract: true,
+    default: '.all',
     resolve: {
-      stores: ['storeService', (stores) => {
-        return stores.getAll();
-      }
-      ]
-    }
+      stores: ['storeService', stores => stores.getAll()]
+    },
+    component: 'stores'
   });
 
   $stateProvider.state({
-    name:'stores.all',
+    name: 'stores.all',
     url: '/all',
-    views: {
-      all: {
-        component: 'storesAll'
-      }
-    }
-  });
-
-
-  $stateProvider.state({
-    name: 'stores.add',
-    url: '/add',
-    views: {
-      all: {
-        component: 'storeNew'
-      }
-    }
+    component: 'allStores'
   });
 
   $stateProvider.state({
-    name: 'stores.detail',
+    name: 'stores.newStore',
+    url: '/add-store',
+    component: 'newStore'
+  });
+
+  $stateProvider.state({
+    name: 'store',
     url: '/:id',
-    params: {
-      view: { dynamic: true }
-    },
+    abstract: true,
+    default: '.stores',
     resolve: {
-      id: ['$transition$', t => t.params().id],
-      view: ['$transition$', t => t.params().view || 'detail']
+      store: ['storeService', '$transition$', (stores, t) => stores.get(t.params().id)]
     },
-    views: {
-      all: {
-        component: 'storeDetail'
-      }
-    }
+    component: 'store'
   });
 
   $stateProvider.state({
@@ -67,8 +51,8 @@ export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'store.newPet',
     url: '/add-pet',
-    component: 'petNew'
-});
+    component: 'newPet'
+  });
 
   $urlRouterProvider.otherwise('/');
 }

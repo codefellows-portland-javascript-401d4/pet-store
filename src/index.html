@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
-
+<html lang="en" ng-app="petStore">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pet store</title>
+  <title>Pet Store</title>
 </head>
-
 <body>
-  <store-app></store-app>
+  <a ui-sref="welcome">Home</a>
+  <a ui-sref="stores">Pet Stores</a>
+  <ui-view></ui-view>
 </body>
-
 </html>

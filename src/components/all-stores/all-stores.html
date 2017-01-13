@@ -1,0 +1,10 @@
+<section>
+  <h2>Pet Stores</h2>
+  <ul>
+    <li ng-repeat="store in $ctrl.stores" ng-click="$ctrl.goToStore(store._id)">
+      <div store="store">
+        <h4>{{store.name}}</h4>
+      </div>
+    </li>
+  </ul>
+</section>
