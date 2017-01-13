@@ -1,5 +1,5 @@
 import angular from 'angular';
-import './scss/main.scss';
+// import './scss/main.scss';
 
 import components from './components';
 import services from './services';

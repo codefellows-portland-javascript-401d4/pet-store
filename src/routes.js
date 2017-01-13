@@ -36,27 +36,20 @@ export default function routes($stateProvider, $urlRouterProvider) {
     url: '/add',
     views: {
       all: {
-        component: 'newStore'
+        component: 'storeNew'
       }
     }
   });
 
   $stateProvider.state({
     name: 'stores.detail',
-    // the url, plus implied params id and view
     url: '/:id',
     params: {
-      // "view" same key as above
       view: { dynamic: true }
     },
     resolve: {
       id: ['$transition$', t => t.params().id],
-      // "view" is name of component binding,
-      // t.params().view is dependent on key above
       view: ['$transition$', t => t.params().view || 'detail']
-      // crew: ['$transition$', 'crewService', (t, crews) => {
-      //     return crews.get(t.params().id);
-      // }]
     },
     views: {
       all: {
@@ -64,6 +57,18 @@ export default function routes($stateProvider, $urlRouterProvider) {
       }
     }
   });
+
+  $stateProvider.state({
+    name: 'store.pets',
+    url: '/pets',
+    component: 'pets'
+  });
+
+  $stateProvider.state({
+    name: 'store.newPet',
+    url: '/add-pet',
+    component: 'petNew'
+});
 
   $urlRouterProvider.otherwise('/');
 }

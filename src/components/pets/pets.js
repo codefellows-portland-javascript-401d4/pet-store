@@ -1,5 +1,5 @@
-import template from './stores.html';
-// import styles from './stores.scss';
+import template from './pets.html';
+// import styles from './pets.scss';
 
 export default {
   template,
