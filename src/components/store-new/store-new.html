@@ -1,0 +1,19 @@
+<div class="component">
+
+  <h3>Add a New Store</h3>
+  <form>
+    <label>store name: </label>
+    <input ng-model="$ctrl.name">
+    <label>street: </label>
+    <input ng-model="$ctrl.address.street">
+    <label>city: </label>
+    <input ng-model="$ctrl.address.city">
+    <label>state: </label>
+    <input ng-model="$ctrl.address.state">
+  </form>
+
+  <button class="viewButton" ng-click=$ctrl.addNew()>Add Store</button>
+
+  <button class="viewButton" ng-click=$ctrl.cancel()>Cancel</button>
+
+</div>
