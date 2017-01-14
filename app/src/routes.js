@@ -3,6 +3,15 @@ routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 export default function routes($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state({
+      name: 'home',
+      url: '/',
+      component: 'home',
+      data: {
+        public: true
+      }
+    });
+  $stateProvider
+    .state({
       name: 'stores',
       url: '/stores',
       component: 'stores',
