@@ -50,33 +50,53 @@
 	
 	var _angular2 = _interopRequireDefault(_angular);
 	
-	var _components = __webpack_require__(3);
-	
-	var _components2 = _interopRequireDefault(_components);
-	
-	var _services = __webpack_require__(25);
-	
-	var _services2 = _interopRequireDefault(_services);
-	
-	var _angularUiRouter = __webpack_require__(29);
+	var _angularUiRouter = __webpack_require__(3);
 	
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 	
-	var _routes = __webpack_require__(99);
+	var _angularUiRouterDefault = __webpack_require__(73);
+	
+	var _angularUiRouterDefault2 = _interopRequireDefault(_angularUiRouterDefault);
+	
+	__webpack_require__(74);
+	
+	var _ngDialog = __webpack_require__(75);
+	
+	var _ngDialog2 = _interopRequireDefault(_ngDialog);
+	
+	__webpack_require__(76);
+	
+	__webpack_require__(80);
+	
+	var _components = __webpack_require__(82);
+	
+	var _components2 = _interopRequireDefault(_components);
+	
+	var _services = __webpack_require__(108);
+	
+	var _services2 = _interopRequireDefault(_services);
+	
+	var _routes = __webpack_require__(114);
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
+	var _http = __webpack_require__(115);
+	
+	var _http2 = _interopRequireDefault(_http);
+	
+	var _auth = __webpack_require__(116);
+	
+	var _auth2 = _interopRequireDefault(_auth);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// import './scss/main.scss';
-	
-	var app = _angular2.default.module('myApp', [_components2.default, _services2.default, _angularUiRouter2.default]);
-	
-	app.config(_routes2.default);
-	
-	var dev = 'https://pet-store-401.herokuapp.com/api/unauth';
+	var dev = 'https://pet-store-401.herokuapp.com/api';
+	var app = _angular2.default.module('petStore', [_components2.default, _services2.default, _angularUiRouter2.default, _angularUiRouterDefault2.default, _angular2.default.module('ui.router.state.events').name, _ngDialog2.default]);
 	
 	app.value('apiUrl', dev);
+	app.config(_http2.default);
+	app.config(_routes2.default);
+	app.run(_auth2.default);
 
 /***/ },
 /* 1 */
@@ -33077,1028 +33097,6 @@
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _angular = __webpack_require__(1);
-	
-	var _angular2 = _interopRequireDefault(_angular);
-	
-	var _camelcase = __webpack_require__(4);
-	
-	var _camelcase2 = _interopRequireDefault(_camelcase);
-	
-	var _path = __webpack_require__(5);
-	
-	var _path2 = _interopRequireDefault(_path);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var context = __webpack_require__(7);
-	
-	var _module = _angular2.default.module('components', []);
-	
-	context.keys().forEach(function (key) {
-	  var name = (0, _camelcase2.default)(_path2.default.basename(key, '.js'));
-	  _module.component(name, context(key).default);
-	});
-	
-	exports.default = _module.name;
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	function preserveCamelCase(str) {
-		let isLastCharLower = false;
-		let isLastCharUpper = false;
-		let isLastLastCharUpper = false;
-	
-		for (let i = 0; i < str.length; i++) {
-			const c = str.charAt(i);
-	
-			if (isLastCharLower && (/[a-zA-Z]/).test(c) && c.toUpperCase() === c) {
-				str = str.substr(0, i) + '-' + str.substr(i);
-				isLastCharLower = false;
-				isLastLastCharUpper = isLastCharUpper;
-				isLastCharUpper = true;
-				i++;
-			} else if (isLastCharUpper && isLastLastCharUpper && (/[a-zA-Z]/).test(c) && c.toLowerCase() === c) {
-				str = str.substr(0, i - 1) + '-' + str.substr(i - 1);
-				isLastLastCharUpper = isLastCharUpper;
-				isLastCharUpper = false;
-				isLastCharLower = true;
-			} else {
-				isLastCharLower = c.toLowerCase() === c;
-				isLastLastCharUpper = isLastCharUpper;
-				isLastCharUpper = c.toUpperCase() === c;
-			}
-		}
-	
-		return str;
-	}
-	
-	module.exports = function () {
-		let str = [].map.call(arguments, x => x.trim()).filter(x => x.length).join('-');
-	
-		if (str.length === 0) {
-			return '';
-		}
-	
-		if (str.length === 1) {
-			return str.toLowerCase();
-		}
-	
-		str = preserveCamelCase(str);
-	
-		return str
-			.replace(/^[_.\- ]+/, '')
-			.toLowerCase()
-			.replace(/[_.\- ]+(\w|$)/g, (m, p1) => p1.toUpperCase());
-	};
-
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-	
-	// resolves . and .. elements in a path array with directory names there
-	// must be no slashes, empty elements, or device names (c:\) in the array
-	// (so also no leading and trailing slashes - it does not distinguish
-	// relative and absolute paths)
-	function normalizeArray(parts, allowAboveRoot) {
-	  // if the path tries to go above the root, `up` ends up > 0
-	  var up = 0;
-	  for (var i = parts.length - 1; i >= 0; i--) {
-	    var last = parts[i];
-	    if (last === '.') {
-	      parts.splice(i, 1);
-	    } else if (last === '..') {
-	      parts.splice(i, 1);
-	      up++;
-	    } else if (up) {
-	      parts.splice(i, 1);
-	      up--;
-	    }
-	  }
-	
-	  // if the path is allowed to go above the root, restore leading ..s
-	  if (allowAboveRoot) {
-	    for (; up--; up) {
-	      parts.unshift('..');
-	    }
-	  }
-	
-	  return parts;
-	}
-	
-	// Split a filename into [root, dir, basename, ext], unix version
-	// 'root' is just a slash, or nothing.
-	var splitPathRe =
-	    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
-	var splitPath = function(filename) {
-	  return splitPathRe.exec(filename).slice(1);
-	};
-	
-	// path.resolve([from ...], to)
-	// posix version
-	exports.resolve = function() {
-	  var resolvedPath = '',
-	      resolvedAbsolute = false;
-	
-	  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
-	    var path = (i >= 0) ? arguments[i] : process.cwd();
-	
-	    // Skip empty and invalid entries
-	    if (typeof path !== 'string') {
-	      throw new TypeError('Arguments to path.resolve must be strings');
-	    } else if (!path) {
-	      continue;
-	    }
-	
-	    resolvedPath = path + '/' + resolvedPath;
-	    resolvedAbsolute = path.charAt(0) === '/';
-	  }
-	
-	  // At this point the path should be resolved to a full absolute path, but
-	  // handle relative paths to be safe (might happen when process.cwd() fails)
-	
-	  // Normalize the path
-	  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
-	    return !!p;
-	  }), !resolvedAbsolute).join('/');
-	
-	  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
-	};
-	
-	// path.normalize(path)
-	// posix version
-	exports.normalize = function(path) {
-	  var isAbsolute = exports.isAbsolute(path),
-	      trailingSlash = substr(path, -1) === '/';
-	
-	  // Normalize the path
-	  path = normalizeArray(filter(path.split('/'), function(p) {
-	    return !!p;
-	  }), !isAbsolute).join('/');
-	
-	  if (!path && !isAbsolute) {
-	    path = '.';
-	  }
-	  if (path && trailingSlash) {
-	    path += '/';
-	  }
-	
-	  return (isAbsolute ? '/' : '') + path;
-	};
-	
-	// posix version
-	exports.isAbsolute = function(path) {
-	  return path.charAt(0) === '/';
-	};
-	
-	// posix version
-	exports.join = function() {
-	  var paths = Array.prototype.slice.call(arguments, 0);
-	  return exports.normalize(filter(paths, function(p, index) {
-	    if (typeof p !== 'string') {
-	      throw new TypeError('Arguments to path.join must be strings');
-	    }
-	    return p;
-	  }).join('/'));
-	};
-	
-	
-	// path.relative(from, to)
-	// posix version
-	exports.relative = function(from, to) {
-	  from = exports.resolve(from).substr(1);
-	  to = exports.resolve(to).substr(1);
-	
-	  function trim(arr) {
-	    var start = 0;
-	    for (; start < arr.length; start++) {
-	      if (arr[start] !== '') break;
-	    }
-	
-	    var end = arr.length - 1;
-	    for (; end >= 0; end--) {
-	      if (arr[end] !== '') break;
-	    }
-	
-	    if (start > end) return [];
-	    return arr.slice(start, end - start + 1);
-	  }
-	
-	  var fromParts = trim(from.split('/'));
-	  var toParts = trim(to.split('/'));
-	
-	  var length = Math.min(fromParts.length, toParts.length);
-	  var samePartsLength = length;
-	  for (var i = 0; i < length; i++) {
-	    if (fromParts[i] !== toParts[i]) {
-	      samePartsLength = i;
-	      break;
-	    }
-	  }
-	
-	  var outputParts = [];
-	  for (var i = samePartsLength; i < fromParts.length; i++) {
-	    outputParts.push('..');
-	  }
-	
-	  outputParts = outputParts.concat(toParts.slice(samePartsLength));
-	
-	  return outputParts.join('/');
-	};
-	
-	exports.sep = '/';
-	exports.delimiter = ':';
-	
-	exports.dirname = function(path) {
-	  var result = splitPath(path),
-	      root = result[0],
-	      dir = result[1];
-	
-	  if (!root && !dir) {
-	    // No dirname whatsoever
-	    return '.';
-	  }
-	
-	  if (dir) {
-	    // It has a dirname, strip trailing slash
-	    dir = dir.substr(0, dir.length - 1);
-	  }
-	
-	  return root + dir;
-	};
-	
-	
-	exports.basename = function(path, ext) {
-	  var f = splitPath(path)[2];
-	  // TODO: make this comparison case-insensitive on windows?
-	  if (ext && f.substr(-1 * ext.length) === ext) {
-	    f = f.substr(0, f.length - ext.length);
-	  }
-	  return f;
-	};
-	
-	
-	exports.extname = function(path) {
-	  return splitPath(path)[3];
-	};
-	
-	function filter (xs, f) {
-	    if (xs.filter) return xs.filter(f);
-	    var res = [];
-	    for (var i = 0; i < xs.length; i++) {
-	        if (f(xs[i], i, xs)) res.push(xs[i]);
-	    }
-	    return res;
-	}
-	
-	// String.prototype.substr - negative index don't work in IE8
-	var substr = 'ab'.substr(-1) === 'b'
-	    ? function (str, start, len) { return str.substr(start, len) }
-	    : function (str, start, len) {
-	        if (start < 0) start = str.length + start;
-	        return str.substr(start, len);
-	    }
-	;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	// shim for using process in browser
-	var process = module.exports = {};
-	
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-	
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-	
-	function defaultSetTimout() {
-	    throw new Error('setTimeout has not been defined');
-	}
-	function defaultClearTimeout () {
-	    throw new Error('clearTimeout has not been defined');
-	}
-	(function () {
-	    try {
-	        if (typeof setTimeout === 'function') {
-	            cachedSetTimeout = setTimeout;
-	        } else {
-	            cachedSetTimeout = defaultSetTimout;
-	        }
-	    } catch (e) {
-	        cachedSetTimeout = defaultSetTimout;
-	    }
-	    try {
-	        if (typeof clearTimeout === 'function') {
-	            cachedClearTimeout = clearTimeout;
-	        } else {
-	            cachedClearTimeout = defaultClearTimeout;
-	        }
-	    } catch (e) {
-	        cachedClearTimeout = defaultClearTimeout;
-	    }
-	} ())
-	function runTimeout(fun) {
-	    if (cachedSetTimeout === setTimeout) {
-	        //normal enviroments in sane situations
-	        return setTimeout(fun, 0);
-	    }
-	    // if setTimeout wasn't available but was latter defined
-	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-	        cachedSetTimeout = setTimeout;
-	        return setTimeout(fun, 0);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedSetTimeout(fun, 0);
-	    } catch(e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-	            return cachedSetTimeout.call(null, fun, 0);
-	        } catch(e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-	            return cachedSetTimeout.call(this, fun, 0);
-	        }
-	    }
-	
-	
-	}
-	function runClearTimeout(marker) {
-	    if (cachedClearTimeout === clearTimeout) {
-	        //normal enviroments in sane situations
-	        return clearTimeout(marker);
-	    }
-	    // if clearTimeout wasn't available but was latter defined
-	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-	        cachedClearTimeout = clearTimeout;
-	        return clearTimeout(marker);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedClearTimeout(marker);
-	    } catch (e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-	            return cachedClearTimeout.call(null, marker);
-	        } catch (e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-	            return cachedClearTimeout.call(this, marker);
-	        }
-	    }
-	
-	
-	
-	}
-	var queue = [];
-	var draining = false;
-	var currentQueue;
-	var queueIndex = -1;
-	
-	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
-	    draining = false;
-	    if (currentQueue.length) {
-	        queue = currentQueue.concat(queue);
-	    } else {
-	        queueIndex = -1;
-	    }
-	    if (queue.length) {
-	        drainQueue();
-	    }
-	}
-	
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    var timeout = runTimeout(cleanUpNextTick);
-	    draining = true;
-	
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        while (++queueIndex < len) {
-	            if (currentQueue) {
-	                currentQueue[queueIndex].run();
-	            }
-	        }
-	        queueIndex = -1;
-	        len = queue.length;
-	    }
-	    currentQueue = null;
-	    draining = false;
-	    runClearTimeout(timeout);
-	}
-	
-	process.nextTick = function (fun) {
-	    var args = new Array(arguments.length - 1);
-	    if (arguments.length > 1) {
-	        for (var i = 1; i < arguments.length; i++) {
-	            args[i - 1] = arguments[i];
-	        }
-	    }
-	    queue.push(new Item(fun, args));
-	    if (queue.length === 1 && !draining) {
-	        runTimeout(drainQueue);
-	    }
-	};
-	
-	// v8 likes predictible objects
-	function Item(fun, array) {
-	    this.fun = fun;
-	    this.array = array;
-	}
-	Item.prototype.run = function () {
-	    this.fun.apply(null, this.array);
-	};
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-	
-	function noop() {}
-	
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-	
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-	
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var map = {
-		"./pet-new/pet-new.js": 8,
-		"./pets/pets.js": 10,
-		"./store-app/store-app.js": 12,
-		"./store-detail/store-detail.js": 14,
-		"./store-new/store-new.js": 16,
-		"./store/store.js": 18,
-		"./stores-all/stores-all.js": 20,
-		"./stores/stores.js": 22,
-		"./welcome/welcome.js": 24
-	};
-	function webpackContext(req) {
-		return __webpack_require__(webpackContextResolve(req));
-	};
-	function webpackContextResolve(req) {
-		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
-	};
-	webpackContext.keys = function webpackContextKeys() {
-		return Object.keys(map);
-	};
-	webpackContext.resolve = webpackContextResolve;
-	module.exports = webpackContext;
-	webpackContext.id = 7;
-
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _petNew = __webpack_require__(9);
-	
-	var _petNew2 = _interopRequireDefault(_petNew);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	  template: _petNew2.default,
-	  bindings: {
-	    store: '<'
-	  },
-	  require: {
-	    parent: '^store'
-	  },
-	  controller: controller
-	};
-	
-	
-	controller.$inject = ['$state'];
-	
-	function controller() {
-	  var _this = this;
-	
-	  this.reset = function () {
-	    _this.name = '';
-	    _this.animal = '';
-	  };
-	
-	  this.addPet = function () {
-	    _this.parent.add({
-	      name: _this.name,
-	      animal: _this.animal,
-	      store: _this.store._id
-	    });
-	    _this.reset();
-	  };
-	}
-
-/***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-	module.exports = "<section>\r\n  <form>\r\n    <label>Name</label>\r\n    <input ng-model=\"$ctrl.name\">\r\n    <label>Type</label>\r\n    <input ng-model=\"$ctrl.animal\">\r\n    <button ng-click=\"$ctrl.addPet()\">Add Pet</button>\r\n    <button ui-sref=\"store.pets\">Cancel</button>\r\n  </form>\r\n</section>";
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _pets = __webpack_require__(11);
-	
-	var _pets2 = _interopRequireDefault(_pets);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	  template: _pets2.default,
-	  bindings: {
-	    store: '<'
-	  }
-	};
-
-/***/ },
-/* 11 */
-/***/ function(module, exports) {
-
-	module.exports = "<section>\r\n  <ul>\r\n    <li ng-repeat=\"pet in $ctrl.store.pets\">{{pet.name}} - {{pet.animal}}</li>\r\n  </ul>\r\n</section>";
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _storeApp = __webpack_require__(13);
-	
-	var _storeApp2 = _interopRequireDefault(_storeApp);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	// import styles from './store-app.scss';
-	
-	exports.default = {
-	  template: _storeApp2.default
-	};
-
-/***/ },
-/* 13 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"container\">\r\n  <h1>Pet stores</h1>\r\n\r\n  <header class=\"main-nav\">\r\n    <nav>\r\n      <a ui-sref=\"welcome\">Home</a>\r\n      <a ui-sref=\"stores.all\">Stores</a>\r\n  </nav>\r\n  </header>\r\n\r\n  <main>\r\n    <ui-view></ui-view>\r\n  </main>\r\n\r\n</div>";
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _storeDetail = __webpack_require__(15);
-	
-	var _storeDetail2 = _interopRequireDefault(_storeDetail);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	  template: _storeDetail2.default,
-	  bindings: {
-	    store: '<',
-	    id: '<',
-	    name: '<'
-	  },
-	  controller: controller
-	};
-	
-	
-	controller.$inject = ['storeService', 'petService', '$state'];
-	
-	function controller(stores, petService, $state) {
-	  var _this = this;
-	
-	  this.$onInit = function () {
-	    stores.get(_this.id).then(function (store) {
-	      _this.store = store;
-	    });
-	  };
-	
-	  this.add = function (pet) {
-	    petService.add(pet).then(function (saved) {
-	      _this.store.pets.push(saved);
-	      $state.go('store.pets', { id: _this.store._id });
-	    }).catch();
-	  };
-	};
-
-/***/ },
-/* 15 */
-/***/ function(module, exports) {
-
-	module.exports = "<section class=\"detail\">\r\n  <ul>{{$ctrl.store.name}}\r\n    <li>{{$ctrl.store.address.street}}</li>\r\n    <li>{{$ctrl.store.address.city}}</li>\r\n    <li>{{$ctrl.store.address.state}}</li>\r\n    <li ng-repeat=\"pet in $ctrl.store.pets\">Name: {{pet.name}} Animal: {{pet.animal}}</li>\r\n  </ul>\r\n  \r\n</section>\r\n\r\n<a ui-sref=\"store.petNew\">Add Pet</a>\r\n  <ui-view></ui-view>";
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _storeNew = __webpack_require__(17);
-	
-	var _storeNew2 = _interopRequireDefault(_storeNew);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	  template: _storeNew2.default,
-	  bindings: {
-	    add: '<'
-	  },
-	  require: {
-	    parent: '^stores'
-	  },
-	  controller: controller
-	};
-	
-	
-	controller.$inject = ['$state'];
-	
-	function controller($state) {
-	  var _this = this;
-	
-	  this.reset = function () {
-	    _this.name = '';
-	    _this.address.street = '';
-	    _this.address.city = '';
-	    _this.address.state = '';
-	  };
-	
-	  this.addStore = function () {
-	    _this.parent.add({
-	      name: _this.name,
-	      address: {
-	        street: _this.address.street,
-	        city: _this.address.city,
-	        state: _this.address.state
-	      }
-	    });
-	    $state.go('stores');
-	    _this.reset();
-	  };
-	}
-
-/***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-	module.exports = "<section>\r\n  <form>\r\n    <label>Name:</label>\r\n    <input ng-model=\"$ctrl.name\">\r\n    <label>Street:</label>\r\n    <input ng-model=\"$ctrl.address.street\">\r\n    <label>City:</label>\r\n    <input ng-model=\"$ctrl.address.city\">\r\n    <label>State:</label>\r\n    <input ng-model=\"$ctrl.address.state\">\r\n    <button ng-click=\"$ctrl.addStore()\">Add New Store</button>\r\n    <button ui-sref=\"stores\">Cancel</button>\r\n  </form>\r\n</section>";
-
-/***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _store = __webpack_require__(19);
-	
-	var _store2 = _interopRequireDefault(_store);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	  template: _store2.default,
-	  bindings: {
-	    store: '<'
-	  },
-	  controller: controller
-	};
-	
-	
-	controller.$inject = ['petService', '$state'];
-	
-	function controller(petService, $state) {
-	  var _this = this;
-	
-	  this.add = function (pet) {
-	    petService.add(pet).then(function (saved) {
-	      _this.store.pets.push(saved);
-	      $state.go('store.pets', { id: _this.store._id });
-	    }).catch();
-	  };
-	};
-
-/***/ },
-/* 19 */
-/***/ function(module, exports) {
-
-	module.exports = "<section>\r\n  <h2>{{$ctrl.store.name}}</h2>\r\n  <h3>{{$ctrl.store.address.street}}, {{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</h3>\r\n  <a ui-sref=\"store.newPet\">Add Pet</a>\r\n  \r\n  <ui-view></ui-view>\r\n</section>";
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _storesAll = __webpack_require__(21);
-	
-	var _storesAll2 = _interopRequireDefault(_storesAll);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	  template: _storesAll2.default,
-	  bindings: {
-	    stores: '<'
-	  },
-	  controller: controller
-	};
-	
-	
-	controller.$inject = ['$state'];
-	
-	function controller($state) {
-	
-	  this.goToStore = function (storeId) {
-	    $state.go('store.pets', { id: storeId });
-	  };
-	}
-
-/***/ },
-/* 21 */
-/***/ function(module, exports) {
-
-	module.exports = "<section>\r\n  <h2>Stores</h2>\r\n  <ul>\r\n    <li ng-repeat=\"store in $ctrl.stores\" ng-click=\"$ctrl.goToStore(store._id)\">\r\n      <div store=\"store\">\r\n        <h4>{{store.name}}</h4>\r\n      </div>\r\n    </li>\r\n  </ul>\r\n</section>";
-
-/***/ },
-/* 22 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _stores = __webpack_require__(23);
-	
-	var _stores2 = _interopRequireDefault(_stores);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	  template: _stores2.default,
-	  bindings: {
-	    stores: '<'
-	  },
-	  controller: controller
-	};
-	
-	
-	controller.$inject = ['storeService', '$state'];
-	
-	function controller(storeService, $state) {
-	  var _this = this;
-	
-	  this.add = function (store) {
-	    storeService.add(store).then(function (saved) {
-	      _this.stores.push(saved);
-	      $state.go('store', { id: saved._id });
-	    }).catch();
-	  };
-	};
-
-/***/ },
-/* 23 */
-/***/ function(module, exports) {
-
-	module.exports = " <section>\r\n  <a ui-sref=\"stores.newStore\">Add Store</a>\r\n  <ui-view></ui-view> \r\n  </section> ";
-
-/***/ },
-/* 24 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = {
-	  template: "\n  <div class=\"component\">\n    <h2>Welcome to the Pet store list!</h2>\n    <section>\n      <p></p>\n    </section>\n  </div>\n  "
-	};
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _angular = __webpack_require__(1);
-	
-	var _angular2 = _interopRequireDefault(_angular);
-	
-	var _camelcase = __webpack_require__(4);
-	
-	var _camelcase2 = _interopRequireDefault(_camelcase);
-	
-	var _path = __webpack_require__(5);
-	
-	var _path2 = _interopRequireDefault(_path);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var context = __webpack_require__(26);
-	
-	var _module = _angular2.default.module('services', []);
-	
-	context.keys().forEach(function (key) {
-	  var name = (0, _camelcase2.default)(_path2.default.basename(key, '.js'));
-	  _module.factory(name, context(key).default);
-	});
-	
-	exports.default = _module.name;
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var map = {
-		"./pet-service.js": 27,
-		"./store-service.js": 28
-	};
-	function webpackContext(req) {
-		return __webpack_require__(webpackContextResolve(req));
-	};
-	function webpackContextResolve(req) {
-		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
-	};
-	webpackContext.keys = function webpackContextKeys() {
-		return Object.keys(map);
-	};
-	webpackContext.resolve = webpackContextResolve;
-	module.exports = webpackContext;
-	webpackContext.id = 26;
-
-
-/***/ },
-/* 27 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = petService;
-	petService.$inject = ['$http', 'apiUrl'];
-	
-	function petService($http /*, apiUrl*/) {
-	  return {
-	    getAll: function getAll() {
-	      return $http.get('https://pet-store-401.herokuapp.com/api/unauth/pets').then(function (res) {
-	        return res.data;
-	      });
-	    },
-	    get: function get(id) {
-	      return $http.get('https://pet-store-401.herokuapp.com/api/unauth/pets/' + id).then(function (res) {
-	        return res.data;
-	      });
-	    },
-	    add: function add(pet) {
-	      return $http.post('https://pet-store-401.herokuapp.com/api/unauth/pets', pet).then(function (res) {
-	        return res.data;
-	      });
-	    }
-	  };
-	}
-
-/***/ },
-/* 28 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = storeService;
-	storeService.$inject = ['$http', 'apiUrl'];
-	
-	function storeService($http, apiUrl) {
-	  return {
-	    getAll: function getAll() {
-	      return $http.get(apiUrl + '/stores').then(function (res) {
-	        return res.data;
-	      });
-	    },
-	    get: function get(id) {
-	      if (!id) return this.getAll();
-	      return $http.get(apiUrl + '/stores/' + id).then(function (res) {
-	        return res.data;
-	      });
-	    },
-	    add: function add(store) {
-	      return $http.post(apiUrl + '/stores', store).then(function (res) {
-	        return res.data;
-	      });
-	    }
-	  };
-	}
-
-/***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/**
 	 * Main entry point for angular 1.x build
 	 * @module ng1
@@ -34107,23 +33105,23 @@
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	var core = __webpack_require__(30);
+	var core = __webpack_require__(4);
 	exports.core = core;
-	__export(__webpack_require__(30));
-	__export(__webpack_require__(86));
-	__export(__webpack_require__(88));
-	__export(__webpack_require__(90));
-	__webpack_require__(94);
-	__webpack_require__(95);
-	__webpack_require__(96);
-	__webpack_require__(97);
-	__webpack_require__(98);
+	__export(__webpack_require__(4));
+	__export(__webpack_require__(60));
+	__export(__webpack_require__(62));
+	__export(__webpack_require__(64));
+	__webpack_require__(68);
+	__webpack_require__(69);
+	__webpack_require__(70);
+	__webpack_require__(71);
+	__webpack_require__(72);
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.default = "ui.router";
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 30 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -34134,21 +33132,21 @@
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(31));
-	__export(__webpack_require__(78));
-	__export(__webpack_require__(79));
-	__export(__webpack_require__(80));
-	__export(__webpack_require__(81));
-	__export(__webpack_require__(82));
-	__export(__webpack_require__(83));
-	__export(__webpack_require__(84));
-	__export(__webpack_require__(75));
+	__export(__webpack_require__(5));
+	__export(__webpack_require__(52));
+	__export(__webpack_require__(53));
 	__export(__webpack_require__(54));
-	__export(__webpack_require__(85));
+	__export(__webpack_require__(55));
+	__export(__webpack_require__(56));
+	__export(__webpack_require__(57));
+	__export(__webpack_require__(58));
+	__export(__webpack_require__(49));
+	__export(__webpack_require__(28));
+	__export(__webpack_require__(59));
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 31 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34156,18 +33154,18 @@
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
 	/** @module common */ /** for typedoc */
-	__export(__webpack_require__(32));
-	__export(__webpack_require__(35));
-	__export(__webpack_require__(36));
-	__export(__webpack_require__(34));
-	__export(__webpack_require__(33));
-	__export(__webpack_require__(37));
-	__export(__webpack_require__(38));
-	__export(__webpack_require__(41));
+	__export(__webpack_require__(6));
+	__export(__webpack_require__(9));
+	__export(__webpack_require__(10));
+	__export(__webpack_require__(8));
+	__export(__webpack_require__(7));
+	__export(__webpack_require__(11));
+	__export(__webpack_require__(12));
+	__export(__webpack_require__(15));
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 32 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -34179,9 +33177,9 @@
 	 * @module common
 	 */ /** for typedoc */
 	"use strict";
-	var predicates_1 = __webpack_require__(33);
-	var hof_1 = __webpack_require__(34);
-	var coreservices_1 = __webpack_require__(35);
+	var predicates_1 = __webpack_require__(7);
+	var hof_1 = __webpack_require__(8);
+	var coreservices_1 = __webpack_require__(9);
 	var w = typeof window === 'undefined' ? {} : window;
 	var angular = w.angular || {};
 	exports.fromJson = angular.fromJson || JSON.parse.bind(JSON);
@@ -34789,7 +33787,7 @@
 	//# sourceMappingURL=common.js.map
 
 /***/ },
-/* 33 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34800,7 +33798,7 @@
 	 *
 	 * @module common_predicates
 	 */ /** */
-	var hof_1 = __webpack_require__(34);
+	var hof_1 = __webpack_require__(8);
 	var toStr = Object.prototype.toString;
 	var tis = function (t) { return function (x) { return typeof (x) === t; }; };
 	exports.isUndefined = tis('undefined');
@@ -34837,7 +33835,7 @@
 	//# sourceMappingURL=predicates.js.map
 
 /***/ },
-/* 34 */
+/* 8 */
 /***/ function(module, exports) {
 
 	/**
@@ -35086,7 +34084,7 @@
 	//# sourceMappingURL=hof.js.map
 
 /***/ },
-/* 35 */
+/* 9 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -35101,7 +34099,7 @@
 	//# sourceMappingURL=coreservices.js.map
 
 /***/ },
-/* 36 */
+/* 10 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -35190,7 +34188,7 @@
 	//# sourceMappingURL=glob.js.map
 
 /***/ },
-/* 37 */
+/* 11 */
 /***/ function(module, exports) {
 
 	/**
@@ -35240,7 +34238,7 @@
 	//# sourceMappingURL=queue.js.map
 
 /***/ },
-/* 38 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -35251,12 +34249,12 @@
 	 * @module common_strings
 	 */ /** */
 	"use strict";
-	var predicates_1 = __webpack_require__(33);
-	var rejectFactory_1 = __webpack_require__(39);
-	var common_1 = __webpack_require__(32);
-	var hof_1 = __webpack_require__(34);
-	var transition_1 = __webpack_require__(40);
-	var resolvable_1 = __webpack_require__(51);
+	var predicates_1 = __webpack_require__(7);
+	var rejectFactory_1 = __webpack_require__(13);
+	var common_1 = __webpack_require__(6);
+	var hof_1 = __webpack_require__(8);
+	var transition_1 = __webpack_require__(14);
+	var resolvable_1 = __webpack_require__(25);
 	/**
 	 * Returns a string shortened to a maximum length
 	 *
@@ -35396,7 +34394,7 @@
 	//# sourceMappingURL=strings.js.map
 
 /***/ },
-/* 39 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -35404,8 +34402,8 @@
 	 * @module transition
 	 */ /** for typedoc */
 	"use strict";
-	var common_1 = __webpack_require__(32);
-	var strings_1 = __webpack_require__(38);
+	var common_1 = __webpack_require__(6);
+	var strings_1 = __webpack_require__(12);
 	var RejectType;
 	(function (RejectType) {
 	    RejectType[RejectType["SUPERSEDED"] = 2] = "SUPERSEDED";
@@ -35475,27 +34473,27 @@
 	//# sourceMappingURL=rejectFactory.js.map
 
 /***/ },
-/* 40 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var trace_1 = __webpack_require__(41);
-	var coreservices_1 = __webpack_require__(35);
-	var common_1 = __webpack_require__(32);
-	var predicates_1 = __webpack_require__(33);
-	var hof_1 = __webpack_require__(34);
-	var interface_1 = __webpack_require__(42);
-	var transitionHook_1 = __webpack_require__(43);
-	var hookRegistry_1 = __webpack_require__(45);
-	var hookBuilder_1 = __webpack_require__(46);
-	var node_1 = __webpack_require__(47);
-	var pathFactory_1 = __webpack_require__(50);
-	var targetState_1 = __webpack_require__(44);
-	var param_1 = __webpack_require__(48);
-	var resolvable_1 = __webpack_require__(51);
-	var rejectFactory_1 = __webpack_require__(39);
-	var resolveContext_1 = __webpack_require__(52);
-	var router_1 = __webpack_require__(54);
+	var trace_1 = __webpack_require__(15);
+	var coreservices_1 = __webpack_require__(9);
+	var common_1 = __webpack_require__(6);
+	var predicates_1 = __webpack_require__(7);
+	var hof_1 = __webpack_require__(8);
+	var interface_1 = __webpack_require__(16);
+	var transitionHook_1 = __webpack_require__(17);
+	var hookRegistry_1 = __webpack_require__(19);
+	var hookBuilder_1 = __webpack_require__(20);
+	var node_1 = __webpack_require__(21);
+	var pathFactory_1 = __webpack_require__(24);
+	var targetState_1 = __webpack_require__(18);
+	var param_1 = __webpack_require__(22);
+	var resolvable_1 = __webpack_require__(25);
+	var rejectFactory_1 = __webpack_require__(13);
+	var resolveContext_1 = __webpack_require__(26);
+	var router_1 = __webpack_require__(28);
 	/** @hidden */
 	var stateSelf = hof_1.prop("self");
 	/**
@@ -36088,7 +35086,7 @@
 	//# sourceMappingURL=transition.js.map
 
 /***/ },
-/* 41 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -36127,9 +35125,9 @@
 	 * @coreapi
 	 * @module trace
 	 */ /** for typedoc */
-	var hof_1 = __webpack_require__(34);
-	var predicates_1 = __webpack_require__(33);
-	var strings_1 = __webpack_require__(38);
+	var hof_1 = __webpack_require__(8);
+	var predicates_1 = __webpack_require__(7);
+	var strings_1 = __webpack_require__(12);
 	/** @hidden */
 	function uiViewString(viewData) {
 	    if (!viewData)
@@ -36339,7 +35337,7 @@
 	//# sourceMappingURL=trace.js.map
 
 /***/ },
-/* 42 */
+/* 16 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -36359,18 +35357,18 @@
 	//# sourceMappingURL=interface.js.map
 
 /***/ },
-/* 43 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var common_1 = __webpack_require__(32);
-	var strings_1 = __webpack_require__(38);
-	var predicates_1 = __webpack_require__(33);
-	var hof_1 = __webpack_require__(34);
-	var trace_1 = __webpack_require__(41);
-	var coreservices_1 = __webpack_require__(35);
-	var rejectFactory_1 = __webpack_require__(39);
-	var targetState_1 = __webpack_require__(44);
+	var common_1 = __webpack_require__(6);
+	var strings_1 = __webpack_require__(12);
+	var predicates_1 = __webpack_require__(7);
+	var hof_1 = __webpack_require__(8);
+	var trace_1 = __webpack_require__(15);
+	var coreservices_1 = __webpack_require__(9);
+	var rejectFactory_1 = __webpack_require__(13);
+	var targetState_1 = __webpack_require__(18);
 	var defaultOptions = {
 	    current: common_1.noop,
 	    transition: null,
@@ -36510,7 +35508,7 @@
 	//# sourceMappingURL=transitionHook.js.map
 
 /***/ },
-/* 44 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -36518,8 +35516,8 @@
 	 * @module state
 	 */ /** for typedoc */
 	"use strict";
-	var common_1 = __webpack_require__(32);
-	var predicates_1 = __webpack_require__(33);
+	var common_1 = __webpack_require__(6);
+	var predicates_1 = __webpack_require__(7);
 	/**
 	 * Encapsulate the target (destination) state/params/options of a [[Transition]].
 	 *
@@ -36628,7 +35626,7 @@
 	//# sourceMappingURL=targetState.js.map
 
 /***/ },
-/* 45 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -36636,10 +35634,10 @@
 	 * @coreapi
 	 * @module transition
 	 */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var predicates_1 = __webpack_require__(33);
-	var interface_1 = __webpack_require__(42); // has or is using
-	var glob_1 = __webpack_require__(36);
+	var common_1 = __webpack_require__(6);
+	var predicates_1 = __webpack_require__(7);
+	var interface_1 = __webpack_require__(16); // has or is using
+	var glob_1 = __webpack_require__(10);
 	/**
 	 * Determines if the given state matches the matchCriteria
 	 *
@@ -36773,7 +35771,7 @@
 	//# sourceMappingURL=hookRegistry.js.map
 
 /***/ },
-/* 46 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -36781,10 +35779,10 @@
 	 * @module transition
 	 */ /** for typedoc */
 	"use strict";
-	var common_1 = __webpack_require__(32);
-	var predicates_1 = __webpack_require__(33);
-	var interface_1 = __webpack_require__(42);
-	var transitionHook_1 = __webpack_require__(43);
+	var common_1 = __webpack_require__(6);
+	var predicates_1 = __webpack_require__(7);
+	var interface_1 = __webpack_require__(16);
+	var transitionHook_1 = __webpack_require__(17);
 	/**
 	 * This class returns applicable TransitionHooks for a specific Transition instance.
 	 *
@@ -36898,14 +35896,14 @@
 	//# sourceMappingURL=hookBuilder.js.map
 
 /***/ },
-/* 47 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module path */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var hof_1 = __webpack_require__(34);
-	var param_1 = __webpack_require__(48);
+	var common_1 = __webpack_require__(6);
+	var hof_1 = __webpack_require__(8);
+	var param_1 = __webpack_require__(22);
 	/**
 	 * A node in a [[TreeChanges]] path
 	 *
@@ -36988,7 +35986,7 @@
 	//# sourceMappingURL=node.js.map
 
 /***/ },
-/* 48 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -36996,11 +35994,11 @@
 	 * @internalapi
 	 * @module params
 	 */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var hof_1 = __webpack_require__(34);
-	var predicates_1 = __webpack_require__(33);
-	var coreservices_1 = __webpack_require__(35);
-	var paramType_1 = __webpack_require__(49);
+	var common_1 = __webpack_require__(6);
+	var hof_1 = __webpack_require__(8);
+	var predicates_1 = __webpack_require__(7);
+	var coreservices_1 = __webpack_require__(9);
+	var paramType_1 = __webpack_require__(23);
 	var hasOwn = Object.prototype.hasOwnProperty;
 	var isShorthand = function (cfg) {
 	    return ["value", "type", "squash", "array", "dynamic"].filter(hasOwn.bind(cfg || {})).length === 0;
@@ -37166,13 +36164,13 @@
 	//# sourceMappingURL=param.js.map
 
 /***/ },
-/* 49 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module params */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var predicates_1 = __webpack_require__(33);
+	var common_1 = __webpack_require__(6);
+	var predicates_1 = __webpack_require__(7);
 	/**
 	 * An internal class which implements [[ParamTypeDefinition]].
 	 *
@@ -37308,15 +36306,15 @@
 	//# sourceMappingURL=paramType.js.map
 
 /***/ },
-/* 50 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @module path */ /** for typedoc */
 	"use strict";
-	var common_1 = __webpack_require__(32);
-	var hof_1 = __webpack_require__(34);
-	var targetState_1 = __webpack_require__(44);
-	var node_1 = __webpack_require__(47);
+	var common_1 = __webpack_require__(6);
+	var hof_1 = __webpack_require__(8);
+	var targetState_1 = __webpack_require__(18);
+	var node_1 = __webpack_require__(21);
 	/**
 	 * This class contains functions which convert TargetStates, Nodes and paths from one type to another.
 	 */
@@ -37446,7 +36444,7 @@
 	//# sourceMappingURL=pathFactory.js.map
 
 /***/ },
-/* 51 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37454,11 +36452,11 @@
 	 * @coreapi
 	 * @module resolve
 	 */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var coreservices_1 = __webpack_require__(35);
-	var trace_1 = __webpack_require__(41);
-	var strings_1 = __webpack_require__(38);
-	var predicates_1 = __webpack_require__(33);
+	var common_1 = __webpack_require__(6);
+	var coreservices_1 = __webpack_require__(9);
+	var trace_1 = __webpack_require__(15);
+	var strings_1 = __webpack_require__(12);
+	var predicates_1 = __webpack_require__(7);
 	// TODO: explicitly make this user configurable
 	exports.defaultResolvePolicy = {
 	    when: "LAZY",
@@ -37583,20 +36581,20 @@
 	//# sourceMappingURL=resolvable.js.map
 
 /***/ },
-/* 52 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module resolve */
 	/** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var hof_1 = __webpack_require__(34);
-	var trace_1 = __webpack_require__(41);
-	var coreservices_1 = __webpack_require__(35);
-	var interface_1 = __webpack_require__(53);
-	var resolvable_1 = __webpack_require__(51);
-	var pathFactory_1 = __webpack_require__(50);
-	var strings_1 = __webpack_require__(38);
+	var common_1 = __webpack_require__(6);
+	var hof_1 = __webpack_require__(8);
+	var trace_1 = __webpack_require__(15);
+	var coreservices_1 = __webpack_require__(9);
+	var interface_1 = __webpack_require__(27);
+	var resolvable_1 = __webpack_require__(25);
+	var pathFactory_1 = __webpack_require__(24);
+	var strings_1 = __webpack_require__(12);
 	var when = interface_1.resolvePolicies.when;
 	var ALL_WHENS = [when.EAGER, when.LAZY];
 	var EAGER_WHENS = [when.EAGER];
@@ -37787,7 +36785,7 @@
 	//# sourceMappingURL=resolveContext.js.map
 
 /***/ },
-/* 53 */
+/* 27 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -37806,7 +36804,7 @@
 	//# sourceMappingURL=interface.js.map
 
 /***/ },
-/* 54 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37814,16 +36812,16 @@
 	 * @coreapi
 	 * @module core
 	 */ /** */
-	var urlMatcherFactory_1 = __webpack_require__(55);
-	var urlRouter_1 = __webpack_require__(58);
-	var transitionService_1 = __webpack_require__(61);
-	var view_1 = __webpack_require__(69);
-	var stateRegistry_1 = __webpack_require__(70);
-	var stateService_1 = __webpack_require__(74);
-	var globals_1 = __webpack_require__(75);
-	var common_1 = __webpack_require__(32);
-	var predicates_1 = __webpack_require__(33);
-	var urlService_1 = __webpack_require__(77);
+	var urlMatcherFactory_1 = __webpack_require__(29);
+	var urlRouter_1 = __webpack_require__(32);
+	var transitionService_1 = __webpack_require__(35);
+	var view_1 = __webpack_require__(43);
+	var stateRegistry_1 = __webpack_require__(44);
+	var stateService_1 = __webpack_require__(48);
+	var globals_1 = __webpack_require__(49);
+	var common_1 = __webpack_require__(6);
+	var predicates_1 = __webpack_require__(7);
+	var urlService_1 = __webpack_require__(51);
 	/** @hidden */
 	var _routerInstance = 0;
 	/**
@@ -37911,7 +36909,7 @@
 	//# sourceMappingURL=router.js.map
 
 /***/ },
-/* 55 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37919,11 +36917,11 @@
 	 * @internalapi
 	 * @module url
 	 */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var predicates_1 = __webpack_require__(33);
-	var urlMatcher_1 = __webpack_require__(56);
-	var param_1 = __webpack_require__(48);
-	var paramTypes_1 = __webpack_require__(57);
+	var common_1 = __webpack_require__(6);
+	var predicates_1 = __webpack_require__(7);
+	var urlMatcher_1 = __webpack_require__(30);
+	var param_1 = __webpack_require__(22);
+	var paramTypes_1 = __webpack_require__(31);
 	/**
 	 * Factory for [[UrlMatcher]] instances.
 	 *
@@ -38042,7 +37040,7 @@
 	//# sourceMappingURL=urlMatcherFactory.js.map
 
 /***/ },
-/* 56 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38050,11 +37048,11 @@
 	 * @coreapi
 	 * @module url
 	 */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var hof_1 = __webpack_require__(34);
-	var predicates_1 = __webpack_require__(33);
-	var param_1 = __webpack_require__(48);
-	var strings_1 = __webpack_require__(38);
+	var common_1 = __webpack_require__(6);
+	var hof_1 = __webpack_require__(8);
+	var predicates_1 = __webpack_require__(7);
+	var param_1 = __webpack_require__(22);
+	var strings_1 = __webpack_require__(12);
 	/** @hidden */
 	function quoteRegExp(string, param) {
 	    var surroundPattern = ['', ''], result = string.replace(/[\\\[\]\^$*+?.()|{}]/g, "\\$&");
@@ -38519,7 +37517,7 @@
 	//# sourceMappingURL=urlMatcher.js.map
 
 /***/ },
-/* 57 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38527,11 +37525,11 @@
 	 * @coreapi
 	 * @module params
 	 */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var predicates_1 = __webpack_require__(33);
-	var hof_1 = __webpack_require__(34);
-	var coreservices_1 = __webpack_require__(35);
-	var paramType_1 = __webpack_require__(49);
+	var common_1 = __webpack_require__(6);
+	var predicates_1 = __webpack_require__(7);
+	var hof_1 = __webpack_require__(8);
+	var coreservices_1 = __webpack_require__(9);
+	var paramType_1 = __webpack_require__(23);
 	/**
 	 * A registry for parameter types.
 	 *
@@ -38678,7 +37676,7 @@
 	//# sourceMappingURL=paramTypes.js.map
 
 /***/ },
-/* 58 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38687,12 +37685,12 @@
 	 * @module url
 	 */
 	/** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var predicates_1 = __webpack_require__(33);
-	var urlMatcher_1 = __webpack_require__(56);
-	var hof_1 = __webpack_require__(34);
-	var urlRule_1 = __webpack_require__(59);
-	var targetState_1 = __webpack_require__(44);
+	var common_1 = __webpack_require__(6);
+	var predicates_1 = __webpack_require__(7);
+	var urlMatcher_1 = __webpack_require__(30);
+	var hof_1 = __webpack_require__(8);
+	var urlRule_1 = __webpack_require__(33);
+	var targetState_1 = __webpack_require__(18);
 	/** @hidden */
 	function appendBasePath(url, isHtml5, absolute, baseHref) {
 	    if (baseHref === '/')
@@ -38927,7 +37925,7 @@
 	//# sourceMappingURL=urlRouter.js.map
 
 /***/ },
-/* 59 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38935,11 +37933,11 @@
 	 * @coreapi
 	 * @module url
 	 */ /** */
-	var urlMatcher_1 = __webpack_require__(56);
-	var predicates_1 = __webpack_require__(33);
-	var common_1 = __webpack_require__(32);
-	var hof_1 = __webpack_require__(34);
-	var stateObject_1 = __webpack_require__(60);
+	var urlMatcher_1 = __webpack_require__(30);
+	var predicates_1 = __webpack_require__(7);
+	var common_1 = __webpack_require__(6);
+	var hof_1 = __webpack_require__(8);
+	var stateObject_1 = __webpack_require__(34);
 	/**
 	 * Creates a [[UrlRule]]
 	 *
@@ -39141,7 +38139,7 @@
 	//# sourceMappingURL=urlRule.js.map
 
 /***/ },
-/* 60 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -39149,8 +38147,8 @@
 	 * @module state
 	 */ /** for typedoc */
 	"use strict";
-	var common_1 = __webpack_require__(32);
-	var hof_1 = __webpack_require__(34);
+	var common_1 = __webpack_require__(6);
+	var hof_1 = __webpack_require__(8);
 	/**
 	 * Internal representation of a UI-Router state.
 	 *
@@ -39235,7 +38233,7 @@
 	//# sourceMappingURL=stateObject.js.map
 
 /***/ },
-/* 61 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39243,20 +38241,20 @@
 	 * @coreapi
 	 * @module transition
 	 */ /** for typedoc */
-	var interface_1 = __webpack_require__(42);
-	var transition_1 = __webpack_require__(40);
-	var hookRegistry_1 = __webpack_require__(45);
-	var resolve_1 = __webpack_require__(62);
-	var views_1 = __webpack_require__(63);
-	var url_1 = __webpack_require__(64);
-	var redirectTo_1 = __webpack_require__(65);
-	var onEnterExitRetain_1 = __webpack_require__(66);
-	var lazyLoad_1 = __webpack_require__(67);
-	var transitionEventType_1 = __webpack_require__(68);
-	var transitionHook_1 = __webpack_require__(43);
-	var predicates_1 = __webpack_require__(33);
-	var common_1 = __webpack_require__(32);
-	var hof_1 = __webpack_require__(34);
+	var interface_1 = __webpack_require__(16);
+	var transition_1 = __webpack_require__(14);
+	var hookRegistry_1 = __webpack_require__(19);
+	var resolve_1 = __webpack_require__(36);
+	var views_1 = __webpack_require__(37);
+	var url_1 = __webpack_require__(38);
+	var redirectTo_1 = __webpack_require__(39);
+	var onEnterExitRetain_1 = __webpack_require__(40);
+	var lazyLoad_1 = __webpack_require__(41);
+	var transitionEventType_1 = __webpack_require__(42);
+	var transitionHook_1 = __webpack_require__(17);
+	var predicates_1 = __webpack_require__(7);
+	var common_1 = __webpack_require__(6);
+	var hof_1 = __webpack_require__(8);
 	/**
 	 * The default [[Transition]] options.
 	 *
@@ -39476,14 +38474,14 @@
 	//# sourceMappingURL=transitionService.js.map
 
 /***/ },
-/* 62 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module hooks */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var resolveContext_1 = __webpack_require__(52);
-	var hof_1 = __webpack_require__(34);
+	var common_1 = __webpack_require__(6);
+	var resolveContext_1 = __webpack_require__(26);
+	var hof_1 = __webpack_require__(8);
 	/**
 	 * A [[TransitionHookFn]] which resolves all EAGER Resolvables in the To Path
 	 *
@@ -39522,13 +38520,13 @@
 	//# sourceMappingURL=resolve.js.map
 
 /***/ },
-/* 63 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module hooks */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var coreservices_1 = __webpack_require__(35);
+	var common_1 = __webpack_require__(6);
+	var coreservices_1 = __webpack_require__(9);
 	/**
 	 * A [[TransitionHookFn]] which waits for the views to load
 	 *
@@ -39573,7 +38571,7 @@
 	//# sourceMappingURL=views.js.map
 
 /***/ },
-/* 64 */
+/* 38 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -39602,14 +38600,14 @@
 	//# sourceMappingURL=url.js.map
 
 /***/ },
-/* 65 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module hooks */ /** */
-	var predicates_1 = __webpack_require__(33);
-	var coreservices_1 = __webpack_require__(35);
-	var targetState_1 = __webpack_require__(44);
+	var predicates_1 = __webpack_require__(7);
+	var coreservices_1 = __webpack_require__(9);
+	var targetState_1 = __webpack_require__(18);
 	/**
 	 * A [[TransitionHookFn]] that redirects to a different state or params
 	 *
@@ -39643,7 +38641,7 @@
 	//# sourceMappingURL=redirectTo.js.map
 
 /***/ },
-/* 66 */
+/* 40 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -39703,11 +38701,11 @@
 	//# sourceMappingURL=onEnterExitRetain.js.map
 
 /***/ },
-/* 67 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var coreservices_1 = __webpack_require__(35);
+	var coreservices_1 = __webpack_require__(9);
 	/**
 	 * A [[TransitionHookFn]] that performs lazy loading
 	 *
@@ -39804,11 +38802,11 @@
 	//# sourceMappingURL=lazyLoad.js.map
 
 /***/ },
-/* 68 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var transitionHook_1 = __webpack_require__(43);
+	var transitionHook_1 = __webpack_require__(17);
 	/**
 	 * This class defines a type of hook, such as `onBefore` or `onEnter`.
 	 * Plugins can define custom hook types, such as sticky states does for `onInactive`.
@@ -39836,7 +38834,7 @@
 	//# sourceMappingURL=transitionEventType.js.map
 
 /***/ },
-/* 69 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39844,10 +38842,10 @@
 	 * @coreapi
 	 * @module view
 	 */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var hof_1 = __webpack_require__(34);
-	var predicates_1 = __webpack_require__(33);
-	var trace_1 = __webpack_require__(41);
+	var common_1 = __webpack_require__(6);
+	var hof_1 = __webpack_require__(8);
+	var predicates_1 = __webpack_require__(7);
+	var trace_1 = __webpack_require__(15);
 	/**
 	 * The View service
 	 *
@@ -40109,7 +39107,7 @@
 	//# sourceMappingURL=view.js.map
 
 /***/ },
-/* 70 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -40117,11 +39115,11 @@
 	 * @module state
 	 */ /** for typedoc */
 	"use strict";
-	var stateMatcher_1 = __webpack_require__(71);
-	var stateBuilder_1 = __webpack_require__(72);
-	var stateQueueManager_1 = __webpack_require__(73);
-	var common_1 = __webpack_require__(32);
-	var hof_1 = __webpack_require__(34);
+	var stateMatcher_1 = __webpack_require__(45);
+	var stateBuilder_1 = __webpack_require__(46);
+	var stateQueueManager_1 = __webpack_require__(47);
+	var common_1 = __webpack_require__(6);
+	var hof_1 = __webpack_require__(8);
 	var StateRegistry = (function () {
 	    /** @internalapi */
 	    function StateRegistry(_router) {
@@ -40270,14 +39268,14 @@
 	//# sourceMappingURL=stateRegistry.js.map
 
 /***/ },
-/* 71 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module state */ /** for typedoc */
-	var predicates_1 = __webpack_require__(33);
-	var glob_1 = __webpack_require__(36);
-	var common_1 = __webpack_require__(32);
+	var predicates_1 = __webpack_require__(7);
+	var glob_1 = __webpack_require__(10);
+	var common_1 = __webpack_require__(6);
 	var StateMatcher = (function () {
 	    function StateMatcher(_states) {
 	        this._states = _states;
@@ -40334,17 +39332,17 @@
 	//# sourceMappingURL=stateMatcher.js.map
 
 /***/ },
-/* 72 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module state */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var predicates_1 = __webpack_require__(33);
-	var strings_1 = __webpack_require__(38);
-	var hof_1 = __webpack_require__(34);
-	var resolvable_1 = __webpack_require__(51);
-	var coreservices_1 = __webpack_require__(35);
+	var common_1 = __webpack_require__(6);
+	var predicates_1 = __webpack_require__(7);
+	var strings_1 = __webpack_require__(12);
+	var hof_1 = __webpack_require__(8);
+	var resolvable_1 = __webpack_require__(25);
+	var coreservices_1 = __webpack_require__(9);
 	var parseUrl = function (url) {
 	    if (!predicates_1.isString(url))
 	        return false;
@@ -40612,14 +39610,14 @@
 	//# sourceMappingURL=stateBuilder.js.map
 
 /***/ },
-/* 73 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module state */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
-	var predicates_1 = __webpack_require__(33);
-	var stateObject_1 = __webpack_require__(60);
+	var common_1 = __webpack_require__(6);
+	var predicates_1 = __webpack_require__(7);
+	var stateObject_1 = __webpack_require__(34);
 	/** @internalapi */
 	var StateQueueManager = (function () {
 	    function StateQueueManager($registry, $urlRouter, states, builder, listeners) {
@@ -40705,7 +39703,7 @@
 	//# sourceMappingURL=stateQueueManager.js.map
 
 /***/ },
-/* 74 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -40713,20 +39711,20 @@
 	 * @coreapi
 	 * @module state
 	 */ /** */
-	var common_1 = __webpack_require__(32);
-	var predicates_1 = __webpack_require__(33);
-	var queue_1 = __webpack_require__(37);
-	var coreservices_1 = __webpack_require__(35);
-	var pathFactory_1 = __webpack_require__(50);
-	var node_1 = __webpack_require__(47);
-	var transitionService_1 = __webpack_require__(61);
-	var rejectFactory_1 = __webpack_require__(39);
-	var targetState_1 = __webpack_require__(44);
-	var param_1 = __webpack_require__(48);
-	var glob_1 = __webpack_require__(36);
-	var resolveContext_1 = __webpack_require__(52);
-	var lazyLoad_1 = __webpack_require__(67);
-	var hof_1 = __webpack_require__(34);
+	var common_1 = __webpack_require__(6);
+	var predicates_1 = __webpack_require__(7);
+	var queue_1 = __webpack_require__(11);
+	var coreservices_1 = __webpack_require__(9);
+	var pathFactory_1 = __webpack_require__(24);
+	var node_1 = __webpack_require__(21);
+	var transitionService_1 = __webpack_require__(35);
+	var rejectFactory_1 = __webpack_require__(13);
+	var targetState_1 = __webpack_require__(18);
+	var param_1 = __webpack_require__(22);
+	var glob_1 = __webpack_require__(10);
+	var resolveContext_1 = __webpack_require__(26);
+	var lazyLoad_1 = __webpack_require__(41);
+	var hof_1 = __webpack_require__(8);
 	/**
 	 * Provides state related service functions
 	 *
@@ -41296,7 +40294,7 @@
 	//# sourceMappingURL=stateService.js.map
 
 /***/ },
-/* 75 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41304,9 +40302,9 @@
 	 * @coreapi
 	 * @module core
 	 */ /** */
-	var stateParams_1 = __webpack_require__(76);
-	var queue_1 = __webpack_require__(37);
-	var common_1 = __webpack_require__(32);
+	var stateParams_1 = __webpack_require__(50);
+	var queue_1 = __webpack_require__(11);
+	var common_1 = __webpack_require__(6);
 	/**
 	 * Global mutable state
 	 */
@@ -41338,12 +40336,12 @@
 	//# sourceMappingURL=globals.js.map
 
 /***/ },
-/* 76 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module params */ /** for typedoc */
-	var common_1 = __webpack_require__(32);
+	var common_1 = __webpack_require__(6);
 	var StateParams = (function () {
 	    function StateParams(params) {
 	        if (params === void 0) { params = {}; }
@@ -41381,7 +40379,7 @@
 	//# sourceMappingURL=stateParams.js.map
 
 /***/ },
-/* 77 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -41389,8 +40387,8 @@
 	 * @module url
 	 */ /** */
 	"use strict";
-	var coreservices_1 = __webpack_require__(35);
-	var common_1 = __webpack_require__(32);
+	var coreservices_1 = __webpack_require__(9);
+	var common_1 = __webpack_require__(6);
 	/** @hidden */
 	var makeStub = function (keys) {
 	    return keys.reduce(function (acc, key) { return (acc[key] = coreservices_1.notImplemented(key), acc); }, { dispose: common_1.noop });
@@ -41465,21 +40463,21 @@
 	//# sourceMappingURL=urlService.js.map
 
 /***/ },
-/* 78 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(48));
-	__export(__webpack_require__(57));
-	__export(__webpack_require__(76));
-	__export(__webpack_require__(49));
+	__export(__webpack_require__(22));
+	__export(__webpack_require__(31));
+	__export(__webpack_require__(50));
+	__export(__webpack_require__(23));
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 79 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41487,12 +40485,12 @@
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
 	/** @module path */ /** for typedoc */
-	__export(__webpack_require__(47));
-	__export(__webpack_require__(50));
+	__export(__webpack_require__(21));
+	__export(__webpack_require__(24));
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 80 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41500,30 +40498,30 @@
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
 	/** @module resolve */ /** for typedoc */
-	__export(__webpack_require__(53));
-	__export(__webpack_require__(51));
-	__export(__webpack_require__(52));
+	__export(__webpack_require__(27));
+	__export(__webpack_require__(25));
+	__export(__webpack_require__(26));
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 81 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(72));
-	__export(__webpack_require__(60));
-	__export(__webpack_require__(71));
-	__export(__webpack_require__(73));
-	__export(__webpack_require__(70));
-	__export(__webpack_require__(74));
+	__export(__webpack_require__(46));
+	__export(__webpack_require__(34));
+	__export(__webpack_require__(45));
+	__export(__webpack_require__(47));
 	__export(__webpack_require__(44));
+	__export(__webpack_require__(48));
+	__export(__webpack_require__(18));
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 82 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41542,44 +40540,44 @@
 	 * @preferred
 	 * @module transition
 	 */ /** for typedoc */
+	__export(__webpack_require__(16));
+	__export(__webpack_require__(20));
+	__export(__webpack_require__(19));
+	__export(__webpack_require__(13));
+	__export(__webpack_require__(14));
+	__export(__webpack_require__(17));
 	__export(__webpack_require__(42));
-	__export(__webpack_require__(46));
-	__export(__webpack_require__(45));
-	__export(__webpack_require__(39));
-	__export(__webpack_require__(40));
+	__export(__webpack_require__(35));
+	//# sourceMappingURL=index.js.map
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	function __export(m) {
+	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+	}
+	__export(__webpack_require__(30));
+	__export(__webpack_require__(29));
+	__export(__webpack_require__(32));
+	__export(__webpack_require__(33));
+	__export(__webpack_require__(51));
+	//# sourceMappingURL=index.js.map
+
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	function __export(m) {
+	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+	}
 	__export(__webpack_require__(43));
-	__export(__webpack_require__(68));
-	__export(__webpack_require__(61));
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	function __export(m) {
-	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-	}
-	__export(__webpack_require__(56));
-	__export(__webpack_require__(55));
-	__export(__webpack_require__(58));
-	__export(__webpack_require__(59));
-	__export(__webpack_require__(77));
-	//# sourceMappingURL=index.js.map
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	function __export(m) {
-	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-	}
-	__export(__webpack_require__(69));
-	//# sourceMappingURL=index.js.map
-
-/***/ },
-/* 85 */
+/* 59 */
 /***/ function(module, exports) {
 
 	/**
@@ -41603,7 +40601,7 @@
 	//# sourceMappingURL=interface.js.map
 
 /***/ },
-/* 86 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41618,14 +40616,14 @@
 	 * @preferred
 	 */
 	/** for typedoc */
-	var angular_1 = __webpack_require__(87);
-	var ui_router_core_1 = __webpack_require__(30);
-	var views_1 = __webpack_require__(88);
-	var templateFactory_1 = __webpack_require__(89);
-	var stateProvider_1 = __webpack_require__(90);
-	var onEnterExitRetain_1 = __webpack_require__(91);
-	var locationServices_1 = __webpack_require__(92);
-	var urlRouterProvider_1 = __webpack_require__(93);
+	var angular_1 = __webpack_require__(61);
+	var ui_router_core_1 = __webpack_require__(4);
+	var views_1 = __webpack_require__(62);
+	var templateFactory_1 = __webpack_require__(63);
+	var stateProvider_1 = __webpack_require__(64);
+	var onEnterExitRetain_1 = __webpack_require__(65);
+	var locationServices_1 = __webpack_require__(66);
+	var urlRouterProvider_1 = __webpack_require__(67);
 	angular_1.ng.module("ui.router.angular1", []);
 	var mod_init = angular_1.ng.module('ui.router.init', []);
 	var mod_util = angular_1.ng.module('ui.router.util', ['ng', 'ui.router.init']);
@@ -41722,7 +40720,7 @@
 	//# sourceMappingURL=services.js.map
 
 /***/ },
-/* 87 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41732,11 +40730,11 @@
 	//# sourceMappingURL=angular.js.map
 
 /***/ },
-/* 88 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var ui_router_core_1 = __webpack_require__(30);
+	var ui_router_core_1 = __webpack_require__(4);
 	function getNg1ViewConfigFactory() {
 	    var templateFactory = null;
 	    return function (path, view) {
@@ -41833,14 +40831,14 @@
 	//# sourceMappingURL=views.js.map
 
 /***/ },
-/* 89 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module view */
 	/** for typedoc */
-	var angular_1 = __webpack_require__(87);
-	var ui_router_core_1 = __webpack_require__(30);
+	var angular_1 = __webpack_require__(61);
+	var ui_router_core_1 = __webpack_require__(4);
 	/**
 	 * Service which manages loading of templates from a ViewConfig.
 	 */
@@ -42024,12 +41022,12 @@
 	//# sourceMappingURL=templateFactory.js.map
 
 /***/ },
-/* 90 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module ng1 */ /** for typedoc */
-	var ui_router_core_1 = __webpack_require__(30);
+	var ui_router_core_1 = __webpack_require__(4);
 	/**
 	 * @ngdoc object
 	 * @name ui.router.state.$stateProvider
@@ -42175,13 +41173,13 @@
 	//# sourceMappingURL=stateProvider.js.map
 
 /***/ },
-/* 91 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module ng1 */ /** */
-	var ui_router_core_1 = __webpack_require__(30);
-	var services_1 = __webpack_require__(86);
+	var ui_router_core_1 = __webpack_require__(4);
+	var services_1 = __webpack_require__(60);
 	/**
 	 * This is a [[StateBuilder.builder]] function for angular1 `onEnter`, `onExit`,
 	 * `onRetain` callback hooks on a [[Ng1StateDeclaration]].
@@ -42204,11 +41202,11 @@
 	//# sourceMappingURL=onEnterExitRetain.js.map
 
 /***/ },
-/* 92 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var ui_router_core_1 = __webpack_require__(30);
+	var ui_router_core_1 = __webpack_require__(4);
 	/**
 	 * Implements UI-Router LocationServices and LocationConfig using Angular 1's $location service
 	 */
@@ -42283,13 +41281,13 @@
 	//# sourceMappingURL=locationServices.js.map
 
 /***/ },
-/* 93 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module url */ /** */
-	var ui_router_core_1 = __webpack_require__(30);
-	var ui_router_core_2 = __webpack_require__(30);
+	var ui_router_core_1 = __webpack_require__(4);
+	var ui_router_core_2 = __webpack_require__(4);
 	/**
 	 * Manages rules for client-side URL
 	 *
@@ -42491,7 +41489,7 @@
 	//# sourceMappingURL=urlRouterProvider.js.map
 
 /***/ },
-/* 94 */
+/* 68 */
 /***/ function(module, exports) {
 
 	/**
@@ -42853,7 +41851,7 @@
 	//# sourceMappingURL=injectables.js.map
 
 /***/ },
-/* 95 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42866,8 +41864,8 @@
 	 * @preferred
 	 * @module directives
 	 */ /** for typedoc */
-	var angular_1 = __webpack_require__(87);
-	var ui_router_core_1 = __webpack_require__(30);
+	var angular_1 = __webpack_require__(61);
+	var ui_router_core_1 = __webpack_require__(4);
 	/** @hidden */
 	function parseStateRef(ref) {
 	    var paramsOnly = ref.match(/^\s*({[^}]*})\s*$/), parsed;
@@ -43386,12 +42384,12 @@
 	//# sourceMappingURL=stateDirectives.js.map
 
 /***/ },
-/* 96 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @module state */ /** for typedoc */
 	"use strict";
-	var angular_1 = __webpack_require__(87);
+	var angular_1 = __webpack_require__(61);
 	/**
 	 * @ngdoc filter
 	 * @name ui.router.state.filter:isState
@@ -43434,7 +42432,7 @@
 	//# sourceMappingURL=stateFilters.js.map
 
 /***/ },
-/* 97 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -43442,11 +42440,11 @@
 	 * @ng1api
 	 * @module directives
 	 */ /** for typedoc */
-	var angular_1 = __webpack_require__(87);
+	var angular_1 = __webpack_require__(61);
 	var angular_2 = __webpack_require__(1);
-	var ui_router_core_1 = __webpack_require__(30);
-	var views_1 = __webpack_require__(88);
-	var services_1 = __webpack_require__(86);
+	var ui_router_core_1 = __webpack_require__(4);
+	var views_1 = __webpack_require__(62);
+	var services_1 = __webpack_require__(60);
 	/**
 	 * `ui-view`: A viewport directive which is filled in by a view from the active state.
 	 *
@@ -43836,12 +42834,12 @@
 	//# sourceMappingURL=viewDirective.js.map
 
 /***/ },
-/* 98 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	/** @module ng1 */ /** */
-	var angular_1 = __webpack_require__(87);
+	var angular_1 = __webpack_require__(61);
 	/** @hidden */
 	function $ViewScrollProvider() {
 	    var useAnchorScroll = false;
@@ -43863,7 +42861,2508 @@
 	//# sourceMappingURL=viewScroll.js.map
 
 /***/ },
+/* 73 */
+/***/ function(module, exports) {
+
+	/**
+	 * AngularJS module that adds support for specifying default child views for abstract states when using ui-router.
+	 *
+	 * @link https://github.com/nonplus/angular-ui-router-default
+	 *
+	 * @license angular-ui-router-default v0.0.6
+	 * (c) Copyright Stepan Riha <github@nonplus.net>
+	 * License MIT
+	 */
+	
+	(function(angular) {
+	
+	"use strict";
+	var moduleName = 'ui.router.default';
+	if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports === exports) {
+	    module.exports = moduleName;
+	}
+	var max_redirects = 10;
+	angular.module(moduleName, ['ui.router'])
+	    .config(['$provide', function ($provide) {
+	        $provide.decorator('$state', ['$delegate', '$injector', '$q', function ($delegate, $injector, $q) {
+	                var transitionTo = $delegate.transitionTo;
+	                var pendingPromise;
+	                $delegate.transitionTo = function (to, toParams, options) {
+	                    var numRedirects = 0;
+	                    var $state = this;
+	                    var nextState = to.name || to;
+	                    var nextParams = toParams;
+	                    var nextOptions = options;
+	                    return fetchTarget();
+	                    function fetchTarget() {
+	                        var target = $state.get(nextState, $state.$current);
+	                        if (!target) {
+	                            // default specification is invalid, let ui-router report the problem...
+	                            return transitionTo.call($delegate, nextState, nextParams, nextOptions);
+	                        }
+	                        nextState = target.name;
+	                        var absRedirectPromise = getAbstractRedirect(target);
+	                        pendingPromise = absRedirectPromise;
+	                        return $q.when(absRedirectPromise)
+	                            .then(abstractTargetResolved);
+	                        function abstractTargetResolved(abstractTarget) {
+	                            if (absRedirectPromise !== pendingPromise) {
+	                                return $q.reject(new Error('transition superseded'));
+	                            }
+	                            // we didn't get anything from the abstract target
+	                            if (!abstractTarget) {
+	                                return transitionTo.call($delegate, nextState, nextParams, nextOptions);
+	                            }
+	                            checkForMaxRedirect();
+	                            nextState = abstractTarget;
+	                            return fetchTarget();
+	                        }
+	                        function checkForMaxRedirect() {
+	                            if (numRedirects === max_redirects) {
+	                                throw new Error('Too many abstract state default redirects');
+	                            }
+	                            numRedirects += 1;
+	                        }
+	                    }
+	                    function getAbstractRedirect(state) {
+	                        if (!state || !state.abstract || (state.abstract === true && !state.default)) {
+	                            return null;
+	                        }
+	                        return invokeAbstract(state).then(abstractInvoked);
+	                        function abstractInvoked(newState) {
+	                            if (newState[0] === '.') {
+	                                return nextState + newState;
+	                            }
+	                            else {
+	                                return newState;
+	                            }
+	                        }
+	                    }
+	                    function invokeAbstract(state) {
+	                        var defaultState;
+	                        if (state.default) {
+	                            defaultState = state.default;
+	                        }
+	                        else {
+	                            defaultState = state.abstract;
+	                        }
+	                        if (defaultState instanceof Function || defaultState instanceof Array) {
+	                            return $q.when($injector.invoke(defaultState));
+	                        }
+	                        else {
+	                            return $q.when(defaultState);
+	                        }
+	                    }
+	                };
+	                return $delegate;
+	            }]);
+	    }]);
+	
+	
+	})(window.angular);
+
+/***/ },
+/* 74 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * State-based routing for AngularJS 1.x
+	 * @version v1.0.0-rc.1
+	 * @link https://ui-router.github.io
+	 * @license MIT License, http://www.opensource.org/licenses/MIT
+	 */
+	(function (global, factory) {
+	     true ? factory(exports, __webpack_require__(1)) :
+	    typeof define === 'function' && define.amd ? define(['exports', 'angular'], factory) :
+	    (factory((global['angular-ui-router-state-events'] = global['angular-ui-router-state-events'] || {}),global.angular));
+	}(this, (function (exports,ng_from_import) { 'use strict';
+	
+	var ng_from_global = angular;
+	var ng = (ng_from_import && ng_from_import.module) ? ng_from_import : ng_from_global;
+	
+	/**
+	 * Provides implementation of the UI-Router 0.2.x state events.
+	 *
+	 * The 0.2.x state events are deprecated.  We recommend moving to Transition Hooks instead, as they
+	 * provide much more flexibility, support async, and provide the context (the Transition, etc) necessary
+	 * to implement meaningful application behaviors.
+	 *
+	 * To enable these state events, include the `stateEvents.js` file in your project, e.g.,
+	 * ```
+	 * <script src="stateEvents.js"></script>
+	 * ```
+	 * and also make sure you depend on the `ui.router.state.events` angular module, e.g.,
+	 * ```
+	 * angular.module("myApplication", ['ui.router', 'ui.router.state.events']
+	 * ```
+	 *
+	 * @module ng1_state_events
+	 */ /** */
+	/**
+	 * An event broadcast on `$rootScope` when the state transition **begins**.
+	 *
+	 * You can use `event.preventDefault()`
+	 * to prevent the transition from happening and then the transition promise will be
+	 * rejected with a `'transition prevented'` value.
+	 *
+	 * Additional arguments to the event handler are provided:
+	 * - `toState`: the Transition Target state
+	 * - `toParams`: the Transition Target Params
+	 * - `fromState`: the state the transition is coming from
+	 * - `fromParams`: the parameters from the state the transition is coming from
+	 * - `options`: any Transition Options
+	 * - `$transition$`: the [[Transition]]
+	 *
+	 * @example
+	 * ```
+	 *
+	 * $rootScope.$on('$stateChangeStart', function(event, transition) {
+	 *   event.preventDefault();
+	 *   // transitionTo() promise will be rejected with
+	 *   // a 'transition prevented' error
+	 * })
+	 * ```
+	 *
+	 * @deprecated use [[TransitionService.onStart]]
+	 * @event $stateChangeStart
+	 */
+	var $stateChangeStart;
+	/**
+	 * An event broadcast on `$rootScope` if a transition is **cancelled**.
+	 *
+	 * Additional arguments to the event handler are provided:
+	 * - `toState`: the Transition Target state
+	 * - `toParams`: the Transition Target Params
+	 * - `fromState`: the state the transition is coming from
+	 * - `fromParams`: the parameters from the state the transition is coming from
+	 * - `options`: any Transition Options
+	 * - `$transition$`: the [[Transition]] that was cancelled
+	 *
+	 * @deprecated
+	 * @event $stateChangeCancel
+	 */
+	var $stateChangeCancel;
+	/**
+	 *
+	 * An event broadcast on `$rootScope` once the state transition is **complete**.
+	 *
+	 * Additional arguments to the event handler are provided:
+	 * - `toState`: the Transition Target state
+	 * - `toParams`: the Transition Target Params
+	 * - `fromState`: the state the transition is coming from
+	 * - `fromParams`: the parameters from the state the transition is coming from
+	 * - `options`: any Transition Options
+	 * - `$transition$`: the [[Transition]] that just succeeded
+	 *
+	 * @deprecated use [[TransitionService.onStart]] and [[Transition.promise]], or [[Transition.onSuccess]]
+	 * @event $stateChangeSuccess
+	 */
+	var $stateChangeSuccess;
+	/**
+	 * An event broadcast on `$rootScope` when an **error occurs** during transition.
+	 *
+	 * It's important to note that if you
+	 * have any errors in your resolve functions (javascript errors, non-existent services, etc)
+	 * they will not throw traditionally. You must listen for this $stateChangeError event to
+	 * catch **ALL** errors.
+	 *
+	 * Additional arguments to the event handler are provided:
+	 * - `toState`: the Transition Target state
+	 * - `toParams`: the Transition Target Params
+	 * - `fromState`: the state the transition is coming from
+	 * - `fromParams`: the parameters from the state the transition is coming from
+	 * - `error`: The reason the transition errored.
+	 * - `options`: any Transition Options
+	 * - `$transition$`: the [[Transition]] that errored
+	 *
+	 * @deprecated use [[TransitionService.onStart]] and [[Transition.promise]], or [[Transition.onError]]
+	 * @event $stateChangeError
+	 */
+	var $stateChangeError;
+	/**
+	 * An event broadcast on `$rootScope` when a requested state **cannot be found** using the provided state name.
+	 *
+	 * The event is broadcast allowing any handlers a single chance to deal with the error (usually by
+	 * lazy-loading the unfound state). A `TargetState` object is passed to the listener handler,
+	 * you can see its properties in the example. You can use `event.preventDefault()` to abort the
+	 * transition and the promise returned from `transitionTo()` will be rejected with a
+	 * `'transition aborted'` error.
+	 *
+	 * Additional arguments to the event handler are provided:
+	 * - `unfoundState` Unfound State information. Contains: `to, toParams, options` properties.
+	 * - `fromState`: the state the transition is coming from
+	 * - `fromParams`: the parameters from the state the transition is coming from
+	 * - `options`: any Transition Options
+	 * @example
+	 *
+	 * <pre>
+	 * // somewhere, assume lazy.state has not been defined
+	 * $state.go("lazy.state", { a: 1, b: 2 }, { inherit: false });
+	 *
+	 * // somewhere else
+	 * $scope.$on('$stateNotFound', function(event, transition) {
+	 * function(event, unfoundState, fromState, fromParams){
+	 *     console.log(unfoundState.to); // "lazy.state"
+	 *     console.log(unfoundState.toParams); // {a:1, b:2}
+	 *     console.log(unfoundState.options); // {inherit:false} + default options
+	 * });
+	 * </pre>
+	 *
+	 * @deprecated use [[StateProvider.onInvalid]] // TODO: Move to [[StateService.onInvalid]]
+	 * @event $stateNotFound
+	 */
+	var $stateNotFound;
+	(function () {
+	    var isFunction = ng.isFunction, isString = ng.isString;
+	    function applyPairs(memo, keyValTuple) {
+	        var key, value;
+	        if (Array.isArray(keyValTuple))
+	            key = keyValTuple[0], value = keyValTuple[1];
+	        if (!isString(key))
+	            throw new Error("invalid parameters to applyPairs");
+	        memo[key] = value;
+	        return memo;
+	    }
+	    function stateChangeStartHandler($transition$) {
+	        if (!$transition$.options().notify || !$transition$.valid() || $transition$.ignored())
+	            return;
+	        var $injector = $transition$.injector();
+	        var $stateEvents = $injector.get('$stateEvents');
+	        var $rootScope = $injector.get('$rootScope');
+	        var $state = $injector.get('$state');
+	        var $urlRouter = $injector.get('$urlRouter');
+	        var enabledEvents = $stateEvents.provider.enabled();
+	        var toParams = $transition$.params("to");
+	        var fromParams = $transition$.params("from");
+	        if (enabledEvents.$stateChangeSuccess) {
+	            var startEvent = $rootScope.$broadcast('$stateChangeStart', $transition$.to(), toParams, $transition$.from(), fromParams, $transition$.options(), $transition$);
+	            if (startEvent.defaultPrevented) {
+	                if (enabledEvents.$stateChangeCancel) {
+	                    $rootScope.$broadcast('$stateChangeCancel', $transition$.to(), toParams, $transition$.from(), fromParams, $transition$.options(), $transition$);
+	                }
+	                //Don't update and resync url if there's been a new transition started. see issue #2238, #600
+	                if ($state.transition == null)
+	                    $urlRouter.update();
+	                return false;
+	            }
+	            // right after global state is updated
+	            var successOpts = { priority: 9999 };
+	            $transition$.onSuccess({}, function () {
+	                $rootScope.$broadcast('$stateChangeSuccess', $transition$.to(), toParams, $transition$.from(), fromParams, $transition$.options(), $transition$);
+	            }, successOpts);
+	        }
+	        if (enabledEvents.$stateChangeError) {
+	            $transition$.promise["catch"](function (error) {
+	                if (error && (error.type === 2 /* RejectType.SUPERSEDED */ || error.type === 3 /* RejectType.ABORTED */))
+	                    return;
+	                var evt = $rootScope.$broadcast('$stateChangeError', $transition$.to(), toParams, $transition$.from(), fromParams, error, $transition$.options(), $transition$);
+	                if (!evt.defaultPrevented) {
+	                    $urlRouter.update();
+	                }
+	            });
+	        }
+	    }
+	    stateNotFoundHandler.$inject = ['$to$', '$from$', '$state', '$rootScope', '$urlRouter'];
+	    function stateNotFoundHandler($to$, $from$, injector) {
+	        var $state = injector.get('$state');
+	        var $rootScope = injector.get('$rootScope');
+	        var $urlRouter = injector.get('$urlRouter');
+	        var redirect = { to: $to$.identifier(), toParams: $to$.params(), options: $to$.options() };
+	        var e = $rootScope.$broadcast('$stateNotFound', redirect, $from$.state(), $from$.params());
+	        if (e.defaultPrevented || e.retry)
+	            $urlRouter.update();
+	        function redirectFn() {
+	            return $state.target(redirect.to, redirect.toParams, redirect.options);
+	        }
+	        if (e.defaultPrevented) {
+	            return false;
+	        }
+	        else if (e.retry || !!$state.get(redirect.to)) {
+	            return e.retry && isFunction(e.retry.then) ? e.retry.then(redirectFn) : redirectFn();
+	        }
+	    }
+	    $StateEventsProvider.$inject = ['$stateProvider'];
+	    function $StateEventsProvider($stateProvider) {
+	        $StateEventsProvider.prototype.instance = this;
+	        var runtime = false;
+	        var allEvents = ['$stateChangeStart', '$stateNotFound', '$stateChangeSuccess', '$stateChangeError'];
+	        var enabledStateEvents = allEvents.map(function (e) { return [e, true]; }).reduce(applyPairs, {});
+	        function assertNotRuntime() {
+	            if (runtime)
+	                throw new Error("Cannot enable events at runtime (use $stateEventsProvider");
+	        }
+	        /**
+	         * Enables the deprecated UI-Router 0.2.x State Events
+	         * [ '$stateChangeStart', '$stateNotFound', '$stateChangeSuccess', '$stateChangeError' ]
+	         */
+	        this.enable = function () {
+	            var events = [];
+	            for (var _i = 0; _i < arguments.length; _i++) {
+	                events[_i] = arguments[_i];
+	            }
+	            assertNotRuntime();
+	            if (!events || !events.length)
+	                events = allEvents;
+	            events.forEach(function (event) { return enabledStateEvents[event] = true; });
+	        };
+	        /**
+	         * Disables the deprecated UI-Router 0.2.x State Events
+	         * [ '$stateChangeStart', '$stateNotFound', '$stateChangeSuccess', '$stateChangeError' ]
+	         */
+	        this.disable = function () {
+	            var events = [];
+	            for (var _i = 0; _i < arguments.length; _i++) {
+	                events[_i] = arguments[_i];
+	            }
+	            assertNotRuntime();
+	            if (!events || !events.length)
+	                events = allEvents;
+	            events.forEach(function (event) { return delete enabledStateEvents[event]; });
+	        };
+	        this.enabled = function () { return enabledStateEvents; };
+	        this.$get = $get;
+	        $get.$inject = ['$transitions'];
+	        function $get($transitions) {
+	            runtime = true;
+	            if (enabledStateEvents["$stateNotFound"])
+	                $stateProvider.onInvalid(stateNotFoundHandler);
+	            if (enabledStateEvents.$stateChangeStart)
+	                $transitions.onBefore({}, stateChangeStartHandler, { priority: 1000 });
+	            return {
+	                provider: $StateEventsProvider.prototype.instance
+	            };
+	        }
+	    }
+	    ng.module('ui.router.state.events', ['ui.router.state'])
+	        .provider("$stateEvents", $StateEventsProvider)
+	        .run(['$stateEvents', function ($stateEvents) {
+	        }]);
+	})();
+	
+	exports.$stateChangeStart = $stateChangeStart;
+	exports.$stateChangeCancel = $stateChangeCancel;
+	exports.$stateChangeSuccess = $stateChangeSuccess;
+	exports.$stateChangeError = $stateChangeError;
+	exports.$stateNotFound = $stateNotFound;
+	
+	Object.defineProperty(exports, '__esModule', { value: true });
+	
+	})));
+	//# sourceMappingURL=stateEvents.js.map
+
+
+/***/ },
+/* 75 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
+	 * ngDialog - easy modals and popup windows
+	 * http://github.com/likeastore/ngDialog
+	 * (c) 2013-2015 MIT License, https://likeastore.com
+	 */
+	
+	(function (root, factory) {
+	    if (typeof module !== 'undefined' && module.exports) {
+	        // CommonJS
+	        if (typeof angular === 'undefined') {
+	            factory(__webpack_require__(1));
+	        } else {
+	            factory(angular);
+	        }
+	        module.exports = 'ngDialog';
+	    } else if (true) {
+	        // AMD
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    } else {
+	        // Global Variables
+	        factory(root.angular);
+	    }
+	}(this, function (angular) {
+	    'use strict';
+	
+	    var m = angular.module('ngDialog', []);
+	
+	    var $el = angular.element;
+	    var isDef = angular.isDefined;
+	    var style = (document.body || document.documentElement).style;
+	    var animationEndSupport = isDef(style.animation) || isDef(style.WebkitAnimation) || isDef(style.MozAnimation) || isDef(style.MsAnimation) || isDef(style.OAnimation);
+	    var animationEndEvent = 'animationend webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend';
+	    var focusableElementSelector = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
+	    var disabledAnimationClass = 'ngdialog-disabled-animation';
+	    var forceElementsReload = { html: false, body: false };
+	    var scopes = {};
+	    var openIdStack = [];
+	    var keydownIsBound = false;
+	    var openOnePerName = false;
+	
+	
+	    m.provider('ngDialog', function () {
+	        var defaults = this.defaults = {
+	            className: 'ngdialog-theme-default',
+	            appendClassName: '',
+	            disableAnimation: false,
+	            plain: false,
+	            showClose: true,
+	            closeByDocument: true,
+	            closeByEscape: true,
+	            closeByNavigation: false,
+	            appendTo: false,
+	            preCloseCallback: false,
+	            overlay: true,
+	            cache: true,
+	            trapFocus: true,
+	            preserveFocus: true,
+	            ariaAuto: true,
+	            ariaRole: null,
+	            ariaLabelledById: null,
+	            ariaLabelledBySelector: null,
+	            ariaDescribedById: null,
+	            ariaDescribedBySelector: null,
+	            bodyClassName: 'ngdialog-open',
+	            width: null,
+	            height: null
+	        };
+	
+	        this.setForceHtmlReload = function (_useIt) {
+	            forceElementsReload.html = _useIt || false;
+	        };
+	
+	        this.setForceBodyReload = function (_useIt) {
+	            forceElementsReload.body = _useIt || false;
+	        };
+	
+	        this.setDefaults = function (newDefaults) {
+	            angular.extend(defaults, newDefaults);
+	        };
+	
+	        this.setOpenOnePerName = function (isOpenOne) {
+	            openOnePerName = isOpenOne || false;
+	        };
+	
+	        var globalID = 0, dialogsCount = 0, closeByDocumentHandler, defers = {};
+	
+	        this.$get = ['$document', '$templateCache', '$compile', '$q', '$http', '$rootScope', '$timeout', '$window', '$controller', '$injector',
+	            function ($document, $templateCache, $compile, $q, $http, $rootScope, $timeout, $window, $controller, $injector) {
+	                var $elements = [];
+	
+	                var privateMethods = {
+	                    onDocumentKeydown: function (event) {
+	                        if (event.keyCode === 27) {
+	                            publicMethods.close('$escape');
+	                        }
+	                    },
+	
+	                    activate: function($dialog) {
+	                        var options = $dialog.data('$ngDialogOptions');
+	
+	                        if (options.trapFocus) {
+	                            $dialog.on('keydown', privateMethods.onTrapFocusKeydown);
+	
+	                            // Catch rogue changes (eg. after unfocusing everything by clicking a non-focusable element)
+	                            $elements.body.on('keydown', privateMethods.onTrapFocusKeydown);
+	                        }
+	                    },
+	
+	                    deactivate: function ($dialog) {
+	                        $dialog.off('keydown', privateMethods.onTrapFocusKeydown);
+	                        $elements.body.off('keydown', privateMethods.onTrapFocusKeydown);
+	                    },
+	
+	                    deactivateAll: function (els) {
+	                        angular.forEach(els,function(el) {
+	                            var $dialog = angular.element(el);
+	                            privateMethods.deactivate($dialog);
+	                        });
+	                    },
+	
+	                    setBodyPadding: function (width) {
+	                        var originalBodyPadding = parseInt(($elements.body.css('padding-right') || 0), 10);
+	                        $elements.body.css('padding-right', (originalBodyPadding + width) + 'px');
+	                        $elements.body.data('ng-dialog-original-padding', originalBodyPadding);
+	                        $rootScope.$broadcast('ngDialog.setPadding', width);
+	                    },
+	
+	                    resetBodyPadding: function () {
+	                        var originalBodyPadding = $elements.body.data('ng-dialog-original-padding');
+	                        if (originalBodyPadding) {
+	                            $elements.body.css('padding-right', originalBodyPadding + 'px');
+	                        } else {
+	                            $elements.body.css('padding-right', '');
+	                        }
+	                        $rootScope.$broadcast('ngDialog.setPadding', 0);
+	                    },
+	
+	                    performCloseDialog: function ($dialog, value) {
+	                        var options = $dialog.data('$ngDialogOptions');
+	                        var id = $dialog.attr('id');
+	                        var scope = scopes[id];
+	
+	                        if (!scope) {
+	                            // Already closed
+	                            return;
+	                        }
+	
+	                        if (typeof $window.Hammer !== 'undefined') {
+	                            var hammerTime = scope.hammerTime;
+	                            hammerTime.off('tap', closeByDocumentHandler);
+	                            hammerTime.destroy && hammerTime.destroy();
+	                            delete scope.hammerTime;
+	                        } else {
+	                            $dialog.unbind('click');
+	                        }
+	
+	                        if (dialogsCount === 1) {
+	                            $elements.body.unbind('keydown', privateMethods.onDocumentKeydown);
+	                        }
+	
+	                        if (!$dialog.hasClass('ngdialog-closing')){
+	                            dialogsCount -= 1;
+	                        }
+	
+	                        var previousFocus = $dialog.data('$ngDialogPreviousFocus');
+	                        if (previousFocus && previousFocus.focus) {
+	                            previousFocus.focus();
+	                        }
+	
+	                        $rootScope.$broadcast('ngDialog.closing', $dialog, value);
+	                        dialogsCount = dialogsCount < 0 ? 0 : dialogsCount;
+	                        if (animationEndSupport && !options.disableAnimation) {
+	                            scope.$destroy();
+	                            $dialog.unbind(animationEndEvent).bind(animationEndEvent, function () {
+	                                privateMethods.closeDialogElement($dialog, value);
+	                            }).addClass('ngdialog-closing');
+	                        } else {
+	                            scope.$destroy();
+	                            privateMethods.closeDialogElement($dialog, value);
+	                        }
+	                        if (defers[id]) {
+	                            defers[id].resolve({
+	                                id: id,
+	                                value: value,
+	                                $dialog: $dialog,
+	                                remainingDialogs: dialogsCount
+	                            });
+	                            delete defers[id];
+	                        }
+	                        if (scopes[id]) {
+	                            delete scopes[id];
+	                        }
+	                        openIdStack.splice(openIdStack.indexOf(id), 1);
+	                        if (!openIdStack.length) {
+	                            $elements.body.unbind('keydown', privateMethods.onDocumentKeydown);
+	                            keydownIsBound = false;
+	                        }
+	                    },
+	
+	                    closeDialogElement: function($dialog, value) {
+	                        var options = $dialog.data('$ngDialogOptions');
+	                        $dialog.remove();
+	                        if (dialogsCount === 0) {
+	                            $elements.html.removeClass(options.bodyClassName);
+	                            $elements.body.removeClass(options.bodyClassName);
+	                            privateMethods.resetBodyPadding();
+	                        }
+	                        $rootScope.$broadcast('ngDialog.closed', $dialog, value);
+	                    },
+	
+	                    closeDialog: function ($dialog, value) {
+	                        var preCloseCallback = $dialog.data('$ngDialogPreCloseCallback');
+	
+	                        if (preCloseCallback && angular.isFunction(preCloseCallback)) {
+	
+	                            var preCloseCallbackResult = preCloseCallback.call($dialog, value);
+	
+	                            if (angular.isObject(preCloseCallbackResult)) {
+	                                if (preCloseCallbackResult.closePromise) {
+	                                    preCloseCallbackResult.closePromise.then(function () {
+	                                        privateMethods.performCloseDialog($dialog, value);
+	                                    }, function () {
+	                                        return false;
+	                                    });
+	                                } else {
+	                                    preCloseCallbackResult.then(function () {
+	                                        privateMethods.performCloseDialog($dialog, value);
+	                                    }, function () {
+	                                        return false;
+	                                    });
+	                                }
+	                            } else if (preCloseCallbackResult !== false) {
+	                                privateMethods.performCloseDialog($dialog, value);
+	                            } else {
+	                                return false;
+	                            }
+	                        } else {
+	                            privateMethods.performCloseDialog($dialog, value);
+	                        }
+	                    },
+	
+	                    onTrapFocusKeydown: function(ev) {
+	                        var el = angular.element(ev.currentTarget);
+	                        var $dialog;
+	
+	                        if (el.hasClass('ngdialog')) {
+	                            $dialog = el;
+	                        } else {
+	                            $dialog = privateMethods.getActiveDialog();
+	
+	                            if ($dialog === null) {
+	                                return;
+	                            }
+	                        }
+	
+	                        var isTab = (ev.keyCode === 9);
+	                        var backward = (ev.shiftKey === true);
+	
+	                        if (isTab) {
+	                            privateMethods.handleTab($dialog, ev, backward);
+	                        }
+	                    },
+	
+	                    handleTab: function($dialog, ev, backward) {
+	                        var focusableElements = privateMethods.getFocusableElements($dialog);
+	
+	                        if (focusableElements.length === 0) {
+	                            if (document.activeElement && document.activeElement.blur) {
+	                                document.activeElement.blur();
+	                            }
+	                            return;
+	                        }
+	
+	                        var currentFocus = document.activeElement;
+	                        var focusIndex = Array.prototype.indexOf.call(focusableElements, currentFocus);
+	
+	                        var isFocusIndexUnknown = (focusIndex === -1);
+	                        var isFirstElementFocused = (focusIndex === 0);
+	                        var isLastElementFocused = (focusIndex === focusableElements.length - 1);
+	
+	                        var cancelEvent = false;
+	
+	                        if (backward) {
+	                            if (isFocusIndexUnknown || isFirstElementFocused) {
+	                                focusableElements[focusableElements.length - 1].focus();
+	                                cancelEvent = true;
+	                            }
+	                        } else {
+	                            if (isFocusIndexUnknown || isLastElementFocused) {
+	                                focusableElements[0].focus();
+	                                cancelEvent = true;
+	                            }
+	                        }
+	
+	                        if (cancelEvent) {
+	                            ev.preventDefault();
+	                            ev.stopPropagation();
+	                        }
+	                    },
+	
+	                    autoFocus: function($dialog) {
+	                        var dialogEl = $dialog[0];
+	
+	                        // Browser's (Chrome 40, Forefix 37, IE 11) don't appear to honor autofocus on the dialog, but we should
+	                        var autoFocusEl = dialogEl.querySelector('*[autofocus]');
+	                        if (autoFocusEl !== null) {
+	                            autoFocusEl.focus();
+	
+	                            if (document.activeElement === autoFocusEl) {
+	                                return;
+	                            }
+	
+	                            // Autofocus element might was display: none, so let's continue
+	                        }
+	
+	                        var focusableElements = privateMethods.getFocusableElements($dialog);
+	
+	                        if (focusableElements.length > 0) {
+	                            focusableElements[0].focus();
+	                            return;
+	                        }
+	
+	                        // We need to focus something for the screen readers to notice the dialog
+	                        var contentElements = privateMethods.filterVisibleElements(dialogEl.querySelectorAll('h1,h2,h3,h4,h5,h6,p,span'));
+	
+	                        if (contentElements.length > 0) {
+	                            var contentElement = contentElements[0];
+	                            $el(contentElement).attr('tabindex', '-1').css('outline', '0');
+	                            contentElement.focus();
+	                        }
+	                    },
+	
+	                    getFocusableElements: function ($dialog) {
+	                        var dialogEl = $dialog[0];
+	
+	                        var rawElements = dialogEl.querySelectorAll(focusableElementSelector);
+	
+	                        // Ignore untabbable elements, ie. those with tabindex = -1
+	                        var tabbableElements = privateMethods.filterTabbableElements(rawElements);
+	
+	                        return privateMethods.filterVisibleElements(tabbableElements);
+	                    },
+	
+	                    filterTabbableElements: function (els) {
+	                        var tabbableFocusableElements = [];
+	
+	                        for (var i = 0; i < els.length; i++) {
+	                            var el = els[i];
+	
+	                            if ($el(el).attr('tabindex') !== '-1') {
+	                                tabbableFocusableElements.push(el);
+	                            }
+	                        }
+	
+	                        return tabbableFocusableElements;
+	                    },
+	
+	                    filterVisibleElements: function (els) {
+	                        var visibleFocusableElements = [];
+	
+	                        for (var i = 0; i < els.length; i++) {
+	                            var el = els[i];
+	
+	                            if (el.offsetWidth > 0 || el.offsetHeight > 0) {
+	                                visibleFocusableElements.push(el);
+	                            }
+	                        }
+	
+	                        return visibleFocusableElements;
+	                    },
+	
+	                    getActiveDialog: function () {
+	                        var dialogs = document.querySelectorAll('.ngdialog');
+	
+	                        if (dialogs.length === 0) {
+	                            return null;
+	                        }
+	
+	                        // TODO: This might be incorrect if there are a mix of open dialogs with different 'appendTo' values
+	                        return $el(dialogs[dialogs.length - 1]);
+	                    },
+	
+	                    applyAriaAttributes: function ($dialog, options) {
+	                        if (options.ariaAuto) {
+	                            if (!options.ariaRole) {
+	                                var detectedRole = (privateMethods.getFocusableElements($dialog).length > 0) ?
+	                                    'dialog' :
+	                                    'alertdialog';
+	
+	                                options.ariaRole = detectedRole;
+	                            }
+	
+	                            if (!options.ariaLabelledBySelector) {
+	                                options.ariaLabelledBySelector = 'h1,h2,h3,h4,h5,h6';
+	                            }
+	
+	                            if (!options.ariaDescribedBySelector) {
+	                                options.ariaDescribedBySelector = 'article,section,p';
+	                            }
+	                        }
+	
+	                        if (options.ariaRole) {
+	                            $dialog.attr('role', options.ariaRole);
+	                        }
+	
+	                        privateMethods.applyAriaAttribute(
+	                            $dialog, 'aria-labelledby', options.ariaLabelledById, options.ariaLabelledBySelector);
+	
+	                        privateMethods.applyAriaAttribute(
+	                            $dialog, 'aria-describedby', options.ariaDescribedById, options.ariaDescribedBySelector);
+	                    },
+	
+	                    applyAriaAttribute: function($dialog, attr, id, selector) {
+	                        if (id) {
+	                            $dialog.attr(attr, id);
+	                        }
+	
+	                        if (selector) {
+	                            var dialogId = $dialog.attr('id');
+	
+	                            var firstMatch = $dialog[0].querySelector(selector);
+	
+	                            if (!firstMatch) {
+	                                return;
+	                            }
+	
+	                            var generatedId = dialogId + '-' + attr;
+	
+	                            $el(firstMatch).attr('id', generatedId);
+	
+	                            $dialog.attr(attr, generatedId);
+	
+	                            return generatedId;
+	                        }
+	                    },
+	
+	                    detectUIRouter: function() {
+	                        //Detect if ui-router module is installed if not return false
+	                        try {
+	                            angular.module('ui.router');
+	                            return true;
+	                        } catch(err) {
+	                            return false;
+	                        }
+	                    },
+	
+	                    getRouterLocationEventName: function() {
+	                        if(privateMethods.detectUIRouter()) {
+	                            return '$stateChangeStart';
+	                        }
+	                        return '$locationChangeStart';
+	                    }
+	                };
+	
+	                var publicMethods = {
+	                    __PRIVATE__: privateMethods,
+	
+	                    /*
+	                     * @param {Object} options:
+	                     * - template {String} - id of ng-template, url for partial, plain string (if enabled)
+	                     * - plain {Boolean} - enable plain string templates, default false
+	                     * - scope {Object}
+	                     * - controller {String}
+	                     * - controllerAs {String}
+	                     * - className {String} - dialog theme class
+	                     * - appendClassName {String} - dialog theme class to be appended to defaults
+	                     * - disableAnimation {Boolean} - set to true to disable animation
+	                     * - showClose {Boolean} - show close button, default true
+	                     * - closeByEscape {Boolean} - default true
+	                     * - closeByDocument {Boolean} - default true
+	                     * - preCloseCallback {String|Function} - user supplied function name/function called before closing dialog (if set)
+	                     * - bodyClassName {String} - class added to body at open dialog
+	                     * @return {Object} dialog
+	                     */
+	                    open: function (opts) {
+	                        var dialogID = null;
+	                        opts = opts || {};
+	                        if (openOnePerName && opts.name) {
+	                            dialogID = opts.name.toLowerCase().replace(/\s/g, '-') + '-dialog';
+	                            if (this.isOpen(dialogID)) {
+	                                return;
+	                            }
+	                        }
+	                        var options = angular.copy(defaults);
+	                        var localID = ++globalID;
+	                        dialogID = dialogID || 'ngdialog' + localID;
+	                        openIdStack.push(dialogID);
+	
+	                        // Merge opts.data with predefined via setDefaults
+	                        if (typeof options.data !== 'undefined') {
+	                            if (typeof opts.data === 'undefined') {
+	                                opts.data = {};
+	                            }
+	                            opts.data = angular.merge(angular.copy(options.data), opts.data);
+	                        }
+	
+	                        angular.extend(options, opts);
+	
+	                        var defer;
+	                        defers[dialogID] = defer = $q.defer();
+	
+	                        var scope;
+	                        scopes[dialogID] = scope = angular.isObject(options.scope) ? options.scope.$new() : $rootScope.$new();
+	
+	                        var $dialog, $dialogParent, $dialogContent;
+	
+	                        var resolve = angular.extend({}, options.resolve);
+	
+	                        angular.forEach(resolve, function (value, key) {
+	                            resolve[key] = angular.isString(value) ? $injector.get(value) : $injector.invoke(value, null, null, key);
+	                        });
+	
+	                        $q.all({
+	                            template: loadTemplate(options.template || options.templateUrl),
+	                            locals: $q.all(resolve)
+	                        }).then(function (setup) {
+	                            var template = setup.template,
+	                                locals = setup.locals;
+	
+	                            if (options.showClose) {
+	                                template += '<div class="ngdialog-close"></div>';
+	                            }
+	
+	                            var hasOverlayClass = options.overlay ? '' : ' ngdialog-no-overlay';
+	                            $dialog = $el('<div id="' + dialogID + '" class="ngdialog' + hasOverlayClass + '"></div>');
+	                            $dialog.html((options.overlay ?
+	                                '<div class="ngdialog-overlay"></div><div class="ngdialog-content" role="document">' + template + '</div>' :
+	                                '<div class="ngdialog-content" role="document">' + template + '</div>'));
+	
+	                            $dialog.data('$ngDialogOptions', options);
+	
+	                            scope.ngDialogId = dialogID;
+	
+	                            if (options.data && angular.isString(options.data)) {
+	                                var firstLetter = options.data.replace(/^\s*/, '')[0];
+	                                scope.ngDialogData = (firstLetter === '{' || firstLetter === '[') ? angular.fromJson(options.data) : new String(options.data);
+	                                scope.ngDialogData.ngDialogId = dialogID;
+	                            } else if (options.data && angular.isObject(options.data)) {
+	                                scope.ngDialogData = options.data;
+	                                scope.ngDialogData.ngDialogId = dialogID;
+	                            }
+	
+	                            if (options.className) {
+	                                $dialog.addClass(options.className);
+	                            }
+	
+	                            if (options.appendClassName) {
+	                                $dialog.addClass(options.appendClassName);
+	                            }
+	
+	                            if (options.width) {
+	                                $dialogContent = $dialog[0].querySelector('.ngdialog-content');
+	                                if (angular.isString(options.width)) {
+	                                    $dialogContent.style.width = options.width;
+	                                } else {
+	                                    $dialogContent.style.width = options.width + 'px';
+	                                }
+	                            }
+	
+	                            if (options.height) {
+	                                $dialogContent = $dialog[0].querySelector('.ngdialog-content');
+	                                if (angular.isString(options.height)) {
+	                                    $dialogContent.style.height = options.height;
+	                                } else {
+	                                    $dialogContent.style.height = options.height + 'px';
+	                                }
+	                            }
+	
+	                            if (options.disableAnimation) {
+	                                $dialog.addClass(disabledAnimationClass);
+	                            }
+	
+	                            if (options.appendTo && angular.isString(options.appendTo)) {
+	                                $dialogParent = angular.element(document.querySelector(options.appendTo));
+	                            } else {
+	                                $dialogParent = $elements.body;
+	                            }
+	
+	                            privateMethods.applyAriaAttributes($dialog, options);
+	
+	                            if (options.preCloseCallback) {
+	                                var preCloseCallback;
+	
+	                                if (angular.isFunction(options.preCloseCallback)) {
+	                                    preCloseCallback = options.preCloseCallback;
+	                                } else if (angular.isString(options.preCloseCallback)) {
+	                                    if (scope) {
+	                                        if (angular.isFunction(scope[options.preCloseCallback])) {
+	                                            preCloseCallback = scope[options.preCloseCallback];
+	                                        } else if (scope.$parent && angular.isFunction(scope.$parent[options.preCloseCallback])) {
+	                                            preCloseCallback = scope.$parent[options.preCloseCallback];
+	                                        } else if ($rootScope && angular.isFunction($rootScope[options.preCloseCallback])) {
+	                                            preCloseCallback = $rootScope[options.preCloseCallback];
+	                                        }
+	                                    }
+	                                }
+	
+	                                if (preCloseCallback) {
+	                                    $dialog.data('$ngDialogPreCloseCallback', preCloseCallback);
+	                                }
+	                            }
+	
+	                            scope.closeThisDialog = function (value) {
+	                                privateMethods.closeDialog($dialog, value);
+	                            };
+	
+	                            if (options.controller && (angular.isString(options.controller) || angular.isArray(options.controller) || angular.isFunction(options.controller))) {
+	
+	                                var label;
+	
+	                                if (options.controllerAs && angular.isString(options.controllerAs)) {
+	                                    label = options.controllerAs;
+	                                }
+	
+	                                var controllerInstance = $controller(options.controller, angular.extend(
+	                                    locals,
+	                                    {
+	                                        $scope: scope,
+	                                        $element: $dialog
+	                                    }),
+	                                    true,
+	                                    label
+	                                );
+	
+	                                if(options.bindToController) {
+	                                    angular.extend(controllerInstance.instance, {ngDialogId: scope.ngDialogId, ngDialogData: scope.ngDialogData, closeThisDialog: scope.closeThisDialog, confirm: scope.confirm});
+	                                }
+	
+	                                if(typeof controllerInstance === 'function'){
+	                                    $dialog.data('$ngDialogControllerController', controllerInstance());
+	                                } else {
+	                                    $dialog.data('$ngDialogControllerController', controllerInstance);
+	                                }
+	                            }
+	
+	                            $timeout(function () {
+	                                var $activeDialogs = document.querySelectorAll('.ngdialog');
+	                                privateMethods.deactivateAll($activeDialogs);
+	
+	                                $compile($dialog)(scope);
+	                                var widthDiffs = $window.innerWidth - $elements.body.prop('clientWidth');
+	                                $elements.html.addClass(options.bodyClassName);
+	                                $elements.body.addClass(options.bodyClassName);
+	                                var scrollBarWidth = widthDiffs - ($window.innerWidth - $elements.body.prop('clientWidth'));
+	                                if (scrollBarWidth > 0) {
+	                                    privateMethods.setBodyPadding(scrollBarWidth);
+	                                }
+	                                $dialogParent.append($dialog);
+	
+	                                privateMethods.activate($dialog);
+	
+	                                if (options.trapFocus) {
+	                                    privateMethods.autoFocus($dialog);
+	                                }
+	
+	                                if (options.name) {
+	                                    $rootScope.$broadcast('ngDialog.opened', {dialog: $dialog, name: options.name});
+	                                } else {
+	                                    $rootScope.$broadcast('ngDialog.opened', $dialog);
+	                                }
+	                            });
+	
+	                            if (!keydownIsBound) {
+	                                $elements.body.bind('keydown', privateMethods.onDocumentKeydown);
+	                                keydownIsBound = true;
+	                            }
+	
+	                            if (options.closeByNavigation) {
+	                                var eventName = privateMethods.getRouterLocationEventName();
+	                                $rootScope.$on(eventName, function ($event) {
+	                                    if (privateMethods.closeDialog($dialog) === false)
+	                                        $event.preventDefault();
+	                                });
+	                            }
+	
+	                            if (options.preserveFocus) {
+	                                $dialog.data('$ngDialogPreviousFocus', document.activeElement);
+	                            }
+	
+	                            closeByDocumentHandler = function (event) {
+	                                var isOverlay = options.closeByDocument ? $el(event.target).hasClass('ngdialog-overlay') : false;
+	                                var isCloseBtn = $el(event.target).hasClass('ngdialog-close');
+	
+	                                if (isOverlay || isCloseBtn) {
+	                                    publicMethods.close($dialog.attr('id'), isCloseBtn ? '$closeButton' : '$document');
+	                                }
+	                            };
+	
+	                            if (typeof $window.Hammer !== 'undefined') {
+	                                var hammerTime = scope.hammerTime = $window.Hammer($dialog[0]);
+	                                hammerTime.on('tap', closeByDocumentHandler);
+	                            } else {
+	                                $dialog.bind('click', closeByDocumentHandler);
+	                            }
+	
+	                            dialogsCount += 1;
+	
+	                            return publicMethods;
+	                        });
+	
+	                        return {
+	                            id: dialogID,
+	                            closePromise: defer.promise,
+	                            close: function (value) {
+	                                privateMethods.closeDialog($dialog, value);
+	                            }
+	                        };
+	
+	                        function loadTemplateUrl (tmpl, config) {
+	                            var config = config || {};
+	                            config.headers = config.headers || {};
+	
+	                            angular.extend(config.headers, {'Accept': 'text/html'});
+	
+	                            $rootScope.$broadcast('ngDialog.templateLoading', tmpl);
+	                            return $http.get(tmpl, config).then(function(res) {
+	                                $rootScope.$broadcast('ngDialog.templateLoaded', tmpl);
+	                                return res.data || '';
+	                            });
+	                        }
+	
+	                        function loadTemplate (tmpl) {
+	                            if (!tmpl) {
+	                                return 'Empty template';
+	                            }
+	
+	                            if (angular.isString(tmpl) && options.plain) {
+	                                return tmpl;
+	                            }
+	
+	                            if (typeof options.cache === 'boolean' && !options.cache) {
+	                                return loadTemplateUrl(tmpl, {cache: false});
+	                            }
+	
+	                            return loadTemplateUrl(tmpl, {cache: $templateCache});
+	                        }
+	                    },
+	
+	                    /*
+	                     * @param {Object} options:
+	                     * - template {String} - id of ng-template, url for partial, plain string (if enabled)
+	                     * - plain {Boolean} - enable plain string templates, default false
+	                     * - name {String}
+	                     * - scope {Object}
+	                     * - controller {String}
+	                     * - controllerAs {String}
+	                     * - className {String} - dialog theme class
+	                     * - appendClassName {String} - dialog theme class to be appended to defaults
+	                     * - showClose {Boolean} - show close button, default true
+	                     * - closeByEscape {Boolean} - default false
+	                     * - closeByDocument {Boolean} - default false
+	                     * - preCloseCallback {String|Function} - user supplied function name/function called before closing dialog (if set); not called on confirm
+	                     * - bodyClassName {String} - class added to body at open dialog
+	                     *
+	                     * @return {Object} dialog
+	                     */
+	                    openConfirm: function (opts) {
+	                        var defer = $q.defer();
+	                        var options = angular.copy(defaults);
+	
+	                        opts = opts || {};
+	
+	                        // Merge opts.data with predefined via setDefaults
+	                        if (typeof options.data !== 'undefined') {
+	                            if (typeof opts.data === 'undefined') {
+	                                opts.data = {};
+	                            }
+	                            opts.data = angular.merge(angular.copy(options.data), opts.data);
+	                        }
+	
+	                        angular.extend(options, opts);
+	
+	                        options.scope = angular.isObject(options.scope) ? options.scope.$new() : $rootScope.$new();
+	                        options.scope.confirm = function (value) {
+	                            defer.resolve(value);
+	                            var $dialog = $el(document.getElementById(openResult.id));
+	                            privateMethods.performCloseDialog($dialog, value);
+	                        };
+	
+	                        var openResult = publicMethods.open(options);
+	                        if (openResult) {
+	                            openResult.closePromise.then(function (data) {
+	                                if (data) {
+	                                    return defer.reject(data.value);
+	                                }
+	                                return defer.reject();
+	                            });
+	                            return defer.promise;
+	                        }
+	                    },
+	
+	                    isOpen: function(id) {
+	                        var $dialog = $el(document.getElementById(id));
+	                        return $dialog.length > 0;
+	                    },
+	
+	                    /*
+	                     * @param {String} id
+	                     * @return {Object} dialog
+	                     */
+	                    close: function (id, value) {
+	                        var $dialog = $el(document.getElementById(id));
+	
+	                        if ($dialog.length) {
+	                            privateMethods.closeDialog($dialog, value);
+	                        } else {
+	                            if (id === '$escape') {
+	                                var topDialogId = openIdStack[openIdStack.length - 1];
+	                                $dialog = $el(document.getElementById(topDialogId));
+	                                if ($dialog.data('$ngDialogOptions').closeByEscape) {
+	                                    privateMethods.closeDialog($dialog, '$escape');
+	                                }
+	                            } else {
+	                                publicMethods.closeAll(value);
+	                            }
+	                        }
+	
+	                        return publicMethods;
+	                    },
+	
+	                    closeAll: function (value) {
+	                        var $all = document.querySelectorAll('.ngdialog');
+	
+	                        // Reverse order to ensure focus restoration works as expected
+	                        for (var i = $all.length - 1; i >= 0; i--) {
+	                            var dialog = $all[i];
+	                            privateMethods.closeDialog($el(dialog), value);
+	                        }
+	                    },
+	
+	                    getOpenDialogs: function() {
+	                        return openIdStack;
+	                    },
+	
+	                    getDefaults: function () {
+	                        return defaults;
+	                    }
+	                };
+	
+	                angular.forEach(
+	                    ['html', 'body'],
+	                    function(elementName) {
+	                        $elements[elementName] = $document.find(elementName);
+	                        if (forceElementsReload[elementName]) {
+	                            var eventName = privateMethods.getRouterLocationEventName();
+	                            $rootScope.$on(eventName, function () {
+	                                $elements[elementName] = $document.find(elementName);
+	                            });
+	                        }
+	                    }
+	                );
+	
+	                return publicMethods;
+	            }];
+	    });
+	
+	    m.directive('ngDialog', ['ngDialog', function (ngDialog) {
+	        return {
+	            restrict: 'A',
+	            scope: {
+	                ngDialogScope: '='
+	            },
+	            link: function (scope, elem, attrs) {
+	                elem.on('click', function (e) {
+	                    e.preventDefault();
+	
+	                    var ngDialogScope = angular.isDefined(scope.ngDialogScope) ? scope.ngDialogScope : 'noScope';
+	                    angular.isDefined(attrs.ngDialogClosePrevious) && ngDialog.close(attrs.ngDialogClosePrevious);
+	
+	                    var defaults = ngDialog.getDefaults();
+	
+	                    ngDialog.open({
+	                        template: attrs.ngDialog,
+	                        className: attrs.ngDialogClass || defaults.className,
+	                        appendClassName: attrs.ngDialogAppendClass,
+	                        controller: attrs.ngDialogController,
+	                        controllerAs: attrs.ngDialogControllerAs,
+	                        bindToController: attrs.ngDialogBindToController,
+	                        disableAnimation: attrs.ngDialogDisableAnimation,
+	                        scope: ngDialogScope,
+	                        data: attrs.ngDialogData,
+	                        showClose: attrs.ngDialogShowClose === 'false' ? false : (attrs.ngDialogShowClose === 'true' ? true : defaults.showClose),
+	                        closeByDocument: attrs.ngDialogCloseByDocument === 'false' ? false : (attrs.ngDialogCloseByDocument === 'true' ? true : defaults.closeByDocument),
+	                        closeByEscape: attrs.ngDialogCloseByEscape === 'false' ? false : (attrs.ngDialogCloseByEscape === 'true' ? true : defaults.closeByEscape),
+	                        overlay: attrs.ngDialogOverlay === 'false' ? false : (attrs.ngDialogOverlay === 'true' ? true : defaults.overlay),
+	                        preCloseCallback: attrs.ngDialogPreCloseCallback || defaults.preCloseCallback,
+	                        bodyClassName: attrs.ngDialogBodyClass || defaults.bodyClassName
+	                    });
+	                });
+	            }
+	        };
+	    }]);
+	
+	    return m;
+	}));
+
+
+/***/ },
+/* 76 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 81 */,
+/* 82 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _angular = __webpack_require__(1);
+	
+	var _angular2 = _interopRequireDefault(_angular);
+	
+	var _camelcase = __webpack_require__(83);
+	
+	var _camelcase2 = _interopRequireDefault(_camelcase);
+	
+	var _path = __webpack_require__(84);
+	
+	var _path2 = _interopRequireDefault(_path);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var context = __webpack_require__(86);
+	
+	var _module = _angular2.default.module('components', []);
+	
+	context.keys().forEach(function (key) {
+	  var name = (0, _camelcase2.default)(_path2.default.basename(key, '.js'));
+	  _module.component(name, context(key).default);
+	});
+	
+	exports.default = _module.name;
+
+/***/ },
+/* 83 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	function preserveCamelCase(str) {
+		let isLastCharLower = false;
+		let isLastCharUpper = false;
+		let isLastLastCharUpper = false;
+	
+		for (let i = 0; i < str.length; i++) {
+			const c = str.charAt(i);
+	
+			if (isLastCharLower && (/[a-zA-Z]/).test(c) && c.toUpperCase() === c) {
+				str = str.substr(0, i) + '-' + str.substr(i);
+				isLastCharLower = false;
+				isLastLastCharUpper = isLastCharUpper;
+				isLastCharUpper = true;
+				i++;
+			} else if (isLastCharUpper && isLastLastCharUpper && (/[a-zA-Z]/).test(c) && c.toLowerCase() === c) {
+				str = str.substr(0, i - 1) + '-' + str.substr(i - 1);
+				isLastLastCharUpper = isLastCharUpper;
+				isLastCharUpper = false;
+				isLastCharLower = true;
+			} else {
+				isLastCharLower = c.toLowerCase() === c;
+				isLastLastCharUpper = isLastCharUpper;
+				isLastCharUpper = c.toUpperCase() === c;
+			}
+		}
+	
+		return str;
+	}
+	
+	module.exports = function () {
+		let str = [].map.call(arguments, x => x.trim()).filter(x => x.length).join('-');
+	
+		if (str.length === 0) {
+			return '';
+		}
+	
+		if (str.length === 1) {
+			return str.toLowerCase();
+		}
+	
+		str = preserveCamelCase(str);
+	
+		return str
+			.replace(/^[_.\- ]+/, '')
+			.toLowerCase()
+			.replace(/[_.\- ]+(\w|$)/g, (m, p1) => p1.toUpperCase());
+	};
+
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+	
+	// resolves . and .. elements in a path array with directory names there
+	// must be no slashes, empty elements, or device names (c:\) in the array
+	// (so also no leading and trailing slashes - it does not distinguish
+	// relative and absolute paths)
+	function normalizeArray(parts, allowAboveRoot) {
+	  // if the path tries to go above the root, `up` ends up > 0
+	  var up = 0;
+	  for (var i = parts.length - 1; i >= 0; i--) {
+	    var last = parts[i];
+	    if (last === '.') {
+	      parts.splice(i, 1);
+	    } else if (last === '..') {
+	      parts.splice(i, 1);
+	      up++;
+	    } else if (up) {
+	      parts.splice(i, 1);
+	      up--;
+	    }
+	  }
+	
+	  // if the path is allowed to go above the root, restore leading ..s
+	  if (allowAboveRoot) {
+	    for (; up--; up) {
+	      parts.unshift('..');
+	    }
+	  }
+	
+	  return parts;
+	}
+	
+	// Split a filename into [root, dir, basename, ext], unix version
+	// 'root' is just a slash, or nothing.
+	var splitPathRe =
+	    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
+	var splitPath = function(filename) {
+	  return splitPathRe.exec(filename).slice(1);
+	};
+	
+	// path.resolve([from ...], to)
+	// posix version
+	exports.resolve = function() {
+	  var resolvedPath = '',
+	      resolvedAbsolute = false;
+	
+	  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+	    var path = (i >= 0) ? arguments[i] : process.cwd();
+	
+	    // Skip empty and invalid entries
+	    if (typeof path !== 'string') {
+	      throw new TypeError('Arguments to path.resolve must be strings');
+	    } else if (!path) {
+	      continue;
+	    }
+	
+	    resolvedPath = path + '/' + resolvedPath;
+	    resolvedAbsolute = path.charAt(0) === '/';
+	  }
+	
+	  // At this point the path should be resolved to a full absolute path, but
+	  // handle relative paths to be safe (might happen when process.cwd() fails)
+	
+	  // Normalize the path
+	  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
+	    return !!p;
+	  }), !resolvedAbsolute).join('/');
+	
+	  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
+	};
+	
+	// path.normalize(path)
+	// posix version
+	exports.normalize = function(path) {
+	  var isAbsolute = exports.isAbsolute(path),
+	      trailingSlash = substr(path, -1) === '/';
+	
+	  // Normalize the path
+	  path = normalizeArray(filter(path.split('/'), function(p) {
+	    return !!p;
+	  }), !isAbsolute).join('/');
+	
+	  if (!path && !isAbsolute) {
+	    path = '.';
+	  }
+	  if (path && trailingSlash) {
+	    path += '/';
+	  }
+	
+	  return (isAbsolute ? '/' : '') + path;
+	};
+	
+	// posix version
+	exports.isAbsolute = function(path) {
+	  return path.charAt(0) === '/';
+	};
+	
+	// posix version
+	exports.join = function() {
+	  var paths = Array.prototype.slice.call(arguments, 0);
+	  return exports.normalize(filter(paths, function(p, index) {
+	    if (typeof p !== 'string') {
+	      throw new TypeError('Arguments to path.join must be strings');
+	    }
+	    return p;
+	  }).join('/'));
+	};
+	
+	
+	// path.relative(from, to)
+	// posix version
+	exports.relative = function(from, to) {
+	  from = exports.resolve(from).substr(1);
+	  to = exports.resolve(to).substr(1);
+	
+	  function trim(arr) {
+	    var start = 0;
+	    for (; start < arr.length; start++) {
+	      if (arr[start] !== '') break;
+	    }
+	
+	    var end = arr.length - 1;
+	    for (; end >= 0; end--) {
+	      if (arr[end] !== '') break;
+	    }
+	
+	    if (start > end) return [];
+	    return arr.slice(start, end - start + 1);
+	  }
+	
+	  var fromParts = trim(from.split('/'));
+	  var toParts = trim(to.split('/'));
+	
+	  var length = Math.min(fromParts.length, toParts.length);
+	  var samePartsLength = length;
+	  for (var i = 0; i < length; i++) {
+	    if (fromParts[i] !== toParts[i]) {
+	      samePartsLength = i;
+	      break;
+	    }
+	  }
+	
+	  var outputParts = [];
+	  for (var i = samePartsLength; i < fromParts.length; i++) {
+	    outputParts.push('..');
+	  }
+	
+	  outputParts = outputParts.concat(toParts.slice(samePartsLength));
+	
+	  return outputParts.join('/');
+	};
+	
+	exports.sep = '/';
+	exports.delimiter = ':';
+	
+	exports.dirname = function(path) {
+	  var result = splitPath(path),
+	      root = result[0],
+	      dir = result[1];
+	
+	  if (!root && !dir) {
+	    // No dirname whatsoever
+	    return '.';
+	  }
+	
+	  if (dir) {
+	    // It has a dirname, strip trailing slash
+	    dir = dir.substr(0, dir.length - 1);
+	  }
+	
+	  return root + dir;
+	};
+	
+	
+	exports.basename = function(path, ext) {
+	  var f = splitPath(path)[2];
+	  // TODO: make this comparison case-insensitive on windows?
+	  if (ext && f.substr(-1 * ext.length) === ext) {
+	    f = f.substr(0, f.length - ext.length);
+	  }
+	  return f;
+	};
+	
+	
+	exports.extname = function(path) {
+	  return splitPath(path)[3];
+	};
+	
+	function filter (xs, f) {
+	    if (xs.filter) return xs.filter(f);
+	    var res = [];
+	    for (var i = 0; i < xs.length; i++) {
+	        if (f(xs[i], i, xs)) res.push(xs[i]);
+	    }
+	    return res;
+	}
+	
+	// String.prototype.substr - negative index don't work in IE8
+	var substr = 'ab'.substr(-1) === 'b'
+	    ? function (str, start, len) { return str.substr(start, len) }
+	    : function (str, start, len) {
+	        if (start < 0) start = str.length + start;
+	        return str.substr(start, len);
+	    }
+	;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)))
+
+/***/ },
+/* 85 */
+/***/ function(module, exports) {
+
+	// shim for using process in browser
+	var process = module.exports = {};
+	
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+	
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+	
+	function defaultSetTimout() {
+	    throw new Error('setTimeout has not been defined');
+	}
+	function defaultClearTimeout () {
+	    throw new Error('clearTimeout has not been defined');
+	}
+	(function () {
+	    try {
+	        if (typeof setTimeout === 'function') {
+	            cachedSetTimeout = setTimeout;
+	        } else {
+	            cachedSetTimeout = defaultSetTimout;
+	        }
+	    } catch (e) {
+	        cachedSetTimeout = defaultSetTimout;
+	    }
+	    try {
+	        if (typeof clearTimeout === 'function') {
+	            cachedClearTimeout = clearTimeout;
+	        } else {
+	            cachedClearTimeout = defaultClearTimeout;
+	        }
+	    } catch (e) {
+	        cachedClearTimeout = defaultClearTimeout;
+	    }
+	} ())
+	function runTimeout(fun) {
+	    if (cachedSetTimeout === setTimeout) {
+	        //normal enviroments in sane situations
+	        return setTimeout(fun, 0);
+	    }
+	    // if setTimeout wasn't available but was latter defined
+	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+	        cachedSetTimeout = setTimeout;
+	        return setTimeout(fun, 0);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedSetTimeout(fun, 0);
+	    } catch(e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+	            return cachedSetTimeout.call(null, fun, 0);
+	        } catch(e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	            return cachedSetTimeout.call(this, fun, 0);
+	        }
+	    }
+	
+	
+	}
+	function runClearTimeout(marker) {
+	    if (cachedClearTimeout === clearTimeout) {
+	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
+	    }
+	    // if clearTimeout wasn't available but was latter defined
+	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+	        cachedClearTimeout = clearTimeout;
+	        return clearTimeout(marker);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedClearTimeout(marker);
+	    } catch (e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+	            return cachedClearTimeout.call(null, marker);
+	        } catch (e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+	            return cachedClearTimeout.call(this, marker);
+	        }
+	    }
+	
+	
+	
+	}
+	var queue = [];
+	var draining = false;
+	var currentQueue;
+	var queueIndex = -1;
+	
+	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
+	    draining = false;
+	    if (currentQueue.length) {
+	        queue = currentQueue.concat(queue);
+	    } else {
+	        queueIndex = -1;
+	    }
+	    if (queue.length) {
+	        drainQueue();
+	    }
+	}
+	
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    var timeout = runTimeout(cleanUpNextTick);
+	    draining = true;
+	
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        while (++queueIndex < len) {
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
+	        }
+	        queueIndex = -1;
+	        len = queue.length;
+	    }
+	    currentQueue = null;
+	    draining = false;
+	    runClearTimeout(timeout);
+	}
+	
+	process.nextTick = function (fun) {
+	    var args = new Array(arguments.length - 1);
+	    if (arguments.length > 1) {
+	        for (var i = 1; i < arguments.length; i++) {
+	            args[i - 1] = arguments[i];
+	        }
+	    }
+	    queue.push(new Item(fun, args));
+	    if (queue.length === 1 && !draining) {
+	        runTimeout(drainQueue);
+	    }
+	};
+	
+	// v8 likes predictible objects
+	function Item(fun, array) {
+	    this.fun = fun;
+	    this.array = array;
+	}
+	Item.prototype.run = function () {
+	    this.fun.apply(null, this.array);
+	};
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+	
+	function noop() {}
+	
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+	
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+	
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var map = {
+		"./all-stores/all-stores.js": 87,
+		"./app/app.js": 89,
+		"./new-pet/new-pet.js": 91,
+		"./new-store/new-store.js": 93,
+		"./pets/pets.js": 95,
+		"./store/store.js": 97,
+		"./stores/stores.js": 99,
+		"./user/signin/signin.js": 101,
+		"./user/signup/signup.js": 103,
+		"./user/user-auth.js": 105,
+		"./welcome/welcome.js": 107
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 86;
+
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _allStores = __webpack_require__(88);
+	
+	var _allStores2 = _interopRequireDefault(_allStores);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _allStores2.default,
+	  bindings: {
+	    stores: '<'
+	  },
+	  controller: controller
+	};
+	
+	
+	controller.$inject = ['$state'];
+	
+	function controller($state) {
+	
+	  this.goToStore = function (storeId) {
+	    $state.go('store.pets', { id: storeId });
+	  };
+	}
+
+/***/ },
+/* 88 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\r\n  <h2>Pet Stores</h2>\r\n  <ul>\r\n    <li ng-repeat=\"store in $ctrl.stores\" ng-click=\"$ctrl.goToStore(store._id)\">\r\n      <div store=\"store\">\r\n        <h4>{{store.name}}</h4>\r\n      </div>\r\n    </li>\r\n  </ul>\r\n</section>";
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _app = __webpack_require__(90);
+	
+	var _app2 = _interopRequireDefault(_app);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _app2.default,
+	  transclude: true,
+	  controller: controller
+	};
+	
+	
+	controller.$inject = ['userService'];
+	
+	function controller(userService) {
+	  this.logout = function () {
+	    return userService.logout();
+	  };
+	  this.isAuthenticated = function () {
+	    return userService.isAuthenticated();
+	  };
+	}
+
+/***/ },
+/* 90 */
+/***/ function(module, exports) {
+
+	module.exports = "<a ui-sref=\"welcome\">Home</a>\r\n  <a ui-sref=\"stores\">Stores</a>\r\n  <a ng-if=\"$ctrl.isAuthenticated()\" ui-sref=\"welcome\" ng-click=\"$ctrl.logout()\">logout</a>\r\n<ui-view></ui-view>";
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _newPet = __webpack_require__(92);
+	
+	var _newPet2 = _interopRequireDefault(_newPet);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _newPet2.default,
+	  bindings: {
+	    store: '<'
+	  },
+	  require: {
+	    parent: '^store'
+	  },
+	  controller: controller
+	};
+	
+	
+	controller.$inject = ['$state'];
+	
+	function controller() {
+	  var _this = this;
+	
+	  this.clearFields = function () {
+	    _this.name = '';
+	    _this.animal = '';
+	  };
+	
+	  this.addPet = function () {
+	    _this.parent.add({
+	      name: _this.name,
+	      animal: _this.animal,
+	      store: _this.store._id
+	    });
+	    _this.clearFields();
+	  };
+	}
+
+/***/ },
+/* 92 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\r\n  <form>\r\n    <label>Name</label>\r\n    <input ng-model=\"$ctrl.name\">\r\n    <label>Type</label>\r\n    <input ng-model=\"$ctrl.animal\">\r\n    <button ng-click=\"$ctrl.addPet()\">Add Pet</button>\r\n    <button ui-sref=\"store.pets\">Cancel</button>\r\n  </form>\r\n</section>";
+
+/***/ },
+/* 93 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _newStore = __webpack_require__(94);
+	
+	var _newStore2 = _interopRequireDefault(_newStore);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _newStore2.default,
+	  bindings: {
+	    add: '<'
+	  },
+	  require: {
+	    parent: '^stores'
+	  },
+	  controller: controller
+	};
+	
+	
+	controller.$inject = ['$state'];
+	
+	function controller($state) {
+	  var _this = this;
+	
+	  this.clearFields = function () {
+	    _this.name = '';
+	    _this.address.street = '';
+	    _this.address.city = '';
+	    _this.address.state = '';
+	  };
+	
+	  this.addStore = function () {
+	    _this.parent.add({
+	      name: _this.name,
+	      address: {
+	        street: _this.address.street,
+	        city: _this.address.city,
+	        state: _this.address.state
+	      }
+	    });
+	    $state.go('stores');
+	    _this.clearFields();
+	  };
+	}
+
+/***/ },
+/* 94 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\r\n  <form>\r\n    <label>Name</label>\r\n    <input ng-model=\"$ctrl.name\">\r\n    <label>Street</label>\r\n    <input ng-model=\"$ctrl.address.street\">\r\n    <label>City</label>\r\n    <input ng-model=\"$ctrl.address.city\">\r\n    <label>State</label>\r\n    <input ng-model=\"$ctrl.address.state\">\r\n    <button ng-click=\"$ctrl.addStore()\">Add Store</button>\r\n    <button ui-sref=\"stores\">Cancel</button>\r\n  </form>\r\n</section>";
+
+/***/ },
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _pets = __webpack_require__(96);
+	
+	var _pets2 = _interopRequireDefault(_pets);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _pets2.default,
+	  bindings: {
+	    store: '<'
+	  }
+	};
+
+/***/ },
+/* 96 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\r\n  <ul>\r\n    <li ng-repeat=\"pet in $ctrl.store.pets\">{{pet.name}} - {{pet.animal}}</li>\r\n  </ul>\r\n</section>";
+
+/***/ },
+/* 97 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _store = __webpack_require__(98);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _store2.default,
+	  bindings: {
+	    store: '<'
+	  },
+	  controller: controller
+	};
+	
+	
+	controller.$inject = ['petService', '$state'];
+	
+	function controller(petService, $state) {
+	  var _this = this;
+	
+	  this.add = function (pet) {
+	    petService.add(pet).then(function (saved) {
+	      _this.store.pets.push(saved);
+	      $state.go('store.pets', { id: _this.store._id });
+	    }).catch();
+	  };
+	};
+
+/***/ },
+/* 98 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\r\n  <h2>{{$ctrl.store.name}}</h2>\r\n  <h3>{{$ctrl.store.address.street}}, {{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</h3>\r\n  <a ui-sref=\"store.newPet\">Add Pet</a>\r\n  \r\n  <ui-view></ui-view>\r\n</section>";
+
+/***/ },
 /* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _stores = __webpack_require__(100);
+	
+	var _stores2 = _interopRequireDefault(_stores);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _stores2.default,
+	  bindings: {
+	    stores: '<'
+	  },
+	  controller: controller
+	};
+	
+	
+	controller.$inject = ['storeService', '$state'];
+	
+	function controller(storeService, $state) {
+	  var _this = this;
+	
+	  this.add = function (store) {
+	    storeService.add(store).then(function (saved) {
+	      _this.stores.push(saved);
+	      $state.go('store', { id: saved._id });
+	    }).catch();
+	  };
+	};
+
+/***/ },
+/* 100 */
+/***/ function(module, exports) {
+
+	module.exports = " <section>\r\n  <a ui-sref=\"stores.newStore\">Add Store</a>\r\n  <ui-view></ui-view> \r\n  </section> ";
+
+/***/ },
+/* 101 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _signin = __webpack_require__(102);
+	
+	var _signin2 = _interopRequireDefault(_signin);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _signin2.default,
+	  bindings: {
+	    success: '<'
+	  },
+	  controller: controller
+	};
+	
+	
+	controller.$inject = ['userService'];
+	
+	function controller(userService) {
+	  var _this = this;
+	
+	  this.credentials = {
+	    username: '',
+	    password: ''
+	  };
+	
+	  this.authenticate = function () {
+	    return userService.signin(_this.credentials).then(function () {
+	      _this.success();
+	    }).catch(function (error) {
+	      return _this.error = error;
+	    });
+	  };
+	}
+
+/***/ },
+/* 102 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\r\n\t<h2>Sign in to view the stores</h2>\r\n\t<form name=\"auth\" ng-submit=\"$ctrl.authenticate()\">\r\n\t\t<div>\r\n\t\t\t<label>username</label>\r\n\t\t\t<input required ng-model=\"$ctrl.credentials.username\">\r\n\t\t</div>\r\n\t\t<div>\r\n\t\t\t<label>password</label>\r\n\t\t\t<input required type=\"password\" ng-model=\"$ctrl.credentials.password\">\r\n\t\t</div>\r\n\t\t<button type=\"submit\">Sign In</button>\r\n\t</form>\r\n\t<div class=\"error\" ng-if='$ctrl.error'>{{$ctrl.error.reason}}</div>\r\n</section>";
+
+/***/ },
+/* 103 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _signup = __webpack_require__(104);
+	
+	var _signup2 = _interopRequireDefault(_signup);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _signup2.default,
+	  bindings: {
+	    success: '<'
+	  },
+	  controller: controller
+	};
+	
+	
+	controller.$inject = ['userService'];
+	
+	function controller(userService) {
+	  var _this = this;
+	
+	  this.credentials = {
+	    email: '',
+	    username: '',
+	    password: ''
+	  };
+	
+	  this.authenticate = function () {
+	    return userService.signup(_this.credentials).then(function () {
+	      _this.success();
+	    }).catch(function (error) {
+	      return _this.error = error;
+	    });
+	  };
+	}
+
+/***/ },
+/* 104 */
+/***/ function(module, exports) {
+
+	module.exports = "<section>\r\n  <h2>Sign Up</h2>\r\n  <form name=\"auth\" ng-submit=\"$ctrl.authenticate()\">\r\n    <div>\r\n      <label>Email</label>\r\n      <input required ng-model=\"$ctrl.credentials.email\">\r\n    </div>\r\n\r\n    <div>\r\n      <label>Username</label>\r\n      <input required ng-model=\"$ctrl.credentials.username\">\r\n    \r\n    </div>\r\n    <div>\r\n      <label>Password</label>\r\n      <input required ng-model=\"$ctrl.credentials.password\">  \r\n    </div>\r\n    <button type=\"submit\">Sign Up</button>\r\n  </form>\r\n  <div class=\"error\" ng-if=\"$ctrl.error\">{{ $ctrl.error.reason }}</div>\r\n</section>";
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _userAuth = __webpack_require__(106);
+	
+	var _userAuth2 = _interopRequireDefault(_userAuth);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  template: _userAuth2.default,
+	  bindings: {
+	    success: '<'
+	  },
+	  controller: controller
+	};
+	
+	
+	function controller() {
+	  this.action = 'signin';
+	}
+
+/***/ },
+/* 106 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\r\n  <label>Sign In</label>\r\n  <input type=\"radio\" ng-model=\"$ctrl.action\" value=\"signin\">\r\n  <label>Sign Up</label>\r\n  <input type=\"radio\" ng-model=\"$ctrl.action\" value=\"signup\">\r\n</div>\r\n<signin ng-if=\"$ctrl.action==='signin'\" success=\"$ctrl.success\"></signin>\r\n<signup ng-if=\"$ctrl.action==='signup'\" success=\"$ctrl.success\"></signup>";
+
+/***/ },
+/* 107 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	  template: "\n  <div class=\"component\">\n    <h2>Welcome to the Pet store!</h2>\n    <section>\n      <p></p>\n    </section>\n  </div>\n  "
+	};
+
+/***/ },
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _angular = __webpack_require__(1);
+	
+	var _angular2 = _interopRequireDefault(_angular);
+	
+	var _camelcase = __webpack_require__(83);
+	
+	var _camelcase2 = _interopRequireDefault(_camelcase);
+	
+	var _path = __webpack_require__(84);
+	
+	var _path2 = _interopRequireDefault(_path);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var context = __webpack_require__(109);
+	
+	var _module = _angular2.default.module('services', []);
+	
+	context.keys().forEach(function (key) {
+	  var name = (0, _camelcase2.default)(_path2.default.basename(key, '.js'));
+	  _module.factory(name, context(key).default);
+	});
+	
+	exports.default = _module.name;
+
+/***/ },
+/* 109 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var map = {
+		"./pet-service.js": 110,
+		"./store-service.js": 111,
+		"./token-service.js": 112,
+		"./user-service.js": 113
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 109;
+
+
+/***/ },
+/* 110 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = petService;
+	petService.$inject = ['$http', 'apiUrl'];
+	
+	function petService($http, apiUrl) {
+	  return {
+	    getAll: function getAll() {
+	      return $http.get(apiUrl + '/pets').then(function (res) {
+	        return res.data;
+	      });
+	    },
+	    get: function get(id) {
+	      return $http.get(apiUrl + '/pets/' + id).then(function (res) {
+	        return res.data;
+	      });
+	    },
+	    add: function add(pet) {
+	      return $http.post(apiUrl + '/pets', pet).then(function (res) {
+	        return res.data;
+	      });
+	    }
+	  };
+	}
+
+/***/ },
+/* 111 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = storeService;
+	storeService.$inject = ['$http', 'apiUrl'];
+	
+	function storeService($http, apiUrl) {
+	  return {
+	    getAll: function getAll() {
+	      return $http.get('https://pet-store-401.herokuapp.com/api/stores').then(function (res) {
+	        return res.data;
+	      });
+	    },
+	    get: function get(id) {
+	      return $http.get(apiUrl + '/stores/' + id).then(function (res) {
+	        return res.data;
+	      });
+	    },
+	    add: function add(store) {
+	      return $http.post(apiUrl + '/stores', store).then(function (res) {
+	        return res.data;
+	      });
+	    }
+	  };
+	}
+
+/***/ },
+/* 112 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = tokenService;
+	tokenService.$inject = ['$window'];
+	
+	var TOKEN_NAME = 'token';
+	
+	function tokenService($window) {
+	  return {
+	    get: function get() {
+	      return $window.localStorage.getItem(TOKEN_NAME);
+	    },
+	    remove: function remove() {
+	      $window.localStorage.removeItem(TOKEN_NAME);
+	    },
+	    set: function set(token) {
+	      $window.localStorage.setItem(TOKEN_NAME, token);
+	    }
+	  };
+	}
+
+/***/ },
+/* 113 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = userService;
+	userService.$inject = ['tokenService', '$http', 'apiUrl'];
+	
+	function userService(token, $http, apiUrl) {
+	
+	  var current = token.get();
+	  if (current) {
+	    $http.get(apiUrl + '/auth/verify').catch(function () {
+	      return token.remove();
+	    });
+	  }
+	
+	  function credential(endpoint) {
+	    return function (credentials) {
+	      return $http.post(apiUrl + '/auth/' + endpoint, credentials).then(function (result) {
+	        token.set(result.data.token);
+	      }).catch(function (err) {
+	        throw err.data;
+	      });
+	    };
+	  }
+	
+	  return {
+	    isAuthenticated: function isAuthenticated() {
+	      return !!token.get();
+	    },
+	    logout: function logout() {
+	      token.remove();
+	    },
+	
+	    signin: credential('signin'),
+	    signup: credential('signup')
+	  };
+	}
+
+/***/ },
+/* 114 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -43872,7 +45371,7 @@
 	  value: true
 	});
 	exports.default = routes;
-	routes.inject = ['$stateProvider', '$urlRouterProvider'];
+	routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 	
 	function routes($stateProvider, $urlRouterProvider) {
 	
@@ -43898,13 +45397,13 @@
 	  $stateProvider.state({
 	    name: 'stores.all',
 	    url: '/all',
-	    component: 'storesAll'
+	    component: 'allStores'
 	  });
 	
 	  $stateProvider.state({
 	    name: 'stores.newStore',
 	    url: '/add-store',
-	    component: 'storeNew'
+	    component: 'newStore'
 	  });
 	
 	  $stateProvider.state({
@@ -43933,6 +45432,78 @@
 	  });
 	
 	  $urlRouterProvider.otherwise('/');
+	}
+
+/***/ },
+/* 115 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = configHttp;
+	configHttp.$inject = ['$httpProvider'];
+	
+	function configHttp($httpProvider) {
+	  $httpProvider.interceptors.push(interceptor);
+	}
+	
+	interceptor.$inject = ['$window', 'tokenService', '$state'];
+	
+	function interceptor($window, tokenService, $state) {
+	  return {
+	    request: function request(config) {
+	      config.headers = config.headers || {};
+	      var token = tokenService.get();
+	      if (token) {
+	        config.headers.Authorization = 'Bearer ' + token;
+	      }
+	      return config;
+	    },
+	    responseError: function responseError(response) {
+	      if (response.status === 403) {
+	        tokenService.remove();
+	        $state.go('welcome');
+	      }
+	      return Promise.reject(response);
+	    }
+	  };
+	}
+
+/***/ },
+/* 116 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = auth;
+	auth.$inject = ['$rootScope', 'userService', 'ngDialog', '$state'];
+	
+	function auth($rootScope, userService, ngDialog, $state) {
+	  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+	
+	    if (!(toState.data && toState.data.public) && !userService.isAuthenticated()) {
+	      (function () {
+	        event.preventDefault();
+	
+	        var dialog = ngDialog.open({
+	          template: '<user-auth success="success"></user-auth>',
+	          plain: true,
+	          controller: ['$scope', function ($scope) {
+	            $scope.success = function () {
+	              dialog.close();
+	              return $state.go(toState.name, toParams);
+	            };
+	          }]
+	        });
+	      })();
+	    }
+	  });
 	}
 
 /***/ }
