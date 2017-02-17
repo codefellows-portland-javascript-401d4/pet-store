@@ -1,0 +1,7 @@
+<button ui-sref="store.newPet({id: $ctrl.store._id})">Add pet</button>
+<h4>Pets at this store:</h4>
+<ul>
+  <li ng-repeat="pet in $ctrl.pets">
+    <p>{{pet.name}} the {{pet.animal}}</p>
+  </li>
+</ul>

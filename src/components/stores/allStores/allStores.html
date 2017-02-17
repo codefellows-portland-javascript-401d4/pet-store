@@ -1,0 +1,10 @@
+<h2>This is a list of all stores!</h2>
+<button ui-sref="stores.new">Add a store.</button>
+<ul>
+  <li ng-repeat="store in $ctrl.stores">
+    <a ui-sref="store({id: store._id})"><h3>{{store.name}}</h3></a>
+    <p>{{store.address.street}}</p>
+    <p>{{store.address.city}}</p>
+    <p>{{store.address.state}}</p>
+  </li>
+</ul>
