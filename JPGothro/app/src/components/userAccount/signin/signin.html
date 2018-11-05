@@ -1,0 +1,20 @@
+
+<section ng-class="$ctrl.styles.signin">
+    <h3>Sign In to access your account</h3>
+    <form name="auth" ng-submit="$ctrl.authenticate()">
+        <div>
+            <label>
+                UserName: <input ng-model="$ctrl.credentials.username" required>
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Password: <input ng-model="$ctrl.credentials.password" type="password" required>
+            </label>
+        </div>
+
+        <button type="submit">Sign In</button>
+    </form>
+    <div class="error" ng-if="$ctrl.error">{{$ctrl.error.reason}}</div>
+</section>
