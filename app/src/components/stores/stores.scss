@@ -1,0 +1,21 @@
+@import 'button';
+
+main {
+  background-color: white;
+  width: 840px;
+  margin: 0 auto;
+}
+table {
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid mediumvioletred;
+  padding: 0.5rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+tbody tr:nth-child(odd) {
+  background: #eee;
+}

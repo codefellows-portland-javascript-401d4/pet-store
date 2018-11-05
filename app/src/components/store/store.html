@@ -1,0 +1,8 @@
+<h1>{{$ctrl.store.name}}</h1>
+<h2>{{$ctrl.store.address.street}}</h2>
+<h2>{{$ctrl.store.address.city}}, {{$ctrl.store.address.state}}</h2>
+<a ui-sref="store.addPet">Add a pet</a>
+<ui-view></ui-view>
+<ul>
+  <li ng-repeat="pet in $ctrl.store.pets">{{pet.name}}, the {{pet.animal}}</li>
+</ul>
