@@ -32,6 +32,7 @@
     _id: <id>,
     name: <name>,
     animal: <cat|lizard|bird|dog|fish>
+    store: _id of Store.
 }
 ```
 
@@ -39,14 +40,14 @@
 
 * `stores`
     * Header with name of company
-    * `stores.all` (default for `stores`)
-        * Show list of current stores
+    * `stores.all` (default for `stores`) X
+        * Show list of current stores X
             * data is array with:
                 * { _id, name, city, state }
-            * click to go to `store` with id
-        * Link to go to `stores.add`
-    * `stores.add`
-        * Create new from: name, address, city, state
+            * click to go to `store` with id 
+        * Link to go to `stores.add` X
+    * `stores.add` X
+        * Create new from: name, address, city, state 
         * Cancel Button, goes back to `stores`, 
         * Submit goes to `store` with new id
 * `store` (param `id`)
@@ -58,7 +59,7 @@
                 * pets have { _id, name, animal }
     * `store.pets` (default for `store`)
         * name, animal [cat, lizard, bird, dog, fish]
-        * Link to change to Add New Pet
+        * Link to Add New Pet
     * `store.addPet`
         * Create new from: name
             animal type [cat, lizard, bird, dog, fish],
