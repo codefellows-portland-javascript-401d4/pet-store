@@ -1,0 +1,15 @@
+<section ng-class="$storePets.styles.section">
+  <h2 ng-class="$storePets.styles.petlist">
+    {{$storePets.store.name}} has the following pets for sale:
+  </h2>
+  
+  <main ng-class="$storePets.styles.scroll" ng-class="$storePets.styles.petlist">
+    <div ng-repeat="pet in $storePets.store.pets">
+      {{pet.name}}, who is an awesome {{pet.animal}}!!
+    </div>
+  </main>
+
+  <br><br>
+  <button ui-sref="store.addPet">add a new pet</button>
+
+</section>

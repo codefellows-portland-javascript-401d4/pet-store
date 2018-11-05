@@ -1,0 +1,10 @@
+@import 'fonts';
+
+:local(.header) {
+
+  h1 {
+    margin: 5%;
+    font-family: $header-font;
+  }
+
+}

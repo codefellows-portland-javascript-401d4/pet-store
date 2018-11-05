@@ -1,0 +1,8 @@
+<section>
+  <header ng-class="$store.styles.header">
+    {{$store.store.name}} -- {{$store.store.address.street}},
+    {{$store.store.address.city}}, {{$store.store.address.state}}
+  </header>
+
+  <ui-view></ui-view>
+</section>
