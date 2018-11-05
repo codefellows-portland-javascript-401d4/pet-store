@@ -1,0 +1,7 @@
+ 
+ <section>
+   <a ng-if="!$ctrl.isAuthenticated()" ui-sref="stores">LOG IN</a>
+   
+   <a ng-if="$ctrl.isAuthenticated()" ui-sref="landing" ng-click="$ctrl.logout()">LOG OUT</a>
+
+ </section>

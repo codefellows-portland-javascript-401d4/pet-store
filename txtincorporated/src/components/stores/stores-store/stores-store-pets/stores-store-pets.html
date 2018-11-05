@@ -1,0 +1,9 @@
+    <div>
+      <h4>Available at -{{$ctrl.store.name}}-</h4>
+      <ul ng-repeat="pet in $ctrl.store.pets">
+        <li>
+          <p>Pet no. {{$index + 1}} -- {{pet.name}} the {{pet.animal}}</p>
+
+        </li>
+      </ul>
+    </div>

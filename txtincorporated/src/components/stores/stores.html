@@ -1,0 +1,23 @@
+<section ng-class="$ctrl.styles.stores">
+  <aside>
+    <div>
+      <select 
+        ng-model="$ctrl.selected"
+        ng-change="$ctrl.toStore(event)"
+        ng-options="store._id as store.name for store in $ctrl.stores"
+        >
+        <option value="">STORES</option>
+
+      </select>
+    </div>
+    
+    <button ui-sref="stores.add">ADD STORE</button>  
+
+  </aside>
+
+    <div class="store-details">
+      <h2>STORE DETAILS</h2>
+        <ui-view></ui-view>
+
+    </div>
+</section>

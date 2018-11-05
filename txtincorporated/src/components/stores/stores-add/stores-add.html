@@ -1,0 +1,30 @@
+  <section ng-class="$ctrl.styles.storesadd">
+    <div>
+      <h4>ADD STORE</h4>
+
+      <div>
+        <label>NAME: <input ng-model="$ctrl.name" type="text"></label>
+
+      </div>
+
+      <div>
+        <label>STREET: <input ng-model="$ctrl.address.street" type="text"></label>
+      
+      </div>
+
+      <div>
+        <label>CITY: <input ng-model="$ctrl.address.city" type="text"></label>
+     
+      </div>
+     
+      <div>
+        <label>STATE: <input ng-model="$ctrl.address.state" type="text"></label>
+     
+      </div>
+     
+      <button ng-click="$ctrl.addStore()">ADD</button>
+      
+      <button ng-click="$ctrl.scratch()">CANCEL</button>
+    
+    </div>
+  </section>
