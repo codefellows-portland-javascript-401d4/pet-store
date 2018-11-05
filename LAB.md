@@ -72,4 +72,8 @@
   * Routes, Resolves, States *8pts*
   * Components *6pts*
   * Tests *4pts*
+<<<<<<< HEAD
   * Code Quality *2pts*
+=======
+  * Code Quality *2pts*
+>>>>>>> 54fc696911b4c4463a5408fba7f94610b274cd14

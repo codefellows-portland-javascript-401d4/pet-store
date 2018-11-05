@@ -44,7 +44,11 @@ Optional: Add a welcome or home state that does not require auth, and has a call
 =======
 * Works Correctly *4pts*
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 5e9b5f02d873afe557a94676f5a762bcada399c1
 =======
 >>>>>>> c9024fd53a6cd888f9a865252133cbab4fa610ce
 >>>>>>> gnkatchmar
+=======
+>>>>>>> 54fc696911b4c4463a5408fba7f94610b274cd14
+>>>>>>> viper86
