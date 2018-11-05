@@ -1,0 +1,10 @@
+<section>
+    <h1>Pet Store-pedia!</h1>
+    <hr>
+    <nav>
+        <a ui-sref="welcome">Welcome</a>
+        <a ui-sref="stores">Stores</a>
+        <a ng-if="$ctrl.isAuthenticated()" ui-sref="welcome" ng-click="$ctrl.logout()">Logout</a>
+    </nav>
+    <section ng-transclude="links"></section>
+</section>

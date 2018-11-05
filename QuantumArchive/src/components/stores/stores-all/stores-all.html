@@ -1,0 +1,40 @@
+<h3>Check out our associated pet stores!</h3>
+<section>
+    <button ng-click="$ctrl.toNewForm()">Add new stores here!</button>
+    <div ng-class="$ctrl.styles.search">
+        <h4>Search:</h4>
+        Store: <input ng-model="search.name" type="text">
+    </div>
+</section>
+<section ng-class="$ctrl.styles.storetable">
+
+    <table>
+        <thead>
+            <tr>
+                <th ng-class="{sorted: $ctrl.sort, desc: $ctrl.order}"
+                    ng-click="$ctrl.set()">
+                    name
+                </th>
+                <th>go</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="store in $ctrl.stores
+                | filter : search
+                | orderBy : $ctrl.sort : $ctrl.order">
+                <td>{{store.name}}</td>
+                <td>
+                    <button ng-click="$ctrl.go(store)">Go!</button>
+                </td>
+                <td>
+                    <button ng-click="$ctrl.parent.del(store)">X</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>
+<section>
+    <button ng-click="$ctrl.toNewForm()">Add new stores here!</button>
+</section>
