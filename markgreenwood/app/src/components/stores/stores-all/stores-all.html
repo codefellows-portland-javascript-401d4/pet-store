@@ -1,0 +1,10 @@
+<h1>Our Stores</h1>
+<table>
+  <tr>
+    <th>ID</th><th>Name</th><th>City</th><th>State</th>
+  </tr>
+  <tr ng-click="$ctrl.gotoStore(store._id)" ng-repeat="store in $ctrl.storesList" class="storelink">
+    <td>{{ store._id }}</td><td>{{ store.name }}</td><td>{{ store.address.city }}</td><td>{{ store.address.state }}</td>
+  </tr>
+</table>
+<button id="add-store" ui-sref="stores.add">Add store</button>
