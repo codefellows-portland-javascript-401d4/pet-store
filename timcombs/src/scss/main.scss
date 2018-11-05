@@ -1,0 +1,18 @@
+@import 'colors';
+@import 'fonts';
+@import 'mixins';
+
+body {
+  background-color: $ltpink;
+}
+
+header {
+  border: none;
+  @include rounded-corners(1rem);
+  font-family: $header-font;
+  font-size: 1.5rem;
+  background-color: $blue;
+  width: 80%;
+  padding: 1%;
+  box-shadow: .25rem .25rem .25rem $dkblue;
+}
