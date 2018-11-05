@@ -33,4 +33,8 @@ Optional: Add a welcome or home state that does not require auth, and has a call
 
 * Services *3pts*
 * Setup routes, http, and auth (run via `$stateChangeStart`) *3pts*
+<<<<<<< HEAD
 * Works Correctly *4pts*
+=======
+* Works Correctly *4pts*
+>>>>>>> 54fc696911b4c4463a5408fba7f94610b274cd14
