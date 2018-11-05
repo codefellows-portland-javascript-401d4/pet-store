@@ -1,0 +1,9 @@
+<section>
+	<div>
+		<p ng-repeat="pet in $ctrl.store.pets">
+		{{pet.name}} ({{pet.animal}})
+		</p>
+	</div>
+	<button ng-click="$ctrl.goToAddPets()">Add a Pet</button>
+	<button ng-click="$ctrl.backToAll()">Back to Stores</button>
+</section>

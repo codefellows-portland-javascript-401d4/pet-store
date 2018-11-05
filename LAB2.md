@@ -10,7 +10,10 @@
     * GET `/api/auth/verify` (returns `{ sucess: true|false }`)
     * POST `/api/auth/signin` (returns `{ token: <token> }`)
     * POST `/api/auth/signup` (returns `{ token: <token> }`)
+<<<<<<< HEAD
   * If you need unauthed routes for previous assignment, they are available at `/api/unauth/<resource>`
+=======
+>>>>>>> c9024fd53a6cd888f9a865252133cbab4fa610ce
   * Token passed via header: `Authorization: Bearer <token>`
 
 ## New Welcome/Home State
@@ -25,7 +28,10 @@ Optional: Add a welcome or home state that does not require auth, and has a call
 * `app.config` with http interceptor
 * Model Dialog or state for signin/signup
   * Associated components for sign in/up
+<<<<<<< HEAD
   * ngDialog will require css, make sure webpack config handles straight css
+=======
+>>>>>>> c9024fd53a6cd888f9a865252133cbab4fa610ce
 * logout link
 
   
@@ -33,4 +39,8 @@ Optional: Add a welcome or home state that does not require auth, and has a call
 
 * Services *3pts*
 * Setup routes, http, and auth (run via `$stateChangeStart`) *3pts*
+<<<<<<< HEAD
 * Works Correctly *4pts*
+=======
+* Works Correctly *4pts*
+>>>>>>> c9024fd53a6cd888f9a865252133cbab4fa610ce
