@@ -1,0 +1,12 @@
+<section>
+  <form ng-submit="$ctrl.addPet()">
+    <label>Name:</label>
+    <input type="text" ng-model="$ctrl.name" required>
+    <label>Animal:</label>
+    <select ng-options="option for option in $ctrl.options" ng-model="$ctrl.animal" required>
+    </select>
+    
+    <button>Submit</button>
+    <button ui-sref="store">Cancel</button>
+  </form>
+</section>
